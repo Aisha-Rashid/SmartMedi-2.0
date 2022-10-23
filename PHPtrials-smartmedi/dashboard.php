@@ -80,7 +80,7 @@ if (isset($_GET['logout'])) {
         <div class="card shadow-sm">
           <div class="card-header bg-transparent text-center">
 		    <img class="profile_img" src="https://www.pngkey.com/png/detail/349-3499617_person-placeholder-person-placeholder.png" alt="Profile Pic">
-            <h3>
+            <h3 >
 				<?php echo $_SESSION['username']; ?>
 				
 			</h3>
