@@ -291,4 +291,7 @@ h1 { font-size: 24px; }
   transition: max-height 0.2s ease-out;
   background-color: #f1f1f1;
 }
+.h3{
+    text-transform: capitalize;
+}
 
