@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+  <title>SmartMedi User Dashboard</title>
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width">        
+  <link rel="stylesheet" href="dashboardcss/templatemo_main.css">
+  <link rel="shortcut icon" href="dashboardimages/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="dashboardimages/apple-touch-icon.png">
+<!-- 
+Dashboard Template 
+http://www.templatemo.com/preview/templatemo_415_dashboard
+-->
+</head>
+<body>
+	<!-- Start Preferences -->
+	<div id="main-wrapper">
+		<div class="template-page-wrapper">
+			<div class="navbar-collapse collapse templatemo-sidebar">
+				<ul class="templatemo-sidebar-menu">
+				<li>
+				<form class="navbar-form">
+				<input type="text" class="form-control" id="templatemo_search_box" placeholder="Search...">
+				<span class="btn btn-default">Go</span>
+				</form>
+				</li>
+				<li><a href="dashboard.html"><i class="fa fa-home"></i>Dashboard</a></li>
+				<li class="sub">
+				<a href="javascript:;">
+				<i class="fa fa-database"></i> Menu <div class="pull-right"><span class="caret"></span></div>
+				</a>
+				<ul class="templatemo-submenu">
+				<li><a href="#">Medical History</a></li>
+				<li><a href="#">Attachments</a></li>
+				<li><a href="#">Appointments</a></li>
+				</ul>
+				</li>
+				<li class="active"><a href="#"><i class="fa fa-cog"></i>Settings</a></li>
+				<li><a href="javascript:;" data-toggle="modal" data-target="#confirmModal"><i class="fa fa-sign-out"></i>Sign Out</a></li>
+				</ul>
+			</div>
+			<div class="templatemo-content-wrapper">
+				<div class="templatemo-content">
+					<ol class="breadcrumb">
+					<li><a href="dashboard.html">User Panel</a></li>
+					<li><a href="#">Preferences</a></li>
+					</ol>
+					<h1>Settings</h1>
+					<p class="margin-bottom-15">Here goes another form and form controls.</p>
+					<div class="row">
+						<div class="col-md-12">
+							<form role="form" id="templatemo-preferences-form">
+								<div class="row">
+									<div class="col-md-6 margin-bottom-15">
+									<label for="firstName" class="control-label">First Name</label>
+									<input type="text" class="form-control" id="firstName" value="John">                  
+									</div>
+									<div class="col-md-6 margin-bottom-15">
+									<label for="lastName" class="control-label">Last Name</label>
+									<input type="text" class="form-control" id="lastName" value="Henry">                 
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 margin-bottom-15">
+									<label>Username</label>
+									<p class="form-control-static" id="username">@admin</p>
+									</div>
+									<div class="col-md-6 margin-bottom-15">
+									<label>Email address</label>
+									<p class="form-control-static" id="email">admin@company.com</p>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 margin-bottom-15">
+									<label for="currentPassword">Current Password</label>
+									<input type="password" class="form-control" id="currentPassword" value="********" disabled>  
+									</div>
+									<div class="col-md-6 margin-bottom-15">
+									</div>
+								</div>
+						
+								<div class="row">
+									<div class="col-md-6 margin-bottom-15">
+									<label for="password_1">New Password</label>
+									<input type="password" class="form-control" id="password_1" placeholder="New Password">  
+									</div>
+									<div class="col-md-6 margin-bottom-15">
+									<label for="password_2">Confirm New Password</label>
+									<input type="password" class="form-control" id="password_2" placeholder="Confirm New Password">  
+									</div>
+								</div>
+								  <div class="row">
+									<div class="col-md-12 margin-bottom-30">
+									  <label for="exampleInputFile">File input</label>
+									  <input type="file" id="exampleInputFile">
+									  <p class="help-block">You can upload file here.</p>  
+									</div>                  
+								  </div>
+								<div class="row templatemo-form-buttons">
+									<div class="col-md-12">
+									<button type="submit" class="btn btn-primary">Update</button>
+									<button type="reset" class="btn btn-default">Reset</button>    
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		<!-- Start menu -->
+
+		<!-- Start popup -->
+			<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						<h4 class="modal-title" id="myModalLabel">Are you sure you want to sign out?</h4>
+						</div>
+						<div class="modal-footer">
+						<a href="logIn.html" class="btn btn-primary">Yes</a>
+						<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		<!-- End popup -->		
+		</div>
+	</div>
+	<!-- ALL JS FILES -->	
+    <script src="dashboardjs/jquery.min.js"></script>
+    <script src="dashboardjs/bootstrap.min.js"></script>
+    <script src="dashboardjs/templatemo_script.js"></script>
+</body>
+</html>
