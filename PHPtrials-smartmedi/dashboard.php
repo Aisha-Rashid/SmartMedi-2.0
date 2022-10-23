@@ -100,18 +100,29 @@ if (isset($_GET['logout'])) {
                 <th width="30%">Name</th>
                 <td width="2%">:</td>
 				<td>
-						<?php echo $_SESSION['FirstName']; ?>
+						<?php echo $_SESSION['FirstName']; ?> 
+            <?php echo $_SESSION['LastName']; ?>
 				</td>
               </tr>
               <tr>
                 <th width="30%">Age</th>
+               
                 <td width="2%">:</td>
-                <td></td>
+                <td>
+                <?php 
+                $age = $_SESSION['DOB'] ;
+                $year = explode('-', $age);
+                $patientAge = date("Y") - $year[0];
+                echo $patientAge
+                ?>
+                </td>
               </tr>
               <tr>
                 <th width="30%">Gender</th>
                 <td width="2%">:</td>
-                <td></td>
+                <td>
+                <?php echo $_SESSION['gender']; ; ?>
+                </td>
               </tr>
               <tr>
                 <th width="30%">Location</th>
