@@ -162,6 +162,7 @@ if (isset($_POST['login_user'])) {
 		if (mysqli_num_rows($results) == 1) {
 			
 			// Storing username in session variable
+			$_SESSION['FirstName'] = $FirstName;
 			$_SESSION['username'] = $username;
 			
 			

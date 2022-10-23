@@ -111,7 +111,8 @@ if (isset($_GET['logout'])) {
               <tr>
                 <th width="30%">Gender</th>
                 <td width="2%">:</td>
-                <td></td>
+                <td>
+				</td>
               </tr>
               <tr>
                 <th width="30%">Location</th>

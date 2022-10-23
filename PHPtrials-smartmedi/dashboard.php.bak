@@ -4,7 +4,6 @@
 // store data in session variable
 session_start();
 
-$_SESSION['FirstName'] = $FirstName;
 // If the session variable is empty, this
 // means the user is yet to login
 // User will be sent to 'login.php' page
@@ -112,7 +111,9 @@ if (isset($_GET['logout'])) {
               <tr>
                 <th width="30%">Gender</th>
                 <td width="2%">:</td>
-                <td></td>
+                <td>
+				<?php echo $_SESSION['gender']; ?>
+				</td>
               </tr>
               <tr>
                 <th width="30%">Location</th>
