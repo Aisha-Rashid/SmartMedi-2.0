@@ -40,6 +40,7 @@ if (isset($_GET['logout'])) {
 <body>
 <?php if (isset($_SESSION['username'])) : 
    
+   
    $unique = $_SESSION['username'];
    $query = "SELECT * FROM `patients` WHERE username = '$unique'";
    $res = mysqli_query($db, $query);
