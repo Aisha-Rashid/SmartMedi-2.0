@@ -1,4 +1,4 @@
-<?php include('server.php') ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,8 +53,9 @@
 		
 		<div class="contact-block">
 			<div class="template-page-wrapper" align="center">
-				<form class="form-horizontal templatemo-signin-form" method="post" action="login.php">
-				<?php include('errors.php'); ?>
+				<form class="form-horizontal templatemo-signin-form" method="post" action="signin.php">
+				<!-- <?php include('errors.php'); ?> -->
+				
 				
 				<div class="form-group">
 						<div class="col-md-6">

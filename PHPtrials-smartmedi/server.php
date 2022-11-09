@@ -163,8 +163,7 @@ if (isset($_POST['login_user'])) {
 			
 			// Storing username in session variable
 			$_SESSION['FirstName'] = $FirstName;
-			$_SESSION['username'] = $username;
-			
+			$_SESSION['username'] = $username;B;
 			
 			// Welcome message
 			$_SESSION['success'] = "You have logged in!";

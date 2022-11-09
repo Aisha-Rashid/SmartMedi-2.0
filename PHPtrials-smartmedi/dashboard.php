@@ -1,8 +1,9 @@
 <?php
+include('signin.php'); 
 
 // Starting the session, to use and
 // store data in session variable
-session_start();
+// session_start();
 
 // If the session variable is empty, this
 // means the user is yet to login
@@ -37,7 +38,16 @@ if (isset($_GET['logout'])) {
  
 </head>
 <body>
-<?php if (isset($_SESSION['username'])) : ?>
+<?php if (isset($_SESSION['username'])) : 
+   
+   $unique = $_SESSION['username'];
+   $query = "SELECT * FROM `patients` WHERE username = '$unique'";
+   $res = mysqli_query($db, $query);
+   $array=mysqli_fetch_row($res);
+   $rows = mysqli_num_rows($res);
+   
+   ?>
+  
 
 <!-- Start menu -->
     <div class="template-page-wrapper">
@@ -99,9 +109,13 @@ if (isset($_GET['logout'])) {
               <tr>
                 <th width="30%">Name</th>
                 <td width="2%">:</td>
+                
 				<td>
-						<?php echo $_SESSION['FirstName']; ?> 
-            <?php echo $_SESSION['LastName']; ?>
+						<?php 
+            
+            echo $array[1];
+            
+            echo $array[2];?>
 				</td>
               </tr>
               <tr>
@@ -110,7 +124,7 @@ if (isset($_GET['logout'])) {
                 <td width="2%">:</td>
                 <td>
                 <?php 
-                $age = $_SESSION['DOB'] ;
+                $age = $array[6] ;
                 $year = explode('-', $age);
                 $patientAge = date("Y") - $year[0];
                 echo $patientAge
@@ -121,7 +135,7 @@ if (isset($_GET['logout'])) {
                 <th width="30%">Gender</th>
                 <td width="2%">:</td>
                 <td>
-                <?php echo $_SESSION['gender']; ; ?>
+                <?php echo $array[7] ?>
                 </td>
               </tr>
               <tr>
