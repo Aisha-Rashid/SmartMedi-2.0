@@ -42,25 +42,26 @@
     </div>
     <!-- END LOADER -->
 	
-	<div id="signup" class="contact-box">
+	<div id="login" class="contact-box">
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="title-box">
-					<h2>Log In</h2>
+					<h2>SmartMedi EHR Medic Platform</h2><br>
 				</div>
 			</div>
 		</div>
 		
 		<div class="contact-block">
 			<div class="template-page-wrapper" align="center">
-				<form class="form-horizontal templatemo-signin-form" method="post" action="login.php">
-				<?php include('errors.php'); ?>
+				<form class="form-horizontal templatemo-signin-form" method="post" action="doc_signin_server.php">
+				<!-- <?php include('errors.php'); ?> -->
+				
 				
 				<div class="form-group">
 						<div class="col-md-6">
-							<label>Username</label>
+							<label>Account ID</label>
 								<div class="col-sm-6">
-								<input type="text" class="form-control" name="username">
+								<input type="number" class="form-control" name="id">
 								</div>
 						</div>              
 				</div>
@@ -76,16 +77,9 @@
 						<div class="col-md-12">
 							<div class="col-sm-offset-2 col-sm-10">
 							<button type="submit" class="btn"
-							name="login_user">Log In</button>
+							name="doc_login">Log In</button>
 							</div>
 						</div>
-				</div>
-				<div class="form-group">
-						<div class="col-md-6">
-							<p>New Here?
-							<a href="signup.php"><u>Click here to register!</u></a>
-							</p>
-						</div>              
 				</div>
 			</div>
 		</div>

@@ -1,8 +1,7 @@
 <?php
-
+include('signin.php'); 
 // Starting the session, to use and
 // store data in session variable
-session_start();
 
 // If the session variable is empty, this
 // means the user is yet to login
@@ -10,7 +9,7 @@ session_start();
 // to allow the user to login
 if (!isset($_SESSION['username'])) {
 	$_SESSION['msg'] = "You have to log in first";
-	header('location: login.php');
+	header('location: DocLogin.php');
 }
 
 // Logout button will destroy the session, and
@@ -20,7 +19,7 @@ if (!isset($_SESSION['username'])) {
 if (isset($_GET['logout'])) {
 	session_destroy();
 	unset($_SESSION['username']);
-	header("location: login.php");
+	header("location: DocLogin.php");
 }
 ?>
 <!DOCTYPE html>
@@ -40,7 +39,15 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 -->
 </head>
 <body>
-<?php if (isset($_SESSION['username'])) : ?>
+<?php if (isset($_SESSION['id'])) : 
+   
+   
+   $unique = $_SESSION['id'];
+   
+
+   
+   ?>
+
 	<!-- Start Preferences -->
 	<div id="main-wrapper">
 		<div class="template-page-wrapper">
@@ -74,56 +81,43 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 					</ol-->
 					<div class="row">
 						<div class="col-md-12">
-							<form role="form" id="templatemo-preferences-form">
+							<form role="form" id="templatemo-preferences-form" method="post" action="DocSettings.php>
 								<div class="row">
 									
 									<h3>Settings</h3><br>
 									
 									
-									<hr>
-								<label class="collapsible">Update Profile Picture</label>
-								<div class="content">
-								<input type="file" id="myFile" name="filename"><br><input type="submit">
-								</div>
 								<hr>
-								<label class="collapsible">Update medical history details</label>
-								<div class="content">
-								<input type="file" id="myFile" name="filename"><br><input type="submit">
-								</div>
-								<hr>
-							
-								<div class="row">
-									<div class="col-md-10 margin-bottom-1">
-									<h3>Update medical history details</h3><br>
-									<a href = "mediform.php">Update details</a>
-									</div>
-								</div>
-								<hr>
+								
 								<div class="row">
 									<div class="col-md-10 margin-bottom-1">
 									<h3>Change Password</h3><br>
-									<label>Password</label>
+									<label>New Password</label>
 									<div class="form-group">
-									<input type="password" class="form-control" name="password1">                 
+									<input type="password" class="form-control" name="docpassword1">                 
 									</div>
 									<label> Confirm Password</label>
 									<div class="form-group">
-									<input type="password" class="form-control" name="password2">
+									<input type="password" class="form-control" name="docpassword2">
 									</div>
 									</div>
 								</div>
 								<hr>
-								<div class="row">
-									<div class="col-md-6 margin-bottom-1">
-									<h3>Upgrade Package</h3><br>
-									<a href = "">Add Payment details</a>
-									</div>
-								</div>
-								<hr>
+								
 								<div class="row templatemo-form-buttons">
 									<div class="col-md-12">
-									<button type="submit" class="btn btn-primary">Update</button>
-									<button type="reset" class="btn btn-default">Reset</button>    
+									
+									<?php 
+									$query = "SELECT * FROM `doctors` WHERE id = '$unique'";
+									$res = mysqli_query($db, $query);
+									if($_POST["docpassword1"] == $row["docpassword2"] ) {
+										mysqli_query($con,"UPDATE doctors set password='" . $_POST["docpassword1"] . "' WHERE name='" . $id . "'");
+										$message = "Password Changed Sucessfully";
+										} 
+									?>
+									
+									<button type="submit" class="btn"
+										name="doc_password">Update</button>  
 									</div>
 								</div>
 							</form>

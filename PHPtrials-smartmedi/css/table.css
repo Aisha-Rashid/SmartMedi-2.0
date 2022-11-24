@@ -1,11 +1,12 @@
-TABLE, TH, TD {
+TABLE{
 	BORDER: 1px solid white;
 	BORDER-COLLAPSE: collapse;
 	WIDTH: 100%;
 	}
-TH, TD{
+TD{
 	PADDING:4px;
 	SPACING:3px;
 	FONT-SIZE:18px;
 	COLOR:black;
+	WIDTH: 50%;
 	}

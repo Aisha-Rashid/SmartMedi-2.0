@@ -1,4 +1,4 @@
-
+<?php include('server.php') ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,7 +84,7 @@
 				<div class="form-group">
 						<div class="col-md-6">
 							<p>New Here?
-							<a href="signup.php"><u>Click here to register!</u></a>
+							<a href="register.php"><u>Click here to register!</u></a>
 							</p>
 						</div>              
 				</div>
