@@ -57,6 +57,7 @@
 		</div>		
 		<div class="container">
 			<div class="row">
+			<h2><u>1. Basic Information</u></h2>
 				<div class="col-lg-12 col-xs-12">
 					<div class="contact-block">
 						<form class="form-horizontal templatemo-signin-form" method="post" action="register.php">
@@ -75,12 +76,6 @@
 									<input type="text" class="form-control" name="LastName" value="<?php echo $LastName; ?>">
 									</div>   
 								</div> 
-								<div class="col-md-6">
-									<label>Username</label>
-									<div class="form-group">
-									<input type="text" class="form-control" name="username" value="<?php echo $username; ?>">
-									</div>   
-								</div>
 								<div class="col-md-6">
 									<label>Email</label>
 									<div class="form-group">
@@ -116,6 +111,28 @@
 									</div>   
 								</div> 
 								<div class="col-md-6">
+									<label>Blood Group</label>
+									<div class="form-group">
+									<SELECT NAME="bloodgroup" class="form-control">
+										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
+										<?php 
+										$query ="SELECT bloodgroup FROM blood";
+										$result = mysqli_query($db, $query);
+										if($result->num_rows> 0){
+										  $options= mysqli_fetch_all($result, MYSQLI_ASSOC);
+										}
+										
+											foreach ($options as $option) {
+										?>
+										<option><?php echo $option['bloodgroup']; ?> </option>
+										<?php 
+										}
+										?>
+										
+									</SELECT>
+									</div>   
+								</div>
+								<div class="col-md-6">
 									<label>Password</label>
 									<div class="form-group">
 									<input type="password" class="form-control" name="password1">
@@ -127,6 +144,10 @@
 									<input type="password" class="form-control" name="password2">
 									</div>
 								</div> 
+							
+								
+								
+								
 								<div class="form-group">
 									<div class="col-md-12">
 										<div class="col-sm-offset-2 col-sm-10">

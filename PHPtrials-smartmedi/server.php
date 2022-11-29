@@ -7,7 +7,7 @@ session_start();
 // Declaring and hoisting the variables
 $FirstName = "";
 $LastName = "";
-$username = "";
+$bloodgroup = "";
 $TelNo = "";
 $IDNo = "";
 $DOB = "";
@@ -37,20 +37,20 @@ if (isset($_POST['reg_user'])) {
 	// SQL injections
 	$FirstName = mysqli_real_escape_string($db, $_POST['FirstName']);
 	$LastName = mysqli_real_escape_string($db, $_POST['LastName']);
-	$username = mysqli_real_escape_string($db, $_POST['username']);
 	$TelNo = mysqli_real_escape_string($db, $_POST['TelNo']);
 	$IDNo = mysqli_real_escape_string($db, $_POST['IDNo']);
 	$DOB = mysqli_real_escape_string($db, $_POST['DOB']);
 	$gender = mysqli_real_escape_string($db, $_POST['gender']);
+	$bloodgroup = mysqli_real_escape_string($db, $_POST['bloodgroup']);
 	$email = mysqli_real_escape_string($db, $_POST['email']);
 	$password1 = mysqli_real_escape_string($db, $_POST['password1']);
 	$password2 = mysqli_real_escape_string($db, $_POST['password2']);
+	
 
 	// Ensuring that the user has not left any input field blank
 	// error messages will be displayed for every blank input
 	if (empty($FirstName)) { array_push($errors, "First Name is required"); }
 	if (empty($LastName)) { array_push($errors, "Last Name is required"); }
-	if (empty($username)) { array_push($errors, "Username is required"); }
 	if (empty($TelNo)) { array_push($errors, "Telephone Number is required"); }
 	if (empty($IDNo)) { array_push($errors, "ID Number is required"); }
 	if (empty($DOB)) { array_push($errors, "Date of Birth is required"); }
@@ -69,18 +69,20 @@ if (isset($_POST['reg_user'])) {
 		$password = md5($password1);
 		
 		// Inserting data into table
-		$query = "INSERT INTO patients (FirstName, LastName, username, TelNo, IDNo, DOB, gender, email, password)
-				VALUES('$FirstName' , '$LastName' , '$username', '$TelNo' , '$IDNo' , '$DOB' , '$gender', '$email', '$password')";
+		$query = "INSERT INTO patients (FirstName, LastName, TelNo, IDNo, DOB, gender, bloodgroup, email, password)
+				VALUES('$FirstName' , '$LastName' , '$TelNo' , '$IDNo' , '$DOB' , '$gender', '$bloodgroup', '$email', '$password')";
 		
 		mysqli_query($db, $query);
 
 		// Storing username of the logged in user,
 		// in the session variable
-		$_SESSION['username'] = $username;
 		$_SESSION['FirstName'] = $FirstName;
 		$_SESSION['LastName'] = $LastName;
+		$_SESSION['bloodgroup'] = $bloodgroup;
 		$_SESSION['DOB'] = $DOB;
 		$_SESSION['gender'] = $gender;
+		$_SESSION['IDNo'] = $IDNo;
+		
 		
 		
 		// Welcome message

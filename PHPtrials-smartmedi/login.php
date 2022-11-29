@@ -59,9 +59,9 @@
 				
 				<div class="form-group">
 						<div class="col-md-6">
-							<label>Username</label>
+							<label>National ID Number</label>
 								<div class="col-sm-6">
-								<input type="text" class="form-control" name="username">
+								<input type="number" class="form-control" name="IDNo">
 								</div>
 						</div>              
 				</div>
