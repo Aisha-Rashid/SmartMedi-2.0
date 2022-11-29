@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 24, 2022 at 12:05 PM
+-- Generation Time: Nov 29, 2022 at 04:01 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -149,13 +149,23 @@ INSERT INTO `hospitals` (`hospitalID`, `hospitalname`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `names`
+-- Table structure for table `nextofkin`
 --
 
-CREATE TABLE `names` (
+CREATE TABLE `nextofkin` (
   `id` int(11) NOT NULL,
-  `notes` text NOT NULL
+  `kinFirstName` varchar(50) NOT NULL,
+  `kinLastName` varchar(50) NOT NULL,
+  `relationship` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `nextofkin`
+--
+
+INSERT INTO `nextofkin` (`id`, `kinFirstName`, `kinLastName`, `relationship`) VALUES
+(1, 'fatuma', 'wairimu', ''),
+(2, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -167,11 +177,11 @@ CREATE TABLE `patients` (
   `ID` int(11) NOT NULL,
   `FirstName` varchar(255) NOT NULL,
   `LastName` varchar(255) NOT NULL,
-  `username` varchar(255) NOT NULL,
   `TelNo` varchar(255) NOT NULL,
   `IDNo` int(11) NOT NULL,
   `DOB` date NOT NULL,
   `gender` varchar(20) NOT NULL,
+  `bloodgroup` varchar(20) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `pic` blob NOT NULL
@@ -181,9 +191,26 @@ CREATE TABLE `patients` (
 -- Dumping data for table `patients`
 --
 
-INSERT INTO `patients` (`ID`, `FirstName`, `LastName`, `username`, `TelNo`, `IDNo`, `DOB`, `gender`, `email`, `password`, `pic`) VALUES
-(20, 'Aisha', 'Rashid', 'Jazzy', '+254703277202', 2147483647, '1990-02-09', 'Female', 'chuchuaisha@gmail.com', 'a381bedb5d4478053eb04be35f8798dd', ''),
-(21, 'Farida', 'Karanja', 'Farida', '8450039344', 2147483647, '2001-06-12', 'Female', 'farida@yahoo.com', '41a6a36598a0acd0d0c3aac95edc7b35', '');
+INSERT INTO `patients` (`ID`, `FirstName`, `LastName`, `TelNo`, `IDNo`, `DOB`, `gender`, `bloodgroup`, `email`, `password`, `pic`) VALUES
+(20, 'Aisha', 'Rashid', '+254703277202', 2147483647, '1990-02-09', 'Female', '', 'chuchuaisha@gmail.com', 'a381bedb5d4478053eb04be35f8798dd', ''),
+(21, 'Farida', 'Karanja', '8450039344', 2147483647, '2001-06-12', 'Female', '', 'farida@yahoo.com', '41a6a36598a0acd0d0c3aac95edc7b35', ''),
+(22, 'Fatuma', 'Rashid', '273940287', 53664673, '1995-11-09', 'Female', '', 'fatuma@yahoo.com', 'fdc0978bc0cc4c37c3e3d44fc63ee487', ''),
+(23, 'Ashraf', 'Mbulika', '63647828', 63748264, '2020-07-07', 'Male', 'AB+', 'ashraf@yahoo.com', '508924b0eac2ba101ada28841c931e44', ''),
+(24, 'Rehema', 'Rashid', '637483625', 68493736, '1998-03-10', 'Female', 'O+', 'rehema@yahoo.com', '5eaf0467a7fdc9fe2a16b9b8a8fd8b4a', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `response`
+--
+
+CREATE TABLE `response` (
+  `id` int(11) NOT NULL,
+  `IDNo` int(11) NOT NULL,
+  `conditions` text NOT NULL,
+  `allergies` text NOT NULL,
+  `notes` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
@@ -214,9 +241,9 @@ ALTER TABLE `hospitals`
   ADD PRIMARY KEY (`hospitalID`);
 
 --
--- Indexes for table `names`
+-- Indexes for table `nextofkin`
 --
-ALTER TABLE `names`
+ALTER TABLE `nextofkin`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -224,6 +251,12 @@ ALTER TABLE `names`
 --
 ALTER TABLE `patients`
   ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `response`
+--
+ALTER TABLE `response`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -248,16 +281,22 @@ ALTER TABLE `hospitals`
   MODIFY `hospitalID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `names`
+-- AUTO_INCREMENT for table `nextofkin`
 --
-ALTER TABLE `names`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `nextofkin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `patients`
 --
 ALTER TABLE `patients`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `response`
+--
+ALTER TABLE `response`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
