@@ -89,7 +89,7 @@ if (isset($_GET['logout'])) {
 			echo $array[3];?><br>
 			<?php 
             
-            echo $array[5];?><br>
+            echo $array[0];?><br>
 			<?php 
             
             echo $array[6];?><br>
@@ -103,36 +103,30 @@ if (isset($_GET['logout'])) {
 		<form >
 		<TABLE width=70% align ="center">
 			<TR><TD><input type="text" class="form-control" id="fname" name="fname" placeholder="Search patient record using National ID number"></td><td><button type="submit" class="btn"
-										name="reg_doc">Register</button></td></tr>
+										name="search">Search</button></td></tr>
 		</table>
             </form>
           <div style="height: 26px"></div>
-		<!--  
-        <div class="card shadow-sm">
-		<h3 class="mb-0"><i class="far fa-clone pr-1"></i>Medical History</h3>
-		<div class="card-header bg-transparent border-0">
-			<button class="collapsible">Basic History Form</button>
-			<div class="content">
-				 <a href="mediform.php">Click here to fill in the Basic History form</a>
-			</div>
-          </div>
-		  <br>
-          <div class="card-header bg-transparent border-0">
-			<button class="collapsible">Reports</button>
-			<div class="content">
-				 <a href="#">Download/print report</a>
-			</div>
-          </div>
-		  <br>
-		  <div class="card-header bg-transparent border-0">
-			<button class="collapsible">Package</button>
-			<div class="content">
-				 <a href="appointment.html">Upgrade or retore previous package</a>
-			</div>
-          </div>
-		  <br>
-		  
-        </div> -->
+		
+		<hr>
+		
+	<div class="table-responsive">          
+	  <table class="table">
+	    <thead>
+	      <tr>
+	        <th>#</th>
+	        <th>Patient Name</th>
+	        <th>ID No</th>
+	        
+	      </tr>
+	    </thead>
+	    <tbody>
+	    		
+	    	
+	     </tbody>
+	  </table>
+		
+		
       </div>
     </div>
 	
