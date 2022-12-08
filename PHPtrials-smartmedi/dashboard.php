@@ -66,7 +66,7 @@ if (isset($_GET['logout'])) {
 				</a>
 				<ul class="templatemo-submenu">
 				<li><a href="medicalhist.php">Medical History</a></li>
-				<li><a href="#">Attachments</a></li>
+				<li><a href="attachments.php">Attachments</a></li>
 				<li><a href="appointment.php">Appointments</a></li>
 				</ul>
 				</li>
@@ -91,10 +91,10 @@ if (isset($_GET['logout'])) {
         <div class="card shadow-sm">
           <div class="card-header bg-transparent text-center">
 		    <img class="profile_img" src="https://www.pngkey.com/png/detail/349-3499617_person-placeholder-person-placeholder.png" alt="Profile Pic">
-            <!--h3 >
-				?php echo $_SESSION['FirstName']; ?>
+            <h3>
+				<?php echo $array[1]; ?>
 				
-			</h3-->
+			</h3>
           </div>
           <div class="card-body" align = "center">
           </div>

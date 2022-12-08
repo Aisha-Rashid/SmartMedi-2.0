@@ -102,7 +102,7 @@ if (isset($_GET['logout'])) {
 		<h3 class="mb-0" align ="center" ><i class="far fa-clone pr-1"></i>Record Search</h3>
 		<form >
 		<TABLE width=70% align ="center">
-			<TR><TD><input type="text" class="form-control" id="fname" name="fname" placeholder="Search patient record using National ID number"></td><td><button type="submit" class="btn"
+			<TR><TD><input type="text" class="form-control" id="fname" name="fname" placeholder="Search patient record"></td><td><button type="submit" class="btn"
 										name="search">Search</button></td></tr>
 		</table>
             </form>

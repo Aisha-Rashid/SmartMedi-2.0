@@ -1,14 +1,15 @@
 <?php
+include('signin.php'); 
 
 // Starting the session, to use and
 // store data in session variable
-session_start();
+// session_start();
 
 // If the session variable is empty, this
 // means the user is yet to login
 // User will be sent to 'login.php' page
 // to allow the user to login
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['IDNo'])) {
 	$_SESSION['msg'] = "You have to log in first";
 	header('location: login.php');
 }
@@ -19,7 +20,7 @@ if (!isset($_SESSION['username'])) {
 // after logging out
 if (isset($_GET['logout'])) {
 	session_destroy();
-	unset($_SESSION['username']);
+	unset($_SESSION['IDNo']);
 	header("location: login.php");
 }
 ?>
@@ -37,7 +38,16 @@ if (isset($_GET['logout'])) {
  
 </head>
 <body>
-<?php if (isset($_SESSION['username'])) : ?>
+<?php if (isset($_SESSION['IDNo'])) : 
+   
+   
+   $unique = $_SESSION['IDNo'];
+   $query = "SELECT * FROM `patients` WHERE IDNo = '$unique'";
+   $res = mysqli_query($db, $query);
+   $array=mysqli_fetch_row($res);
+   $rows = mysqli_num_rows($res);
+   
+   ?>
 	<!-- Start menu -->
     <div class="template-page-wrapper">
 		<div class="navbar-collapse collapse templatemo-sidebar">
@@ -54,7 +64,7 @@ if (isset($_GET['logout'])) {
 				</a>
 				<ul class="templatemo-submenu">
 				<li><a href="medicalhist.php">Medical History</a></li>
-				<li><a href="#">Attachments</a></li>
+				<li><a href="attachments.php">Attachments</a></li>
 				<li class="active"><a href="#">Appointments</a></li>
 				</ul>
 				</li>
@@ -82,7 +92,7 @@ if (isset($_GET['logout'])) {
 				<img class="profile_img" src="https://www.pngkey.com/png/detail/349-3499617_person-placeholder-person-placeholder.png" alt="Profile Pic">
 				<!--input id="file" type="file" onchange="loadFile(event)"/-->
             <h3>
-			<?php echo $_SESSION['username']; ?>
+			<?php echo $array[1]; ?>
 			</h3>
           </div>
           <div class="card-body" align = "center">

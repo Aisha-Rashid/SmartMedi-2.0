@@ -9,7 +9,7 @@ include('signin.php');
 // means the user is yet to login
 // User will be sent to 'login.php' page
 // to allow the user to login
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['IDNo'])) {
 	$_SESSION['msg'] = "You have to log in first";
 	header('location: login.php');
 }
@@ -20,7 +20,7 @@ if (!isset($_SESSION['username'])) {
 // after logging out
 if (isset($_GET['logout'])) {
 	session_destroy();
-	unset($_SESSION['username']);
+	unset($_SESSION['IDNo']);
 	header("location: login.php");
 }
 ?>
@@ -38,11 +38,11 @@ if (isset($_GET['logout'])) {
  
 </head>
 <body>
-<?php if (isset($_SESSION['username'])) : 
+<?php if (isset($_SESSION['IDNo'])) : 
    
    
-   $unique = $_SESSION['username'];
-   $query = "SELECT * FROM `patients` WHERE username = '$unique'";
+   $unique = $_SESSION['IDNo'];
+   $query = "SELECT * FROM `patients` WHERE IDNo = '$unique'";
    $res = mysqli_query($db, $query);
    $array=mysqli_fetch_row($res);
    $rows = mysqli_num_rows($res);
@@ -52,7 +52,7 @@ if (isset($_GET['logout'])) {
 			
 			<ol class="breadcrumb">
 			<li><img src="dashboardimages/favicon.ico" alt="Smartmedi"></li>
-            <li><b>ID : <?php echo $array[5];?></b></li>
+            <li><b>ID : <?php echo $array[4];?></b></li>
 			</ol>
 			
 
@@ -70,13 +70,13 @@ if (isset($_GET['logout'])) {
 				echo $array[2];; ?> 
 				<br>
 				<?php 
-                $age = $array[6] ;
+                $age = $array[5] ;
                 $year = explode('-', $age);
                 $patientAge = date("Y") - $year[0];
                 echo $patientAge
                 ?>yrs
 				<br>
-				<?php echo $array[7] ?>
+				<?php echo $array[6] ?>
 			</h3>
           </div>
           <div class="card-body" align = "center">
@@ -112,7 +112,7 @@ if (isset($_GET['logout'])) {
                 <td width="2%">:</td>
                 
 				<td>
-						<?php ;?>
+						<?php echo $array[7] ;?>
 				</td>
               </tr>
 			  <tr>

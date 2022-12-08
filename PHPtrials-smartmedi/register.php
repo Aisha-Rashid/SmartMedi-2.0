@@ -135,13 +135,15 @@
 								<div class="col-md-6">
 									<label>Password</label>
 									<div class="form-group">
-									<input type="password" class="form-control" name="password1">
+									<input type="password" class="form-control" id="password1"  name="password1" value="">
+									<span toggle="#password1" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 									</div>
 								</div> 
 								<div class="col-md-6">
 									<label> Confirm Password</label>
 									<div class="form-group">
-									<input type="password" class="form-control" name="password2">
+									<input type="password" class="form-control" id="password2"  name="password2" value="">
+									<span toggle="#password2" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 									</div>
 								</div> 
 							
