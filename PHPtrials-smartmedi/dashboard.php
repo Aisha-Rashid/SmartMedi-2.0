@@ -158,7 +158,7 @@ if (isset($_GET['logout'])) {
         </div>
           <div style="height: 26px"></div>
         <div class="card shadow-sm">
-		<h3 class="mb-0"><i class="far fa-clone pr-1"></i>Medical History</h3>
+		<h3 class="mb-0"><i class="far fa-clone pr-1"></i>Quick Profile Setup</h3>
 		<div class="card-header bg-transparent border-0">
 			<button class="collapsible">Basic History Form</button>
 			<div class="content">

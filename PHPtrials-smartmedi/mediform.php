@@ -74,6 +74,44 @@ if (isset($_GET['logout'])) {
    $rows = mysqli_num_rows($res);
    
    ?>
+<?php
+$con=mysqli_connect('localhost', 'root', '', 'phptrials-smartmedi')or die("cannot connect");//connection string  
+if(isset($_POST['sub'])!=""){
+	
+	$allergies = mysqli_real_escape_string($db, $_POST['allergies']);
+	$notes = mysqli_real_escape_string($db, $_POST['notes']);
+	$checkbox1=$_POST['quiz']; 
+
+	//$query="select * from response WHERE IDNO = '$unique'";
+	$query=$con->query("SELECT * FROM response WHERE IDNO = '$unique'");
+	if($query){
+		echo'<script>alert("Record already exists"); window.location.href ='SmartMedi-2.0/PHPtrials-smartmedi/dashboard.php'; </script>'; 
+		//die(mysqli_error($con));
+		//header("location:dashboard.php");
+	}
+	else{
+	$chk="";  
+	foreach($checkbox1 as $chk1)  
+	   {  
+		  $chk .= $chk1.",";  
+	   }  
+	$in_ch=mysqli_query($con,"insert into response(IDNo, conditions, allergies, notes) values ('$unique','$chk', '$allergies','$notes')");
+  
+	if($in_ch==1)  
+	   {  
+		  echo'<script>alert("Inserted Successfully")</script>';  
+	   }  
+	else  
+	   {  
+		  echo'<script>alert("Failed To Insert")</script>';  
+	   }
+	}
+header("location:dashboard.php");	   
+	}  
+?>  
+	
+	
+  
 
 
 	<!-- LOADER -->
@@ -93,7 +131,7 @@ if (isset($_GET['logout'])) {
 					<p><i>Ask a doctor for assistance if needed</i></P>
 					<hr>
 					<div class="contact-block">
-						<form class="form-horizontal templatemo-signin-form" action="mediform.php" method="post">
+						<form class="form-horizontal templatemo-signin-form" action="" method="post">
 							<TABLE width=100%>
 										
 								<TR bgcolor="#d3fcf3"><TD colspan="2"><h3><i><b><u>Part A: Allergies</u></b></i></h3></TD></TR>
