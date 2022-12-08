@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2022 at 04:01 PM
+-- Generation Time: Dec 08, 2022 at 10:21 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -117,6 +117,35 @@ INSERT INTO `doctors` (`id`, `nationalid`, `fname`, `lname`, `hospital`, `workid
 (23510146, 63849286, 'wanja', 'aisha', 'Avenue Hospital', 6283920, 'Neurosurgery', ''),
 (67066255, 638992847, 'Rehema', 'rashid', 'Avenue Hospital', 53748920, 'Diagnostic Radiology', ''),
 (70336988, 2147483647, 'Imran', 'Mbulika', 'Gertrude\'s Children\'s Hospital Muthaiga', 6389403, 'Pediatrics', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `fileupload`
+--
+
+CREATE TABLE `fileupload` (
+  `id` int(10) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `date` datetime NOT NULL,
+  `IDNo` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `fileupload`
+--
+
+INSERT INTO `fileupload` (`id`, `name`, `date`, `IDNo`) VALUES
+(1, 'File1example.pdf', '2022-11-23 05:30:12', 68493736),
+(2, 'fatuma.pdf', '2022-12-04 09:46:20', 53664673),
+(4, 'rehema.png', '2022-12-04 09:46:20', 68493736),
+(5, 'FORM 1.png', '2022-12-08 14:09:07', 0),
+(6, 'FORM 4.png', '2022-12-08 11:49:08', 0),
+(7, 'REPORT.png', '2022-12-08 11:52:03', 0),
+(10, 'Screenshot (11).png', '2022-12-08 14:31:44', 0),
+(12, '2022 Calendar.pdf', '2022-12-08 12:03:46', 0),
+(13, 'CyberGirls Interview Schedule (Segun).pdf', '2022-12-08 12:04:55', 2147483647),
+(17, 'DAILY ADMISSION LIST-DSF (1).xlsx', '2022-12-08 12:15:09', 2147483647);
 
 -- --------------------------------------------------------
 
@@ -235,6 +264,12 @@ ALTER TABLE `doctors`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `fileupload`
+--
+ALTER TABLE `fileupload`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `hospitals`
 --
 ALTER TABLE `hospitals`
@@ -273,6 +308,12 @@ ALTER TABLE `blood`
 --
 ALTER TABLE `docspecialty`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `fileupload`
+--
+ALTER TABLE `fileupload`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `hospitals`
