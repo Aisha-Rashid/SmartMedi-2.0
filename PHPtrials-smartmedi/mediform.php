@@ -85,7 +85,8 @@ if(isset($_POST['sub'])!=""){
 	//$query="select * from response WHERE IDNO = '$unique'";
 	$query=$con->query("SELECT * FROM response WHERE IDNO = '$unique'");
 	if($query){
-		echo'<script>alert("Record already exists"); window.location.href ='SmartMedi-2.0/PHPtrials-smartmedi/dashboard.php'; </script>'; 
+// 		
+		echo"<script>alert('Record already exists'); window.location.href ='/SmartMedi-2.0/PHPtrials-smartmedi/dashboard.php'; </script>"; 
 		//die(mysqli_error($con));
 		//header("location:dashboard.php");
 	}
