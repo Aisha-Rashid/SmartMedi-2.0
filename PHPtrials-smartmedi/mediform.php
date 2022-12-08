@@ -81,16 +81,17 @@ if(isset($_POST['sub'])!=""){
 	$allergies = mysqli_real_escape_string($db, $_POST['allergies']);
 	$notes = mysqli_real_escape_string($db, $_POST['notes']);
 	$checkbox1=$_POST['quiz']; 
-
+	
+	$result = $con->query("SELECT id FROM response WHERE IDNo = '$unique'");
+	if($result->num_rows == 0) {
 	//$query="select * from response WHERE IDNO = '$unique'";
-	$query=$con->query("SELECT * FROM response WHERE IDNO = '$unique'");
-	if($query){
+	//$query=$con->query("SELECT * FROM response WHERE IDNO = '$unique'");
+	//if($query){
 // 		
-		echo"<script>alert('Record already exists'); window.location.href ='/SmartMedi-2.0/PHPtrials-smartmedi/dashboard.php'; </script>"; 
+		//echo"<script>alert('Record already exists'); window.location.href ='/SmartMedi-2.0/PHPtrials-smartmedi/dashboard.php'; </script>"; 
 		//die(mysqli_error($con));
-		//header("location:dashboard.php");
-	}
-	else{
+		//header("location:dashboard.php");}
+	//else{
 	$chk="";  
 	foreach($checkbox1 as $chk1)  
 	   {  
@@ -106,9 +107,14 @@ if(isset($_POST['sub'])!=""){
 	   {  
 		  echo'<script>alert("Failed To Insert")</script>';  
 	   }
-	}
-header("location:dashboard.php");	   
+	
+header("location:dashboard.php");	
+		} 
+		else {
+			echo"<script>alert('Record already exists'); window.location.href ='/SmartMedi-2.0/PHPtrials-smartmedi/dashboard.php'; </script>";
+		}	
 	}  
+	
 ?>  
 	
 	

@@ -1,0 +1,146 @@
+Hello, everyone.
+And welcome to this task. In this task,
+You will learn about accessing Cisco devices.
+You will learn about the Cisco IOS operating system, how
+to connect to and manage Cisco devices, the software tools
+used to do that, and the two configuration modes available.
+on Cisco IOS. To start,
+let's talk about the Cisco IOS operating system.
+Network devices, like any other computer device, is
+a collection of electronic components
+with some form of software running on top of them.
+This software is referred to as an operating system. Cisco
+devices their own operating system, called the Cisco
+IOS. To manage a Cisco device, you must first connect to the
+device.
+This connection can be directed using a console cable
+for example, or it can be over a network. To manage Cisco
+devices,
+you will also need special software tools called terminal
+emulation.
+There are two months of accessing a Cisco device.
+The first mode is referred to as the user exec mode, which is
+a quiet limited.
+The second mode is the user privilege mode, which gives you
+more access and control over your Cisco device.
+We have three methods to connect to a Cisco device, console
+secure shell or (SSH), and telnet.
+A console connection is established by connecting your laptop
+or PC directly to a Cisco switch, router, or firewall.
+This connection is mostly used for maintenance
+ purposes or when the device has
+no configuration yet.
+A special cable is required for this connection, called
+a console cable.
+Now let's go back to Cisco Packet Tracer and open our
+Connections lab, go to desktop -> labs ->
+connections lab.
+ Double click it, and go back
+to the physical view and the corporate office, then to my
+wiring closet and finally to my network rack.
+I can see here a router, two switches, and a laptop.
+Now I'm going to connect my laptop to the router
+through a console cable. Click on connections,
+then go to the console.
+Click on the laptop, and select the RS port. 
+Go to the router. Click the router and select
+the console port.
+To access this router from my laptop,
+I'll click the laptop, go to the desktop tap.
+Here I can see a list of available applications
+on this laptop.
+From this application lists, I need a terminal emulation tool.
+I have a terminal here.
+Click the terminal.
+Here I see a list of settings.
+I'll just click, OK, and now I can see that I am connected
+to my router.
+It's time for you to practice this.
+Pause the video now and come back when you're ready.
+Another method of connecting two a Cisco device is by using
+the talent protocol.
+Telnet is used to establish a remote connection
+over a network to your Cisco device.
+This connection type is highly insecure and only used in lab
+and testing environments.
+I'll go back to my packet tracer, remove the console
+connection and connect my laptop to the telnet switch.
+Go to the connections
+tab. This time, I'll choose a copper straight through cable.
+Click the laptop.
+Choose FastEthernet 0. click the switch
+and connect to FastEthernet 0/1.
+I'll open my laptop once again.
+Now I'm going to use another terminal emulation tool.
+From the list,
+I'll go to the telnet/SSH client.
+Click it.
+And here from the drop down list, I will select Telnet.
+Okay. in the IP address tab
+I'm gonna type the IP address of my switch 
+192.168.1.1 then click connect.
+Now I can see that I'm connected to my switch
+and I'm being asked for my user name and password.
+I'll type admin as a user name and Cisco as a password.
+It's time for you to practice. Pause the video now and
+and come back when you're ready.
+Welcome back again.
+The secure shell or SSH is another way of remotely
+connecting to your Cisco device.
+This connection is similar to the talent connection,
+except that it is highly secured.
+It uses encryption to send user name and passwords
+and commands.
+Now I'm back to my Cisco Packet Tracer window
+and I'll disconnect my laptop from the talent to switch
+and connected to the sshh switch.
+Go. The connections tab select straight through cable. Click
+the laptop then
+FastEthernet zero. Click the switch and select FastEthernet 0/1
+Once again, I'll click my laptop.
+select the SSH client terminal emulation tool, and enter
+the information for the switch 192.168.1.1
+and the user name is admin.
+Click connect.  Now it's asking me for a password, which is cisco.
+and hit Enter. Now
+I'm connected to my SSH switch.
+It's time for you to practice this. Pause the video now and come
+back when you're ready.
+Welcome back again.
+So far we have been
+using terminal emulation tools available inside
+of the package a tracer.
+But when connecting to real Cisco devices, you will need
+terminal emulation software installed on your computer.
+There are many terminal emulation tools available, including
+Putty, TerraTerm and SecureCRT.
+Now let's talk about the Cisco IOS modes.
+There are two modes of accessing Cisco IOS, the user exec
+mode and the privileged mode.
+The user exec mode is a quiet limited and also referred to as 
+view on lee mode.
+This command gives you access to basic troubleshooting and
+diagnostic features such a ping, trace-route  and others.
+The user privilege mode, as the name implies, gives you
+access toe all monitoring commands.
+It also gives you access to other configuration modes
+available in Cisco IOS. In Packet Tracer,
+You can also access a switch or a router directly from the
+Packet Tracer's interface.
+I'll double click the telnet switch, and go to the CLI tab 
+and here I can see that I can access my switch. By default,
+when you access a Cisco device, you are in the user exec
+mode. You can see here the device name followed by the arrow
+sign. To access the privileged mode.
+You can use the enable command. Type "enable" and hit "Enter". And 
+now you are in the privilege mode.
+Here you can see the device name followed by the pound sign
+indicating that you are in the privileged mode.
+It's time for you to practice this. Pause the video now and
+come back when you're ready.
+Welcome back again and great job on completing this task
+of this carried a project. In this task you learned about the
+Cisco IOS operating system.
+How to access, manage, and connect to a Cisco advice, and the
+two modes of Cisco IOS:
+The exec mode and the privileged mode.

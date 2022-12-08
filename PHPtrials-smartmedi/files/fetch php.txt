@@ -1,0 +1,12 @@
+$query = "SELECT * FROM `comments` WHERE `articleid` =$article_id LIMIT 0 , 30";
+
+$comments = mysql_query($query);
+
+while($row = mysql_fetch_array($comments, MYSQL_ASSOC))
+{
+  $name = $row['name'];
+  $email = $row['email'];
+  $website = $row['website'];
+  $comment = $row['comment'];
+  $timestamp = $row['timestamp'];
+}
