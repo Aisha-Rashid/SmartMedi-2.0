@@ -65,7 +65,7 @@ if (isset($_GET['logout'])) {
 				<i class="fa fa-database"></i> Menu <div class="pull-right"><span class="caret"></span></div>
 				</a>
 				<ul class="templatemo-submenu">
-				<li><a href="medicalhist.php">Medical History</a></li>
+				
 				<li><a href="attachments.php">Attachments</a></li>
 				<li><a href="appointment.php">Appointments</a></li>
 				</ul>
@@ -167,16 +167,16 @@ if (isset($_GET['logout'])) {
           </div>
 		  <br>
           <div class="card-header bg-transparent border-0">
-			<button class="collapsible">Reports</button>
+			<button class="collapsible">Medical conditions</button>
 			<div class="content">
-				 <a href="#">Download/print report</a>
+				 <a href="medicalhist.php">Click to view/print medical conditions</a>
 			</div>
           </div>
 		  <br>
 		  <div class="card-header bg-transparent border-0">
 			<button class="collapsible">Package</button>
 			<div class="content">
-				 <a href="appointment.html">Upgrade or retore previous package</a>
+				 <a href="#">Upgrade or retore previous package</a>
 			</div>
           </div>
 		  <br>
