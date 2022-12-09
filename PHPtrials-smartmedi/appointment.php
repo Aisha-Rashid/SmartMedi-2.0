@@ -63,7 +63,7 @@ if (isset($_GET['logout'])) {
 				<i class="fa fa-database"></i> Menu <div class="pull-right"><span class="caret"></span></div>
 				</a>
 				<ul class="templatemo-submenu">
-				<li><a href="medicalhist.php">Medical History</a></li>
+				
 				<li><a href="attachments.php">Attachments</a></li>
 				<li class="active"><a href="#">Appointments</a></li>
 				</ul>

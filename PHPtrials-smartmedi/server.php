@@ -46,6 +46,7 @@ if (isset($_POST['reg_user'])) {
 	$password1 = mysqli_real_escape_string($db, $_POST['password1']);
 	$password2 = mysqli_real_escape_string($db, $_POST['password2']);
 	
+	
 
 	// Ensuring that the user has not left any input field blank
 	// error messages will be displayed for every blank input
@@ -68,9 +69,11 @@ if (isset($_POST['reg_user'])) {
 		// Password encryption to increase data security
 		$password = md5($password1);
 		
-		// Inserting data into table
+		// Inserting data into tables
 		$query = "INSERT INTO patients (FirstName, LastName, TelNo, IDNo, DOB, gender, bloodgroup, email, password)
 				VALUES('$FirstName' , '$LastName' , '$TelNo' , '$IDNo' , '$DOB' , '$gender', '$bloodgroup', '$email', '$password')";
+		
+		
 		
 		mysqli_query($db, $query);
 

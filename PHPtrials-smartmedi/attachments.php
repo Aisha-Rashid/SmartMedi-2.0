@@ -90,7 +90,7 @@ die(mysqli_error($conn));
 				<i class="fa fa-database"></i> Menu <div class="pull-right"><span class="caret"></span></div>
 				</a>
 				<ul class="templatemo-submenu">
-				<li><a href="medicalhist.php">Medical History</a></li>
+				
 				<li><a href="#">Attachments</a></li>
 				<li><a href="appointment.php">Appointments</a></li>
 				</ul>
