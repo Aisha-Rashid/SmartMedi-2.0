@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2022 at 05:09 PM
+-- Generation Time: Dec 13, 2022 at 01:38 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -150,7 +150,8 @@ INSERT INTO `fileupload` (`id`, `name`, `date`, `IDNo`) VALUES
 (21, 'Accessing Cisco Devices_transcript.txt', '2022-12-08 14:48:01', 68493736),
 (22, 'fetch php.txt', '2022-12-08 15:35:59', 63748264),
 (23, 'AAR Medical Insurance Quotation 2022-Farida (52yrs).xlsx', '2022-12-08 15:36:13', 63748264),
-(24, 'MMUrepo6.docx', '2022-12-08 15:36:47', 63748264);
+(24, 'MMUrepo6.docx', '2022-12-08 15:36:47', 63748264),
+(25, '4_entropy_coding.pdf', '2022-12-13 15:34:25', 2147483647);
 
 -- --------------------------------------------------------
 
@@ -258,8 +259,17 @@ CREATE TABLE `medicalcover` (
   `nhifnumber` int(11) NOT NULL,
   `insurancetype` varchar(255) NOT NULL,
   `insurancenumber` int(11) NOT NULL,
+  `insuranceprincipal` varchar(100) NOT NULL,
+  `expiry` date NOT NULL,
   `IDNo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `medicalcover`
+--
+
+INSERT INTO `medicalcover` (`id`, `nhiftype`, `nhifnumber`, `insurancetype`, `insurancenumber`, `insuranceprincipal`, `expiry`, `IDNo`) VALUES
+(1, 'Individual', 64792764, 'APA Insurance Limited', 5367286, 'Aisha Wanja Rashid', '2023-07-11', 2147483647);
 
 -- --------------------------------------------------------
 
@@ -272,6 +282,7 @@ CREATE TABLE `nextofkin` (
   `kinFirstName` varchar(50) NOT NULL,
   `kinLastName` varchar(50) NOT NULL,
   `relationship` varchar(50) NOT NULL,
+  `telephone` varchar(100) NOT NULL,
   `IDNo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -279,29 +290,10 @@ CREATE TABLE `nextofkin` (
 -- Dumping data for table `nextofkin`
 --
 
-INSERT INTO `nextofkin` (`id`, `kinFirstName`, `kinLastName`, `relationship`, `IDNo`) VALUES
-(1, 'fatuma', 'wairimu', '', 0),
-(2, '', '', '', 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `nhif`
---
-
-CREATE TABLE `nhif` (
-  `id` int(11) NOT NULL,
-  `type` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `nhif`
---
-
-INSERT INTO `nhif` (`id`, `type`) VALUES
-(1, 'Civil Servant'),
-(2, 'Employee'),
-(3, 'Individual');
+INSERT INTO `nextofkin` (`id`, `kinFirstName`, `kinLastName`, `relationship`, `telephone`, `IDNo`) VALUES
+(1, 'fatuma', 'wairimu', '', '', 0),
+(2, '', '', '', '', 0),
+(3, 'Rehema', 'Rashid', 'Sibling', '152671827', 2147483647);
 
 -- --------------------------------------------------------
 
@@ -328,8 +320,8 @@ CREATE TABLE `patients` (
 --
 
 INSERT INTO `patients` (`ID`, `FirstName`, `LastName`, `TelNo`, `IDNo`, `DOB`, `gender`, `bloodgroup`, `email`, `password`, `pic`) VALUES
-(20, 'Aisha', 'Rashid', '+254703277202', 2147483647, '1990-02-09', 'Female', '', 'chuchuaisha@gmail.com', 'a381bedb5d4478053eb04be35f8798dd', ''),
-(22, 'Fatuma', 'Rashid', '273940287', 53664673, '1995-11-09', 'Female', '', 'fatuma@yahoo.com', 'fdc0978bc0cc4c37c3e3d44fc63ee487', ''),
+(20, 'Aisha', 'Rashid', '+254703277202', 2147483647, '1990-02-09', 'Female', 'O+', 'chuchuaisha@gmail.com', 'a381bedb5d4478053eb04be35f8798dd', ''),
+(22, 'Fatuma', 'Rashid', '273940287', 53664673, '1995-11-09', 'Female', 'O+', 'fatuma@yahoo.com', 'fdc0978bc0cc4c37c3e3d44fc63ee487', ''),
 (23, 'Ashraf', 'Mbulika', '63647828', 63748264, '2020-07-07', 'Male', 'AB+', 'ashraf@yahoo.com', '508924b0eac2ba101ada28841c931e44', ''),
 (24, 'Rehema', 'Rashid', '637483625', 68493736, '1998-03-10', 'Female', 'O+', 'rehema@yahoo.com', '5eaf0467a7fdc9fe2a16b9b8a8fd8b4a', ''),
 (25, 'Suhaila', 'Salim', '73849837', 82736745, '2017-07-21', 'Female', 'O+', 'suhaila@yahoo.com', 'e8b3ca806fd3c5e8e18368994a7ee305', '');
@@ -355,7 +347,8 @@ CREATE TABLE `response` (
 INSERT INTO `response` (`id`, `IDNo`, `conditions`, `allergies`, `notes`) VALUES
 (2, 53664673, 'Respiratory and Ear Nose and Throat (ENT) disorders,Endocrine disorders,Gastro-intestinal disorders,Gynaecological and Obstetric disorders,Neurological and psychological disorders,Congenital/inherited/hereditary disorders,', 'peanuts, flowers', '5-year gastritis diagnosis, anxiety disorder,  stomach hernia, pelvic inflammation'),
 (3, 68493736, 'Respiratory and Ear Nose and Throat (ENT) disorders,', 'paracetamol, dust particles', 'rhinitis diagnosed in 2013'),
-(4, 63748264, 'Gastro-intestinal disorders,', 'nuts', 'gastritis detected');
+(4, 63748264, 'Gastro-intestinal disorders,', 'nuts', 'gastritis detected'),
+(5, 2147483647, 'Respiratory and Ear Nose and Throat (ENT) disorders, Gastro-intestinal disorders, Gynaecological and Obstetric disorders, Neurological and psychological disorders, ', 'reactive to iboprufen, dust particles, strong perfumes, eggs', 'diagnosed with allergic rhinitis, hiatus hernia, peptic ulcers, endometriosis, anxiety and panic attacks');
 
 --
 -- Indexes for dumped tables
@@ -410,12 +403,6 @@ ALTER TABLE `nextofkin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `nhif`
---
-ALTER TABLE `nhif`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `patients`
 --
 ALTER TABLE `patients`
@@ -447,7 +434,7 @@ ALTER TABLE `docspecialty`
 -- AUTO_INCREMENT for table `fileupload`
 --
 ALTER TABLE `fileupload`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `hospitals`
@@ -465,18 +452,12 @@ ALTER TABLE `insurance`
 -- AUTO_INCREMENT for table `medicalcover`
 --
 ALTER TABLE `medicalcover`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `nextofkin`
 --
 ALTER TABLE `nextofkin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `nhif`
---
-ALTER TABLE `nhif`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
@@ -489,7 +470,7 @@ ALTER TABLE `patients`
 -- AUTO_INCREMENT for table `response`
 --
 ALTER TABLE `response`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

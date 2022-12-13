@@ -95,17 +95,17 @@ if(isset($_POST['sub'])!=""){
 	$chk="";  
 	foreach($checkbox1 as $chk1)  
 	   {  
-		  $chk .= $chk1.",";  
+		  $chk .= $chk1.", ";  
 	   }  
 	$in_ch=mysqli_query($con,"insert into response(IDNo, conditions, allergies, notes) values ('$unique','$chk', '$allergies','$notes')");
   
 	if($in_ch==1)  
 	   {  
-		  echo'<script>alert("Inserted Successfully")</script>';  
+		  echo"<script>alert('Inserted Successfully')</script>";  
 	   }  
 	else  
 	   {  
-		  echo'<script>alert("Failed To Insert")</script>';  
+		  echo"<script>alert('Failed To Insert')</script>";  
 	   }
 	
 header("location:dashboard.php");	

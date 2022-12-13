@@ -175,7 +175,7 @@ die(mysqli_error($conn));
 				<a href="download.php?filename=<?php echo $name;?>" title="click to download"><i class="fa fa-download" aria-hidden="true"></i></a>
 				</td>
 				<td>
-				<a href="delete.php?del=<?php echo $row['name']?>"><i class="fa fa-minus-circle" aria-hidden="true""></i></a>
+				<a href="delete.php?del=<?php echo $row['name']?>"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
 				</td>
 				
                                 </tr>
@@ -183,14 +183,8 @@ die(mysqli_error($conn));
 						         <?php } ?> 
                             </tbody>
                         </table>
-						
-                              
-                               
-								
-                            </div>
-          
-</form>
-		
+					</form>
+		</div>
         </div>
 	   </div>
     
