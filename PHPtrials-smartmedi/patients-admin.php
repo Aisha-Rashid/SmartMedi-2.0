@@ -204,10 +204,6 @@ if (isset($_GET['logout'])) {
                                 // $array = mysqli_fetch_row($res);
                                 $rows = mysqli_num_rows($res);
                                 $newArr =  mysqli_fetch_array($res);
-                                
-                               
-                             
-
                                 // while($row = mysqli_fetch_array($res))
                                 // while ($row = $AllPatientsRes->fetch_array()) 
                                 // {
@@ -217,16 +213,10 @@ if (isset($_GET['logout'])) {
                                 //     echo $patientAge;
                                 // }
                                 ?>
-                            
-                            
-
-                        
-
-
                         </div>
                         <div>
-                            <table class="table">
-                                <thead>
+                            <table class=" table table-stripped">
+                                <thead class="thead-light">
 
                                     <tr>
                                         <th scope="col">Patient Name</th>
