@@ -92,27 +92,11 @@ if (isset($_GET['logout'])) {
             <table class="table table-bordered">
               
 			  <tr>
-                <th width="30%">Next of Kin</th>
-                <td width="2%">:</td>
-                
-				<td>
-						<?php ;?>
-				</td>
-              </tr>
-			  <tr>
-                <th width="30%">Insurance Details</th>
-                <td width="2%">:</td>
-                
-				<td>
-						<?php ;?>
-				</td>
-              </tr>
-			  <tr>
                 <th width="30%">Blood Group</th>
                 <td width="2%">:</td>
                 
 				<td>
-						<?php echo $array[7] ;?>
+						<?php echo $array[7] ;?><br><br>
 				</td>
               </tr>
 			  <tr>
@@ -120,7 +104,16 @@ if (isset($_GET['logout'])) {
                 <td width="2%">:</td>
                 
 				<td>
-						<?php ;?>
+						<?php 
+							$query="select * from response WHERE IDNO = '$unique'";
+							$res = mysqli_query($db, $query);
+							while($row=mysqli_fetch_array($res)){
+							
+							$allergies=$row['allergies'];
+							$conditions=$row['conditions'];
+							$notes=$row['notes'];
+							?>
+							<?php echo $row['allergies'] ?><br><br>
 				</td>
               </tr>
 			  <tr>
@@ -128,47 +121,76 @@ if (isset($_GET['logout'])) {
                 <td width="2%">:</td>
                 
 				<td>
-						<?php ;?>
+						<?php echo $row['conditions'] ?><br><br>
 				</td>
               </tr>
+			  <tr>
+                <th width="30%">Additional Information</th>
+                <td width="2%">:</td>
+                
+				<td>
+						<?php echo $row['notes'] ?><br><br>
+				</td>
+				<?php } ?> 
+              </tr>
 			  
+			   <tr>
+                <th width="30%">Insurance Details</th>
+                <td width="2%">:</td>
+                <?php 
+							$query="select * from medicalcover WHERE IDNO = '$unique'";
+							$res = mysqli_query($db, $query);
+							while($row=mysqli_fetch_array($res)){
+							
+							$nhiftype=$row['nhiftype'];
+							$nhifnumber=$row['nhifnumber'];
+							$insurancetype=$row['insurancetype'];
+							$insurancenumber=$row['insurancenumber'];
+							$insuranceprincipal=$row['insuranceprincipal'];
+							$expiry=$row['expiry'];
+							?>
+				<td>
+						<b>NHIF Cover Type : </b><?php echo $row['nhiftype'] ?><br>
+						<b>NHIF Member Number : </b><?php echo $row['nhifnumber'] ?> <br><br>
+						<b>Other Insurance Cover : </b><?php echo $row['insurancetype'] ?><br>
+						<b>Member Number : </b><?php echo $row['insurancenumber'] ?><br>
+						<b>Principal Member : </b><?php echo $row['insuranceprincipal'] ?><br>
+						<b>Expiry Date : </b><?php echo $row['expiry'] ?><br><br>
+						
+						
+				</td>
+				<?php } ?> 
+              </tr>
+			  <tr>
+                <th width="30%">Next of Kin</th>
+                <td width="2%">:</td>
+                <?php 
+							$query="select * from nextofkin WHERE IDNO = '$unique'";
+							$res = mysqli_query($db, $query);
+							while($row=mysqli_fetch_array($res)){
+							
+							$kinFirstName=$row['kinFirstName'];
+							$kinLastName=$row['kinLastName'];
+							$relationship=$row['relationship'];
+							$telephone=$row['telephone'];
+							?>
+				<td>
+						<b>Name : </b><?php echo $row['kinFirstName'];
+						echo " ";
+						echo $row['kinLastName'];; ?> <br>
+						<b>Relationship : </b><?php echo $row['relationship'] ?><br>
+						<b>Phone Number : </b><?php echo $row['telephone'] ?><br><br>
+						
+				</td>
+				<?php } ?> 
+              </tr>
             </table>
           </div>
         </div>
-          <div style="height: 26px"></div>
+         
 		  
-        <div class="card shadow-sm">
-		
-		<div class="card-header bg-transparent border-0">
-			<button class="collapsible">Medical History</button>
-			<div class="content">
-				 <a href="mediform.php">Click here to fill in the Basic History form</a>
-			</div>
-          </div>
-		  <br>
-          <div class="card-header bg-transparent border-0">
-			<button class="collapsible">Insurance Details</button>
-			<div class="content">
-				 <a href="#">Download/print report</a>
-			</div>
-          </div>
-		  <br>
-		  <div class="card-header bg-transparent border-0">
-			<button class="collapsible">Next of Kin Details</button>
-			<div class="content">
-				 <a href="appointment.html">Upgrade or retore previous package</a>
-			</div>
-          </div>
-		  <br>
-		    <div class="card-header bg-transparent border-0">
-			<button class="collapsible">Attachments</button>
-			<div class="content">
-				 <a href="appointment.html">Upgrade or retore previous package</a>
-			</div>
-          </div>
-		  <br>
-		  <button onClick="window.print()">Print</button>
-        </div>
+        
+		<button onClick="window.print()">Print</button>
       </div>
     </div>
 	

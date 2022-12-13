@@ -115,7 +115,7 @@ if (isset($_GET['logout'])) {
 						<?php 
             
             echo $array[1];
-            
+            echo " ";
             echo $array[2];?>
 				</td>
               </tr>
@@ -160,9 +160,48 @@ if (isset($_GET['logout'])) {
         <div class="card shadow-sm">
 		<h3 class="mb-0"><i class="far fa-clone pr-1"></i>Quick Profile Setup</h3>
 		<div class="card-header bg-transparent border-0">
-			<button class="collapsible">Basic History Form</button>
+			<button class="collapsible">Basic Medical History</button>
 			<div class="content">
-				 <a href="mediform.php">Click here to fill in the Basic History form</a>
+				 <a href="mediform.php">Click here to fill in the Basic Medical History form</a><br><br><br>
+				 
+				 <?php 
+							$query="select * from response WHERE IDNO = '$unique'";
+							$res = mysqli_query($db, $query);
+							while($row=mysqli_fetch_array($res)){
+							
+							$allergies=$row['allergies'];
+							$conditions=$row['conditions'];
+							$notes=$row['notes'];
+							?>
+				  <table class="table table-bordered">
+				  <u> History Details </u>
+				<tr>
+					<th width="30%">Allergies</th>
+					<td width="2%">:</td>
+					
+					<td>
+					<?php echo $row['allergies'] ?><br><br>
+					</td>
+				</tr>
+				<tr>
+                <th width="30%">Conditions</th>
+                <td width="2%">:</td>
+                
+				<td>
+						<?php echo $row['conditions'] ?><br><br>
+				</td>
+              </tr>
+			   <tr>
+                <th width="30%">Additional Information</th>
+                <td width="2%">:</td>
+                
+				<td>
+						<?php echo $row['notes'] ?><br><br>
+				</td>
+				 
+              </tr>
+				 </table>
+				 <?php } ?> 
 			</div>
           </div>
 		  <br>
@@ -170,6 +209,107 @@ if (isset($_GET['logout'])) {
 			<button class="collapsible">Medical conditions</button>
 			<div class="content">
 				 <a href="medicalhist.php">Click to view/print medical conditions</a>
+			</div>
+          </div>
+		  <br>
+		  <div class="card-header bg-transparent border-0">
+			<button class="collapsible">Insurance Details</button>
+			<div class="content">
+			
+				 <a href="insuranceform.php">Click to add Insurance Cover Details</a><br><br><br>
+				 <?php 
+							$query="select * from medicalcover WHERE IDNO = '$unique'";
+							$res = mysqli_query($db, $query);
+							while($row=mysqli_fetch_array($res)){
+							
+							$nhiftype=$row['nhiftype'];
+							$nhifnumber=$row['nhifnumber'];
+							$insurancetype=$row['insurancetype'];
+							$insurancenumber=$row['insurancenumber'];
+							$insuranceprincipal=$row['insuranceprincipal'];
+							$expiry=$row['expiry'];
+							?>
+				 <table class="table table-bordered">
+				<u> NHIF Details </u>
+				 <thead>
+					<tr>
+						<th>Cover Type</th>
+                        <th>Member Number</th>
+						
+						
+                    </tr>
+                 </thead>
+				 <tbody>
+					<tr>
+						<td><?php echo $row['nhiftype'] ?></td>
+						<td><?php echo $row['nhifnumber'] ?></td>
+					</tr>
+				 </tbody>
+				 </table>
+				 
+				 
+				 <table class="table table-bordered">
+				 <u> Other Insurance Details </u>
+				 <thead>
+					<tr>
+						<th>Insurance Name</th>
+                        <th>Member Number</th>
+						<th>Principal Member</th>
+						<th>Expiry Date</th>
+                    </tr>
+                 </thead>
+				 <tbody>
+					<tr>
+						<td><?php echo $row['insurancetype'] ?></td>
+						<td><?php echo $row['insurancenumber'] ?></td>
+						<td><?php echo $row['insuranceprincipal'] ?></td>
+						<td><?php echo $row['expiry'] ?></td>
+					</tr>
+				 </tbody>
+				 </table>
+				 <?php } ?> 
+			</div>
+          </div>
+		  <br>
+		  <div class="card-header bg-transparent border-0">
+			<button class="collapsible">Next of Kin details</button>
+			<div class="content">
+				 <a href="nextkin.php">Click to add Next of Kin Details</a><br><br><br>
+				 <?php 
+							$query="select * from nextofkin WHERE IDNO = '$unique'";
+							$res = mysqli_query($db, $query);
+							while($row=mysqli_fetch_array($res)){
+							
+							$kinFirstName=$row['kinFirstName'];
+							$kinLastName=$row['kinLastName'];
+							$relationship=$row['relationship'];
+							$telephone=$row['telephone'];
+							?>
+				 <table class="table table-bordered">
+				<u> Kin Details </u>
+				 <thead>
+					<tr>
+						<th>Name</th>
+                        <th>Relationship</th>
+						<th>Phone Number</th>
+						
+                    </tr>
+                 </thead>
+				 <tbody>
+					<tr>
+						<td>
+						<?php echo $row['kinFirstName'];
+						echo " ";
+						echo $row['kinLastName'];; ?> 
+						</td>
+						<td><?php echo $row['relationship'] ?></td>
+						<td><?php echo $row['telephone'] ?></td>
+					</tr>
+				 </tbody>
+				 </table>
+				 
+				 <?php } ?> 
+				 
 			</div>
           </div>
 		  <br>
