@@ -56,6 +56,10 @@ h1 { font-size: 24px; }
     color: #ccc;
     background-color: black;
 }
+.image-upload>input {
+    width: 0; height: 0;
+    position: absolute; top: -9999px; left: -9999px;
+  }
 .margin-bottom-15 { margin-bottom: 15px; }
 .margin-bottom-30 { margin-bottom: 30px; }
 
@@ -294,4 +298,3 @@ h1 { font-size: 24px; }
 .h3{
     text-transform: capitalize;
 }
-

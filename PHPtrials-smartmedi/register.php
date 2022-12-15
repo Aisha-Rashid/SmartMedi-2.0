@@ -62,7 +62,6 @@
 					<div class="contact-block">
 						<form class="form-horizontal templatemo-signin-form" method="post" action="register.php">
 						<?php include('errors.php'); ?>
-						<h2><u>1. Basic Information</u></h2>
 						<div class="row">
 								<div class="col-md-6">
 									<label>First Name</label>
@@ -146,106 +145,19 @@
 									<span toggle="#password2" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 									</div>
 								</div> 
-							
-								
-							</div>
-							<h2><u>2. Insurance Details</u></h2>
-							<div class="row">
 								<div class="col-md-6">
-									<label>NHIF cover type</label>
-									<div class="form-group">
-									<SELECT NAME="nhiftype" class="form-control">
-										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
-										<?php 
-										$query ="SELECT type FROM nhif";
-										$result = mysqli_query($db, $query);
-										if($result->num_rows> 0){
-										  $options= mysqli_fetch_all($result, MYSQLI_ASSOC);
-										}
-										
-											foreach ($options as $option) {
-										?>
-										<option><?php echo $option['type']; ?> </option>
-										<?php 
-										}
-										?>
-										
-									</SELECT>
-									</div>   
-								</div> 
-								<div class="col-md-6">
-									<label>Member Number</label>
-									<div class="form-group">
-									<input type="number" class="form-control" name="nhifnumber" value="<?php echo $nhifnumber; ?>">
-									</div>   
-								</div> 
-								<div class="col-md-6">
-									<label>Other Insurance Cover</label>
-									<div class="form-group">
-									<SELECT NAME="insurer" class="form-control">
-										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
-										<?php 
-										$query ="SELECT insurer FROM insurance";
-										$result = mysqli_query($db, $query);
-										if($result->num_rows> 0){
-										  $options= mysqli_fetch_all($result, MYSQLI_ASSOC);
-										}
-										
-											foreach ($options as $option) {
-										?>
-										<option><?php echo $option['insurer']; ?> </option>
-										<?php 
-										}
-										?>
-										
-									</SELECT>
-									</div>   
-								</div>  
-								<div class="col-md-6">
-									<label>Member Number</label>
-									<div class="form-group">
-									<input type="number" class="form-control" name="insurancenumber" value="<?php echo $insurancenumber; ?>">
-									</div>   
-								</div> 
-							</div>
-							<h2><u>3. Next of Kin Details</u></h2>
-							<div class="row">
-								<div class="col-md-4">
-									<label>First Name</label>
-									<div class="form-group">
-									<input type="text" class="form-control" name="kinfname" value="<?php echo $kinfname; ?>">
-									</div>   
-								</div> 
-								<div class="col-md-4">
-									<label>Last Name</label>
-									<div class="form-group">
-									<input type="text" class="form-control" name="kinlname" value="<?php echo $kinlname; ?>">
-									</div>   
-								</div> 
-								<div class="col-md-4">
-									<label>Relationship</label>
-									<div class="form-group">
-									<SELECT NAME="relationship" class="form-control">
-										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
-										<OPTION VALUE="parent">Parent
-										<OPTION VALUE="Husband/Wife">Husband/Wife
-										<OPTION VALUE="Brother/Sister">Brother/Sister
-										<OPTION VALUE="Son/Daughter">Son/Daughter
-										<OPTION VALUE="Relative">Relative
-										<OPTION VALUE="Guardian">Guardian<BR>
-										
-										</SELECT>
-									</div>   
-								</div> 
-								<div class="form-group">
-									<div class="col-md-12">
 										<div class="col-sm-offset-2 col-sm-10">
 										<button type="submit" class="btn"
 										name="reg_user">Register</button>
 										</div>
 									</div>
-								</div>
+								
 							</div>
+								
+							</div>
+							
+									
+								</div>
 						</form>
 					</div>
 				</div>

@@ -127,7 +127,7 @@ die(mysqli_error($conn));
 	   <div class="col-lg-8">
 	   <div class="card shadow-sm">
           
-         <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Upload Files</h3>
+         <h3 class="mb-0">Upload Files</h3>
 		 <hr>
 		 
 		<!--form enctype="multipart/form-data"  method="post" action="attachments.php"--> 
@@ -184,6 +184,9 @@ die(mysqli_error($conn));
                             </tbody>
                         </table>
 					</form>
+					
+					
+					
 		</div>
         </div>
 	   </div>

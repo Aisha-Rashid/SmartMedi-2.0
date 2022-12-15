@@ -25,8 +25,8 @@
     <link rel="stylesheet" href="css/style.css">    
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="css/responsive.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/custom.css">
+    <!-- Custom CSS --
+    <link rel="stylesheet" href="css/custom.css"-->
 	<!--Password eye icon-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 
@@ -39,46 +39,19 @@
 <body id="home" data-spy="scroll" data-target="#navbar-wd" data-offset="98">
 
 	<!-- LOADER -->
-     <!-- <div id="preloader">
+     <div id="preloader">
 		<div class="loader">
 			<img src="images/preloader.gif" alt="" />
 		</div>
-    </div>end loader -->
+    </div><!--end loader -->
     <!-- END LOADER -->
 	
-	<!-- Start top bar ****
-	<div class="main-top">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-6">
-					<div class="left-top">
-						<a class="new-btn-d br-2" href="#"><span>Book Appointment</span></a>
-						<div class="mail-b"><a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i> demo@gmail.com</a></div>
-					</div>
-				</div>
-				<div class="col-lg-6">
-					<div class="wel-nots">
-						<p>Welcome to Our Health Lab!</p>
-					</div>
-					<div class="right-top">
-						<ul>
-							<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-							<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-							<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-							<li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	**** End top bar -->
-	
+		
 	<!-- Start header -->
 	<header class="top-header">
 		<nav class="navbar header-nav navbar-expand-lg">
             <div class="container">
-				<a class="navbar-brand" href="index.html"><img src="images/logo2icon.png" alt="image"></a>
+				<a class="navbar-brand" href="index.php"><img src="images/SM-logo3icon.png" alt="image"></a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-wd" aria-controls="navbar-wd" aria-expanded="false" aria-label="Toggle navigation">
 					<span></span>
 					<span></span>
@@ -104,20 +77,20 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="pogoSlider" id="js-main-slider">
-					<div class="pogoSlider-slide" data-transition="fade" data-duration="1000" style="background-image:url(images/slider-01.jpg);">
+					<div class="pogoSlider-slide" data-transition="fade" data-duration="1500" style="background-image:url(images/slider01.jpg);">
 						<div class="lbox-caption pogoSlider-slide-element">
-							<div class="lbox-details">
+							<!--div class="lbox-details">
 								<h1>Welcome to SmartMedi</h1>
 								<p>The number 1 platform in medical record-keeping.</p>
 								<a href="#about" class="btn">Read More</a>
-							</div>
+							</div-->
 						</div>
 					</div>
 					<div class="pogoSlider-slide" data-transition="fade" data-duration="1500" style="background-image:url(images/slider-02.jpg);">
 						<div class="lbox-caption pogoSlider-slide-element">
 							<div class="lbox-details">
-								<h1>We are the experts in the field of medicine.</h1>
-								<p>Our platform is able to hold thousands of records.</p>
+								<h1>Welcome to SmartMedi.</h1>
+								<p>Our platform is able to hold thousands of records for emergency care.</p>
 								<a href="#services" class="btn">View Packages</a>
 							</div>
 						</div>
@@ -127,7 +100,7 @@
 							<div class="lbox-details">
 								<h1>We are universal</h1>
 								<p>Our platform tranverses both private and public industry.</p>
-								<a href="Signup.html" class="btn">Open an account with us today!</a>
+								<a href="Signup.html" class="btn">Sign up with us today!</a>
 							</div>
 						</div>
 						
