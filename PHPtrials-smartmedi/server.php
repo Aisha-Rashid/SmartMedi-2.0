@@ -55,7 +55,7 @@ if (isset($_POST['reg_user'])) {
 	if (empty($TelNo)) { array_push($errors, "Telephone Number is required"); }
 	if (empty($IDNo)) { array_push($errors, "ID Number is required"); }
 	if (empty($DOB)) { array_push($errors, "Date of Birth is required"); }
-	if (empty($email)) { array_push($errors, "Email is required"); }
+	//if (empty($email)) { array_push($errors, "Email is required"); }
 	if (empty($password1)) { array_push($errors, "Password is required"); }
 
 	if ($password1 != $password2) {

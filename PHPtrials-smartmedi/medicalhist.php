@@ -1,5 +1,5 @@
 <?php
-include('signin.php'); 
+include('doc_signin_server.php'); 
 
 // Starting the session, to use and
 // store data in session variable
@@ -9,9 +9,9 @@ include('signin.php');
 // means the user is yet to login
 // User will be sent to 'login.php' page
 // to allow the user to login
-if (!isset($_SESSION['IDNo'])) {
+if (!isset($_SESSION['id'])) {
 	$_SESSION['msg'] = "You have to log in first";
-	header('location: login.php');
+	header('location: DocLogin.php');
 }
 
 // Logout button will destroy the session, and
@@ -20,9 +20,22 @@ if (!isset($_SESSION['IDNo'])) {
 // after logging out
 if (isset($_GET['logout'])) {
 	session_destroy();
-	unset($_SESSION['IDNo']);
-	header("location: login.php");
+	unset($_SESSION['id']);
+	header("location: DocLogin.php");
 }
+?>
+<?php
+extract($_REQUEST);
+
+$query = "select * from patients where IDNo='$filename'";
+//$sql=mysqli_query($conn,"select * from patients where IDNo='$filename'");
+
+	$res = mysqli_query($db, $query);
+   $array=mysqli_fetch_row($res);
+   $rows = mysqli_num_rows($res);
+
+
+
 ?>
 <!DOCTYPE html>
 <head>
@@ -38,20 +51,10 @@ if (isset($_GET['logout'])) {
  
 </head>
 <body>
-<?php if (isset($_SESSION['IDNo'])) : 
-   
-   
-   $unique = $_SESSION['IDNo'];
-   $query = "SELECT * FROM `patients` WHERE IDNo = '$unique'";
-   $res = mysqli_query($db, $query);
-   $array=mysqli_fetch_row($res);
-   $rows = mysqli_num_rows($res);
-   
-   ?>
-  	
+
 			
 			<ol class="breadcrumb">
-			<li><a href="dashboard.php"><img src="dashboardimages/favicon.ico" alt="Smartmedi"></a></li>
+			<li><a href="DocDashboard.php"><img src="dashboardimages/favicon.ico" alt="Smartmedi"></a></li>
             <li><b>ID : <?php echo $array[4];?></b></li>
 			</ol>
 			
@@ -105,7 +108,7 @@ if (isset($_GET['logout'])) {
                 
 				<td>
 						<?php 
-							$query="select * from response WHERE IDNO = '$unique'";
+							$query="select * from response WHERE IDNO = '$filename'";
 							$res = mysqli_query($db, $query);
 							while($row=mysqli_fetch_array($res)){
 							
@@ -138,7 +141,7 @@ if (isset($_GET['logout'])) {
                 <th width="30%">Insurance Details</th>
                 <td width="2%">:</td>
                 <?php 
-							$query="select * from medicalcover WHERE IDNO = '$unique'";
+							$query="select * from medicalcover WHERE IDNO = '$filename'";
 							$res = mysqli_query($db, $query);
 							while($row=mysqli_fetch_array($res)){
 							
@@ -165,7 +168,7 @@ if (isset($_GET['logout'])) {
                 <th width="30%">Next of Kin</th>
                 <td width="2%">:</td>
                 <?php 
-							$query="select * from nextofkin WHERE IDNO = '$unique'";
+							$query="select * from nextofkin WHERE IDNO = '$filename'";
 							$res = mysqli_query($db, $query);
 							while($row=mysqli_fetch_array($res)){
 							
@@ -191,6 +194,7 @@ if (isset($_GET['logout'])) {
 		  
         
 		<button onClick="window.print()">Print</button>
+		<!--button onclick="history.back()">Go Back</button-->
       </div>
     </div>
 	
@@ -247,6 +251,6 @@ for (i = 0; i < coll.length; i++) {
   });
 }
 </script>
-<?php endif ?>   
+ 
 </body>
 </html>
