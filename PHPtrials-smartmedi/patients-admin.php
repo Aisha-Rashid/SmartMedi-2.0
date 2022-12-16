@@ -241,7 +241,7 @@ if (isset($_GET['logout'])) {
                                     echo "<td>" . $row['gender'] . "</td>"; 
                                     echo "<td>" . $row['bloodgroup'] . "</td>";                                                                       
                                     echo "<td>" . $row['email'] . "</td>";
-                                    echo "<td><button class='btn'>View</button> </td>";
+                                    echo "<td><button>View</button> </td>";
                                     
                                     echo "</tr>";
                                 }

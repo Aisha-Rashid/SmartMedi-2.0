@@ -48,6 +48,7 @@ if (isset($_GET['logout'])) {
    $rows = mysqli_num_rows($res);
    
    ?>
+ 
   
 
 <!-- Start menu -->
@@ -100,36 +101,97 @@ if (isset($_GET['logout'])) {
           
         </div><hr>
 		<h3 class="mb-0" align ="center" ><i class="far fa-clone pr-1"></i>Record Search</h3>
-		<form >
+		
+		<form method="post" action="" >
 		<TABLE width=70% align ="center">
-			<TR><TD><input type="text" class="form-control" id="fname" name="fname" placeholder="Search patient record"></td><td><button type="submit" class="btn"
-										name="search">Search</button></td></tr>
+			<TR><TD><input type="text" class="form-control"  name="search" placeholder="Search patient record"></td><td><button type="submit" class="btn"
+										name = "searchsub">Search</button></td></tr>
 		</table>
             </form>
           <div style="height: 26px"></div>
 		
 		<hr>
 		
-	<div class="table-responsive">          
-	  <table class="table">
+	<div class="table-responsive">  
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="table-responsive">
+	  <table class="table" class="table table-condensed" id="example">
 	    <thead>
 	      <tr>
-	        <th>#</th>
+	        <!--th>#</th-->
 	        <th>Patient Name</th>
 	        <th>ID No</th>
+			<th>Action</th>
 	        
 	      </tr>
 	    </thead>
 	    <tbody>
-	    		
+		 
 	    	
+				<?php if(isset($_POST['searchsub'])!=""){
+
+					$search = $_POST['search'];
+
+					$servername = "localhost";
+					$username = "root";
+					$password = "";
+					$db = "phptrials-smartmedi";
+
+					$conn = new mysqli($servername, $username, $password, $db);
+
+
+
+
+					$result = $conn->query("select * from patients where FirstName like '%$search%' or LastName like '%$search%'");
+
+					
+
+					if ($result->num_rows > 0){
+					while($row = $result->fetch_assoc() ){
+						$rowcount=mysqli_num_rows($result);
+						
+						$FirstName=$row['FirstName'];
+						$LastName=$row['LastName'];
+						$IDNo=$row['IDNo'];
+						/*echo "<tr>";
+						
+						 echo "<td>" .$row["FirstName"]." ". $row['LastName'] .  "</td>";
+						 echo "<td>" .$row["IDNo"]. "</td>";
+						 echo $row["IDNo"] "<td><a href='medicalhist.php'><button name='view'>View</button></a> </td>";
+						echo "</tr>";
+						
+					}
+					} else {
+						
+						echo "0 records";
+						
+					}*/
+
+					
+				
+
+?>				
+     			<tr>	
+						
+                        <td><?php echo $row['FirstName'];  echo " "; echo $row['LastName'];  ?></td>
+						<td><?php echo $row['IDNo'] ?></td>	
+						<td><a href="medicalhist.php?filename=<?php echo  $row['IDNo'];?>" title="click to view">
+						<button>View</button>
+						</a></td>
+						
+	    	</tr>
+			<?php }}} ?> 
 	     </tbody>
 	  </table>
-		
+		 
+		<!--a href ='medicalhist.php'>View</a>-->
 		
       </div>
     </div>
-	
+	</div>
+	</div>
+	</div>
 		
   </div>
 </div>
@@ -162,6 +224,8 @@ if (isset($_GET['logout'])) {
 
     <script src="dashboardjs/jquery.min.js"></script>
     <script src="dashboardjs/bootstrap.min.js"></script>
+	<script src="dashboardjs/DT_bootstrap.js"></script>
+	<script src="dashboardjs/jquery.dataTables.js"></script>
     <script src="dashboardjs/Chart.min.js"></script>
     <script src="dashboardjs/templatemo_script.js"></script>
 	<script src="dashboardjs/Graph.js"></script>
