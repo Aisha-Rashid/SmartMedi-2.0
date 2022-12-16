@@ -307,8 +307,11 @@ if (isset($_GET['logout'])) {
 					</tr>
 				 </tbody>
 				 </table>
+				 <?php echo" no data"?>
 				 
-				 <?php } ?> 
+				 <?php }
+				
+				  ?> 
 				 
 			</div>
           </div>

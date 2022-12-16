@@ -32,7 +32,7 @@ if (isset($_GET['logout'])) {
     <title>SmartMedi User Dashboard</title>
     <meta name="keywords" content="" />
     <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width">
+    <!-- <meta name="viewport" content="width=device-width"> -->
     <link rel="stylesheet" href="dashboardcss/templatemo_main.css">
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="shortcut icon" href="dashboardimages/favicon.ico" type="image/x-icon">
@@ -68,12 +68,35 @@ if (isset($_GET['logout'])) {
         // $femaleUsers = ;
         $femaleUsersRes = mysqli_query($db, "SELECT * FROM `patients` WHERE `gender`='Female'");
         $femaleUsersNo = mysqli_num_rows($femaleUsersRes);
-        echo "female patients",$femaleUsersNo;
+        echo "female patients", $femaleUsersNo;
+
+        // $x =  "SELECT DISTINCT hospitalname FROM `hospitals`";
+        // $Res = mysqli_query($db, $x);
+        // echo $Res;
+        // echo (mysqli_fetch_all($Res)[1]);
 
         $x =  "SELECT DISTINCT hospitalname FROM `hospitals`";
         $Res = mysqli_query($db, $x);
-        echo (mysqli_fetch_all($Res)[1]);
-        
+        $totalHospitals = mysqli_num_rows($Res);
+
+        while ($row = mysqli_fetch_assoc($Res)) {
+        };
+
+
+        // $sqlQuery = "SELECT student_id,student_name,marks FROM tbl_marks ORDER BY student_id";
+
+        // $result = mysqli_query($conn, $sqlQuery);
+
+        $data = array();
+        foreach ($femaleUsersRes as $row) {
+            $data[] = $row;
+        }
+
+        mysqli_close($db);
+
+        echo json_encode($data)
+
+
 
     ?>
 
@@ -146,58 +169,60 @@ if (isset($_GET['logout'])) {
                             <div class="col-4">
                                 <div class="card shadow p-3 mb-5 bg-body rounded">
                                     <div class="card-header">
-                                        Doctors
+                                        Hospitals
                                     </div>
                                     <div class="card-body">
 
-                                        <p><?php echo $totalDoctors; ?> </p>
+                                        <p><?php echo $totalHospitals; ?> </p>
                                     </div>
                                 </div>
                             </div>
+
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-6">
+                                <canvas id="myChart"></canvas>
+                            </div>
+                        </div>
+                        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+                        <script>
                             
+                            var ctx = document.getElementById('myChart').getContext('2d');
+                            var chart = new Chart(ctx, {
+                                // The type of chart we want to create
+                                type: 'bar',
 
-                        </div>
+                                // The data for our dataset
+                                data: {
+                                    labels: ["Jan", "Feb", "Mar", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"], // labels for the x-axis
+                                    datasets: [{
+                                        label: 'Months', // label for the data set
+                                        backgroundColor: 'rgb(255, 99, 132)',
+                                        borderColor: 'rgb(255, 99, 132)',
+                                        data: [] // data for the chart
+                                    }]
+                                },
+                               
 
+                                // Configuration options go here
+                                options: {}
+                            });
 
-
-                        <div>
-
-                            <table class=" table table-stripped">
-                                <thead class="thead-light">
-
-                                    <tr>
-                                        <th scope="col">Patient Name</th>
-                                        <th scope="col">Age</th>
-                                        <th scope="col">Gender</th>
-                                        <th scope="col">Blood Group</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                <tr>
-                                    <?php
-                                    // while($row = mysqli_fetch_array($res))
-                                    while ($row = $AllPatientsRes->fetch_array()) {
-                                        $age = $row['DOB'];
-                                        $year = explode('-', $age);
-                                        $patientAge = date("Y") - $year[0];
-                                        echo "<tr>";
-                                        echo "<td>" . $row['FirstName'] . " " . $row['LastName'] . "</td>";
-                                        echo "<td>" . $patientAge . "</td>";
-                                        echo "<td>" . $row['gender'] . "</td>";
-                                        echo "<td>" . $row['bloodgroup'] . "</td>";
-                                        echo "<td>" . $row['email'] . "</td>";
-                                        echo "<td><button class='btn'>View</button> </td>";
-
-                                        echo "</tr>";
-                                    }
-
-                                    ?>
-                                </tr>
-                            </table>
-
-                        </div>
-
+                            // Fetch data from PHPMyAdmin database
+                            console.log(data)
+                            fetch('phpmyadmin_url/query.php')
+                                .then(response => response.json())
+                                .then(data => {
+                                    // Update chart data
+                                    chart.data.labels = data.labels;
+                                    chart.data.datasets[0].data = data.data;
+                                    chart.update();
+                                });
+                        </script>
 
                     </div>
                 </div>
