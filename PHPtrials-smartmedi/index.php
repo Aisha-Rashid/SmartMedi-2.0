@@ -222,8 +222,8 @@
 							</div>
 							<div class="media-body dit-right">
 							<h4>Email</h4>
-							<a href="#">admin@smartmedike.com</a><br>
-							<a href="#">reception@smartmedike.com</a>
+							<a href="mailto:admin@smartmedike.com">admin@smartmedike.com</a><br>
+							<a href="mailto:reception@smartmedike.com">reception@smartmedike.com</a>
 							</div>
 						</div>
 						<div class="media cont-line">
@@ -232,8 +232,8 @@
 							</div>
 							<div class="media-body dit-right">
 							<h4>Phone Number</h4>
-							<a href="#">+254 743 234567</a><br>
-							<a href="#">+254 790 453627</a>
+							<a href="tel:+254 743 234567">+254 743 234567</a><br>
+							<a href="tel:+254 790 453627">+254 790 453627</a>
 							</div>
 						</div>
 					</div>

@@ -1,14 +1,15 @@
 <?php
+include('signin.php'); 
 
 // Starting the session, to use and
 // store data in session variable
-session_start();
+// session_start();
 
 // If the session variable is empty, this
 // means the user is yet to login
 // User will be sent to 'login.php' page
 // to allow the user to login
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['IDNo'])) {
 	$_SESSION['msg'] = "You have to log in first";
 	header('location: login.php');
 }
@@ -19,7 +20,7 @@ if (!isset($_SESSION['username'])) {
 // after logging out
 if (isset($_GET['logout'])) {
 	session_destroy();
-	unset($_SESSION['username']);
+	unset($_SESSION['IDNo']);
 	header("location: login.php");
 }
 ?>
@@ -40,7 +41,16 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 -->
 </head>
 <body>
-<?php if (isset($_SESSION['username'])) : ?>
+<?php if (isset($_SESSION['IDNo'])) : 
+   
+   
+   $unique = $_SESSION['IDNo'];
+   $query = "SELECT * FROM `patients` WHERE IDNo = '$unique'";
+   $res = mysqli_query($db, $query);
+   $array=mysqli_fetch_row($res);
+   $rows = mysqli_num_rows($res);
+   
+   ?>
 	<!-- Start Preferences -->
 	<div id="main-wrapper">
 		<div class="template-page-wrapper">
@@ -57,8 +67,8 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 				<i class="fa fa-database"></i> Menu <div class="pull-right"><span class="caret"></span></div>
 				</a>
 				<ul class="templatemo-submenu">
-				<li><a href="medicalhist.php">Medical History</a></li>
-				<li><a href="#">Attachments</a></li>
+				
+				<li><a href="attachments.php">Attachments</a></li>
 				<li><a href="appointment.php">Appointments</a></li>
 				</ul>
 				</li>
@@ -77,10 +87,11 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 							<form role="form" id="templatemo-preferences-form">
 								<div class="row">
 									
-									<h3>Settings</h3><br>
+									<h2>Settings</h2>
 									
 									
 								<hr>
+								
 								<label class="collapsible">Update Profile Picture</label>
 								<div class="content">
 								<input type="file" id="myFile" name="filename"><br><input type="submit">
