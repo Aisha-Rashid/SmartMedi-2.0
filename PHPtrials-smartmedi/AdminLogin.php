@@ -1,4 +1,57 @@
-<?php include('server.php') ?>
+<?php 
+/*session_start();
+
+$workID = "";
+$adminpass = "";
+
+$db = mysqli_connect('localhost', 'root', '', 'phptrials-smartmedi');
+
+if (isset($_POST['admin_login'])) {
+	
+	// Data sanitization to prevent SQL injection
+	$workID = mysqli_real_escape_string($db, $_POST['workID']);
+	$adminpass = mysqli_real_escape_string($db, $_POST['adminpass']);
+	
+	// Error message if the input field is left blank
+	if (empty($workID)) {
+		array_push($errors, "Work ID is required");
+	}
+	if (empty($adminpass)) {
+		array_push($errors, "Password is required");
+	}
+	
+	if (count($errors) == 0) {
+		
+		$query = "SELECT adminFname, adminLname, workID, IDnumber, email, phone FROM `admin` WHERE workID=
+				'$workID' AND adminpass='$password'";
+		$results = mysqli_query($db, $query);
+
+		// $results = 1 means that one user with the
+		// entered username exists
+		if (mysqli_num_rows($results) == 1) {
+			
+			// Storing username in session variable
+			$_SESSION['FirstName'] = $FirstName;
+			$_SESSION['workID'] = $username;B;
+			
+			// Welcome message
+			$_SESSION['success'] = "You have logged in!";
+			
+			// Page on which the user is sent
+			// to after logging in
+			header('location: admindash.html');
+		}
+		else {
+			
+			// If the username and password doesn't match
+			array_push($errors, "Work ID or password incorrect");
+		}
+	
+}
+}*/
+include('server.php'); 
+
+ ?>
 <!DOCTYPE html>
 <html>
 <head>

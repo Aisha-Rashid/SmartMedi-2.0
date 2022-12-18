@@ -1,3 +1,29 @@
+<?php
+include('server.php'); 
+
+// Starting the session, to use and
+// store data in session variable
+// session_start();
+
+// If the session variable is empty, this
+// means the user is yet to login
+// User will be sent to 'login.php' page
+// to allow the user to login
+if (!isset($_SESSION['workID'])) {
+	$_SESSION['msg'] = "You have to log in first";
+	header('location: AdminLogin.php');
+}
+
+// Logout button will destroy the session, and
+// will unset the session variables
+// User will be headed to 'login.php'
+// after logging out
+if (isset($_GET['logout'])) {
+	session_destroy();
+	unset($_SESSION['workID']);
+	header("location: AdminLogin.php");
+}
+?>
 <!DOCTYPE html>
 <head>
   <meta charset="utf-8">
@@ -15,6 +41,16 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 -->
 </head>
 <body>
+<?php if (isset($_SESSION['workID'])) : 
+   
+   
+   $unique = $_SESSION['workID'];
+   $query = "SELECT adminFname, adminLname, workID, IDnumber, email, phone FROM `admin` WHERE workID = '$unique'";
+   $res = mysqli_query($db, $query);
+   $array=mysqli_fetch_row($res);
+   $rows = mysqli_num_rows($res);
+   
+   ?>
   <div id="main-wrapper">
     <div class="navbar navbar-inverse" role="navigation">
       <div class="navbar-header">
@@ -35,14 +71,14 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 				<img src="dashboardimages/favicon.ico" alt="Smartmedi">
 				
 				</li>
-          <li><a href="admindash.html"><i class="fa fa-home"></i>Dashboard</a></li>
+          <li><a href="admindash.php"><i class="fa fa-home"></i>Dashboard</a></li>
           <li class="sub open">
             <a href="javascript:;">
               <i class="fa fa-database"></i> Nested Menu <div class="pull-right"><span class="caret"></span></div>
             </a>
             <ul class="templatemo-submenu">
 			<li class="active"><a href="#"><i class="fa fa-users"></i> Manage Users</a></li>
-              <li><a href="data-visualization.html"><i class="fa fa-cubes"></i> Data Visualization</a></li>
+              <li><a href="data-visualization.php"><i class="fa fa-cubes"></i> Data Visualization</a></li>
           <li><a href="maps.html"><i class="fa fa-file-text"></i> Reports</a></li>
           
             </ul>
@@ -56,7 +92,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
       <div class="templatemo-content-wrapper">
         <div class="templatemo-content">
           <ol class="breadcrumb">
-            <li><a href="admindash.html">Admin Panel</a></li>
+            <li><a href="admindash.php">Admin Panel</a></li>
             <li><a href="#">Manage Users</a></li>
             <li class="active">Tables</li>
           </ol>
@@ -831,5 +867,6 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
     <script src="dashboardjs/Chart.min.js"></script>
     <script src="dashboardjs/templatemo_script.js"></script>
 	<script src="dashboardjs/Graph.js"></script>
+	<?php endif ?>
   </body>
 </html>

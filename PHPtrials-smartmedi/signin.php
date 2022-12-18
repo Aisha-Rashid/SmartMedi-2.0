@@ -7,8 +7,8 @@ if (mysqli_connect_errno())
 
 session_start();
 
-//$workID = "";
-//$adminpass = "";
+$workID = "";
+$adminpass = "";
 
 
 
@@ -63,8 +63,7 @@ if(isset($_POST["adminpass"]) and isset($_POST["workID"])){
 
     $workID = $_POST['workID'];
     $adminpass = $_POST['adminpass'];
-    $mdpass=md5($adminpass);
-    echo $mdpass;
+    
 	// Error message if the input field is left blank
 	if (empty($workID)) {
 		array_push($errors, "Work ID is required");
@@ -74,7 +73,7 @@ if(isset($_POST["adminpass"]) and isset($_POST["workID"])){
 	}
 
 
-$query = "SELECT adminFname, adminLname, workID, IDnumber, email, phone FROM `admin` WHERE workID='$workID' AND adminpass='" . md5($adminpass) . "'";
+$query = "SELECT adminFname, adminLname, workID, IDnumber, email, phone FROM `admin` WHERE workID='$workID' AND adminpass='$adminpass'";
 $data = mysqli_query($db, $query) or die(mysql_error());
 
         $rows = mysqli_num_rows($data);
@@ -90,7 +89,7 @@ if ($rows == 1) {
     // $row = mysqli_fetch_row($data);
     // $_SESSION['FirstName'] = $FirstName;
     // Redirect to user dashboard page
-    header("Location: index.php");
+    header("Location: admindash.php");
     
 
     

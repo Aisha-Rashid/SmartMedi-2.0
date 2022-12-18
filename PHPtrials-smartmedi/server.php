@@ -181,11 +181,9 @@ if (isset($_POST['admin_login'])) {
 	// Checking for the errors
 	if (count($errors) == 0) {
 		
-		// Password matching
-		$password = md5($adminpass);
-		
+				
 		$query = "SELECT adminFname, adminLname, workID, IDnumber, email, phone FROM `admin` WHERE workID=
-				'$workID' AND adminpass='$password'";
+				'$workID' AND adminpass='$adminpass'";
 		$results = mysqli_query($db, $query);
 
 		// $results = 1 means that one user with the
@@ -194,14 +192,14 @@ if (isset($_POST['admin_login'])) {
 			
 			// Storing username in session variable
 			$_SESSION['FirstName'] = $FirstName;
-			$_SESSION['workID'] = $username;B;
+			$_SESSION['workID'] = $workID;B;
 			
 			// Welcome message
 			$_SESSION['success'] = "You have logged in!";
 			
 			// Page on which the user is sent
 			// to after logging in
-			header('location: dashboard.php');
+			header('location: admindash.php');
 		}
 		else {
 			
