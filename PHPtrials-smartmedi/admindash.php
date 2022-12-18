@@ -52,6 +52,18 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
    $array=mysqli_fetch_row($res);
    $rows = mysqli_num_rows($res);
    
+   $AllPatientsQuery = "SELECT * FROM `patients` ORDER by id";
+   $AllPatientsRes = mysqli_query($db, $AllPatientsQuery);
+   $totalPatients = mysqli_num_rows($AllPatientsRes);
+   
+   $x =  "SELECT DISTINCT hospitalname FROM `hospitals`";
+        $Res = mysqli_query($db, $x);
+        $totalHospitals = mysqli_num_rows($Res);
+   
+   $doctorsQuery = "SELECT * FROM `doctors` ORDER by id";
+   $doctorsRes = mysqli_query($db, $doctorsQuery);
+   $totalDoctors = mysqli_num_rows($doctorsRes);
+   
    ?>
 
 
@@ -103,9 +115,9 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
       <div class="row margin-bottom-30">
         <div class="col-md-12">
           <ul class="nav nav-pills">
-            <li class="active"><a href="#">Total Patients Registered <span class="badge">42</span></a></li>
-            <li class="active"><a href="#">Medical Practitioners <span class="badge">107</span></a></li>
-            <li class="active"><a href="#">Hospitals Registered <span class="badge">3</span></a></li>
+            <li class="active"><a href="#">Total Patients Registered <span class="badge"><?php echo $totalPatients; ?></span></a></li>
+            <li class="active"><a href="#">Medical Practitioners <span class="badge"><?php echo $totalDoctors; ?></span></a></li>
+            <li class="active"><a href="#">Hospitals Registered <span class="badge"><?php echo $totalHospitals; ?></span></a></li>
           </ul>          
         </div>
       </div>
@@ -139,10 +151,10 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
                  </thead>
 				 <tbody>
 				 <?php 
-							$query="select * from patients";
-							$res = mysqli_query($db, $query);
-							while($row=mysqli_fetch_array($res)){
-								$count = $res;
+							//$query="select * from patients";
+							//$res = mysqli_query($db, $query);
+							while($row=mysqli_fetch_array($AllPatientsRes)){
+								//$count = $res;
 							
 							$FirstName =$row['FirstName'];
 							$LastName=$row['LastName'];
@@ -179,9 +191,9 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
                  </thead>
 				 <tbody>
 				 <?php 
-							$query="select * from doctors";
-							$res = mysqli_query($db, $query);
-							while($row=mysqli_fetch_array($res)){
+							//$query="select * from doctors";
+							//$res = mysqli_query($db, $query);
+							while($row=mysqli_fetch_array($doctorsRes)){
 							
 							$fname =$row['fname'];
 							$lname=$row['lname'];
@@ -242,174 +254,12 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
                     </div>
 					<span class="btn btn-primary"><a href="manage-users.php">Manage</a></span>
                   </div>
-				  
-				  <!-- Admin pane --
-                  <div class="tab-pane fade" id="admin">
-                    <div class="panel panel-primary">
-                      <div class="panel-heading"></div>
-                      <div class="panel-body">
-                        <table class="table table-striped">
-                          <thead>
-                            <tr>
-                              <th>#</th>
-                              <th>First Name</th>
-                              <th>Last Name</th>
-                              <th>ID Number</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>1</td>
-                              <td>John</td>
-                              <td>Smith</td>
-                              <td>@js</td>
-                            </tr>
-                            <tr>
-                              <td>2</td>
-                              <td>Bill</td>
-                              <td>Jones</td>
-                              <td>@bj</td>
-                            </tr>
-                            <tr>
-                              <td>3</td>
-                              <td>Marry</td>
-                              <td>James</td>
-                              <td>@mj</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-					<span class="btn btn-primary"><a href="manage-users.php">Manage</a></span>
-                  </div-->
                 </div> <!-- tab-content --> 
               </div> 
                         
             </div>
 			<hr>
-          
-			
-			
-			<!--hr>
-            <div class="row">
-              <div class="col-md-6 col-sm-6">
-                <!-- Nav tabs --
-                <ul class="nav nav-tabs" role="tablist" id="templatemo-tabs">
-                  <li class="active"><a href="#home" role="tab" data-toggle="tab">Home</a></li>
-                  <li><a href="#profile" role="tab" data-toggle="tab">Profile</a></li>
-                  <li><a href="#messages" role="tab" data-toggle="tab">Messages</a></li>
-                  <li><a href="#settings" role="tab" data-toggle="tab">Settings</a></li>
-                </ul>
-
-                <!-- Tab panes --
-                <div class="tab-content">
-                  <div class="tab-pane fade in active" id="home">
-                    <ul class="list-group">
-                      <li class="list-group-item"><input type="checkbox" name="" value=""> Suspendisse dapibus sodales</li>
-                      <li class="list-group-item"><input type="checkbox" name="" value=""> Proin mattis ex vitae</li>
-                      <li class="list-group-item"><input type="checkbox" name="" value=""> Aenean euismod dui vel</li>
-                      <li class="list-group-item"><input type="checkbox" name="" value=""> Vivamus dictum posuere odio</li>
-                      <li class="list-group-item"><input type="checkbox" name="" value=""> Morbi convallis sed nisi suscipit</li>
-                    </ul>
-                  </div>
-                  <div class="tab-pane fade" id="profile">
-                    <ul class="list-group">
-                      <li class="list-group-item">
-                        <span class="badge">33</span>
-                        Vivamus dictum posuere odio
-                      </li>
-                      <li class="list-group-item">
-                        <span class="badge">9</span>
-                        Dapibus ac facilisis in
-                      </li>
-                      <li class="list-group-item">
-                        <span class="badge">0</span>
-                        Morbi convallis sed nisi suscipit
-                      </li>
-                      <li class="list-group-item">
-                        <span class="badge">14</span>
-                        Cras justo odio
-                      </li>
-                      <li class="list-group-item">
-                        <span class="badge">2</span>
-                        Vestibulum at eros
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="tab-pane fade" id="messages">
-                    <div class="list-group">
-                      <a href="#" class="list-group-item active">
-                        Morbi convallis sed nisi suscipit
-                      </a>
-                      <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-                      <a href="#" class="list-group-item">Morbi leo risus</a>
-                      <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-                      <a href="#" class="list-group-item">Vestibulum at eros</a>
-                    </div>
-                  </div>
-                  <div class="tab-pane fade" id="settings">
-                    <div class="list-group">
-                      <a href="#" class="list-group-item disabled">
-                        Vivamus dictum posuere odio
-                      </a>
-                      <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-                      <a href="#" class="list-group-item">Vestibulum at eros</a>
-                      <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-                      <a href="#" class="list-group-item">Morbi leo risus</a>
-                    </div>
-                  </div>
-                </div> <!-- tab-content -- 
-              </div> 
-              <div class="col-md-6 col-sm-6">
-                <div class="panel-group" id="accordion">
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                          Accordion Item 1
-                        </a>
-                      </h4>
-                    </div>
-                    <div id="collapseOne" class="panel-collapse collapse in">
-                      <div class="panel-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                      </div>
-                    </div>
-                  </div>
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                          Accordion Item 2
-                        </a>
-                      </h4>
-                    </div>
-                    <div id="collapseTwo" class="panel-collapse collapse">
-                      <div class="panel-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                      </div>
-                    </div>
-                  </div>
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                          Accordion Item 3
-                        </a>
-                      </h4>
-                    </div>
-                    <div id="collapseThree" class="panel-collapse collapse">
-                      <div class="panel-body">
-                        <button type="button" id="loading-example-btn" data-loading-text="Loading..." class="btn btn-primary">
-                          Click here
-                        </button> to load.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>          
-            </div--> 
-          </div>    
+			</div>    
         </div>
       </div>
       <!-- Modal -->

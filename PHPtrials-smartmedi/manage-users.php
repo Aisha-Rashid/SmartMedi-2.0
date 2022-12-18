@@ -50,6 +50,18 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
    $array=mysqli_fetch_row($res);
    $rows = mysqli_num_rows($res);
    
+   $AllPatientsQuery = "SELECT * FROM `patients` ORDER by id";
+   $AllPatientsRes = mysqli_query($db, $AllPatientsQuery);
+   $totalPatients = mysqli_num_rows($AllPatientsRes);
+   
+   $x =  "SELECT DISTINCT hospitalname FROM `hospitals`";
+        $Res = mysqli_query($db, $x);
+        $totalHospitals = mysqli_num_rows($Res);
+   
+   $doctorsQuery = "SELECT * FROM `doctors` ORDER by id";
+   $doctorsRes = mysqli_query($db, $doctorsQuery);
+   $totalDoctors = mysqli_num_rows($doctorsRes);
+   
    ?>
   <div id="main-wrapper">
     <div class="navbar navbar-inverse" role="navigation">
@@ -102,9 +114,9 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
           <div class="row margin-bottom-30">
         <div class="col-md-12">
           <ul class="nav nav-pills">
-            <li class="active"><a href="#">Total Patients Registered <span class="badge">42</span></a></li>
-            <li class="active"><a href="#">Medical Practitioners <span class="badge">107</span></a></li>
-            <li class="active"><a href="#">Hospitals Registered <span class="badge">3</span></a></li>
+            <li class="active"><a href="#">Total Patients Registered <span class="badge"><?php echo $totalPatients; ?></span></a></li>
+            <li class="active"><a href="#">Medical Practitioners <span class="badge"><?php echo $totalDoctors; ?></span></a></li>
+            <li class="active"><a href="#">Hospitals Registered <span class="badge"><?php echo $totalHospitals; ?></span></a></li>
           </ul>          
         </div>
       </div>
@@ -116,12 +128,12 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
                   <li class="active"><a href="#home" role="tab" data-toggle="tab">General Users</a></li>
                   <li><a href="#doctors" role="tab" data-toggle="tab">Medical Practitioners</a></li>
                   <li><a href="#hospitals" role="tab" data-toggle="tab">Medical institutions</a></li>
-                  <li><a href="#admin" role="tab" data-toggle="tab">Admin</a></li>
+                  <!--li><a href="#admin" role="tab" data-toggle="tab">Admin</a></li-->
                 </ul>
 				<!-- Tab panes -->	
                 <div class="tab-content">
 					<div class="tab-pane fade in active" id="home">
-						<div class="btn-group pull-right" id="templatemo_sort_btn">
+						<!--div class="btn-group pull-right" id="templatemo_sort_btn">
 							<button type="button" class="btn btn-default">Sort by</button>
 							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 							  <span class="caret"></span>
@@ -132,529 +144,170 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 							  <li><a href="#">Last Name</a></li>
 							  <li><a href="#">Username</a></li>
 							</ul>
-						</div>
+						</div-->
 						<div class="table-responsive">
-							<h4 class="margin-bottom-15">New Users Table</h4>
+							<h4 class="margin-bottom-15">Patients Table</h4>
 								<table class="table table-striped table-hover table-bordered">
 								  <thead>
 									<tr>
-									  <th>#</th>
+									  
 									  <th>First Name</th>
 									  <th>Last Name</th>
-									  <th>Username</th>
+									  <th>ID Number</th>
+									  <th>Phone Number</th>
 									  <th>Email</th>
-									  <th>Edit</th>
 									  <th>Action</th>
-									  <th>Delete</th>
 									</tr>
 								  </thead>
 								  <tbody>
-									<tr>
-									  <td>1</td>
-									  <td>John</td>
-									  <td>Smith</td>
-									  <td>@js</td>
-									  <td>a@company.com</td>
-									  <td><a href="#" class="btn btn-default">Edit</a></td>                    
-									  <td>
-										<!-- Split button -->
-										<div class="btn-group">
+									<?php 
+							//$query="select * from patients";
+							//$res = mysqli_query($db, $query);
+							while($row=mysqli_fetch_array($AllPatientsRes)){
+								//$count = $res;
+							
+							$FirstName =$row['FirstName'];
+							$LastName=$row['LastName'];
+							$IDNo=$row['IDNo'];
+							$IDNo=$row['TelNo'];
+							$IDNo=$row['email'];
+							?>
+					<tr>
+						<td><?php echo $row['FirstName'] ?></td>
+						<td><?php echo $row['LastName'] ?></td>
+						<td><?php echo $row['IDNo'] ?></td>
+						<td><?php echo $row['TelNo'] ?></td>
+						<td><?php echo $row['email'] ?></td>
+						<td>
+						<div class="btn-group">
 										  <button type="button" class="btn btn-info">Action</button>
 										  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
 											<span class="caret"></span>
 											<span class="sr-only">Toggle Dropdown</span>
 										  </button>
 										  <ul class="dropdown-menu" role="menu">
-											<li><a href="#">Bootstrap</a></li>
-											<li><a href="#">Font Awesome</a></li>
-											<li><a href="#">jQuery</a></li>
+											<li><a href="#">Delete</a></li>
+											<li><a href="#">Upgrade</a></li>
+											
 										  </ul>
 										</div>
-									  </td>
-									  <td><a href="#" class="btn btn-link">Delete</a></td>
-									</tr>
-									<tr>
-									  <td>2</td>
-									  <td>Bill</td>
-									  <td>Digital</td>
-									  <td>@bd</td>
-									  <td>bd@company.com</td>
-									  <td><a href="#" class="btn btn-default">Edit</a></td>
-									  <td>
-										<!-- Split button -->
-										<div class="btn-group">
-										  <button type="button" class="btn btn-info">Action</button>
-										  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-											<span class="caret"></span>
-											<span class="sr-only">Toggle Dropdown</span>
-										  </button>
-										  <ul class="dropdown-menu" role="menu">
-											<li><a href="#">Bootstrap</a></li>
-											<li><a href="#">Font Awesome</a></li>
-											<li><a href="#">jQuery</a></li>
-										  </ul>
-										</div>
-									  </td>
-									  <td><a href="#" class="btn btn-link">Delete</a></td>
-									</tr>
-									<tr>
-									  <td>3</td>
-									  <td>Marry</td>
-									  <td>James</td>
-									  <td>@mj</td>
-									  <td>mj@company.com</td>
-									  <td><a href="#" class="btn btn-default">Edit</a></td>
-									  <td>
-										<!-- Split button -->
-										<div class="btn-group">
-										  <button type="button" class="btn btn-info">Action</button>
-										  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-											<span class="caret"></span>
-											<span class="sr-only">Toggle Dropdown</span>
-										  </button>
-										  <ul class="dropdown-menu" role="menu">
-											<li><a href="#">Bootstrap</a></li>
-											<li><a href="#">Font Awesome</a></li>
-											<li><a href="#">jQuery</a></li>
-										  </ul>
-										</div>
-									  </td>
-									  <td><a href="#" class="btn btn-link">Delete</a></td>
-									</tr>
-									<tr>
-									  <td>4</td>
-									  <td>Carry</td>
-									  <td>Land</td>
-									  <td>@cl</td>
-									  <td>cl@company.com</td>
-									  <td><a href="#" class="btn btn-default">Edit</a></td>
-									  <td>
-										<!-- Split button -->
-										<div class="btn-group">
-										  <button type="button" class="btn btn-info">Action</button>
-										  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-											<span class="caret"></span>
-											<span class="sr-only">Toggle Dropdown</span>
-										  </button>
-										  <ul class="dropdown-menu" role="menu">
-											<li><a href="#">Bootstrap</a></li>
-											<li><a href="#">Font Awesome</a></li>
-											<li><a href="#">jQuery</a></li>
-										  </ul>
-										</div>
-									  </td>
-									  <td><a href="#" class="btn btn-link">Delete</a></td>
-									</tr>
-									<tr>
-									  <td>5</td>
-									  <td>New</td>
-									  <td>Caroline</td>
-									  <td>@nc</td>
-									  <td>nc@company.com</td>
-									  <td><a href="#" class="btn btn-default">Edit</a></td>
-									  <td>
-										<!-- Split button -->
-										<div class="btn-group">
-										  <button type="button" class="btn btn-info">Action</button>
-										  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-											<span class="caret"></span>
-											<span class="sr-only">Toggle Dropdown</span>
-										  </button>
-										  <ul class="dropdown-menu" role="menu">
-											<li><a href="#">Bootstrap</a></li>
-											<li><a href="#">Font Awesome</a></li>
-											<li><a href="#">jQuery</a></li>
-										  </ul>
-										</div>
-									  </td>
-									  <td><a href="#" class="btn btn-link">Delete</a></td>
-									</tr>
-									<tr>
-									  <td>6</td>
-									  <td>Martin</td>
-									  <td>East</td>
-									  <td>@me</td>
-									  <td>me@company.com</td>
-									  <td><a href="#" class="btn btn-default">Edit</a></td>
-									  <td>
-										<!-- Split button -->
-										<div class="btn-group">
-										  <button type="button" class="btn btn-info">Action</button>
-										  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-											<span class="caret"></span>
-											<span class="sr-only">Toggle Dropdown</span>
-										  </button>
-										  <ul class="dropdown-menu" role="menu">
-											<li><a href="#">Bootstrap</a></li>
-											<li><a href="#">Font Awesome</a></li>
-											<li><a href="#">jQuery</a></li>
-										  </ul>
-										</div>
-									  </td>
-									  <td><a href="#" class="btn btn-link">Delete</a></td>
-									</tr>                    
+						</td>
+						
+					</tr>
+					<?php } ?>                   
 								  </tbody>
 								</table>
 						</div>
 					</div>
 			  
 					<div class="tab-pane fade" id="doctors">
-						<div class="btn-group pull-right" id="templatemo_sort_btn">
-							<button type="button" class="btn btn-default">Sort by</button>
-							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-							  <span class="caret"></span>
-							  <span class="sr-only">Toggle Dropdown</span>
-							</button>
-							<ul class="dropdown-menu" role="menu">
-							  <li><a href="#">First Name</a></li>
-							  <li><a href="#">Last Name</a></li>
-							  <li><a href="#">Username</a></li>
-							</ul>
-						 </div>
+						
 						<div class="table-responsive">
                 <h4 class="margin-bottom-15">Medical Practitioners Table</h4>
                 <table class="table table-striped table-hover table-bordered">
                   <thead>
                     <tr>
-                      <th>#</th>
+                      
                       <th>First Name</th>
                       <th>Last Name</th>
-                      <th>Username</th>
-                      <th>Email</th>
-                      <th>Edit</th>
+                      <th>ID Number</th>
+                      <th>Hospital</th>
+                      <th>Work ID</th>
+                      <th>Specialty</th>
                       <th>Action</th>
-                      <th>Delete</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>John</td>
-                      <td>Smith</td>
-                      <td>@js</td>
-                      <td>a@company.com</td>
-                      <td><a href="#" class="btn btn-default">Edit</a></td>                    
-                      <td>
-                        <!-- Split button -->
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-info">Action</button>
-                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                          </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
-                        </div>
-                      </td>
-                      <td><a href="#" class="btn btn-link">Delete</a></td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Bill</td>
-                      <td>Digital</td>
-                      <td>@bd</td>
-                      <td>bd@company.com</td>
-                      <td><a href="#" class="btn btn-default">Edit</a></td>
-                      <td>
-                        <!-- Split button -->
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-info">Action</button>
-                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                          </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
-                        </div>
-                      </td>
-                      <td><a href="#" class="btn btn-link">Delete</a></td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Marry</td>
-                      <td>James</td>
-                      <td>@mj</td>
-                      <td>mj@company.com</td>
-                      <td><a href="#" class="btn btn-default">Edit</a></td>
-                      <td>
-                        <!-- Split button -->
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-info">Action</button>
-                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                          </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
-                        </div>
-                      </td>
-                      <td><a href="#" class="btn btn-link">Delete</a></td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>Carry</td>
-                      <td>Land</td>
-                      <td>@cl</td>
-                      <td>cl@company.com</td>
-                      <td><a href="#" class="btn btn-default">Edit</a></td>
-                      <td>
-                        <!-- Split button -->
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-info">Action</button>
-                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                          </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
-                        </div>
-                      </td>
-                      <td><a href="#" class="btn btn-link">Delete</a></td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      <td>New</td>
-                      <td>Caroline</td>
-                      <td>@nc</td>
-                      <td>nc@company.com</td>
-                      <td><a href="#" class="btn btn-default">Edit</a></td>
-                      <td>
-                        <!-- Split button -->
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-info">Action</button>
-                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                          </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
-                        </div>
-                      </td>
-                      <td><a href="#" class="btn btn-link">Delete</a></td>
-                    </tr>
-                    <tr>
-                      <td>6</td>
-                      <td>Martin</td>
-                      <td>East</td>
-                      <td>@me</td>
-                      <td>me@company.com</td>
-                      <td><a href="#" class="btn btn-default">Edit</a></td>
-                      <td>
-                        <!-- Split button -->
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-info">Action</button>
-                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                          </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
-                        </div>
-                      </td>
-                      <td><a href="#" class="btn btn-link">Delete</a></td>
-                    </tr>                    
+                    <?php 
+							//$query="select * from doctors";
+							//$res = mysqli_query($db, $query);
+							while($row=mysqli_fetch_array($doctorsRes)){
+							
+							$fname =$row['fname'];
+							$lname=$row['lname'];
+							$nationalid=$row['nationalid'];
+							$hospital=$row['hospital'];
+							$workid=$row['workid'];
+							$specialty=$row['specialty'];
+							?>
+					<tr>
+						<td><?php echo $row['fname'] ?></td>
+						<td><?php echo $row['lname'] ?></td>
+						<td><?php echo $row['nationalid'] ?></td>
+						<td><?php echo $row['hospital'] ?></td>
+						<td><?php echo $row['workid'] ?></td>
+						<td><?php echo $row['specialty'] ?></td>
+						<td>
+						<div class="btn-group">
+										  <button type="button" class="btn btn-info">Action</button>
+										  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+											<span class="caret"></span>
+											<span class="sr-only">Toggle Dropdown</span>
+										  </button>
+										  <ul class="dropdown-menu" role="menu">
+											<li><a href="#">Delete</a></li>
+											
+											
+										  </ul>
+										</div>
+						</td>
+						
+					</tr>
+					<?php } ?>                  
                   </tbody>
                 </table>
               </div>
 			  </div>
 			  
 			  <div class="tab-pane fade" id="hospitals">
-						<div class="btn-group pull-right" id="templatemo_sort_btn">
-							<button type="button" class="btn btn-default">Sort by</button>
-							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-							  <span class="caret"></span>
-							  <span class="sr-only">Toggle Dropdown</span>
-							</button>
-							<ul class="dropdown-menu" role="menu">
-							  <li><a href="#">First Name</a></li>
-							  <li><a href="#">Last Name</a></li>
-							  <li><a href="#">Username</a></li>
-							</ul>
-						 </div>
+						
 						<div class="table-responsive">
                 <h4 class="margin-bottom-15">Hospitals Table</h4>
                 <table class="table table-striped table-hover table-bordered">
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>First Name</th>
-                      <th>Last Name</th>
-                      <th>Username</th>
-                      <th>Email</th>
-                      <th>Edit</th>
+                      <th>Name</th>
                       <th>Action</th>
-                      <th>Delete</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>John</td>
-                      <td>Smith</td>
-                      <td>@js</td>
-                      <td>a@company.com</td>
-                      <td><a href="#" class="btn btn-default">Edit</a></td>                    
-                      <td>
-                        <!-- Split button -->
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-info">Action</button>
-                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                          </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
-                        </div>
-                      </td>
-                      <td><a href="#" class="btn btn-link">Delete</a></td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Bill</td>
-                      <td>Digital</td>
-                      <td>@bd</td>
-                      <td>bd@company.com</td>
-                      <td><a href="#" class="btn btn-default">Edit</a></td>
-                      <td>
-                        <!-- Split button -->
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-info">Action</button>
-                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                          </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
-                        </div>
-                      </td>
-                      <td><a href="#" class="btn btn-link">Delete</a></td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Marry</td>
-                      <td>James</td>
-                      <td>@mj</td>
-                      <td>mj@company.com</td>
-                      <td><a href="#" class="btn btn-default">Edit</a></td>
-                      <td>
-                        <!-- Split button -->
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-info">Action</button>
-                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                          </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
-                        </div>
-                      </td>
-                      <td><a href="#" class="btn btn-link">Delete</a></td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>Carry</td>
-                      <td>Land</td>
-                      <td>@cl</td>
-                      <td>cl@company.com</td>
-                      <td><a href="#" class="btn btn-default">Edit</a></td>
-                      <td>
-                        <!-- Split button -->
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-info">Action</button>
-                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                          </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
-                        </div>
-                      </td>
-                      <td><a href="#" class="btn btn-link">Delete</a></td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      <td>New</td>
-                      <td>Caroline</td>
-                      <td>@nc</td>
-                      <td>nc@company.com</td>
-                      <td><a href="#" class="btn btn-default">Edit</a></td>
-                      <td>
-                        <!-- Split button -->
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-info">Action</button>
-                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                          </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
-                        </div>
-                      </td>
-                      <td><a href="#" class="btn btn-link">Delete</a></td>
-                    </tr>
-                    <tr>
-                      <td>6</td>
-                      <td>Martin</td>
-                      <td>East</td>
-                      <td>@me</td>
-                      <td>me@company.com</td>
-                      <td><a href="#" class="btn btn-default">Edit</a></td>
-                      <td>
-                        <!-- Split button -->
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-info">Action</button>
-                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                          </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
-                        </div>
-                      </td>
-                      <td><a href="#" class="btn btn-link">Delete</a></td>
-                    </tr>                    
+                    <?php 
+							$query="select * from hospitals";
+							$res = mysqli_query($db, $query);
+							while($row=mysqli_fetch_array($res)){
+							
+							$HospitalID =$row['hospitalID'];
+							
+							$hospitalname=$row['hospitalname'];
+							?>
+					<tr>
+					
+						<td><?php echo $row['hospitalID'] ?></td>
+						<td><?php echo $row['hospitalname'] ?></td>
+						<td>
+						<div class="btn-group">
+										  <button type="button" class="btn btn-info">Action</button>
+										  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+											<span class="caret"></span>
+											<span class="sr-only">Toggle Dropdown</span>
+										  </button>
+										  <ul class="dropdown-menu" role="menu">
+											<li><a href="#">Delete</a></li>
+											
+											
+										  </ul>
+										</div>
+						</td>
+						
+					</tr>
+					<?php } ?>                   
                   </tbody>
                 </table>
               </div>
 			  </div>
 			  
-			  <div class="tab-pane fade" id="admin">
+			  <!--div class="tab-pane fade" id="admin">
 						<div class="btn-group pull-right" id="templatemo_sort_btn">
 							<button type="button" class="btn btn-default">Sort by</button>
 							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -683,154 +336,11 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>John</td>
-                      <td>Smith</td>
-                      <td>@js</td>
-                      <td>a@company.com</td>
-                      <td><a href="#" class="btn btn-default">Edit</a></td>                    
-                      <td>
-                        <!-- Split button -->
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-info">Action</button>
-                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                          </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
-                        </div>
-                      </td>
-                      <td><a href="#" class="btn btn-link">Delete</a></td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Bill</td>
-                      <td>Digital</td>
-                      <td>@bd</td>
-                      <td>bd@company.com</td>
-                      <td><a href="#" class="btn btn-default">Edit</a></td>
-                      <td>
-                        <!-- Split button -->
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-info">Action</button>
-                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                          </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
-                        </div>
-                      </td>
-                      <td><a href="#" class="btn btn-link">Delete</a></td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Marry</td>
-                      <td>James</td>
-                      <td>@mj</td>
-                      <td>mj@company.com</td>
-                      <td><a href="#" class="btn btn-default">Edit</a></td>
-                      <td>
-                        <!-- Split button -->
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-info">Action</button>
-                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                          </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
-                        </div>
-                      </td>
-                      <td><a href="#" class="btn btn-link">Delete</a></td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>Carry</td>
-                      <td>Land</td>
-                      <td>@cl</td>
-                      <td>cl@company.com</td>
-                      <td><a href="#" class="btn btn-default">Edit</a></td>
-                      <td>
-                        <!-- Split button -->
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-info">Action</button>
-                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                          </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
-                        </div>
-                      </td>
-                      <td><a href="#" class="btn btn-link">Delete</a></td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      <td>New</td>
-                      <td>Caroline</td>
-                      <td>@nc</td>
-                      <td>nc@company.com</td>
-                      <td><a href="#" class="btn btn-default">Edit</a></td>
-                      <td>
-                        <!-- Split button -->
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-info">Action</button>
-                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                          </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
-                        </div>
-                      </td>
-                      <td><a href="#" class="btn btn-link">Delete</a></td>
-                    </tr>
-                    <tr>
-                      <td>6</td>
-                      <td>Martin</td>
-                      <td>East</td>
-                      <td>@me</td>
-                      <td>me@company.com</td>
-                      <td><a href="#" class="btn btn-default">Edit</a></td>
-                      <td>
-                        <!-- Split button -->
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-info">Action</button>
-                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                          </button>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Font Awesome</a></li>
-                            <li><a href="#">jQuery</a></li>
-                          </ul>
-                        </div>
-                      </td>
-                      <td><a href="#" class="btn btn-link">Delete</a></td>
-                    </tr>                    
+                            
                   </tbody>
                 </table>
               </div>
-			  </div>
+			  </div-->
 			  </div>
 		  
                 
