@@ -22,6 +22,8 @@ $workid = "";
 $randomNumber = rand(10000000,99999999);
 $errors = array();
 $_SESSION['success'] = "";
+$workID = "";
+$adminpass = "";
 
 
 // DBMS connection code -> hostname,
@@ -160,18 +162,19 @@ if (isset($_POST['reg_doc'])) {
 }
 
 
-// Doctor login
-if (isset($_POST['doc_login'])) {
+//Admin Login
+
+if (isset($_POST['admin_login'])) {
 	
 	// Data sanitization to prevent SQL injection
-	$id = mysqli_real_escape_string($db, $_POST['id']);
-	$password = mysqli_real_escape_string($db, $_POST['password']);
+	$workID = mysqli_real_escape_string($db, $_POST['workID']);
+	$adminpass = mysqli_real_escape_string($db, $_POST['adminpass']);
 
 	// Error message if the input field is left blank
-	if (empty($id)) {
-		array_push($errors, "Account ID is required");
+	if (empty($workID)) {
+		array_push($errors, "Work ID is required");
 	}
-	if (empty($password)) {
+	if (empty($adminpass)) {
 		array_push($errors, "Password is required");
 	}
 
@@ -179,10 +182,10 @@ if (isset($_POST['doc_login'])) {
 	if (count($errors) == 0) {
 		
 		// Password matching
-		$password = md5($password);
+		$password = md5($adminpass);
 		
-		$query = "SELECT * FROM doctors WHERE id=
-				'$id' AND password='$password'";
+		$query = "SELECT adminFname, adminLname, workID, IDnumber, email, phone FROM `admin` WHERE workID=
+				'$workID' AND adminpass='$password'";
 		$results = mysqli_query($db, $query);
 
 		// $results = 1 means that one user with the
@@ -190,26 +193,23 @@ if (isset($_POST['doc_login'])) {
 		if (mysqli_num_rows($results) == 1) {
 			
 			// Storing username in session variable
-			$_SESSION['fname'] = $fname;
-			$_SESSION['lname'] = $lname;
-			$_SESSION['id'] = $randomNumber;
-			$_SESSION['hospital'] = $hospital;
+			$_SESSION['FirstName'] = $FirstName;
+			$_SESSION['workID'] = $username;B;
 			
 			// Welcome message
 			$_SESSION['success'] = "You have logged in!";
 			
 			// Page on which the user is sent
 			// to after logging in
-			header('location: DocDashboard.php');
+			header('location: dashboard.php');
 		}
 		else {
 			
 			// If the username and password doesn't match
-			array_push($errors, "Accout ID or password incorrect");
+			array_push($errors, "Work ID or password incorrect");
 		}
 	}
 }
-
 
 
 // Patient login

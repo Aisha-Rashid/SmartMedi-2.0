@@ -62,6 +62,7 @@ if (isset($_GET['logout'])) {
 				</li>
 				<li class="active"><a href="#"><i class="fa fa-home"></i>Dashboard</a></li>
 				
+				
 				<li><a href="#"><i class="fa fa-cog"></i>Settings</a></li>
 				<li><a href="javascript:;" data-toggle="modal" data-target="#confirmModal"><i class="fa fa-sign-out"></i>Sign Out</a></li>
 			</ul>

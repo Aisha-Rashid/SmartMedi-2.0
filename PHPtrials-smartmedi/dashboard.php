@@ -55,9 +55,9 @@ if (isset($_GET['logout'])) {
 		<div class="navbar-collapse collapse templatemo-sidebar">
 			<ul class="templatemo-sidebar-menu">
 				<li>
-				<form class="navbar-form">
+				
 				<img src="dashboardimages/favicon.ico" alt="Smartmedi">
-				</form>
+				
 				</li>
 				<li class="active"><a href="#"><i class="fa fa-home"></i>Dashboard</a></li>
 				<li class="sub">
@@ -77,8 +77,8 @@ if (isset($_GET['logout'])) {
 		<div class="templatemo-content-wrapper">
 			<div class="templatemo-content">
 			<ol class="breadcrumb">
-            <li><a href="dashboard.php">User Panel</a></li>
-            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">User Panel</a></li>
+           
             <li>Overview</li>
 			</ol>
 			

@@ -92,6 +92,9 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 									
 								<hr>
 								
+								
+								
+								
 								<label class="collapsible">Update Profile Picture</label>
 								<div class="content">
 								<input type="file" id="myFile" name="filename"><br><input type="submit">

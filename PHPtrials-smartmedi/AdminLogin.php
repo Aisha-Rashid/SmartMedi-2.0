@@ -1,5 +1,6 @@
+<?php include('server.php') ?>
 <!DOCTYPE html>
-<html lang="en"><!-- Basic -->
+<html>
 <head>
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">   
@@ -7,7 +8,7 @@
     <!-- Mobile Metas -->
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
  
-     <!-- Site Metas -->
+    <!-- Site Metas -->
     <title>SmartMedi EHR</title>  
     <meta name="keywords" content="">
     <meta name="description" content="">
@@ -29,48 +30,69 @@
     <link rel="stylesheet" href="css/custom.css">
 	<!--Password eye icon-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-	 <!-- table CSS -->
-    <link rel="stylesheet" href="css/table.css">
-
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
 </head>
+
 <body id="home" data-spy="scroll" data-target="#navbar-wd" data-offset="98">
 
 	<!-- LOADER -->
-    <div id="preloader">
+     <div id="preloader">
 		<div class="loader">
 			<img src="images/preloader.gif" alt="" />
 		</div>
     </div>
     <!-- END LOADER -->
 	
-	<!-- Start Medical -->
-	<div id="medical" class="contact-box">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 col-xs-12">
-					<h2><b>Upgrade to Silver Package!</b></h2>
-					<p><i>Get premium offers that include appointment scheduling, form upload section and so much more. </i></P>
-					<hr>
-					
+	<div id="login" class="contact-box">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="title-box">
+					<h2>SmartMedi Admin Platform</h2><br>
 				</div>
 			</div>
 		</div>
+		
+		<div class="contact-block">
+			<div class="template-page-wrapper" align="center">
+				<form class="form-horizontal templatemo-signin-form" method="post" action="signin.php">
+				<!-- <?php include('errors.php'); ?> -->
+				
+				
+				<div class="form-group">
+						<div class="col-md-6">
+							<label>Work ID</label>
+								<div class="col-sm-6">
+								<input type="number" class="form-control" name="workID">
+								</div>
+						</div>              
+				</div>
+				<div class="form-group">
+						<div class="col-md-6">
+							<label>Password</label>
+								<div class="col-sm-6">
+								<input type="password" class="form-control" name="adminpass">
+								</div>
+						</div>              
+				</div>
+				<div class="form-group">
+						<div class="col-md-12">
+							<div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" class="btn"
+							name="admin_login">Log In</button>
+							</div>
+						</div>
+				</div>
+			</div>
+		</div>
+	</form>
 	</div>
-	<!-- End Medical -->	
 	
-	<a href="#" id="scroll-to-top" class="new-btn-d br-2"><i class="fa fa-angle-up"></i></a>
-
-	<!-- ALL JS FILES -->
+<!-- ALL JS FILES -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/popper.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/passwordToggle.js"></script>
-    <!-- ALL PLUGINS -->
+	
+    <!-- ALL PLUGINS--> 
 	<script src="js/jquery.magnific-popup.min.js"></script>
     <script src="js/jquery.pogo-slider.min.js"></script> 
 	<script src="js/slider-index.js"></script>
@@ -83,5 +105,8 @@
 	<script src="js/isotope.min.js"></script>	
 	<script src="js/images-loded.min.js"></script>	
     <script src="js/custom.js"></script>
+	<!--script src="js/password-validator.js"></script-->	
+
 </body>
+
 </html>
