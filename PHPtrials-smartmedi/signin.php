@@ -41,7 +41,7 @@ if ($rows == 1) {
     $_SESSION['IDNo'] = $IDNo;
 	
     $row = mysqli_fetch_row($data);
-        echo $row[8];
+        echo $row[10];
 
     // $row = mysqli_fetch_row($data);
     // $_SESSION['FirstName'] = $FirstName;
