@@ -133,18 +133,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 				<!-- Tab panes -->	
                 <div class="tab-content">
 					<div class="tab-pane fade in active" id="home">
-						<!--div class="btn-group pull-right" id="templatemo_sort_btn">
-							<button type="button" class="btn btn-default">Sort by</button>
-							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-							  <span class="caret"></span>
-							  <span class="sr-only">Toggle Dropdown</span>
-							</button>
-							<ul class="dropdown-menu" role="menu">
-							  <li><a href="#">First Name</a></li>
-							  <li><a href="#">Last Name</a></li>
-							  <li><a href="#">Username</a></li>
-							</ul>
-						</div-->
+						
 						<div class="table-responsive">
 							<h4 class="margin-bottom-15">Patients Table</h4>
 								<table class="table table-striped table-hover table-bordered">
