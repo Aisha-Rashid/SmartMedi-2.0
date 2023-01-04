@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 20, 2022 at 10:50 AM
+-- Generation Time: Jan 04, 2023 at 10:11 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -201,9 +201,20 @@ CREATE TABLE `doctors` (
 
 INSERT INTO `doctors` (`id`, `nationalid`, `fname`, `lname`, `hospital`, `workid`, `specialty`, `password`) VALUES
 (10910410, 648392384, 'Fatuma', 'Wairimu', 'Gertrude\'s Children\'s Hospital Muthaiga', 637483, 'Nephrology', 'fdc0978bc0cc4c37c3e3d44fc63ee487'),
+(13955393, 545678, 'Sarah', 'Waithaka', 'Bosongo Hospital', 6568986, 'Hematology', '9e9d7a08e048e9d604b79460b54969c3'),
 (23386746, 263830028, 'Imran', 'Mbulika', 'Brother André Medical Center Dandora', 2474357, 'General/Clinical Pathology', 'e18fdc9fa7cc2b5f4e497d21a48ea3b7'),
-(23510146, 63849286, 'wanja', 'aisha', 'Avenue Hospital', 6283920, 'Neurosurgery', ''),
-(67066255, 638992847, 'Rehema', 'rashid', 'Avenue Hospital', 53748920, 'Diagnostic Radiology', '');
+(27901648, 5986655, 'Mitch', 'Odhiambo', 'Consolata Hospital Nkubu', 5686656, 'Respirology', 'fae53351b9effc708e764e871bef3119'),
+(30953278, 7455685, 'Abdul Aziz', 'Guyo', 'Kakamega County General Teaching & Referral Hospital', 46986565, 'Radiation Oncology', '82027888c5bb8fc395411cb6804a066c'),
+(31863166, 2236566, 'Vincent', 'Mwanza', 'Narok County Referral Hospital', 4564652, 'Neurosurgery', 'b15ab3f829f0f897fe507ef548741afb'),
+(41922387, 6865865, 'Samuel', 'Ratemo', 'Diani Beach Hospital', 6666666, 'Plastic Surgery', 'd8ae5776067290c4712fa454006c8ec6'),
+(57778499, 4455635, 'Rachael', 'Nzioka', 'Machakos Hospital', 5646687, 'Gastroenterology', '3676efb616c47897b2d427b4cd8b9253'),
+(69409721, 654689, 'Pamela', 'Oteng', 'Nanyuki Cottage Hospital', 45665625, 'Ophthalmology', '669ffc150d1f875819183addfc842cab'),
+(72057544, 6556968, 'Patricia', 'Chemutai', 'Aga Khan Hospital, Mombasa', 6666666, 'Urology', '823fec7a2632ea7b498c1d0d11c11377'),
+(77276605, 2252652, 'Julius', 'Chepkorir', 'Maua Methodist Hospital', 3465468, 'General Surgery', '30e6d8432ce54710f9c09f305e7b9829'),
+(81653946, 6486650, 'Brenda', 'Wangui', 'Mandera County Referral Hospital', 5858758, 'Obstetrics/Gynecology', 'e5e9b41c8f1ad39ffb22df4a7aa7d876'),
+(93643432, 56559856, 'Kelvin', 'Nzomo', 'Gatundu Level 5 Hospital', 56465565, 'Nephrology', 'b2c6de510d584484d74c9aa9f8fa9f04'),
+(95142858, 5696598, 'Jack ', 'Ochieng', 'Kiambu County Referral Hospital', 6655665, 'Endocrinology and Metabolism', '4ff9fc6e4e5d5f590c4f2134a8cc96d1'),
+(96784800, 11455985, 'Maimuna', 'Idris', 'Mandera County Referral Hospital', 2556590, 'Pediatrics', 'cbf306d2c9df16d0bd7ba7888cbb1b5e');
 
 -- --------------------------------------------------------
 
@@ -238,7 +249,8 @@ INSERT INTO `fileupload` (`id`, `name`, `date`, `IDNo`) VALUES
 (22, 'fetch php.txt', '2022-12-08 15:35:59', 63748264),
 (23, 'AAR Medical Insurance Quotation 2022-Farida (52yrs).xlsx', '2022-12-08 15:36:13', 63748264),
 (24, 'MMUrepo6.docx', '2022-12-08 15:36:47', 63748264),
-(25, '4_entropy_coding.pdf', '2022-12-13 15:34:25', 2147483647);
+(25, '4_entropy_coding.pdf', '2022-12-13 15:34:25', 2147483647),
+(26, 'TRIAL1.pdf', '2023-01-02 11:55:52', 29816629);
 
 -- --------------------------------------------------------
 
@@ -248,25 +260,68 @@ INSERT INTO `fileupload` (`id`, `name`, `date`, `IDNo`) VALUES
 
 CREATE TABLE `hospitals` (
   `hospitalID` int(11) NOT NULL,
-  `hospitalname` varchar(255) NOT NULL
+  `hospitalname` varchar(255) NOT NULL,
+  `county` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `hospitals`
 --
 
-INSERT INTO `hospitals` (`hospitalID`, `hospitalname`) VALUES
-(1, 'AAR Hospital'),
-(2, 'Aga Khan University Hospital, Nairobi'),
-(3, 'Avenue Hospital'),
-(4, 'Bristol Park Hospital Tasia Embakasi'),
-(5, 'Brother André Medical Center Dandora'),
-(6, 'Coptic Hospital Nursing Hospital'),
-(7, 'Gertrude\'s Children\'s Hospital Muthaiga'),
-(8, 'Guru Nanak Ramgarhia Sikh Hospital'),
-(9, 'The Karen Hospital'),
-(10, 'Kenyatta National Hospital'),
-(11, 'Kenyatta University Teaching, Referral, and Research Hospital');
+INSERT INTO `hospitals` (`hospitalID`, `hospitalname`, `county`) VALUES
+(1, 'AAR Hospital', 'Kiambu'),
+(2, 'Aga Khan University Hospital, Nairobi', 'Nairobi'),
+(3, 'Avenue Hospital', 'Nairobi'),
+(4, 'Bristol Park Hospital Tasia Embakasi', 'Nairobi'),
+(5, 'Brother André Medical Center Dandora', 'Nairobi'),
+(6, 'Coptic Hospital Nursing Hospital', 'Nairobi'),
+(7, 'Gertrude\'s Children\'s Hospital Muthaiga', 'Kiambu'),
+(8, 'Guru Nanak Ramgarhia Sikh Hospital', 'Nairobi'),
+(9, 'The Karen Hospital', 'Kajiado'),
+(10, 'Kenyatta National Hospital', 'Nairobi'),
+(11, 'Kenyatta University Teaching, Referral, and Research Hospital', 'Kiambu'),
+(12, 'AIC Kijabe Hospital Nairobi Medical Center', 'Nairobi'),
+(13, 'Lifecare Hospitals Kenya', 'Nairobi'),
+(14, 'The Nairobi Hospital Outpatient Center', 'Nairobi'),
+(15, 'Kenya Defense Forces Memorial Hospital', 'Nairobi'),
+(16, 'Mediheal Group of Hospitals, Upperhill', 'Nairobi'),
+(17, 'Gatundu Level 5 Hospital', 'Nyeri'),
+(18, 'Kerugoya County Referral Hospital', 'Kirinyaga'),
+(19, 'Kiambu County Referral Hospital', 'Kiambu'),
+(20, 'Murang\'a County Referral Hospital', 'Murang\'a'),
+(21, 'Afya International Hospital', 'Malindi'),
+(22, 'Alfarooq Hospital', 'Mombasa'),
+(23, 'Bomu Hospital', 'Mombasa'),
+(24, 'Diani Beach Hospital', 'Kwale'),
+(25, 'Hola County Referral Hospital', 'Tana River'),
+(26, 'Pandya Memorial Hospital', 'Mombasa'),
+(27, 'Aga Khan Hospital, Mombasa', 'Mombasa'),
+(28, 'Consolata Hospital Nkubu', 'Meru'),
+(29, 'Embu Provincial General Hospital', 'Embu'),
+(30, 'Galaxy Hospital', 'Isiolo'),
+(31, 'Kitui County Referral Hospital', 'Kitui'),
+(32, 'Machakos Hospital', 'Machakos'),
+(33, 'Makueni County Referral Hospital', 'Makueni'),
+(34, 'Maua Methodist Hospital', 'Meru'),
+(35, 'Our Lady of Lourdes Mutomo Hospital', 'Kitui'),
+(36, 'PCEA Chogoria Hospital', 'Tharaka-Nithi'),
+(37, 'Mandera County Referral Hospital', 'Mandera'),
+(38, 'Shamaal Hospital', 'Mandera'),
+(39, 'Aga Khan Hospital, Kisumu', 'Kisumu'),
+(40, 'Bosongo Hospital', 'Kisii'),
+(41, 'Jaramogi Oginga Odinga Teaching & Referral Hospital', 'Kisumu'),
+(42, 'Kendu Adventist Hospital', 'Homa Bay'),
+(43, 'Tenwek Hospital', 'Bomet'),
+(44, 'Barnet Memorial Hospital, Kabarnet', 'Baringo'),
+(45, 'Nakuru Level 6 Hospital', 'Nakuru'),
+(46, 'Nanyuki Cottage Hospital', 'Laikipia'),
+(47, 'Mediheal Hospital and Fertility Center, Uasin Gishu', 'Uasin Gishu'),
+(48, 'Narok County Referral Hospital', 'Narok'),
+(49, 'Catholic Hospital Wamba', 'Samburu'),
+(50, 'Bungoma County Referral Hospital', 'Bungoma'),
+(51, 'Busia County Referral Hospital', 'Busia'),
+(52, 'Jumuia Friends Hospital Kaimosi', 'Vihiga'),
+(53, 'Kakamega County General Teaching & Referral Hospital', 'Kakamega');
 
 -- --------------------------------------------------------
 
@@ -356,7 +411,8 @@ CREATE TABLE `medicalcover` (
 --
 
 INSERT INTO `medicalcover` (`id`, `nhiftype`, `nhifnumber`, `insurancetype`, `insurancenumber`, `insuranceprincipal`, `expiry`, `IDNo`) VALUES
-(1, 'Individual', 64792764, 'APA Insurance Limited', 5367286, 'Aisha Wanja Rashid', '2023-07-11', 2147483647);
+(1, 'Individual', 64792764, 'APA Insurance Limited', 5367286, 'Aisha Wanja Rashid', '2023-07-11', 2147483647),
+(2, 'Individual', 620145, 'Old Mutual Life Assurance Company Limited', 2264087, 'Fatuma Wairimu Rashid', '2024-12-07', 29816629);
 
 -- --------------------------------------------------------
 
@@ -380,7 +436,8 @@ CREATE TABLE `nextofkin` (
 INSERT INTO `nextofkin` (`id`, `kinFirstName`, `kinLastName`, `relationship`, `telephone`, `IDNo`) VALUES
 (1, 'fatuma', 'wairimu', '', '', 0),
 (2, '', '', '', '', 0),
-(3, 'Rehema', 'Rashid', 'Sibling', '152671827', 2147483647);
+(3, 'Rehema', 'Rashid', 'Sibling', '152671827', 2147483647),
+(4, 'Dianah', 'Karanja', 'Parent', '254759320031', 29816629);
 
 -- --------------------------------------------------------
 
@@ -414,7 +471,28 @@ INSERT INTO `patients` (`ID`, `FirstName`, `LastName`, `TelNo`, `IDNo`, `DOB`, `
 (23, 'Ashraf', 'Mbulika', '63647828', 63748264, '2020-07-07', 'Male', 'AB+', 'ashraf@yahoo.com', 'Machakos', 'Athi River', '508924b0eac2ba101ada28841c931e44', ''),
 (24, 'Rehema', 'Rashid', '637483625', 68493736, '1998-03-10', 'Female', 'O+', 'rehema@yahoo.com', 'Nairobi', 'Nairobi', '5eaf0467a7fdc9fe2a16b9b8a8fd8b4a', ''),
 (25, 'Suhaila', 'Salim', '73849837', 82736745, '2017-07-21', 'Female', 'O+', 'suhaila@yahoo.com', 'Kajiado', 'Kitengela', 'e8b3ca806fd3c5e8e18368994a7ee305', ''),
-(26, 'Rashid', 'Thomas', '73883635', 367482725, '1988-10-13', 'Male', 'A+', 'rashid@yahoo.com', 'Nairobi', 'Nairobi', '7d0ba610dea3dbcc848a97d8dfd767ae', '');
+(26, 'Rashid', 'Thomas', '73883635', 367482725, '1988-10-13', 'Male', 'A+', 'rashid@yahoo.com', 'Nairobi', 'Nairobi', '7d0ba610dea3dbcc848a97d8dfd767ae', ''),
+(27, 'Allan', 'Keverenge', '254795846312', 2147483647, '1988-03-15', 'Male', 'B-', 'allan@yahoo.com', 'Homa Bay', 'Homa Bay', 'b993e4526238d62f6b1b90e605532ff8', ''),
+(28, 'Monica', 'Ndunge', '+254788741200', 49798885, '1991-02-05', 'Female', 'O-', 'monica@gmail.com', 'Machakos', 'Machakos', 'ff0d813dd5d2f64dd372c6c4b6aed086', ''),
+(29, 'Cherlyne ', 'Obeyo', '+254719267540', 78978568, '1992-08-18', 'Female', 'AB+', 'cherlyneobeyo@gmail.com', 'Kakamega', 'Kakamega', 'b5e6859e6c6d07090ee1fc3bb85ec441', ''),
+(30, 'Satish', 'Kumar', '+254752861926', 79858912, '1987-10-08', 'Male', 'B+', 'satish@yahoo.com', 'Kilifi', 'Kilifi', 'b8377b23bb86899405d2455cc6da3556', ''),
+(31, 'Winfred', 'Kamunge', '+254752528962', 56552345, '1979-01-25', 'Female', 'A+', 'winfred@gmail.com', 'Kericho', 'Kericho', 'cfeee3fc113367fb6ea82084621e5c0d', ''),
+(32, 'Annastacia', 'Mbula', '+254718097856', 66989559, '1972-07-01', 'Female', 'A-', 'annastacia@gmail.com', 'Makueni', 'Wote', '2708535b89a179fe383b3b548048687f', ''),
+(33, 'Mary', 'Wambui', '+254725898989', 9873268, '1993-09-17', 'Female', 'O+', 'mary@gmail.com', 'Kiambu', 'Kiambu', 'b8e7be5dfa2ce0714d21dcfc7d72382c', ''),
+(34, 'Martin ', 'Sendeyo', '+254710252863', 4879885, '1983-02-17', 'Male', 'AB+', 'martin@gmail.com', 'Busia', 'Busia', '925d7518fc597af0e43f5606f9a51512', ''),
+(35, 'Peter', 'Mburu', '+254716688262', 6598569, '1976-05-13', 'Male', 'O-', 'peter@yahoo.com', 'Kirinyaga', 'Kirinyaga', '51dc30ddc473d43a6011e9ebba6ca770', ''),
+(36, 'Timothy', 'Oketch', '+254720858623', 123456789, '1996-04-02', 'Male', 'AB-', 'timothy@gmail.com', 'Kisumu', 'Kisumu', 'ecb97d53d2d35b8ba98cf82a8d78cad9', ''),
+(37, 'Erastus', 'Kinyua', '+254734528692', 544856500, '1977-10-09', 'Male', 'B-', 'erastus@yahoo.com', 'Embu', 'Embu', '029028fb57ad37f32281997724b97949', ''),
+(38, 'Faith', 'Katunge', '+25478595596', 56588966, '1995-11-20', 'Female', 'O+', 'faith@gmail.com', 'Elgeyo/Marakwet', 'Marakwet', 'ecee7df9bbac50b9b428483bfea1dd7c', ''),
+(39, 'Mark', 'Njoroge', '+2547285689', 30562389, '1999-03-18', 'Male', 'B-', 'mark@gmail.com', 'Kajiado', 'kajiado', 'ea82410c7a9991816b5eeeebe195e20a', ''),
+(40, 'Abdi', 'Osman', '+254720548562', 678456566, '2002-03-29', 'Male', 'AB-', 'abdi@gmail.com', 'Garissa', 'Garissa', '311eba6dada049960e16974e652ef134', ''),
+(41, 'Abdul', 'Imboha', '+2547856622', 6588689, '1988-12-23', 'Male', 'B+', 'abdul@gmail', 'Bungoma', 'Bungoma', '82027888c5bb8fc395411cb6804a066c', ''),
+(42, 'Sophia', 'Mwenje', '+2547582544', 2559655, '1983-06-08', 'Female', 'AB-', 'sophia@gmail.com', 'Trans Nzoia', 'Trans Nzoia', '2ee0272b8e1a9705dc3ebe91c10b32f4', ''),
+(43, 'Biko', 'Biko', '+254710566555', 874797989, '1996-05-14', 'Male', 'O-', 'biko@gmail.com', 'Nairobi City', 'Nairobi', '3aeb4f9aab7e034b7722f070831bce41', ''),
+(44, 'Samantha', 'Makori', '+254720586321', 96542356, '1967-04-10', 'Female', 'A+', 'samantha@gmail.com', 'Nairobi City', 'Nairobi', 'f01e0d7992a3b7748538d02291b0beae', ''),
+(45, 'Vitalis', 'Junior', '+254712358256', 545586598, '1994-07-07', 'Male', 'AB+', 'vitalis@gmail.com', 'Vihiga', 'Vihiga', '92b20c90c1bc317620c82dc41b4eb9fd', ''),
+(46, 'Fatuma', 'Rashid', '254719829526', 29816629, '1993-04-02', 'Female', 'O+', 'fatumarashid4@gmail.com', 'Kajiado', 'Kitengela', '407aa911747042d7f046b62feaf8b4c4', ''),
+(47, 'Jeff', 'Githae', '254743567854', 43628735, '1996-07-05', 'Male', 'O+', 'jeffgithae@gmail.com', 'Kiambu', 'Kiambu', '166ee015c0e0934a8781e0c86a197c6e', '');
 
 -- --------------------------------------------------------
 
@@ -438,7 +516,8 @@ INSERT INTO `response` (`id`, `IDNo`, `conditions`, `allergies`, `notes`) VALUES
 (2, 53664673, 'Respiratory and Ear Nose and Throat (ENT) disorders,Endocrine disorders,Gastro-intestinal disorders,Gynaecological and Obstetric disorders,Neurological and psychological disorders,Congenital/inherited/hereditary disorders,', 'peanuts, flowers', '5-year gastritis diagnosis, anxiety disorder,  stomach hernia, pelvic inflammation'),
 (3, 68493736, 'Respiratory and Ear Nose and Throat (ENT) disorders,', 'paracetamol, dust particles', 'rhinitis diagnosed in 2013'),
 (4, 63748264, 'Gastro-intestinal disorders,', 'nuts', 'gastritis detected'),
-(5, 2147483647, 'Respiratory and Ear Nose and Throat (ENT) disorders, Gastro-intestinal disorders, Gynaecological and Obstetric disorders, Neurological and psychological disorders, ', 'reactive to iboprufen, dust particles, strong perfumes, eggs', 'diagnosed with allergic rhinitis, hiatus hernia, peptic ulcers, endometriosis, anxiety and panic attacks');
+(5, 2147483647, 'Respiratory and Ear Nose and Throat (ENT) disorders, Gastro-intestinal disorders, Gynaecological and Obstetric disorders, Neurological and psychological disorders, ', 'reactive to iboprufen, dust particles, strong perfumes, eggs', 'diagnosed with allergic rhinitis, hiatus hernia, peptic ulcers, endometriosis, anxiety and panic attacks'),
+(6, 29816629, 'Cardiovascular (heart and blood vessels) disorders, Respiratory and Ear Nose and Throat (ENT) disorders, Endocrine disorders, Gastro-intestinal disorders, Gynaecological and Obstetric disorders, Musculoskeletal disorders, Skin disorders, ', 'Dust, Kerosene, pollen ', 'Relatives suffering from - High blood pressure, Diabetes, peptic ulcers, arthritis, keloids\r\nPatient suffering from - asthma, ovarian cyst\r\n');
 
 --
 -- Indexes for dumped tables
@@ -548,13 +627,13 @@ ALTER TABLE `docspecialty`
 -- AUTO_INCREMENT for table `fileupload`
 --
 ALTER TABLE `fileupload`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `hospitals`
 --
 ALTER TABLE `hospitals`
-  MODIFY `hospitalID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `hospitalID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `insurance`
@@ -566,25 +645,25 @@ ALTER TABLE `insurance`
 -- AUTO_INCREMENT for table `medicalcover`
 --
 ALTER TABLE `medicalcover`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `nextofkin`
 --
 ALTER TABLE `nextofkin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `patients`
 --
 ALTER TABLE `patients`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `response`
 --
 ALTER TABLE `response`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
