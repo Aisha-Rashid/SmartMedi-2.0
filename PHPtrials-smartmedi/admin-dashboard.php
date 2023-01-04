@@ -68,7 +68,7 @@ if (isset($_GET['logout'])) {
         // $femaleUsers = ;
         $femaleUsersRes = mysqli_query($db, "SELECT * FROM `patients` WHERE `gender`='Female'");
         $femaleUsersNo = mysqli_num_rows($femaleUsersRes);
-        echo "female patients", $femaleUsersNo;
+        // echo "female patients", $femaleUsersNo;
 
         // $x =  "SELECT DISTINCT hospitalname FROM `hospitals`";
         // $Res = mysqli_query($db, $x);
@@ -90,11 +90,20 @@ if (isset($_GET['logout'])) {
         $data = array();
         foreach ($femaleUsersRes as $row) {
             $data[] = $row;
+            echo implode($data);
         }
+        // $x = implode($data);
+        // echo $x;
 
         mysqli_close($db);
 
-        echo json_encode($data)
+
+        // $data = array();
+        // while ($row = mysqli_fetch_assoc($femaleUsersRes)) {
+        //     $data[] = $row;
+        //     echo $data;
+        // }
+
 
 
 
@@ -104,12 +113,6 @@ if (isset($_GET['logout'])) {
         <!-- Start menu -->
         <div class="template-page-wrapper">
             <div class="navbar-collapse collapse templatemo-sidebar">
-
-
-
-
-
-
                 <ul class="templatemo-sidebar-menu">
                     <li>
                         <form class="navbar-form">
@@ -139,11 +142,8 @@ if (isset($_GET['logout'])) {
                         <li><a href="#">Dashboard</a></li>
                         <li>Overview</li>
                     </ol>
-
-
                     <!-- partial -->
                     <div>
-
                         <div class="row">
                             <div class="col-4 icon-dashboard-container">
                                 <div class="card shadow p-3 mb-5 bg-body rounded">
@@ -174,14 +174,11 @@ if (isset($_GET['logout'])) {
                                     <div class="card-body">
 
                                         <p><?php echo $totalHospitals; ?> </p>
+                                        <?php echo $data; ?>
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
-
-
                         <div class="row">
                             <div class="col-6">
                                 <canvas id="myChart"></canvas>
@@ -189,7 +186,7 @@ if (isset($_GET['logout'])) {
                         </div>
                         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 
-                        <script>
+                        <!-- <script>
                             
                             var ctx = document.getElementById('myChart').getContext('2d');
                             var chart = new Chart(ctx, {
@@ -222,11 +219,12 @@ if (isset($_GET['logout'])) {
                                     chart.data.datasets[0].data = data.data;
                                     chart.update();
                                 });
-                        </script>
+                        </script> -->
+
+
 
                     </div>
                 </div>
-
             </div>
         </div>
         </section>
@@ -273,6 +271,70 @@ if (isset($_GET['logout'])) {
                 });
             }
         </script>
+
+<!-- function showGraph()
+        {
+            {
+                $.post("data.php",
+                function (data)
+                {
+                    console.log(data);
+                     var name = [];
+                    var marks = [];
+
+                    for (var i in data) {
+                        name.push(data[i].student_name);
+                        marks.push(data[i].marks);
+                    }
+
+                    var chartdata = {
+                        labels: name,
+                        datasets: [
+                            {
+                                label: 'Student Marks',
+                                backgroundColor: '#49e2ff',
+                                borderColor: '#46d5f1',
+                                hoverBackgroundColor: '#CCCCCC',
+                                hoverBorderColor: '#666666',
+                                data: marks
+                            }
+                        ]
+                    }; -->
+
+
+
+        <script>
+            // Define the chart configuration
+            var chartConfig = {
+                type: 'line',
+                data: {
+                    labels: ["Jan", "Feb", "Mar", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"], // labels for the x-axis
+                    datasets: [{
+                        label: 'Your data',
+                        data: [<?php echo $data; ?>], // The data for the chart
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            };
+
+            // Get the canvas element
+            var ctx = document.getElementById('myChart').getContext('2d');
+
+            // Create the chart using the chart configuration
+            var myChart = new Chart(ctx, chartConfig);
+        </script>
+
     <?php endif ?>
 </body>
 
