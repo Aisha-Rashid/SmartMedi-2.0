@@ -48,6 +48,48 @@ if (isset($_GET['logout'])) {
    $rows = mysqli_num_rows($res);
    
    ?>
+   <?php
+$conn=new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or die(mysqli_error($conn));
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Check if a file was uploaded
+    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+      // Get the file details
+      $fileName = basename($_FILES['image']['name']);
+      $fileSize = $_FILES['image']['size'];
+      $fileType = $_FILES['image']['type'];
+      $tmpName  = $_FILES['image']['tmp_name'];
+
+      // Validate the file type
+      $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+      if (!in_array($fileType, $allowedTypes)) {
+        // Display an error message
+        echo 'Error: Only JPEG, PNG, and GIF files are allowed';
+        exit;
+      }
+
+      // Validate the file size
+      if ($fileSize > 500000) {
+        // Display an error message
+        echo 'Error: File size must be less than 500KB';
+        exit;
+      }
+
+      // Generate a unique filename
+      $fileName = uniqid() . '.' . pathinfo($fileName, PATHINFO_EXTENSION);
+
+      // Save the uploaded file
+      move_uploaded_file($tmpName, "files/$fileName");
+
+	  $query=$conn->query("INSERT INTO patients (pic) VALUES ('$fileName')");
+
+      // Display a success message
+      echo 'File uploaded successfully';
+    } else {
+      // Display an error message
+      echo 'Error: No file was uploaded';
+    }
+  }
+?>
   
 
 <!-- Start menu -->
@@ -90,8 +132,12 @@ if (isset($_GET['logout'])) {
       <div class="col-lg-4">
         <div class="card shadow-sm">
           <div class="card-header bg-transparent text-center">
-		    <img class="profile_img" src="https://www.pngkey.com/png/detail/349-3499617_person-placeholder-person-placeholder.png" alt="Profile Pic">
-            <h3>
+		  <form action="" method="post" enctype="multipart/form-data">
+		  <input type="file" id="fileInput" accept="image/*" style="display:none !important" />
+		  <img  class="profile_img" id="preview" src="https://www.pngkey.com/png/detail/349-3499617_person-placeholder-person-placeholder.png" alt="Image preview" />
+		    <!-- <img class="profile_img" src="https://www.pngkey.com/png/detail/349-3499617_person-placeholder-person-placeholder.png" alt="Profile Pic"> -->
+			</form>
+			<h3>
 				<?php echo $array[1]; ?>
 				
 			</h3>
@@ -314,7 +360,7 @@ if (isset($_GET['logout'])) {
 					</tr>
 				 </tbody>
 				 </table>
-				 <?php echo" no data"?>
+				 
 				 
 				 <?php }
 				

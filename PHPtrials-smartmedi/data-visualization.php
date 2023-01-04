@@ -138,14 +138,14 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
                 </div>                  
               </div>
             </div>
-            <div class="row">
+            <!--div class="row">
 			<div class="col-md-6 col-sm-6">
                 <div class="panel panel-primary">
                   <div class="panel-heading">Bar Chart</div>
                   <canvas id="templatemo-bar-chart"></canvas>
                 </div>
               </div> 
-            </div>
+            </div-->
 			<div class="row">
               <div class="col-md-6 col-sm-6">
                 <div class="panel panel-success">
@@ -159,7 +159,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
                   <canvas id="templatemo-bar-chart"></canvas>
                 </div>
               </div> 
-            </div>
+            </div-->
           </div>
         </div>
       </div>
@@ -226,13 +226,13 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 //pie chart data
       var pieChartData = [
       {
-        value: [<?php echo $totalFemales; ?>] ,
+        value: <?php echo $totalFemales; ?> ,
         color:"#F7464A",
         highlight: "#FF5A5E",
         label: "Female"
       },
       {
-        value: [<?php echo $totalMales; ?>] ,
+        value: <?php echo $totalMales; ?> ,
         color: "#46BFBD",
         highlight: "#5AD3D1",
         label: "Male"
@@ -240,32 +240,32 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
       
       ] // pie chart data
 
-      // radar chart
-      var radarChartData = {
-        labels: ["Eating", "Drinking"],
-        datasets: [
-        {
-          label: "My First dataset",
-          fillColor: "rgba(220,220,220,0.2)",
-          strokeColor: "rgba(220,220,220,1)",
-          pointColor: "rgba(220,220,220,1)",
-          pointStrokeColor: "#fff",
-          pointHighlightFill: "#fff",
-          pointHighlightStroke: "rgba(220,220,220,1)",
-          data: [65, 59, 90, 81, 56, 55, 40]
-        },
-        {
-          label: "My Second dataset",
-          fillColor: "rgba(151,187,205,0.2)",
-          strokeColor: "rgba(151,187,205,1)",
-          pointColor: "rgba(151,187,205,1)",
-          pointStrokeColor: "#fff",
-          pointHighlightFill: "#fff",
-          pointHighlightStroke: "rgba(151,187,205,1)",
-          data: [28, 48, 40, 19, 96, 27, 100]
-        }
-        ]
-      }; // radar chart
+      // // radar chart
+      // var radarChartData = {
+      //   labels: ["Eating", "Drinking"],
+      //   datasets: [
+      //   {
+      //     label: "My First dataset",
+      //     fillColor: "rgba(220,220,220,0.2)",
+      //     strokeColor: "rgba(220,220,220,1)",
+      //     pointColor: "rgba(220,220,220,1)",
+      //     pointStrokeColor: "#fff",
+      //     pointHighlightFill: "#fff",
+      //     pointHighlightStroke: "rgba(220,220,220,1)",
+      //     data: [65, 59, 90, 81, 56, 55, 40]
+      //   },
+      //   {
+      //     label: "My Second dataset",
+      //     fillColor: "rgba(151,187,205,0.2)",
+      //     strokeColor: "rgba(151,187,205,1)",
+      //     pointColor: "rgba(151,187,205,1)",
+      //     pointStrokeColor: "#fff",
+      //     pointHighlightFill: "#fff",
+      //     pointHighlightStroke: "rgba(151,187,205,1)",
+      //     data: [28, 48, 40, 19, 96, 27, 100]
+      //   }
+      //   ]
+      // }; */ radar chart
 
       // polar area chart
       

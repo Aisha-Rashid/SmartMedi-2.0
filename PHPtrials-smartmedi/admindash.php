@@ -227,6 +227,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 					<tr>
 						<th>#</th>
 						<th>Hospital Name</th>
+						<th>Region</th>
 						
 						
                     </tr>
@@ -238,13 +239,15 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 							while($row=mysqli_fetch_array($res)){
 							
 							$HospitalID =$row['hospitalID'];
-							
+							$county = $row['county'];
 							$hospitalname=$row['hospitalname'];
+							
 							?>
 					<tr>
 					
 						<td><?php echo $row['hospitalID'] ?></td>
 						<td><?php echo $row['hospitalname'] ?></td>
+						<td><?php echo $row['county'] ?></td>
 						
 					</tr>
 					<?php } ?>
