@@ -153,6 +153,20 @@ if (isset($_GET['logout'])) {
                 <?php echo $array[7] ?>
                 </td>
               </tr>
+			  <tr>
+                <th width="30%">County</th>
+                <td width="2%">:</td>
+                <td>
+                <?php echo $array[9] ?>
+                </td>
+              </tr>
+			  <tr>
+                <th width="30%">Town</th>
+                <td width="2%">:</td>
+                <td>
+                <?php echo $array[10] ?>
+                </td>
+              </tr>
             </table>
           </div>
         </div>
@@ -202,13 +216,6 @@ if (isset($_GET['logout'])) {
               </tr>
 				 </table>
 				 <?php } ?> 
-			</div>
-          </div>
-		  <br>
-          <div class="card-header bg-transparent border-0">
-			<button class="collapsible">Medical conditions</button>
-			<div class="content">
-				 <a href="medicalhist.php">Click to view/print medical conditions</a>
 			</div>
           </div>
 		  <br>

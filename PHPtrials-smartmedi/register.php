@@ -132,6 +132,34 @@
 									</div>   
 								</div>
 								<div class="col-md-6">
+									<label>County of residence</label>
+									<div class="form-group">
+									<SELECT NAME="county" class="form-control">
+										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
+										<?php 
+										$query ="SELECT county FROM counties";
+										$result = mysqli_query($db, $query);
+										if($result->num_rows> 0){
+										  $options= mysqli_fetch_all($result, MYSQLI_ASSOC);
+										}
+										
+											foreach ($options as $option) {
+										?>
+										<option><?php echo $option['county']; ?> </option>
+										<?php 
+										}
+										?>
+										
+									</SELECT>
+									</div>   
+								</div>
+								<div class="col-md-6">
+									<label>Town</label>
+									<div class="form-group">
+									<input type="text" class="form-control" name="town" value="<?php echo $town; ?>">
+									</div>   
+								</div> 
+								<div class="col-md-6">
 									<label>Password</label>
 									<div class="form-group">
 									<input type="password" class="form-control" id="password1"  name="password1" value="">

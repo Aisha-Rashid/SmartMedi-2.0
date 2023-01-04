@@ -13,6 +13,8 @@ $IDNo = "";
 $DOB = "";
 $gender = "";
 $email = "";
+$county = "";
+$town = "";
 $id = "";
 $nationalid = "";
 $fname = "";
@@ -45,6 +47,8 @@ if (isset($_POST['reg_user'])) {
 	$gender = mysqli_real_escape_string($db, $_POST['gender']);
 	$bloodgroup = mysqli_real_escape_string($db, $_POST['bloodgroup']);
 	$email = mysqli_real_escape_string($db, $_POST['email']);
+	$county = mysqli_real_escape_string($db, $_POST['county']);
+	$town = mysqli_real_escape_string($db, $_POST['town']);
 	$password1 = mysqli_real_escape_string($db, $_POST['password1']);
 	$password2 = mysqli_real_escape_string($db, $_POST['password2']);
 	
@@ -57,6 +61,7 @@ if (isset($_POST['reg_user'])) {
 	if (empty($TelNo)) { array_push($errors, "Telephone Number is required"); }
 	if (empty($IDNo)) { array_push($errors, "ID Number is required"); }
 	if (empty($DOB)) { array_push($errors, "Date of Birth is required"); }
+	if (empty($county)) { array_push($errors, "County is required"); }
 	//if (empty($email)) { array_push($errors, "Email is required"); }
 	if (empty($password1)) { array_push($errors, "Password is required"); }
 
@@ -72,8 +77,8 @@ if (isset($_POST['reg_user'])) {
 		$password = md5($password1);
 		
 		// Inserting data into tables
-		$query = "INSERT INTO patients (FirstName, LastName, TelNo, IDNo, DOB, gender, bloodgroup, email, password)
-				VALUES('$FirstName' , '$LastName' , '$TelNo' , '$IDNo' , '$DOB' , '$gender', '$bloodgroup', '$email', '$password')";
+		$query = "INSERT INTO patients (FirstName, LastName, TelNo, IDNo, DOB, gender, bloodgroup, email, county, town, password)
+				VALUES('$FirstName' , '$LastName' , '$TelNo' , '$IDNo' , '$DOB' , '$gender', '$bloodgroup', '$email', '$county', '$town', '$password')";
 		
 		
 		

@@ -51,6 +51,32 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
    $array=mysqli_fetch_row($res);
    $rows = mysqli_num_rows($res);
    
+  
+   $AllDataRes1 = mysqli_query($db, "select * from patients where gender = 'Female'");
+   $totalFemales = mysqli_num_rows($AllDataRes1);
+   
+   $AllDataRes2 = mysqli_query($db, "select * from patients where gender = 'Male'");
+   $totalMales = mysqli_num_rows($AllDataRes2);
+   
+   
+   $AllDataRes3 = mysqli_query($db, "select * from patients where bloodgroup = 'O+' and gender = 'Female'");
+   $totalpatientsOFem = mysqli_num_rows($AllDataRes3);
+   
+   $AllDataRes4 = mysqli_query($db, "select * from patients where bloodgroup = 'A+' and gender = 'Female'");
+   $totalpatientsAFem = mysqli_num_rows($AllDataRes4);
+   
+   $AllDataRes5 = mysqli_query($db, "select * from patients where bloodgroup = 'AB+' and gender = 'Female'");
+   $totalpatientsABFem = mysqli_num_rows($AllDataRes5);
+   
+   $AllDataRes6 = mysqli_query($db, "select * from patients where bloodgroup = 'O+' and gender = 'Male'");
+   $totalpatientsOMale = mysqli_num_rows($AllDataRes6);
+   
+   $AllDataRes7 = mysqli_query($db, "select * from patients where bloodgroup = 'A+' and gender = 'Male'");
+   $totalpatientsAMale = mysqli_num_rows($AllDataRes7);
+   
+   $AllDataRes8 = mysqli_query($db, "select * from patients where bloodgroup = 'AB+' and gender = 'Male'");
+   $totalpatientsABMale = mysqli_num_rows($AllDataRes8);
+   
    ?>
   <div id="main-wrapper">
     <div class="navbar navbar-inverse" role="navigation">
@@ -94,8 +120,8 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
             <li class="active">Charts</li>
           </ol>
           <h1>Data Visualization</h1>
-          <p>Credit goes to <a href="http://www.chartjs.org">chartjs.org</a></p>         
-          <div class="templatemo-charts">
+          <p>Credit goes to <a href="http://www.chartjs.org">chartjs.org</a></p>  <hr>       
+          
             <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="panel panel-info">
@@ -108,29 +134,19 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
                     <h4>Pie Chart</h4>
                     <span class="text-muted">Maecenas non</span>  
                   </div>
-                  
-                  <div class="templatemo-chart-box col-lg-3 col-md-3 col-sm-4 col-xs-12">           
-                    <canvas id="templatemo-doughnut-chart"></canvas>
-                    <h4>Doughnut Chart</h4>
-                    <span class="text-muted">Sodales orci aliquet</span> 
-                  </div>
-                  
-                  <div class="templatemo-chart-box col-lg-3 col-md-3 col-sm-4 col-xs-12">           
-                    <canvas id="templatemo-radar-chart"></canvas>
-                    <h4>Radar Chart</h4>
-                    <span class="text-muted">Lorem sed</span> 
-                  </div>
-
-                  <div class="templatemo-chart-box col-lg-3 col-md-3 col-sm-4 col-xs-12">           
-                    <canvas id="templatemo-polar-chart"></canvas>
-                    <h4>Polar Area Chart</h4>
-                    <span class="text-muted">Curabitur</span> 
-                  </div>
 
                 </div>                  
               </div>
             </div>
             <div class="row">
+			<div class="col-md-6 col-sm-6">
+                <div class="panel panel-primary">
+                  <div class="panel-heading">Bar Chart</div>
+                  <canvas id="templatemo-bar-chart"></canvas>
+                </div>
+              </div> 
+            </div>
+			<div class="row">
               <div class="col-md-6 col-sm-6">
                 <div class="panel panel-success">
                   <div class="panel-heading">Line Chart</div>
@@ -182,56 +198,51 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
       // Line chart
       var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
       var lineChartData = {
-        labels : ["January","February","March","April","May","June","July"],
+        labels : ["A","AB","O"],
         datasets : [
         {
-          label: "My First dataset",
+          label: "Female Blood Group",
           fillColor : "rgba(220,220,220,0.2)",
           strokeColor : "rgba(220,220,220,1)",
           pointColor : "rgba(220,220,220,1)",
           pointStrokeColor : "#fff",
           pointHighlightFill : "#fff",
           pointHighlightStroke : "rgba(220,220,220,1)",
-          data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+          data : [<?php echo $totalpatientsAFem; ?>, <?php echo $totalpatientsABFem; ?>, <?php echo $totalpatientsOFem; ?>]
         },
         {
-          label: "My Second dataset",
+          label: "Male blood group",
           fillColor : "rgba(151,187,205,0.2)",
           strokeColor : "rgba(151,187,205,1)",
           pointColor : "rgba(151,187,205,1)",
           pointStrokeColor : "#fff",
           pointHighlightFill : "#fff",
           pointHighlightStroke : "rgba(151,187,205,1)",
-          data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+          data : [<?php echo $totalpatientsAMale; ?>, <?php echo $totalpatientsABMale; ?>, <?php echo $totalpatientsOMale; ?>]
         }
         ]
 
       } // lineChartData
-
+//pie chart data
       var pieChartData = [
       {
-        value: 300,
+        value: [<?php echo $totalFemales; ?>] ,
         color:"#F7464A",
         highlight: "#FF5A5E",
-        label: "Red"
+        label: "Female"
       },
       {
-        value: 50,
+        value: [<?php echo $totalMales; ?>] ,
         color: "#46BFBD",
         highlight: "#5AD3D1",
-        label: "Green"
+        label: "Male"
       },
-      {
-        value: 100,
-        color: "#FDB45C",
-        highlight: "#FFC870",
-        label: "Yellow"
-      }
+      
       ] // pie chart data
 
       // radar chart
       var radarChartData = {
-        labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
+        labels: ["Eating", "Drinking"],
         datasets: [
         {
           label: "My First dataset",
@@ -257,47 +268,15 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
       }; // radar chart
 
       // polar area chart
-      var polarAreaChartData = [
-      {
-        value: 300,
-        color:"#F7464A",
-        highlight: "#FF5A5E",
-        label: "Red"
-      },
-      {
-        value: 50,
-        color: "#46BFBD",
-        highlight: "#5AD3D1",
-        label: "Green"
-      },
-      {
-        value: 100,
-        color: "#FDB45C",
-        highlight: "#FFC870",
-        label: "Yellow"
-      },
-      {
-        value: 40,
-        color: "#949FB1",
-        highlight: "#A8B3C5",
-        label: "Grey"
-      },
-      {
-        value: 120,
-        color: "#4D5360",
-        highlight: "#616774",
-        label: "Dark Grey"
-      }
-
-      ];
+      
 
       window.onload = function(){
         var ctx_line = document.getElementById("templatemo-line-chart").getContext("2d");
         var ctx_bar = document.getElementById("templatemo-bar-chart").getContext("2d");
         var ctx_pie = document.getElementById("templatemo-pie-chart").getContext("2d");
-        var ctx_doughnut = document.getElementById("templatemo-doughnut-chart").getContext("2d");
-        var ctxRadar = document.getElementById("templatemo-radar-chart").getContext("2d");
-        var ctxPolar = document.getElementById("templatemo-polar-chart").getContext("2d");
+        //var ctx_doughnut = document.getElementById("templatemo-doughnut-chart").getContext("2d");
+        //var ctxRadar = document.getElementById("templatemo-radar-chart").getContext("2d");
+        //var ctxPolar = document.getElementById("templatemo-polar-chart").getContext("2d");
 
         window.myLine = new Chart(ctx_line).Line(lineChartData, {
           responsive: true
@@ -308,7 +287,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
         window.myPieChart = new Chart(ctx_pie).Pie(pieChartData,{
           responsive: true
         });
-        window.myDoughnutChart = new Chart(ctx_doughnut).Doughnut(pieChartData,{
+        /*window.myDoughnutChart = new Chart(ctx_doughnut).Doughnut(pieChartData,{
           responsive: true
         });
         var myRadarChart = new Chart(ctxRadar).Radar(radarChartData, {
@@ -316,7 +295,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
         });
         var myPolarAreaChart = new Chart(ctxPolar).PolarArea(polarAreaChartData, {
           responsive: true
-        });
+        });*/
       }
     </script>
 	<?php endif ?>

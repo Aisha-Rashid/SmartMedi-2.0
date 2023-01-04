@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 19, 2022 at 08:16 AM
+-- Generation Time: Dec 20, 2022 at 10:50 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -69,6 +69,70 @@ INSERT INTO `blood` (`id`, `bloodgroup`) VALUES
 (6, 'AB-'),
 (7, 'O+'),
 (8, 'O-');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `counties`
+--
+
+CREATE TABLE `counties` (
+  `id` int(11) NOT NULL,
+  `county` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `counties`
+--
+
+INSERT INTO `counties` (`id`, `county`) VALUES
+(1, 'Baringo\r\n'),
+(2, 'Bomet\r\n'),
+(3, 'Bungoma\r\n'),
+(4, 'Busia\r\n'),
+(5, 'Elgeyo/Marakwet\r\n'),
+(6, 'Embu\r\n'),
+(7, 'Garissa\r\n'),
+(8, 'Homa Bay\r\n'),
+(9, 'Isiolo\r\n'),
+(10, 'Kajiado\r\n'),
+(11, 'Kakamega\r\n'),
+(12, 'Kericho\r\n'),
+(13, 'Kiambu\r\n'),
+(14, 'Kilifi\r\n'),
+(15, 'Kirinyaga\r\n'),
+(16, 'Kisii\r\n'),
+(17, 'Kisumu\r\n'),
+(18, 'Kitui\r\n'),
+(19, 'Kwale\r\n'),
+(20, 'Laikipia\r\n'),
+(21, 'Lamu\r\n'),
+(22, 'Machakos\r\n'),
+(23, 'Makueni\r\n'),
+(24, 'Mandera\r\n'),
+(25, 'Marsabit\r\n'),
+(26, 'Meru\r\n'),
+(27, 'Migori\r\n'),
+(28, 'Mombasa\r\n'),
+(29, 'Murang\'a\r\n'),
+(30, 'Nairobi City\r\n'),
+(31, 'Nakuru\r\n'),
+(32, 'Nandi\r\n'),
+(33, 'Narok\r\n'),
+(34, 'Nyamira\r\n'),
+(35, 'Nyandarua\r\n'),
+(36, 'Nyeri\r\n'),
+(37, 'Samburu\r\n'),
+(38, 'Siaya\r\n'),
+(39, 'Taita/Taveta\r\n'),
+(40, 'Tana River\r\n'),
+(41, 'Tharaka-Nithi\r\n'),
+(42, 'Trans Nzoia\r\n'),
+(43, 'Turkana\r\n'),
+(44, 'Uasin Gishu\r\n'),
+(45, 'Vihiga\r\n'),
+(46, 'Wajir\r\n'),
+(47, 'West Pokot\r\n');
 
 -- --------------------------------------------------------
 
@@ -328,13 +392,15 @@ CREATE TABLE `patients` (
   `ID` int(11) NOT NULL,
   `FirstName` varchar(255) NOT NULL,
   `LastName` varchar(255) NOT NULL,
-  `TelNo` varchar(255) NOT NULL,
+  `TelNo` varchar(100) NOT NULL,
   `IDNo` int(11) NOT NULL,
   `DOB` date NOT NULL,
   `gender` varchar(20) NOT NULL,
   `bloodgroup` varchar(20) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `county` varchar(100) NOT NULL,
+  `town` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
   `pic` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -342,13 +408,13 @@ CREATE TABLE `patients` (
 -- Dumping data for table `patients`
 --
 
-INSERT INTO `patients` (`ID`, `FirstName`, `LastName`, `TelNo`, `IDNo`, `DOB`, `gender`, `bloodgroup`, `email`, `password`, `pic`) VALUES
-(20, 'Aisha', 'Rashid', '+254703277202', 2147483647, '1990-02-09', 'Female', 'O+', 'chuchuaisha@gmail.com', 'a381bedb5d4478053eb04be35f8798dd', ''),
-(22, 'Fatuma', 'Rashid', '273940287', 53664673, '1995-11-09', 'Female', 'O+', 'fatuma@yahoo.com', 'fdc0978bc0cc4c37c3e3d44fc63ee487', ''),
-(23, 'Ashraf', 'Mbulika', '63647828', 63748264, '2020-07-07', 'Male', 'AB+', 'ashraf@yahoo.com', '508924b0eac2ba101ada28841c931e44', ''),
-(24, 'Rehema', 'Rashid', '637483625', 68493736, '1998-03-10', 'Female', 'O+', 'rehema@yahoo.com', '5eaf0467a7fdc9fe2a16b9b8a8fd8b4a', ''),
-(25, 'Suhaila', 'Salim', '73849837', 82736745, '2017-07-21', 'Female', 'O+', 'suhaila@yahoo.com', 'e8b3ca806fd3c5e8e18368994a7ee305', ''),
-(26, 'Rashid', 'Thomas', '73883635', 367482725, '1988-10-13', 'Male', 'A+', 'rashid@yahoo.com', '7d0ba610dea3dbcc848a97d8dfd767ae', '');
+INSERT INTO `patients` (`ID`, `FirstName`, `LastName`, `TelNo`, `IDNo`, `DOB`, `gender`, `bloodgroup`, `email`, `county`, `town`, `password`, `pic`) VALUES
+(20, 'Aisha', 'Rashid', '+254703277202', 2147483647, '1990-02-09', 'Female', 'O+', 'chuchuaisha@gmail.com', 'Kajiado', 'Kitengela', 'a381bedb5d4478053eb04be35f8798dd', ''),
+(22, 'Fatuma', 'Rashid', '273940287', 53664673, '1995-11-09', 'Female', 'O+', 'fatuma@yahoo.com', 'Kilifi', 'Malindi', 'fdc0978bc0cc4c37c3e3d44fc63ee487', ''),
+(23, 'Ashraf', 'Mbulika', '63647828', 63748264, '2020-07-07', 'Male', 'AB+', 'ashraf@yahoo.com', 'Machakos', 'Athi River', '508924b0eac2ba101ada28841c931e44', ''),
+(24, 'Rehema', 'Rashid', '637483625', 68493736, '1998-03-10', 'Female', 'O+', 'rehema@yahoo.com', 'Nairobi', 'Nairobi', '5eaf0467a7fdc9fe2a16b9b8a8fd8b4a', ''),
+(25, 'Suhaila', 'Salim', '73849837', 82736745, '2017-07-21', 'Female', 'O+', 'suhaila@yahoo.com', 'Kajiado', 'Kitengela', 'e8b3ca806fd3c5e8e18368994a7ee305', ''),
+(26, 'Rashid', 'Thomas', '73883635', 367482725, '1988-10-13', 'Male', 'A+', 'rashid@yahoo.com', 'Nairobi', 'Nairobi', '7d0ba610dea3dbcc848a97d8dfd767ae', '');
 
 -- --------------------------------------------------------
 
@@ -388,6 +454,12 @@ ALTER TABLE `admin`
 -- Indexes for table `blood`
 --
 ALTER TABLE `blood`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `counties`
+--
+ALTER TABLE `counties`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -459,6 +531,12 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `blood`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `counties`
+--
+ALTER TABLE `counties`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `docspecialty`
