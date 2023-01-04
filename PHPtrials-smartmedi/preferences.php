@@ -24,6 +24,17 @@ if (isset($_GET['logout'])) {
 	header("location: login.php");
 }
 ?>
+<?php if (isset($_SESSION['IDNo'])) : 
+   
+   
+   $unique = $_SESSION['IDNo'];
+   $query = "SELECT * FROM `patients` WHERE IDNo = '$unique'";
+   $res = mysqli_query($db, $query);
+   $array=mysqli_fetch_row($res);
+   $rows = mysqli_num_rows($res);
+   echo $array[1];
+   
+   ?>
 <!DOCTYPE html>
 <head>
   <meta charset="utf-8">
@@ -146,6 +157,11 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 									</div>
 								</div>
 							</form>
+						</div>
+
+
+						<div class="col-12">
+							testing div
 						</div>
 					</div>
 				</div>

@@ -46,6 +46,7 @@ if (isset($_GET['logout'])) {
    $res = mysqli_query($db, $query);
    $array=mysqli_fetch_row($res);
    $rows = mysqli_num_rows($res);
+   echo $array[1];
    
    ?>
   
