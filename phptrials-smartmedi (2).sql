@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 04, 2023 at 10:11 AM
+-- Generation Time: Jan 09, 2023 at 05:48 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -44,6 +44,30 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id`, `adminFname`, `adminLname`, `workID`, `IDnumber`, `phone`, `email`, `adminpass`) VALUES
 (1, 'Aisha', 'Rashid', 5654, 30301518, 754347613, 'chuchuaisha@gmail.com', 'aisharashid');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `appointments`
+--
+
+CREATE TABLE `appointments` (
+  `id` int(11) NOT NULL,
+  `IDNo` int(11) NOT NULL,
+  `hospital` varchar(255) NOT NULL,
+  `clinic` varchar(255) NOT NULL,
+  `visit` varchar(20) NOT NULL,
+  `doctype` varchar(20) NOT NULL,
+  `date` date NOT NULL,
+  `time` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `appointments`
+--
+
+INSERT INTO `appointments` (`id`, `IDNo`, `hospital`, `clinic`, `visit`, `doctype`, `date`, `time`) VALUES
+(1, 29816629, 'Avenue Hospital', 'Gastroenterology', 'First Visit', 'Specialist', '2023-01-10', '01:30:00');
 
 -- --------------------------------------------------------
 
@@ -530,6 +554,12 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `appointments`
+--
+ALTER TABLE `appointments`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `blood`
 --
 ALTER TABLE `blood`
@@ -603,6 +633,12 @@ ALTER TABLE `response`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `appointments`
+--
+ALTER TABLE `appointments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --

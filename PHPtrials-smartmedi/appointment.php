@@ -47,7 +47,29 @@ if (isset($_GET['logout'])) {
    $array=mysqli_fetch_row($res);
    $rows = mysqli_num_rows($res);
    
-   ?>
+?>
+<?php
+$conn=new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or die(mysqli_error($conn));
+if(isset($_POST['appointbtn'])!=""){
+  $hospital = mysqli_real_escape_string($db, $_POST['hospital']);
+  $visit = mysqli_real_escape_string($db, $_POST['visit']);
+  $doctype = mysqli_real_escape_string($db, $_POST['doctype']);
+  $clinic = mysqli_real_escape_string($db, $_POST['clinic']);
+  $date = mysqli_real_escape_string($db, $_POST['date']);
+  $time = mysqli_real_escape_string($db, $_POST['time']);
+  
+ 
+
+$query=$conn->query("INSERT INTO appointments (IDNo, hospital, clinic, visit, doctype, date, time) VALUES ('$unique', '$hospital', '$clinic', '$visit', '$doctype', '$date', '$time')");
+if($query){
+header("location:appointment.php");
+}
+else{
+die(mysqli_error($conn));
+}
+}
+?>
+
 	<!-- Start menu -->
     <div class="template-page-wrapper">
 		<div class="navbar-collapse collapse templatemo-sidebar">
@@ -107,8 +129,77 @@ if (isset($_GET['logout'])) {
           </div>
           <div class="card-body pt-0">
               <!-- Form start -->
-				<form id="form_create_appointment">
+				<form id="form_create_appointment" method="post" action="">
                             <div class="row">
+							
+							<div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Select Hospital</label>
+                                        <select name="hospital" class="form-control">
+                                            <OPTION SELECTED="TRUE" DISABLED="DISABLED">---</OPTION>
+											<?php 
+										$query ="SELECT hospitalname FROM hospitals";
+										$result = mysqli_query($db, $query);
+										if($result->num_rows> 0){
+										  $options= mysqli_fetch_all($result, MYSQLI_ASSOC);
+										}
+										
+											foreach ($options as $option) {
+										?>
+										<option><?php echo $option['hospitalname']; ?> </option>
+										<?php 
+										}
+										?>
+											
+                                        </select>
+                                    </div>
+                            </div>
+							<div class="col-md-6">
+							<div class="form-group">
+							<label>First Visit?</label><br>
+							<select name="visit" class="form-control">
+										<OPTION SELECTED="TRUE" DISABLED="DISABLED">---</OPTION> 
+										<option VALUE="First Visit">Yes</option>
+										<option VALUE="Regular Patient">No</option>
+							</select>
+							</div>
+							</div>
+							<div class="col-md-6">
+							<div class="form-group">
+							<label>Type of Doctor</label><br>
+							<select name="doctype" class="form-control">
+										<OPTION SELECTED="TRUE" DISABLED="DISABLED">---</OPTION> 
+										<option VALUE="General Doctor">General Doctor</option>
+										<option VALUE="Specialist">Specialist</option>
+							</select>							
+							</div>
+							</div><br>
+							
+							<div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Select clinic</label>
+                                        <select name="clinic" class="form-control">
+										<OPTION SELECTED="TRUE" DISABLED="DISABLED">---</OPTION>  
+										<?php 
+										$query ="SELECT specialty FROM docspecialty";
+										$result = mysqli_query($db, $query);
+										if($result->num_rows> 0){
+										  $options= mysqli_fetch_all($result, MYSQLI_ASSOC);
+										}
+										
+											foreach ($options as $option) {
+										?>
+										<option><?php echo $option['specialty']; ?> </option>
+										<?php 
+										}
+										?>
+										</select>
+                                    </div>
+                            </div>
+							
+							
+							
+							
                                 <!-- Text input-->
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -120,31 +211,36 @@ if (isset($_GET['logout'])) {
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label" for="time">Preferred Time</label>
-                                        <select id="time" name="time" class="form-control">
-                                            <option value="8:00 to 9:00">8:00 to 9:00</option>
-                                            <option value="9:00 to 10:00">9:00 to 10:00</option>
-                                            <option value="10:00 to 1:00">10:00 to 1:00</option>
-                                        </select>
+										<select name="time" id="time" class="form-control">
+										<OPTION SELECTED="TRUE" DISABLED="DISABLED">---</OPTION> 
+										<?php
+										$start = '9:00:00';
+										$end = '16:00:00';
+										$interval = '30 minutes';
+
+										$range = array();
+
+										$current = new DateTime($start);
+										$end = new DateTime($end);
+
+										while ($current <= $end) {
+											$range[] = $current->format('g:i a');
+											$current->modify($interval);
+										}
+
+										foreach ($range as $time) {
+											echo "<option value='$time'>$time</option>";
+										}
+										?>
+									</select><br>
                                     </div>
                                 </div>
-                                <!-- Select Basic -->
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label class="control-label" for="appointmentfor">Department</label>
-                                        <select id="appointmentfor" name="appointmentfor" class="form-control">
-                                            <option value="Choose Department">Choose Department</option>
-											<option value="Gynacology">Gynacology</option>
-											<option value="Dermatologist">Dermatologist</option>
-											<option value="Orthology">Orthology</option>
-											<option value="Anesthesiology">Anesthesiology</option>
-											<option value="Ayurvedic">Ayurvedic</option>
-                                        </select>
-                                    </div>
-                                </div>
+                                
                                 <!-- Button -->
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <button id="singlebutton" name="singlebutton" class="new-btn-d br-2" onclick="make_appointment()">Make An Appointment</button>
+                                        <button type="submit" class="btn"
+										name="appointbtn">Make An Appointment</button>
                                     </div>
                                 </div>
 							</div>	  
@@ -157,12 +253,42 @@ if (isset($_GET['logout'])) {
 						
 						<div class="card-body pt-0">
                             <table class="table table-bordered" id="appointment_list" >
+							<thead>
 							  <tr>
 								<th>Date</th>
-								<th>Department</th>
+								<th>Hospital</th>
+								<th>Clinic</th>
 								<th>Time</th>
-								<th>Action</th>
+								<th></th>
 							  </tr>
+							  </thead>
+							  <tbody>
+								<?php 
+							$query="select * from appointments WHERE IDNO = '$unique'";
+							$res = mysqli_query($db, $query);
+							while($row=mysqli_fetch_array($res)){
+							
+							$IDNo=$row['IDNo'];
+							$date=$row['date'];
+							$hospital=$row['hospital'];
+							$clinic=$row['clinic'];
+							$time=$row['time'];
+							?>
+                              
+										<tr>
+										
+                                         
+                                         <td><?php echo $row['date'] ?></td>
+                                         <td><?php echo $row['hospital'] ?></td>
+										 <td><?php echo $row['clinic'] ?></td>
+										 <td><?php echo $row['time'] ?></td>
+										 <td><a href="server.php?del_app=<?php echo $row['IDNo']?>"><i class="fa fa-trash-o" aria-hidden="true"></i></td>
+										
+				
+                                </tr>
+                         
+						         <?php } ?> 
+                            </tbody>
 							</table>
                         </div>
 						
@@ -239,6 +365,7 @@ var loadFile = function (event) {
   var image = document.getElementById("output");
   image.src = URL.createObjectURL(event.target.files[0]);
 };
+
 
 </script>
   <?php endif ?>   
