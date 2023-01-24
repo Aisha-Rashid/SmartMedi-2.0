@@ -103,6 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				
 				</li>
 				<li class="active"><a href="#"><i class="fa fa-home"></i>Dashboard</a></li>
+				<li><a href="patienthomepage.php"><i class="fa fa-user"></i>Homepage</a></li>
 				<li class="sub">
 				<a href="javascript:;">
 				<i class="fa fa-database"></i> Menu <div class="pull-right"><span class="caret"></span></div>
@@ -120,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		<div class="templatemo-content-wrapper">
 			<div class="templatemo-content">
 			<ol class="breadcrumb">
-            <li><a href="#">User Panel</a></li>
+            <li>Patient Panel</a></li>
            
             <li>Overview</li>
 			</ol>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2023 at 05:48 PM
+-- Generation Time: Jan 24, 2023 at 09:40 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -67,7 +67,13 @@ CREATE TABLE `appointments` (
 --
 
 INSERT INTO `appointments` (`id`, `IDNo`, `hospital`, `clinic`, `visit`, `doctype`, `date`, `time`) VALUES
-(1, 29816629, 'Avenue Hospital', 'Gastroenterology', 'First Visit', 'Specialist', '2023-01-10', '01:30:00');
+(1, 29816629, 'Avenue Hospital', 'Gastroenterology', 'First Visit', 'Specialist', '2023-01-10', '01:30:00'),
+(2, 2147483647, 'The Nairobi Hospital Outpatient Center', 'Gastroenterology', 'First Visit', 'Specialist', '2023-01-27', '01:30:00'),
+(3, 2147483647, 'Bristol Park Hospital Tasia Embakasi', 'Obstetrics/Gynecology', 'First Visit', 'Specialist', '2023-01-21', '10:00:00'),
+(4, 2147483647, 'AAR Hospital', '', 'Regular Patient', 'General Doctor', '2023-01-23', '09:00:00'),
+(5, 2147483647, 'AAR Hospital', 'Dermatology', 'Regular Patient', 'Specialist', '2023-01-23', '10:30:00'),
+(6, 2147483647, 'Coptic Hospital Nursing Hospital', '', 'Regular Patient', 'General Doctor', '2023-02-01', '02:30:00'),
+(7, 2147483647, 'AIC Kijabe Hospital Nairobi Medical Center', 'Endocrinology and Metabolism', 'First Visit', 'Specialist', '2023-01-25', '09:00:00');
 
 -- --------------------------------------------------------
 
@@ -274,7 +280,9 @@ INSERT INTO `fileupload` (`id`, `name`, `date`, `IDNo`) VALUES
 (23, 'AAR Medical Insurance Quotation 2022-Farida (52yrs).xlsx', '2022-12-08 15:36:13', 63748264),
 (24, 'MMUrepo6.docx', '2022-12-08 15:36:47', 63748264),
 (25, '4_entropy_coding.pdf', '2022-12-13 15:34:25', 2147483647),
-(26, 'TRIAL1.pdf', '2023-01-02 11:55:52', 29816629);
+(26, 'TRIAL1.pdf', '2023-01-02 11:55:52', 29816629),
+(32, 'module5.pdf', '2023-01-18 12:17:26', 29816629),
+(33, 'module5.pdf', '2023-01-18 12:18:11', 2147483647);
 
 -- --------------------------------------------------------
 
@@ -639,7 +647,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `blood`
@@ -663,7 +671,7 @@ ALTER TABLE `docspecialty`
 -- AUTO_INCREMENT for table `fileupload`
 --
 ALTER TABLE `fileupload`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `hospitals`

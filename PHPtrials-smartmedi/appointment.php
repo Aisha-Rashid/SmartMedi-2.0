@@ -50,25 +50,32 @@ if (isset($_GET['logout'])) {
 ?>
 <?php
 $conn=new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or die(mysqli_error($conn));
-if(isset($_POST['appointbtn'])!=""){
-  $hospital = mysqli_real_escape_string($db, $_POST['hospital']);
-  $visit = mysqli_real_escape_string($db, $_POST['visit']);
-  $doctype = mysqli_real_escape_string($db, $_POST['doctype']);
-  $clinic = mysqli_real_escape_string($db, $_POST['clinic']);
-  $date = mysqli_real_escape_string($db, $_POST['date']);
-  $time = mysqli_real_escape_string($db, $_POST['time']);
-  
- 
+	$date="";
+	$time="";
 
-$query=$conn->query("INSERT INTO appointments (IDNo, hospital, clinic, visit, doctype, date, time) VALUES ('$unique', '$hospital', '$clinic', '$visit', '$doctype', '$date', '$time')");
-if($query){
-header("location:appointment.php");
-}
-else{
+	
+	
+if(isset($_POST['appointbtn'])!=""){
+	
+	$hospital = mysqli_real_escape_string($db, $_POST['hospital']);
+	$visit = mysqli_real_escape_string($db, $_POST['visit']);
+	$doctype = mysqli_real_escape_string($db, $_POST['doctype']);
+	$clinic = mysqli_real_escape_string($db, $_POST['clinic']);
+	$date = mysqli_real_escape_string($db, $_POST['date']);
+	$time = mysqli_real_escape_string($db, $_POST['time']);
+  
+	$query=$conn->query("INSERT INTO appointments (IDNo, hospital, clinic, visit, doctype, date, time) VALUES ('$unique', '$hospital', '$clinic', '$visit', '$doctype', '$date', '$time')");
+	if($query){
+	header("location:appointment.php");
+	}
+	else{
 die(mysqli_error($conn));
+}	
+
 }
-}
+	
 ?>
+
 
 	<!-- Start menu -->
     <div class="template-page-wrapper">
@@ -255,6 +262,7 @@ die(mysqli_error($conn));
                             <table class="table table-bordered" id="appointment_list" >
 							<thead>
 							  <tr>
+								<th>No.</th>
 								<th>Date</th>
 								<th>Hospital</th>
 								<th>Clinic</th>
@@ -266,8 +274,10 @@ die(mysqli_error($conn));
 								<?php 
 							$query="select * from appointments WHERE IDNO = '$unique'";
 							$res = mysqli_query($db, $query);
+							$counter = 1;
 							while($row=mysqli_fetch_array($res)){
-							
+							$number = $counter;
+							$counter++;
 							$IDNo=$row['IDNo'];
 							$date=$row['date'];
 							$hospital=$row['hospital'];
@@ -277,12 +287,12 @@ die(mysqli_error($conn));
                               
 										<tr>
 										
-                                         
+                                         <td><?php echo $number;?></td>
                                          <td><?php echo $row['date'] ?></td>
                                          <td><?php echo $row['hospital'] ?></td>
 										 <td><?php echo $row['clinic'] ?></td>
 										 <td><?php echo $row['time'] ?></td>
-										 <td><a href="server.php?del_app=<?php echo $row['IDNo']?>"><i class="fa fa-trash-o" aria-hidden="true"></i></td>
+										 <td><button id="delete" onclick="myFunction()">Delete</button></td>
 										
 				
                                 </tr>
@@ -291,6 +301,7 @@ die(mysqli_error($conn));
                             </tbody>
 							</table>
                         </div>
+						
 						
 						
           </div>
@@ -345,6 +356,11 @@ die(mysqli_error($conn));
 	<script src="dashboardjs/appointment.js"></script>
     <script type="text/javascript"></script>
 	
+	<script>
+	function myFunction() {
+	var query = "DELETE FROM appointments WHERE IDNO='" + unique + "' AND date='" + date + "' AND time='" + time + "'";
+	}
+	</script>
 	<script>
 var coll = document.getElementsByClassName("collapsible");
 var i;

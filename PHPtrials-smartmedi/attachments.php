@@ -149,7 +149,7 @@ die(mysqli_error($conn));
 						
                                 <tr>
                                     
-                                   
+                                   <th>No.</th>
                                     <th>FILE NAME</th>
                                    <th>Date</th>
 				<th>Download</th>
@@ -160,15 +160,19 @@ die(mysqli_error($conn));
 								<?php 
 							$query="select * from fileupload WHERE IDNO = '$unique'";
 							$res = mysqli_query($db, $query);
-							while($row=mysqli_fetch_array($res)){
 							
+							$counter = 1;
+							
+							while($row=mysqli_fetch_array($res)){
+							$number = $counter;
+							$counter++;
 							$name=$row['name'];
 							$date=$row['date'];
 							?>
                               
 										<tr>
 										
-                                         
+                                         <td><?php echo $number;?></td>
                                          <td><?php echo $row['name'] ?></td>
                                          <td><?php echo $row['date'] ?></td>
 										<td>
