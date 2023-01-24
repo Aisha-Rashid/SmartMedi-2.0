@@ -24,19 +24,11 @@ if (isset($_GET['logout'])) {
 	header("location: DocLogin.php");
 }
 ?>
-<?php
-extract($_REQUEST);
-
-$query = "select * from patients where IDNo='$filename'";
-//$sql=mysqli_query($conn,"select * from patients where IDNo='$filename'");
-
-	$res = mysqli_query($db, $query);
-   $array=mysqli_fetch_row($res);
-   $rows = mysqli_num_rows($res);
-
-
-
+<?php if (isset($_SESSION['id'])) : 
+  $unique = $_SESSION['id'];
 ?>
+
+
 <!DOCTYPE html>
 <head>
   <meta charset="utf-8">
@@ -51,6 +43,29 @@ $query = "select * from patients where IDNo='$filename'";
  
 </head>
 <body>
+<?php
+$conn=new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or die(mysqli_error($conn));
+extract($_REQUEST);
+
+$query = "select * from patients where IDNo='$filename'";
+//$sql=mysqli_query($conn,"select * from patients where IDNo='$filename'");
+
+	$res = mysqli_query($db, $query);
+   $array=mysqli_fetch_row($res);
+   $rows = mysqli_num_rows($res);
+
+if(isset($_POST['submit'])!=""){
+
+	$note = mysqli_real_escape_string($db, $_POST['note']);
+	$date = date('Y-m-d');
+	$query="insert into docnotes(IDNo, docid, date, notes) values ('$filename', '$unique', '$date', '$note')"; 
+	
+	mysqli_query($db, $query);
+
+}
+
+?>
+
 
 			
 			<ol class="breadcrumb">
@@ -92,7 +107,7 @@ $query = "select * from patients where IDNo='$filename'";
             <h3 class="mb-0">General Information</h3>
           </div>
           <div class="card-body pt-0">
-            <table class="table table-bordered">
+            <table class="table table-bordered" id="datatable">
               
 			  <tr>
                 <th width="30%">Blood Group</th>
@@ -187,8 +202,78 @@ $query = "select * from patients where IDNo='$filename'";
 				</td>
 				<?php } ?> 
               </tr>
+			  <tr>
+                <th width="30%">Add Note</th>
+                <td width="2%">:</td>
+                
+				<td>
+						<form method="post" action="">
+						<textarea id="note" name="note" rows="5" cols="78" ></textarea>
+						<button type="submit" class="btn" name="submit">Submit</button>
+						</form>
+				</td>
+              </tr>
             </table>
+				
+			
+			<form>
+			
+			</form>
+			
           </div>
+		  <div class="card-header bg-transparent border-0">
+            <h3 class="mb-0">Doctor Notes</h3>
+			
+          </div>
+		  <div class="card-body pt-0">
+            <table class="table table-bordered">
+			
+			<thead>
+			<th>No.</th>
+				<th>Date</th>
+				<th>Note</th>
+				<th>Doctor</th>
+			</thead>
+			<tbody>
+			<?php
+			$query="select * from docnotes WHERE IDNO = '$filename'";
+			$res = mysqli_query($db, $query);
+			$counter = 1;
+			while($row=mysqli_fetch_array($res)){
+				$number = $counter;
+				$counter++;
+							
+				$docid=$row['docid'];
+				$date=$row['date'];
+				$notes=$row['notes'];
+			?>
+			<tr>
+				<td><?php echo $number;?></td>
+                <td><?php echo $row['date']?></td>
+				<td><?php echo $row['notes']?></td>
+				<?php } ?>
+				<td>
+				<?php 
+					$query = "SELECT * FROM doctors INNER JOIN docnotes ON doctors.id = docnotes.docid"; 
+					$results = mysqli_query($db, $query);
+					while($row = mysqli_fetch_array($results)){ 
+						$fname=$row['fname'];
+					?>
+				<b>Dr. <?php echo $fname;
+							//echo " ";
+							//echo $row1['lname'];
+					}?></b>
+				</td> 
+				
+				
+				 
+			</tr>
+				
+			  
+			  </tbody>
+			  </table>
+			  </div>
+			
         </div>
          
 		  
@@ -250,7 +335,8 @@ for (i = 0; i < coll.length; i++) {
     } 
   });
 }
+
 </script>
- 
+ <?php endif ?> 
 </body>
 </html>

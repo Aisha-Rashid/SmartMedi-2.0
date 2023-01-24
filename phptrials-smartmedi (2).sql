@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 24, 2023 at 09:40 AM
+-- Generation Time: Jan 24, 2023 at 04:17 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -163,6 +163,29 @@ INSERT INTO `counties` (`id`, `county`) VALUES
 (45, 'Vihiga\r\n'),
 (46, 'Wajir\r\n'),
 (47, 'West Pokot\r\n');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `docnotes`
+--
+
+CREATE TABLE `docnotes` (
+  `id` int(11) NOT NULL,
+  `IDNo` int(11) NOT NULL,
+  `docid` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `notes` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `docnotes`
+--
+
+INSERT INTO `docnotes` (`id`, `IDNo`, `docid`, `date`, `notes`) VALUES
+(8, 29816629, 23386746, '2023-01-17', 'Hypertension'),
+(9, 29816629, 23386746, '2023-01-24', 'PMS'),
+(17, 29816629, 23386746, '2023-01-24', 'Diagnosed with IBS');
 
 -- --------------------------------------------------------
 
@@ -580,6 +603,12 @@ ALTER TABLE `counties`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `docnotes`
+--
+ALTER TABLE `docnotes`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `docspecialty`
 --
 ALTER TABLE `docspecialty`
@@ -660,6 +689,12 @@ ALTER TABLE `blood`
 --
 ALTER TABLE `counties`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+
+--
+-- AUTO_INCREMENT for table `docnotes`
+--
+ALTER TABLE `docnotes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `docspecialty`

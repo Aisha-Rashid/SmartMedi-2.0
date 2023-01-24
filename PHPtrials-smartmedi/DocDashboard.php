@@ -142,11 +142,13 @@ if (isset($_GET['logout'])) {
 					$conn = new mysqli($servername, $username, $password, $db);
 
 
-
+					if(!empty($_POST['search'])) {
 
 					$result = $conn->query("select * from patients where FirstName like '%$search%' or LastName like '%$search%'");
 
 					
+    
+
 
 					if ($result->num_rows > 0){
 					while($row = $result->fetch_assoc() ){
@@ -182,7 +184,7 @@ if (isset($_GET['logout'])) {
 						</a></td>
 						
 	    	</tr>
-			<?php }}} ?> 
+			<?php }}} else {echo"<script>alert('Please enter name')</script>";}} ?> 
 	     </tbody>
 	  </table>
 		 
