@@ -53,6 +53,8 @@ $query = "select * from patients where IDNo='$filename'";
 	$res = mysqli_query($db, $query);
    $array=mysqli_fetch_row($res);
    $rows = mysqli_num_rows($res);
+   
+  
 
 if(isset($_POST['submit'])!=""){
 

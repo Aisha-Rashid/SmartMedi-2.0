@@ -144,7 +144,7 @@ if (isset($_GET['logout'])) {
 
 					if(!empty($_POST['search'])) {
 
-					$result = $conn->query("select * from patients where FirstName like '%$search%' or LastName like '%$search%'");
+					$result = $conn->query("select * from patients where FirstName like '%$search%' or LastName like '%$search%' or IDNo like '%$search'");
 
 					
     
@@ -157,20 +157,9 @@ if (isset($_GET['logout'])) {
 						$FirstName=$row['FirstName'];
 						$LastName=$row['LastName'];
 						$IDNo=$row['IDNo'];
-						/*echo "<tr>";
 						
-						 echo "<td>" .$row["FirstName"]." ". $row['LastName'] .  "</td>";
-						 echo "<td>" .$row["IDNo"]. "</td>";
-						 echo $row["IDNo"] "<td><a href='medicalhist.php'><button name='view'>View</button></a> </td>";
-						echo "</tr>";
-						
-					}
-					} else {
-						
-						echo "0 records";
-						
-					}*/
-
+					//$ecrypt_1=(($IDNo*98365252637*34738394723*253484923846)/52637);
+					$link = urlencode(base64_encode($row['IDNo']));
 					
 				
 
@@ -179,12 +168,12 @@ if (isset($_GET['logout'])) {
 						
                         <td><?php echo $row['FirstName'];  echo " "; echo $row['LastName'];  ?></td>
 						<td><?php echo $row['IDNo'] ?></td>	
-						<td><a href="medicalhist.php?filename=<?php echo  $row['IDNo'];?>" title="click to view">
+						<td><a href="medicalhist.php?filename=<?php echo $row['IDNo'] ?>" title="click to view">
 						<button>View</button>
 						</a></td>
 						
 	    	</tr>
-			<?php }}} else {echo"<script>alert('Please enter name')</script>";}} ?> 
+			<?php }}} } ?> 
 	     </tbody>
 	  </table>
 		 

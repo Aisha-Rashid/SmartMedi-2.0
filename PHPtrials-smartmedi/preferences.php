@@ -1,7 +1,7 @@
 <?php
 include('signin.php');
 
-$id = $_GET['id'];
+//$id = $_GET['id'];
 // Starting the session, to use and
 // store data in session variable
 // session_start();
@@ -88,244 +88,72 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 				</div>
 				<div class="templatemo-content-wrapper">
 					<div class="templatemo-content">
-						<!--ol class="breadcrumb">
-					<li><a href="dashboard.php">User Panel</a></li>
-					<li><a href="#">Settings</a></li>
-					</ol-->
-						<div class="row">
-							<div class="col-md-12">
-								<form role="form" id="templatemo-preferences-form">
-									<div class="row">
-
-										<h2>Settings</h2>
-
-
-										<hr>
+						<ol class="breadcrumb">
+					<li>Patient Panel</a></li>
+					<li>Settings</li>
+					</ol>
+						
 
 
 
 
-										<label class="collapsible">Update Profile Picture</label>
-										<div class="content">
-											<input type="file" id="myFile" name="filename"><br><input type="submit">
-										</div>
-										<hr>
-										<label class="collapsible">Update medical history details</label>
-										<div class="content">
-											<input type="file" id="myFile" name="filename"><br><input type="submit">
-										</div>
-										<hr>
-										<label class="collapsible">Update medical history details</label>
-										<div class="content">
-											<input type="password" class="form-control" name="password1" placeholder="Password"><br><input type="submit">
-										</div>
-										<hr>
 
-										<div class="row">
-											<div class="col-md-10 margin-bottom-1">
-												<h3>Update medical history details</h3><br>
-												<a href="mediform.php">Update details</a>
-											</div>
-										</div>
-										<hr>
-										<div class="row">
-											<div class="col-md-10 margin-bottom-1">
-												<h3>Change Password</h3><br>
-												<label>Password</label>
-												<div class="form-group">
-													<input type="password" class="form-control" name="password1">
-												</div>
-												<label> Confirm Password</label>
-												<div class="form-group">
-													<input type="password" class="form-control" name="password2">
-												</div>
-											</div>
-										</div>
-										<hr>
-										<div class="row">
-											<div class="col-md-6 margin-bottom-1">
-												<h3>Upgrade Package</h3><br>
-												<a href="">Add Payment details</a>
-											</div>
-										</div>
-										<hr>
-										<div class="row templatemo-form-buttons">
-											<div class="col-md-12">
-												<button type="submit" class="btn btn-primary">Update</button>
-												<button type="reset" class="btn btn-default">Reset</button>
-											</div>
-										</div>
-								</form>
-							</div>
-
-
-							<!-- <div class="col-12">
-								<table class="table table-striped">
-									<thead>
-										<tr>
-											<th>Name</th>
-											<th>Age</th>
-											<th>Gender</th>
-											<th>Blood Group</th>
-											<th>Email</th>
-
-
-										</tr>
-									</thead>
-									<tr>
-										<?php
-										//   $row = $res -> fetch_array();
-										//   echo $row;
-										while ($row = $res->fetch_array()) {
-											echo $row;
-											$age = $row['DOB'];
-											$year = explode('-', $age);
-											$patientAge = date("Y") - $year[0];
-											echo "<tr>";
-											echo "<td>" . $row['FirstName'] . " " . $row['LastName'] . "</td>";
-											echo "<td>" . $patientAge . "</td>";
-											echo "<td>" . $row['gender'] . "</td>";
-											echo "<td>" . $row['bloodgroup'] . "</td>";
-											echo "<td>" . $row['email'] . "</td>";
-											echo "<td><button>View</button> </td>";
-
-											echo "</tr>";
-										} ?>
-									</tr>
+					<div class="row">
+		  <div class="col-md-12 col-sm-12">
+		  <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist" id="templatemo-tabs">
+                  <li class="active"><a href="#home" role="tab" data-toggle="tab">Personal Details</a></li>
+                  <li><a href="#doctors" role="tab" data-toggle="tab">Medical History and Conditions</a></li>
+                  <li><a href="#hospitals" role="tab" data-toggle="tab">Insurance Details</a></li>
+                  <!--li><a href="#admin" role="tab" data-toggle="tab">Admin</a></li-->
+                </ul>
+				<!-- Tab panes -->	
+                <div class="tab-content">
+					<div class="tab-pane fade in active" id="home">
+						
+						<div class="table-responsive">
+							<!--h4 class="margin-bottom-15">Patients Table</h4-->
+							<br>
+								<table >
+								  
+									<tr><td><h4>Name :</h4></td><td><input type="text"></td></tr>
+									<tr><td>Email address:</td><td><input type="text"></td></tr>
+									<tr><td>County of residence:</td><td><input type="text"></td></tr>
+									<tr><td>Town:</td><td><input type="text"></td></tr>
+								 
+								  
 								</table>
-							</div> -->
-
-							<div class="row">
-								
-						<form class="form-horizontal templatemo-signin-form" method="post" action="edit.php?id=<?=$id?>">
-						<h3>Edit Personal Details</h3>
-						<!-- <?php include('errors.php'); ?> -->
-						<div class="row">
-								<div class="col-md-6">
-									<label>First Name</label>
-									<div class="form-group">
-									<input type="text" class="form-control" name="FirstName" value="<?=$data['FirstName'] ; ?>">
-									</div>   
-								</div> 
-								<div class="col-md-6">
-									<label>Last Name</label>
-									<div class="form-group">
-									<input type="text" class="form-control" name="LastName" value="<?=$data['LastName'] ; ?>">
-									</div>   
-								</div> 
-								<div class="col-md-6">
-									<label>Email</label>
-									<div class="form-group">
-									<input type="email" class="form-control" name="email" value="<?=$data['email'] ; ?>">
-									</div>   
-								</div>
-								<div class="col-md-6">
-									<label>Telephone No</label>
-									<div class="form-group">
-									<input type="text" class="form-control" name="TelNo" value="<?=$data['TelNo']; ?>">
-									</div>   
-								</div> 
-								<div class="col-md-6">
-									<label>ID Number</label>
-									<div class="form-group">
-									<input type="number" class="form-control" name="IDNo" value="<?=$data['IDNo']; ?>">
-									</div>   
-								</div> 
-								<div class="col-md-6">
-									<label>Date of Birth</label>
-									<div class="form-group">
-									<input type="date" class="form-control" name="DOB" value="<?=$data['DOB']; ?>">
-									</div>   
-								</div> 
-								<div class="col-md-6">
-									<label>Gender</label>
-									<div class="form-group">
-									<select name="gender" class="form-control">
-										<OPTION SELECTED="TRUE" DISABLED="DISABLED">---</OPTION>  
-										<OPTION VALUE="Male">Male
-										<OPTION VALUE="Female">Female
-									</SELECT>
-									</div>   
-								</div> 
-								<div class="col-md-6">
-									<label>Blood Group</label>
-									<div class="form-group">
-									<SELECT NAME="bloodgroup" class="form-control">
-										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
-										<?php 
-										$query ="SELECT bloodgroup FROM blood";
-										$result = mysqli_query($db, $query);
-										if($result->num_rows> 0){
-										  $options= mysqli_fetch_all($result, MYSQLI_ASSOC);
-										}
-										
-											foreach ($options as $option) {
-										?>
-										<option><?php echo $option['bloodgroup']; ?> </option>
-										<?php 
-										}
-										?>
-										
-									</SELECT>
-									</div>   
-								</div>
-								<div class="col-md-6">
-									<label>County of residence</label>
-									<div class="form-group">
-									<SELECT NAME="county" class="form-control">
-										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
-										<?php 
-										$query ="SELECT county FROM counties";
-										$result = mysqli_query($db, $query);
-										if($result->num_rows> 0){
-										  $options= mysqli_fetch_all($result, MYSQLI_ASSOC);
-										}
-										
-											foreach ($options as $option) {
-										?>
-										<option><?php echo $option['county']; ?> </option>
-										<?php 
-										}
-										?>
-										
-									</SELECT>
-									</div>   
-								</div>
-								<div class="col-md-6">
-									<label>Town</label>
-									<div class="form-group">
-									<input type="text" class="form-control" name="town" value="<?=$data['town']; ?>">
-									</div>   
-								</div> 
-								<div class="col-md-6">
-									<label>Password</label>
-									<div class="form-group">
-									<input type="password" class="form-control" id="password1"  name="password1" value="">
-									<span toggle="#password1" class="fa fa-fw fa-eye field-icon toggle-password"></span>
-									</div>
-								</div> 
-								<div class="col-md-6">
-									<label> Confirm Password</label>
-									<div class="form-group">
-									<input type="password" class="form-control" id="password2"  name="password2" value="">
-									<span toggle="#password2" class="fa fa-fw fa-eye field-icon toggle-password"></span>
-									</div>
-								</div> 
-								<div class="col-md-6">
-										<div class="col-sm-offset-2 col-sm-10">
-										<button type="submit" class="btn"
-										name="editForm">Update</button>
-										</div>
-									</div>
-								
-							</div>
-								
-							</div>
-							
-									
-								</div>
-						</form>
+						</div>
 					</div>
+			  
+					<div class="tab-pane fade" id="doctors">
+						
+						<div class="table-responsive">
+                
+                
+              </div>
+			  </div>
+			  
+			  <div class="tab-pane fade" id="hospitals">
+						
+						<div class="table-responsive">
+                
+                
+              </div>
+			  </div>
+			
+			  </div>
+		  
+                
+            </div>
+          </div>
+
+
+
+
+
+
+
 
 
 						</div>

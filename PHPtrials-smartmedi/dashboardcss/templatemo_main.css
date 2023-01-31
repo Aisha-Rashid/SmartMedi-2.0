@@ -295,3 +295,15 @@ h1 { font-size: 24px; }
 .h3{
     text-transform: capitalize;
 }
+/* Pricing */
+.pricing-list {
+    margin-bottom: 1px;
+  }
+  .pricing-table {
+    max-width: 350px;
+    margin: auto;
+  }
+  .pricing-table,
+  .pricing-horizontal {
+    border-radius: 15px !important;
+  }

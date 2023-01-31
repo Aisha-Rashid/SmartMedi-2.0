@@ -33,6 +33,7 @@ if (isset($_GET['logout'])) {
   <meta name="description" content="" />
   <meta name="viewport" content="width=device-width">        
   <link rel="stylesheet" href="dashboardcss/templatemo_main.css">
+  <link rel="stylesheet" href="css/responsive.css">
   <link rel="shortcut icon" href="dashboardimages/favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="dashboardimages/apple-touch-icon.png">
  
@@ -127,6 +128,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			
 
 <!-- Content start -->
+
+
+
+
+
+
+
+
+
 
 <!-- Content end-->
            
