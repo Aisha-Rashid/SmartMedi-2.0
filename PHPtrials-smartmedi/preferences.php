@@ -30,12 +30,10 @@ if (isset($_GET['logout'])) {
 
 
 	$unique = $_SESSION['IDNo'];
-	$query = "SELECT * FROM `patients` WHERE IDNo = '$unique'";
-	$res = mysqli_query($db, $query);
-	$data = $res->fetch_assoc();
-	$array = mysqli_fetch_array($res);
-	$rows = mysqli_num_rows($res);
-	$row = $res->fetch_array();
+   $query = "SELECT * FROM `patients` WHERE IDNo = '$unique'";
+   $res = mysqli_query($db, $query);
+   $array=mysqli_fetch_row($res);
+   $rows = mysqli_num_rows($res);
 	// echo $row;
 	// while ($row = $res->fetch_array()) {
 	// 	echo $row;}
@@ -60,6 +58,33 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 	</head>
 
 	<body>
+<?php
+$con=mysqli_connect('localhost', 'root', '', 'phptrials-smartmedi')or die("cannot connect");//connection string  
+if(isset($_POST['sub1'])!=""){
+	$newEmail="";
+	$newTel="";
+	
+	
+	$newEmail = mysqli_real_escape_string($db, $_POST['newEmail']);
+	$newTel = mysqli_real_escape_string($db, $_POST['newTel']);
+	
+	$result=$con->query("UPDATE patients SET email='$newEmail', TelNo='$newTel' WHERE IDNo = '$unique'");
+	if($result){
+	header("location:preferences.php");
+	}
+	else{
+die(mysqli_error($conn));
+}	
+	//if($result){
+		
+	//$query= ;
+	//}
+	
+	//$result = $con->query("SELECT id FROM response WHERE IDNo = '$unique'");
+}
+
+
+?>
 
 		<!-- Start Preferences -->
 		<div id="main-wrapper">
@@ -102,44 +127,259 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 		  <div class="col-md-12 col-sm-12">
 		  <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist" id="templatemo-tabs">
-                  <li class="active"><a href="#home" role="tab" data-toggle="tab">Personal Details</a></li>
-                  <li><a href="#doctors" role="tab" data-toggle="tab">Medical History and Conditions</a></li>
-                  <li><a href="#hospitals" role="tab" data-toggle="tab">Insurance Details</a></li>
+                  <li class="active"><a href="#personal-details" role="tab" data-toggle="tab">Personal Details</a></li>
+				  <li><a href="#nok" role="tab" data-toggle="tab">Next of Kin Details</a></li>
+                  <li><a href="#records" role="tab" data-toggle="tab">Medical Records</a></li>
+                  <li><a href="#insurance" role="tab" data-toggle="tab">Insurance Details</a></li>
                   <!--li><a href="#admin" role="tab" data-toggle="tab">Admin</a></li-->
                 </ul>
 				<!-- Tab panes -->	
                 <div class="tab-content">
-					<div class="tab-pane fade in active" id="home">
+					<div class="tab-pane fade in active" id="personal-details">
 						
 						<div class="table-responsive">
 							<!--h4 class="margin-bottom-15">Patients Table</h4-->
 							<br>
-								<table >
-								  
-									<tr><td><h4>Name :</h4></td><td><input type="text"></td></tr>
-									<tr><td>Email address:</td><td><input type="text"></td></tr>
-									<tr><td>County of residence:</td><td><input type="text"></td></tr>
-									<tr><td>Town:</td><td><input type="text"></td></tr>
-								 
-								  
+							<form id="personal-details" method="post" action="">
+								<table width = 70%>
+								
+									<tr><td colspan = "2" ><h4><u><b>Contact Details</b></u></h4></td></tr>
+									<tr><td><h4>Current Email :</h4></td><td><b><input disabled type="text" class="form-control" value="<?php echo $array[8]?>"></b></td></tr>
+									<tr><td><h4>New Email :</h4></td><td><input type="email" class="form-control" id="newEmail"></td></tr>
+									<tr><td><h4>Telephone Number :</h4></td><td><b><input disabled type="text" class="form-control" value="<?php echo $array[3]?>"></b></td></tr>
+									<tr><td><h4>Add Telephone number :</h4></td><td><input type="text" class="form-control" id="newTel"></td></tr>
+									<tr><td colspan = "2" ><h4><u><b>Change Residence </b></u></h4></td></tr>
+									<tr>
+									<td><h4>County :</h4></td>
+									<td>
+									<SELECT NAME="county" class="form-control">
+										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
+										<?php 
+										$query ="SELECT county FROM counties";
+										$result = mysqli_query($db, $query);
+										if($result->num_rows> 0){
+										  $options= mysqli_fetch_all($result, MYSQLI_ASSOC);
+										}
+										
+											foreach ($options as $option) {
+										?>
+										<option><?php echo $option['county']; ?> </option>
+										<?php } ?>
+										
+									</SELECT>
+									</td></tr>
+									<tr><td><h4>Town :</h4></td><td><input type="text" class="form-control"></td></tr>
+									<tr><td colspan = "2" ><h4><u><b>Change Password </b></u></h4></td></tr>
+									<tr><td><h4>Enter current password :</h4></td><td><input type="text" class="form-control"></td></tr>
+									<tr><td><h4>New Password :</h4></td><td><input type="text" class="form-control"></td></tr>
+									<tr><td><h4>Confirm Password :</h4></td><td><input type="text" class="form-control"></td></tr>
+									
 								</table>
+								<br><br>
+								<button type="submit" class="btn btn-primary" name="sub1">Submit</button>
+								</form>
 						</div>
 					</div>
 			  
-					<div class="tab-pane fade" id="doctors">
+					<div class="tab-pane fade" id="nok">
 						
 						<div class="table-responsive">
+						
+						<br>
+							<form id="nok" method="post" action="">
+								<table width = 70%>
+								
+								  
+									<tr><td colspan = "2" ><h4><u><b>Current Details</b></u></h4></td></tr>
+									<?php 
+							$query="select * from nextofkin WHERE IDNO = '$unique'";
+							$res = mysqli_query($db, $query);
+							while($row=mysqli_fetch_array($res)){
+							
+							$kinFirstName=$row['kinFirstName'];
+							$kinLastName=$row['kinLastName'];
+							$relationship=$row['relationship'];
+							$telephone=$row['telephone'];
+							?>
+									<tr><td><h4>Name :</h4></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['kinFirstName']; echo " "; echo $row['kinLastName']; ?>"></b></td></tr>
+									<tr><td><h4>Relationship :</h4></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['relationship'] ?>"></b></td></tr>
+									<tr><td><h4>Telephone Number :</h4></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['telephone'] ?>"></b></td></tr>
+									<?php } ?> 
+									<tr><td colspan = "2" ><h4><u><b>New Details </b></u></h4></td></tr>
+									<tr><td><h4>Name :</h4></td><td><input type="text" class="form-control"></td></tr>
+									<tr><td><h4>Relationship :</h4></td><td><input type="text" class="form-control"></td></tr>
+									<tr><td><h4>Telephone Number :</h4></td><td><input type="text" class="form-control"></td></tr>
+									
+								</table>
+								<br><br>
+								<button type="submit" class="btn btn-primary" name="sub2">Submit</button>
+								</form>
+						</div>
+					</div>
+					<div class="tab-pane fade" id="records">
+						
+						<div class="table-responsive">
+						<br>
+							<form id="records" method="post" action="">
+								<table width = 70%>
+									<?php 
+							$query="select * from response WHERE IDNO = '$unique'";
+							$res = mysqli_query($db, $query);
+							while($row=mysqli_fetch_array($res)){
+							
+							$allergies=$row['allergies'];
+							$conditions=$row['conditions'];
+							$notes=$row['notes'];
+							?>
+									<tr><td colspan = "2" ><h4><u><b>Allergies</b></u></h4></td></tr>
+									<tr><td colspan = "2" ><b><textarea disabled id="allergies" name="allergies" rows="3" cols="120" placeholder="<?php echo $row['allergies'] ?>" ></textarea></b></td></tr>
+									<tr><td colspan = "2" ><h4><u><b>Medical History</b></u></h4></td></tr>
+									<tr><td colspan = "2" ><b><textarea disabled id="allergies" name="allergies" rows="5" cols="120" placeholder="<?php echo $row['conditions'] ."\n\n". $row['notes'] ; ?>" ></textarea></b></td></tr>
+									<?php } ?> 
+									<tr><td colspan = "2" ><h4><b>Add conditions</b></h4></td></tr>
+									<tr><td><h4>Condition 1 :</h4></td>
+									<td>
+									<SELECT NAME="conditions" class="form-control">
+										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
+										<?php 
+										$query ="SELECT conditions FROM conditions";
+										$result = mysqli_query($db, $query);
+										if($result->num_rows> 0){
+										  $options= mysqli_fetch_all($result, MYSQLI_ASSOC);
+										}
+										
+											foreach ($options as $option) {
+										?>
+										<option><?php echo $option['conditions']; ?> </option>
+										<?php } ?>
+										
+									</SELECT>
+									</td></tr>
+									<tr><td><h4>Condition 2 :</h4></td>
+									<td>
+									<SELECT NAME="conditions" class="form-control">
+										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
+										<?php 
+										$query ="SELECT conditions FROM conditions";
+										$result = mysqli_query($db, $query);
+										if($result->num_rows> 0){
+										  $options= mysqli_fetch_all($result, MYSQLI_ASSOC);
+										}
+										
+											foreach ($options as $option) {
+										?>
+										<option><?php echo $option['conditions']; ?> </option>
+										<?php } ?>
+										
+									</SELECT>
+									</td></tr>
+									<tr><td><h4>Condition 3 :</h4></td><td>
+									<SELECT NAME="conditions" class="form-control">
+										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
+										<?php 
+										$query ="SELECT conditions FROM conditions";
+										$result = mysqli_query($db, $query);
+										if($result->num_rows> 0){
+										  $options= mysqli_fetch_all($result, MYSQLI_ASSOC);
+										}
+										
+											foreach ($options as $option) {
+										?>
+										<option><?php echo $option['conditions']; ?> </option>
+										<?php } ?>
+										
+									</SELECT>
+									</td></tr>
+									<tr><td><h4>Condition 4 :</h4></td><td>
+									<SELECT NAME="conditions" class="form-control">
+										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
+										<?php 
+										$query ="SELECT conditions FROM conditions";
+										$result = mysqli_query($db, $query);
+										if($result->num_rows> 0){
+										  $options= mysqli_fetch_all($result, MYSQLI_ASSOC);
+										}
+										
+											foreach ($options as $option) {
+										?>
+										<option><?php echo $option['conditions']; ?> </option>
+										<?php } ?>
+										
+									</SELECT>
+									</td></tr>
+									<tr><td><h4>Condition 5 :</h4></td><td>
+									<SELECT NAME="conditions" class="form-control">
+										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
+										<?php 
+										$query ="SELECT conditions FROM conditions";
+										$result = mysqli_query($db, $query);
+										if($result->num_rows> 0){
+										  $options= mysqli_fetch_all($result, MYSQLI_ASSOC);
+										}
+										
+											foreach ($options as $option) {
+										?>
+										<option><?php echo $option['conditions']; ?> </option>
+										<?php } ?>
+										
+									</SELECT>
+									</td></tr>
+									<tr><td colspan = "2" ><h4><b>Add notes for new conditions</b></h4></td></tr>
+									<tr><td colspan = "2" ><b><textarea id="new_notes" name="new_notes" rows="5" cols="120" ></textarea></b></td></tr>
+									
+									
+								</table>
+								<br><br>
+								<button type="submit" class="btn btn-primary" name="sub3">Submit</button>
+								</form>
                 
-                
-              </div>
-			  </div>
+						</div>
+					</div>
 			  
-			  <div class="tab-pane fade" id="hospitals">
+			  <div class="tab-pane fade" id="insurance">
 						
-						<div class="table-responsive">
-                
-                
-              </div>
+					<div class="table-responsive">
+					<br>
+						<form id="insurance" method="post" action="">
+								<table width = 70%>
+								  
+								  <?php 
+							$query="select * from medicalcover WHERE IDNO = '$unique'";
+							$res = mysqli_query($db, $query);
+							while($row=mysqli_fetch_array($res)){
+							
+							$nhiftype=$row['nhiftype'];
+							$nhifnumber=$row['nhifnumber'];
+							$insurancetype=$row['insurancetype'];
+							$insurancenumber=$row['insurancenumber'];
+							$insuranceprincipal=$row['insuranceprincipal'];
+							$expiry=$row['expiry'];
+							?>
+									<tr><td colspan = "2" ><h4><u><b>Current Insurance Details</b></u></h4></td></tr>
+									<tr><td colspan = "2" ><h4><b>Nhif</b></h4></td></tr>
+									<tr><td><h4>Cover Type :</h4></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['nhiftype'] ?>"></b></td></tr>
+									<tr><td><h4>Member Number :</h4></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['nhifnumber'] ?>"></b></td></tr>
+									<tr><td colspan = "2" ><h4><b>Other Insurance</b></h4></td></tr>
+									<tr><td><h4>Insurance Name :</h4></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['insurancetype'] ?>"></b></td></tr>
+									<tr><td><h4>Member Number :</h4></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['insurancenumber'] ?>"></b></td></tr>
+									<tr><td><h4>Principal Member :</h4></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['insuranceprincipal'] ?>"></b></td></tr>
+									<tr><td><h4>Expiry Date :</h4></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['expiry'] ?>"></b></td></tr>
+									<?php } ?> 
+									<tr><td colspan = "2" ><h4><u><b>New Insurance Details </b></u></h4></td></tr>
+									<tr><td colspan = "2" ><h4><b>Nhif</b></h4></td></tr>
+									<tr><td><h4>Cover Type :</h4></td><td><input type="text" class="form-control"></td></tr>
+									<tr><td><h4>Member Number :</h4></td><td><input type="text" class="form-control"></td></tr>
+									<tr><td colspan = "2" ><h4><b>Other Insurance</b></h4></td></tr>
+									<tr><td><h4>Insurance Name :</h4></td><td><input type="text" class="form-control"></td></tr>
+									<tr><td><h4>Member Number :</h4></td><td><input type="text" class="form-control"></td></tr>
+									<tr><td><h4>Principal Member :</h4></td><td><input type="text" class="form-control"></td></tr>
+									<tr><td><h4>Expiry Date :</h4></td><td><input type="text" class="form-control"></td></tr>
+									
+								</table>
+								<br><br>
+								<button type="submit" class="btn btn-primary" name="sub4">Submit</button>
+							</form>
+					</div>
 			  </div>
 			
 			  </div>
@@ -180,6 +420,10 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 					</div>
 				</div>
 				<!-- End popup -->
+				
+				
+				
+				
 			</div>
 		</div>
 		<!-- ALL JS FILES -->

@@ -363,9 +363,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				 </table>
 				 
 				 
-				 <?php }
-				
-				  ?> 
+				 <?php } ?> 
 				 
 			</div>
           </div>

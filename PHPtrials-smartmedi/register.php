@@ -146,9 +146,7 @@
 											foreach ($options as $option) {
 										?>
 										<option><?php echo $option['county']; ?> </option>
-										<?php 
-										}
-										?>
+										<?php } ?>
 										
 									</SELECT>
 									</div>   

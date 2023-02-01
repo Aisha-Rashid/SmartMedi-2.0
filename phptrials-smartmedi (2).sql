@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 24, 2023 at 04:17 PM
+-- Generation Time: Feb 01, 2023 at 04:22 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -99,6 +99,36 @@ INSERT INTO `blood` (`id`, `bloodgroup`) VALUES
 (6, 'AB-'),
 (7, 'O+'),
 (8, 'O-');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `conditions`
+--
+
+CREATE TABLE `conditions` (
+  `id` int(11) NOT NULL,
+  `conditions` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `conditions`
+--
+
+INSERT INTO `conditions` (`id`, `conditions`) VALUES
+(1, 'Cancer, growths or tumors'),
+(2, 'Cardiovascular (heart and blood vessels) disorders'),
+(3, 'Respiratory and Ear Nose and Throat (ENT) disorders'),
+(4, 'Endocrine disorders'),
+(5, 'Eye related disorders'),
+(6, 'Gastro-intestinal disorders'),
+(7, 'Gynaecological and Obstetric disorders'),
+(8, 'Genitourinary disorders'),
+(9, 'Musculoskeletal disorders'),
+(10, 'Neurological and psychological disorders'),
+(11, 'Blood and connective tissue disorder'),
+(12, 'Congenital/inherited/hereditary disorders'),
+(13, 'Skin disorders');
 
 -- --------------------------------------------------------
 
@@ -467,7 +497,12 @@ CREATE TABLE `medicalcover` (
 
 INSERT INTO `medicalcover` (`id`, `nhiftype`, `nhifnumber`, `insurancetype`, `insurancenumber`, `insuranceprincipal`, `expiry`, `IDNo`) VALUES
 (1, 'Individual', 64792764, 'APA Insurance Limited', 5367286, 'Aisha Wanja Rashid', '2023-07-11', 2147483647),
-(2, 'Individual', 620145, 'Old Mutual Life Assurance Company Limited', 2264087, 'Fatuma Wairimu Rashid', '2024-12-07', 29816629);
+(2, 'Individual', 620145, 'Old Mutual Life Assurance Company Limited', 2264087, 'Fatuma Wairimu Rashid', '2024-12-07', 29816629),
+(3, 'Individual', 5367849, '', 0, '', '0000-00-00', 63748264),
+(4, 'Civil Servant', 6374827, '', 0, '', '0000-00-00', 68493736),
+(5, '', 0, '', 0, '', '0000-00-00', 82736745),
+(6, 'Employee', 3547826, '', 0, '', '0000-00-00', 367482725),
+(8, 'Individual', 35727489, 'ICEA LION General Insurance Company Limited', 64829472, 'Allan Keverenge', '2024-01-01', 2147485);
 
 -- --------------------------------------------------------
 
@@ -492,7 +527,8 @@ INSERT INTO `nextofkin` (`id`, `kinFirstName`, `kinLastName`, `relationship`, `t
 (1, 'fatuma', 'wairimu', '', '', 0),
 (2, '', '', '', '', 0),
 (3, 'Rehema', 'Rashid', 'Sibling', '152671827', 2147483647),
-(4, 'Dianah', 'Karanja', 'Parent', '254759320031', 29816629);
+(4, 'Dianah', 'Karanja', 'Parent', '254759320031', 29816629),
+(5, 'Fatuma', 'Rashid', 'Parent', '0719876530', 63748264);
 
 -- --------------------------------------------------------
 
@@ -521,13 +557,13 @@ CREATE TABLE `patients` (
 --
 
 INSERT INTO `patients` (`ID`, `FirstName`, `LastName`, `TelNo`, `IDNo`, `DOB`, `gender`, `bloodgroup`, `email`, `county`, `town`, `password`, `pic`) VALUES
-(20, 'Aisha', 'Rashid', '+254703277202', 2147483647, '1990-02-09', 'Female', 'O+', 'chuchuaisha@gmail.com', 'Kajiado', 'Kitengela', 'a381bedb5d4478053eb04be35f8798dd', ''),
+(20, 'Aisha', 'Rashid', '', 2147483647, '1990-02-09', 'Female', 'O+', '', 'Kajiado', 'Kitengela', 'a381bedb5d4478053eb04be35f8798dd', ''),
 (22, 'Fatuma', 'Rashid', '273940287', 53664673, '1995-11-09', 'Female', 'O+', 'fatuma@yahoo.com', 'Kilifi', 'Malindi', 'fdc0978bc0cc4c37c3e3d44fc63ee487', ''),
 (23, 'Ashraf', 'Mbulika', '63647828', 63748264, '2020-07-07', 'Male', 'AB+', 'ashraf@yahoo.com', 'Machakos', 'Athi River', '508924b0eac2ba101ada28841c931e44', ''),
 (24, 'Rehema', 'Rashid', '637483625', 68493736, '1998-03-10', 'Female', 'O+', 'rehema@yahoo.com', 'Nairobi', 'Nairobi', '5eaf0467a7fdc9fe2a16b9b8a8fd8b4a', ''),
 (25, 'Suhaila', 'Salim', '73849837', 82736745, '2017-07-21', 'Female', 'O+', 'suhaila@yahoo.com', 'Kajiado', 'Kitengela', 'e8b3ca806fd3c5e8e18368994a7ee305', ''),
 (26, 'Rashid', 'Thomas', '73883635', 367482725, '1988-10-13', 'Male', 'A+', 'rashid@yahoo.com', 'Nairobi', 'Nairobi', '7d0ba610dea3dbcc848a97d8dfd767ae', ''),
-(27, 'Allan', 'Keverenge', '254795846312', 2147483647, '1988-03-15', 'Male', 'B-', 'allan@yahoo.com', 'Homa Bay', 'Homa Bay', 'b993e4526238d62f6b1b90e605532ff8', ''),
+(27, 'Allan', 'Keverenge', '254795856', 2147485, '1988-03-15', 'Male', 'B-', 'allan@yahoo.com', 'Homa Bay', 'Homa Bay', 'b993e4526238d62f6b1b90e605532ff8', ''),
 (28, 'Monica', 'Ndunge', '+254788741200', 49798885, '1991-02-05', 'Female', 'O-', 'monica@gmail.com', 'Machakos', 'Machakos', 'ff0d813dd5d2f64dd372c6c4b6aed086', ''),
 (29, 'Cherlyne ', 'Obeyo', '+254719267540', 78978568, '1992-08-18', 'Female', 'AB+', 'cherlyneobeyo@gmail.com', 'Kakamega', 'Kakamega', 'b5e6859e6c6d07090ee1fc3bb85ec441', ''),
 (30, 'Satish', 'Kumar', '+254752861926', 79858912, '1987-10-08', 'Male', 'B+', 'satish@yahoo.com', 'Kilifi', 'Kilifi', 'b8377b23bb86899405d2455cc6da3556', ''),
@@ -572,7 +608,11 @@ INSERT INTO `response` (`id`, `IDNo`, `conditions`, `allergies`, `notes`) VALUES
 (3, 68493736, 'Respiratory and Ear Nose and Throat (ENT) disorders,', 'paracetamol, dust particles', 'rhinitis diagnosed in 2013'),
 (4, 63748264, 'Gastro-intestinal disorders,', 'nuts', 'gastritis detected'),
 (5, 2147483647, 'Respiratory and Ear Nose and Throat (ENT) disorders, Gastro-intestinal disorders, Gynaecological and Obstetric disorders, Neurological and psychological disorders, ', 'reactive to iboprufen, dust particles, strong perfumes, eggs', 'diagnosed with allergic rhinitis, hiatus hernia, peptic ulcers, endometriosis, anxiety and panic attacks'),
-(6, 29816629, 'Cardiovascular (heart and blood vessels) disorders, Respiratory and Ear Nose and Throat (ENT) disorders, Endocrine disorders, Gastro-intestinal disorders, Gynaecological and Obstetric disorders, Musculoskeletal disorders, Skin disorders, ', 'Dust, Kerosene, pollen ', 'Relatives suffering from - High blood pressure, Diabetes, peptic ulcers, arthritis, keloids\r\nPatient suffering from - asthma, ovarian cyst\r\n');
+(6, 29816629, 'Cardiovascular (heart and blood vessels) disorders, Respiratory and Ear Nose and Throat (ENT) disorders, Endocrine disorders, Gastro-intestinal disorders, Gynaecological and Obstetric disorders, Musculoskeletal disorders, Skin disorders, ', 'Dust, Kerosene, pollen ', 'Relatives suffering from - High blood pressure, Diabetes, peptic ulcers, arthritis, keloids\r\nPatient suffering from - asthma, ovarian cyst\r\n'),
+(7, 82736745, '', 'NIL', ''),
+(8, 367482725, 'Gastro-intestinal disorders, ', 'Sulphur', 'Diagnosed with Gastritis on January 2020'),
+(9, 2147485, 'Cardiovascular (heart and blood vessels) disorders, Respiratory and Ear Nose and Throat (ENT) disorders, ', 'Dust and smoke particles,\r\nAnimal Protein', 'Close relatives diagnosed with High blood pressure and asthma'),
+(10, 49798885, 'Eye related disorders, ', '', 'Glaucoma');
 
 --
 -- Indexes for dumped tables
@@ -594,6 +634,12 @@ ALTER TABLE `appointments`
 -- Indexes for table `blood`
 --
 ALTER TABLE `blood`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `conditions`
+--
+ALTER TABLE `conditions`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -685,6 +731,12 @@ ALTER TABLE `blood`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT for table `conditions`
+--
+ALTER TABLE `conditions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
 -- AUTO_INCREMENT for table `counties`
 --
 ALTER TABLE `counties`
@@ -724,13 +776,13 @@ ALTER TABLE `insurance`
 -- AUTO_INCREMENT for table `medicalcover`
 --
 ALTER TABLE `medicalcover`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `nextofkin`
 --
 ALTER TABLE `nextofkin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `patients`
@@ -742,7 +794,7 @@ ALTER TABLE `patients`
 -- AUTO_INCREMENT for table `response`
 --
 ALTER TABLE `response`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
