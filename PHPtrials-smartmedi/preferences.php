@@ -58,31 +58,156 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 	</head>
 
 	<body>
-<?php
-$con=mysqli_connect('localhost', 'root', '', 'phptrials-smartmedi')or die("cannot connect");//connection string  
+<?php 
+$conn=new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or die(mysqli_error($conn));
+//Patients details
 if(isset($_POST['sub1'])!=""){
-	$newEmail="";
-	$newTel="";
+		
+	$email = mysqli_real_escape_string($db, $_POST['email']);
+	$TelNo = mysqli_real_escape_string($db, $_POST['TelNo']);
+	$town = mysqli_real_escape_string($db, $_POST['town']);
+	$current_password = mysqli_real_escape_string($db, $_POST['current_password']);
+	$password1 = mysqli_real_escape_string($db, $_POST['password1']);
+	$password2 = mysqli_real_escape_string($db, $_POST['password2']);
 	
 	
-	$newEmail = mysqli_real_escape_string($db, $_POST['newEmail']);
-	$newTel = mysqli_real_escape_string($db, $_POST['newTel']);
 	
-	$result=$con->query("UPDATE patients SET email='$newEmail', TelNo='$newTel' WHERE IDNo = '$unique'");
-	if($result){
-	header("location:preferences.php");
+	if (!empty($email)) {
+	$query=$conn->query("update patients set email='$email' where IDNo='$unique'");
 	}
-	else{
+	if (!empty($TelNo)) {
+	$query=$conn->query("update patients set TelNo='$TelNo' where IDNo='$unique'");
+	}
+	if (!empty($county)) {
+	$query=$conn->query("update patients set county='$county' where IDNo='$unique'");
+	}
+	if (!empty($town)) {
+	$query=$conn->query("update patients set town='$town' where IDNo='$unique'");
+	}
+	if (!empty($current_password)) {
+		
+		$query="select password from patients where IDNo='$unique'";
+		$result = mysqli_query($db, $query);
+		while($row=mysqli_fetch_array($result)){
+		$password=$row['password'];
+		
+		if ($row['password'] == $current_password && $password1 == $password2 ) {
+			
+			$password = md5($password1);
+		// Update the password in the database
+		$query ="update patients set password='$password1' where IDNo='$unique";
+		$result = mysqli_query($db, $query);
+		if ($result) {
+        // Password update was successful
+        echo "Password updated successfully";
+		} else {
+        // Error occurred while updating password
+        echo "Error updating password";
+		}
+		} else {
+		// The current password is incorrect
+		echo "Incorrect current password";
+		}
+		}
+		
+		//if (empty($password1)) { array_push($errors, "Password is required"); }
+		//if (empty($password2)) { array_push($errors, "Password is required"); }
+				
+		// Checking if the passwords match
+		//if ($password1 != $password2) {array_push($errors, "The two passwords do not match");}
+		
+		//if ($array[11] == $current_password) {$query=$conn->query("update patients set password='$password1' where IDNo='$unique'");}
+		//else{
+		//	echo"<script>alert('Record already exists'); window.location.href ='/SmartMedi-2.0/PHPtrials-smartmedi/dashboard.php'; </script>";
+		//}
+	}
+	
+	
+	if($query){
+header("location:preferences.php");
+}
+else{
+die(mysqli_error($conn));
+}
+}
+//Next of kin details
+if(isset($_POST['sub2'])!=""){
+	
+	$kinFirstName = mysqli_real_escape_string($db, $_POST['kinFirstName']);
+	$kinLastName = mysqli_real_escape_string($db, $_POST['kinLastName']);
+	$relationship = mysqli_real_escape_string($db, $_POST['relationship']);
+	$telephone = mysqli_real_escape_string($db, $_POST['telephone']);
+	
+	if (!empty($kinFirstName) && !empty($kinLastName) && !empty($relationship) && !empty($telephone)) {
+	$query=$conn->query("update nextofkin set kinFirstName='$kinFirstName', kinLastName='$kinLastName', relationship='$relationship', telephone='$telephone' where IDNo='$unique'");
+	}
+	
+if($query){
+header("location:preferences.php");
+}
+else{
 die(mysqli_error($conn));
 }	
-	//if($result){
-		
-	//$query= ;
-	//}
-	
-	//$result = $con->query("SELECT id FROM response WHERE IDNo = '$unique'");
 }
-
+//Medical records
+if(isset($_POST['sub3'])!=""){
+	
+	$allergies = mysqli_real_escape_string($db, $_POST['allergies']);
+	$condition1 = mysqli_real_escape_string($db, $_POST['condition1']);
+	$condition2 = mysqli_real_escape_string($db, $_POST['condition2']);
+	$condition3 = mysqli_real_escape_string($db, $_POST['condition3']);
+	$condition4 = mysqli_real_escape_string($db, $_POST['condition4']);
+	$condition5 = mysqli_real_escape_string($db, $_POST['condition5']);
+	$notes = mysqli_real_escape_string($db, $_POST['notes']);
+	
+	if (!empty($allergies)) {
+	$query=$conn->query("update response set allergies = CONCAT_WS(' ,', allergies, '$allergies') where IDNo='$unique'");
+	}
+	if (!empty($condition1)) {
+	$query=$conn->query("update response set conditions = CONCAT_WS(' ,', conditions, '$condition1') where IDNo='$unique'");
+	}
+	if (!empty($condition2)) {
+	$query=$conn->query("update response set conditions = CONCAT_WS(' ,', conditions, '$condition2') where IDNo='$unique'");
+	}
+	if (!empty($condition3)) {
+	$query=$conn->query("update response set conditions = CONCAT_WS(' ,', conditions, '$condition3') where IDNo='$unique'");
+	}
+	if (!empty($condition4)) {
+	$query=$conn->query("update response set conditions = CONCAT_WS(' ,', conditions, '$condition4') where IDNo='$unique'");
+	}
+	if (!empty($condition5)) {
+	$query=$conn->query("update response set conditions = CONCAT_WS(' ,', conditions, '$condition5') where IDNo='$unique'");
+	}
+	if (!empty($notes)) {
+	$query=$conn->query("update response set notes = CONCAT_WS(' ,',notes, '$notes') where IDNo='$unique'");
+	}
+	
+if($query){
+header("location:preferences.php");
+}
+else{
+die(mysqli_error($conn));
+}	
+}
+//Insurance Details
+if(isset($_POST['sub4'])!=""){
+	
+	$insurancetype = mysqli_real_escape_string($db, $_POST['insurancetype']);
+	$insurancenumber = mysqli_real_escape_string($db, $_POST['insurancenumber']);
+	$insuranceprincipal = mysqli_real_escape_string($db, $_POST['insuranceprincipal']);
+	$expiry = mysqli_real_escape_string($db, $_POST['expiry']);
+	
+	if (!empty($insurancetype) && !empty($insurancenumber) && !empty($insuranceprincipal) && !empty($expiry)) {
+	$query=$conn->query("update medicalcover set insurancetype='$insurancetype', insurancenumber='$insurancenumber', insuranceprincipal='$insuranceprincipal', expiry='$expiry' where IDNo='$unique'");
+	}
+	
+if($query){
+header("location:preferences.php");
+}
+else{
+die(mysqli_error($conn));
+}	
+}
 
 ?>
 
@@ -145,9 +270,9 @@ die(mysqli_error($conn));
 								
 									<tr><td colspan = "2" ><h4><u><b>Contact Details</b></u></h4></td></tr>
 									<tr><td><h4>Current Email :</h4></td><td><b><input disabled type="text" class="form-control" value="<?php echo $array[8]?>"></b></td></tr>
-									<tr><td><h4>New Email :</h4></td><td><input type="email" class="form-control" id="newEmail"></td></tr>
+									<tr><td><h4>New Email :</h4></td><td><input type="email" class="form-control" name="email"></td></tr>
 									<tr><td><h4>Telephone Number :</h4></td><td><b><input disabled type="text" class="form-control" value="<?php echo $array[3]?>"></b></td></tr>
-									<tr><td><h4>Add Telephone number :</h4></td><td><input type="text" class="form-control" id="newTel"></td></tr>
+									<tr><td><h4>Add Telephone number :</h4></td><td><input type="text" class="form-control" name="TelNo"></td></tr>
 									<tr><td colspan = "2" ><h4><u><b>Change Residence </b></u></h4></td></tr>
 									<tr>
 									<td><h4>County :</h4></td>
@@ -168,11 +293,11 @@ die(mysqli_error($conn));
 										
 									</SELECT>
 									</td></tr>
-									<tr><td><h4>Town :</h4></td><td><input type="text" class="form-control"></td></tr>
+									<tr><td><h4>Town :</h4></td><td><input type="text" class="form-control" name="town"></td></tr>
 									<tr><td colspan = "2" ><h4><u><b>Change Password </b></u></h4></td></tr>
-									<tr><td><h4>Enter current password :</h4></td><td><input type="text" class="form-control"></td></tr>
-									<tr><td><h4>New Password :</h4></td><td><input type="text" class="form-control"></td></tr>
-									<tr><td><h4>Confirm Password :</h4></td><td><input type="text" class="form-control"></td></tr>
+									<tr><td><h4>Enter current password :</h4></td><td><input type="password" class="form-control" name="current_password"></td></tr>
+									<tr><td><h4>New Password :</h4></td><td><input type="password" class="form-control" name="password1"></td></tr>
+									<tr><td><h4>Confirm Password :</h4></td><td><input type="password" class="form-control" name="password2"></td></tr>
 									
 								</table>
 								<br><br>
@@ -206,9 +331,20 @@ die(mysqli_error($conn));
 									<tr><td><h4>Telephone Number :</h4></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['telephone'] ?>"></b></td></tr>
 									<?php } ?> 
 									<tr><td colspan = "2" ><h4><u><b>New Details </b></u></h4></td></tr>
-									<tr><td><h4>Name :</h4></td><td><input type="text" class="form-control"></td></tr>
-									<tr><td><h4>Relationship :</h4></td><td><input type="text" class="form-control"></td></tr>
-									<tr><td><h4>Telephone Number :</h4></td><td><input type="text" class="form-control"></td></tr>
+									<tr><td><h4>First Name :</h4></td><td><input type="text" class="form-control" name="kinFirstName"></td></tr>
+									<tr><td><h4>Last Name :</h4></td><td><input type="text" class="form-control" name="kinLastName"></td></tr>
+									<tr><td><h4>Relationship :</h4></td><td>
+									<SELECT NAME="relationship" class="form-control">
+										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>  
+										<OPTION VALUE="Parent">Parent
+										<OPTION VALUE="Significant other">Significant other
+										<OPTION VALUE="Sibling">Sibling
+										<OPTION VALUE="Son/Daughter">Son/Daughter
+										<OPTION VALUE="Relative">Relative
+										<OPTION VALUE="Guardian">Guardian<BR>
+									</SELECT>
+									</td></tr>
+									<tr><td><h4>Telephone Number :</h4></td><td><input type="text" class="form-control" name="telephone"></td></tr>
 									
 								</table>
 								<br><br>
@@ -237,9 +373,10 @@ die(mysqli_error($conn));
 									<tr><td colspan = "2" ><b><textarea disabled id="allergies" name="allergies" rows="5" cols="120" placeholder="<?php echo $row['conditions'] ."\n\n". $row['notes'] ; ?>" ></textarea></b></td></tr>
 									<?php } ?> 
 									<tr><td colspan = "2" ><h4><b>Add conditions</b></h4></td></tr>
+									<tr><td><h4>Allergies :</h4></td><td><input type="text" name="allergies" class="form-control"></td></tr>
 									<tr><td><h4>Condition 1 :</h4></td>
 									<td>
-									<SELECT NAME="conditions" class="form-control">
+									<SELECT NAME="condition1" class="form-control">
 										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
 										<?php 
 										$query ="SELECT conditions FROM conditions";
@@ -257,7 +394,7 @@ die(mysqli_error($conn));
 									</td></tr>
 									<tr><td><h4>Condition 2 :</h4></td>
 									<td>
-									<SELECT NAME="conditions" class="form-control">
+									<SELECT NAME="condition2" class="form-control">
 										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
 										<?php 
 										$query ="SELECT conditions FROM conditions";
@@ -274,7 +411,7 @@ die(mysqli_error($conn));
 									</SELECT>
 									</td></tr>
 									<tr><td><h4>Condition 3 :</h4></td><td>
-									<SELECT NAME="conditions" class="form-control">
+									<SELECT NAME="condition3" class="form-control">
 										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
 										<?php 
 										$query ="SELECT conditions FROM conditions";
@@ -291,7 +428,7 @@ die(mysqli_error($conn));
 									</SELECT>
 									</td></tr>
 									<tr><td><h4>Condition 4 :</h4></td><td>
-									<SELECT NAME="conditions" class="form-control">
+									<SELECT NAME="condition4" class="form-control">
 										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
 										<?php 
 										$query ="SELECT conditions FROM conditions";
@@ -308,7 +445,7 @@ die(mysqli_error($conn));
 									</SELECT>
 									</td></tr>
 									<tr><td><h4>Condition 5 :</h4></td><td>
-									<SELECT NAME="conditions" class="form-control">
+									<SELECT NAME="condition5" class="form-control">
 										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
 										<?php 
 										$query ="SELECT conditions FROM conditions";
@@ -325,7 +462,7 @@ die(mysqli_error($conn));
 									</SELECT>
 									</td></tr>
 									<tr><td colspan = "2" ><h4><b>Add notes for new conditions</b></h4></td></tr>
-									<tr><td colspan = "2" ><b><textarea id="new_notes" name="new_notes" rows="5" cols="120" ></textarea></b></td></tr>
+									<tr><td colspan = "2" ><b><textarea id="notes" name="notes" rows="5" cols="120" ></textarea></b></td></tr>
 									
 									
 								</table>
@@ -366,14 +503,29 @@ die(mysqli_error($conn));
 									<tr><td><h4>Expiry Date :</h4></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['expiry'] ?>"></b></td></tr>
 									<?php } ?> 
 									<tr><td colspan = "2" ><h4><u><b>New Insurance Details </b></u></h4></td></tr>
-									<tr><td colspan = "2" ><h4><b>Nhif</b></h4></td></tr>
-									<tr><td><h4>Cover Type :</h4></td><td><input type="text" class="form-control"></td></tr>
-									<tr><td><h4>Member Number :</h4></td><td><input type="text" class="form-control"></td></tr>
-									<tr><td colspan = "2" ><h4><b>Other Insurance</b></h4></td></tr>
-									<tr><td><h4>Insurance Name :</h4></td><td><input type="text" class="form-control"></td></tr>
-									<tr><td><h4>Member Number :</h4></td><td><input type="text" class="form-control"></td></tr>
-									<tr><td><h4>Principal Member :</h4></td><td><input type="text" class="form-control"></td></tr>
-									<tr><td><h4>Expiry Date :</h4></td><td><input type="text" class="form-control"></td></tr>
+									<tr><td><h4>Insurance Name :</h4></td>
+									<td>
+									<SELECT NAME="insurancetype" class="form-control">
+										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
+										<?php 
+										$query ="SELECT insurer FROM insurance";
+										$result = mysqli_query($db, $query);
+										if($result->num_rows> 0){
+										  $options= mysqli_fetch_all($result, MYSQLI_ASSOC);
+										}
+										
+											foreach ($options as $option) {
+										?>
+										<option><?php echo $option['insurer']; ?> </option>
+										<?php 
+										}
+										?>
+										
+									</SELECT>
+									</td></tr>
+									<tr><td><h4>Member Number :</h4></td><td><input type="number" class="form-control" name="insurancenumber"></td></tr>
+									<tr><td><h4>Principal Member :</h4></td><td><input type="text" class="form-control" name="insuranceprincipal"></td></tr>
+									<tr><td><h4>Expiry Date :</h4></td><td><input type="date" class="form-control" name="expiry"></td></tr>
 									
 								</table>
 								<br><br>
@@ -387,16 +539,7 @@ die(mysqli_error($conn));
                 
             </div>
           </div>
-
-
-
-
-
-
-
-
-
-						</div>
+</div>
 					</div>
 				</div>
 				<!-- Start menu -->

@@ -368,12 +368,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			</div>
           </div>
 		  <br>
-		  <div class="card-header bg-transparent border-0">
-			<button class="collapsible">Package</button>
-			<div class="content">
-				 <a href="#">Upgrade or retore previous package</a>
-			</div>
-          </div>
+		  
 		  <br>
 		  
         </div>
