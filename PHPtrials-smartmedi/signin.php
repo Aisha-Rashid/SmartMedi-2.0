@@ -20,7 +20,7 @@ if(isset($_POST["password"]) and isset($_POST["IDNo"])){
     $IDNo = $_POST['IDNo'];
     $password = $_POST['password'];
     $mdpass=md5($password);
-    echo $mdpass;
+    //echo $mdpass;
 	// Error message if the input field is left blank
 	if (empty($IDNo)) {
 		array_push($errors, "ID number is required");

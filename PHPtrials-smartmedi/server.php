@@ -13,7 +13,7 @@ $IDNo = "";
 $DOB = "";
 $gender = "";
 $email = "";
-$county = "";
+$county ="";
 $town = "";
 $id = "";
 $nationalid = "";
@@ -86,11 +86,11 @@ if (isset($_POST['reg_user'])) {
 
 		// Storing username of the logged in user,
 		// in the session variable
-		$_SESSION['FirstName'] = $FirstName;
-		$_SESSION['LastName'] = $LastName;
-		$_SESSION['bloodgroup'] = $bloodgroup;
-		$_SESSION['DOB'] = $DOB;
-		$_SESSION['gender'] = $gender;
+		//$_SESSION['FirstName'] = $FirstName;
+		//$_SESSION['LastName'] = $LastName;
+		//$_SESSION['bloodgroup'] = $bloodgroup;
+		//$_SESSION['DOB'] = $DOB;
+		//$_SESSION['gender'] = $gender;
 		$_SESSION['IDNo'] = $IDNo;
 		
 		
@@ -101,6 +101,55 @@ if (isset($_POST['reg_user'])) {
 		// Page on which the user will be
 		// redirected after logging in
 		header('location: dashboard.php');
+	}
+}
+
+// Patient login
+if (isset($_POST['login_user'])) {
+	
+	// Data sanitization to prevent SQL injection
+	$IDNo = mysqli_real_escape_string($db, $_POST['IDNo']);
+	$password = mysqli_real_escape_string($db, $_POST['password']);
+
+	// Error message if the input field is left blank
+	if (empty($IDNo)) {
+		array_push($errors, "ID number is required");
+	}
+	if (empty($password)) {
+		array_push($errors, "Password is required");
+	}
+
+	// Checking for the errors
+	if (count($errors) == 0) {
+		
+		// Password matching
+		  //$hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+		$password = md5($password);
+		
+		$query = "SELECT * FROM patients WHERE IDNo=
+				'$IDNo' AND password='$password'";
+		$results = mysqli_query($db, $query);
+
+		// $results = 1 means that one user with the
+		// entered username exists
+		if (mysqli_num_rows($results) == 1) {
+			
+			// Storing username in session variable
+			//$_SESSION['FirstName'] = $FirstName;
+			$_SESSION['IDNo'] = $IDNo;
+			
+			// Welcome message
+			$_SESSION['success'] = "You have logged in!";
+			
+			// Page on which the user is sent
+			// to after logging in
+			header('location: dashboard.php');
+		}
+		else {
+			
+			// If the username and password doesn't match
+			array_push($errors, "Username or password incorrect");
+		}
 	}
 }
 
@@ -151,10 +200,10 @@ if (isset($_POST['reg_doc'])) {
 
 		// Storing username of the logged in user,
 		// in the session variable
-		$_SESSION['fname'] = $fname;
-		$_SESSION['lname'] = $lname;
+		//$_SESSION['fname'] = $fname;
+		//$_SESSION['lname'] = $lname;
 		$_SESSION['id'] = $randomNumber;
-		$_SESSION['hospital'] = $hospital;
+		//$_SESSION['hospital'] = $hospital;
 		
 		
 		// Welcome message
@@ -196,8 +245,8 @@ if (isset($_POST['admin_login'])) {
 		if (mysqli_num_rows($results) == 1) {
 			
 			// Storing username in session variable
-			$_SESSION['FirstName'] = $FirstName;
-			$_SESSION['workID'] = $workID;B;
+			//$_SESSION['FirstName'] = $FirstName;
+			$_SESSION['workID'] = $workID;
 			
 			// Welcome message
 			$_SESSION['success'] = "You have logged in!";
@@ -215,52 +264,6 @@ if (isset($_POST['admin_login'])) {
 }
 
 
-// Patient login
-if (isset($_POST['login_user'])) {
-	
-	// Data sanitization to prevent SQL injection
-	$username = mysqli_real_escape_string($db, $_POST['username']);
-	$password = mysqli_real_escape_string($db, $_POST['password']);
 
-	// Error message if the input field is left blank
-	if (empty($username)) {
-		array_push($errors, "Username is required");
-	}
-	if (empty($password)) {
-		array_push($errors, "Password is required");
-	}
-
-	// Checking for the errors
-	if (count($errors) == 0) {
-		
-		// Password matching
-		$password = md5($password);
-		
-		$query = "SELECT * FROM patients WHERE username=
-				'$username' AND password='$password'";
-		$results = mysqli_query($db, $query);
-
-		// $results = 1 means that one user with the
-		// entered username exists
-		if (mysqli_num_rows($results) == 1) {
-			
-			// Storing username in session variable
-			$_SESSION['FirstName'] = $FirstName;
-			$_SESSION['username'] = $username;B;
-			
-			// Welcome message
-			$_SESSION['success'] = "You have logged in!";
-			
-			// Page on which the user is sent
-			// to after logging in
-			header('location: dashboard.php');
-		}
-		else {
-			
-			// If the username and password doesn't match
-			array_push($errors, "Username or password incorrect");
-		}
-	}
-}
 
 ?>

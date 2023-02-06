@@ -1,5 +1,5 @@
 <?php
-include('signin.php'); 
+include('server.php'); 
 
 // Starting the session, to use and
 // store data in session variable

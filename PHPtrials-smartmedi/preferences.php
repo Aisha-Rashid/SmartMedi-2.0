@@ -1,5 +1,5 @@
 <?php
-include('signin.php');
+include('server.php');
 
 //$id = $_GET['id'];
 // Starting the session, to use and
@@ -65,10 +65,11 @@ if(isset($_POST['sub1'])!=""){
 		
 	$email = mysqli_real_escape_string($db, $_POST['email']);
 	$TelNo = mysqli_real_escape_string($db, $_POST['TelNo']);
+	$county = mysqli_real_escape_string($db, $_POST['county']);
 	$town = mysqli_real_escape_string($db, $_POST['town']);
 	$current_password = mysqli_real_escape_string($db, $_POST['current_password']);
-	$password1 = mysqli_real_escape_string($db, $_POST['password1']);
-	$password2 = mysqli_real_escape_string($db, $_POST['password2']);
+	$new_password = mysqli_real_escape_string($db, $_POST['new_password']);
+	$conf_password = mysqli_real_escape_string($db, $_POST['conf_password']);
 	
 	
 	
@@ -86,45 +87,24 @@ if(isset($_POST['sub1'])!=""){
 	}
 	if (!empty($current_password)) {
 		
-		$query="select password from patients where IDNo='$unique'";
-		$result = mysqli_query($db, $query);
-		while($row=mysqli_fetch_array($result)){
-		$password=$row['password'];
-		
-		if ($row['password'] == $current_password && $password1 == $password2 ) {
-			
-			$password = md5($password1);
-		// Update the password in the database
-		$query ="update patients set password='$password1' where IDNo='$unique";
-		$result = mysqli_query($db, $query);
-		if ($result) {
-        // Password update was successful
-        echo "Password updated successfully";
-		} else {
-        // Error occurred while updating password
-        echo "Error updating password";
-		}
-		} else {
-		// The current password is incorrect
-		echo "Incorrect current password";
-		}
-		}
-		
-		//if (empty($password1)) { array_push($errors, "Password is required"); }
-		//if (empty($password2)) { array_push($errors, "Password is required"); }
+			if ($new_password == $conf_password) {
 				
-		// Checking if the passwords match
-		//if ($password1 != $password2) {array_push($errors, "The two passwords do not match");}
-		
-		//if ($array[11] == $current_password) {$query=$conn->query("update patients set password='$password1' where IDNo='$unique'");}
-		//else{
-		//	echo"<script>alert('Record already exists'); window.location.href ='/SmartMedi-2.0/PHPtrials-smartmedi/dashboard.php'; </script>";
-		//}
+				$enc_password = md5($new_password);
+				$query=$conn->query("UPDATE patients SET password='$enc_password' WHERE IDNo='$unique' ");
+				
+			}
+			 else {
+      // Error: new password and confirm password do not match
+      echo "Error: new password and confirm password do not match.";
+			
+			
+		}
+	
 	}
 	
 	
 	if($query){
-header("location:preferences.php");
+header("location:dashboard.php");
 }
 else{
 die(mysqli_error($conn));
@@ -296,8 +276,8 @@ die(mysqli_error($conn));
 									<tr><td><h4>Town :</h4></td><td><input type="text" class="form-control" name="town"></td></tr>
 									<tr><td colspan = "2" ><h4><u><b>Change Password </b></u></h4></td></tr>
 									<tr><td><h4>Enter current password :</h4></td><td><input type="password" class="form-control" name="current_password"></td></tr>
-									<tr><td><h4>New Password :</h4></td><td><input type="password" class="form-control" name="password1"></td></tr>
-									<tr><td><h4>Confirm Password :</h4></td><td><input type="password" class="form-control" name="password2"></td></tr>
+									<tr><td><h4>New Password :</h4></td><td><input type="password" class="form-control" name="new_password"></td></tr>
+									<tr><td><h4>Confirm Password :</h4></td><td><input type="password" class="form-control" name="conf_password"></td></tr>
 									
 								</table>
 								<br><br>
