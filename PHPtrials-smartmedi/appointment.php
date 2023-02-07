@@ -294,11 +294,9 @@ if (isset($_GET['logout'])) {
 															$appointment_time = mysqli_real_escape_string($conn, $appointment_time);
 															$dateToday = mysqli_real_escape_string($conn, $dateToday);
 															$sql = "DELETE FROM appointments WHERE `time`= '$appointment_time' && `date`='$dateToday'";
-															// if ($conn->query($sql) === TRUE) {
-															// 	echo "Appointment deleted successfully";
-															// } else {
-															// 	echo "Error deleting appointment: ";
-															// }
+															if ($conn->query($sql) === TRUE) {
+																echo "Appointment cancelled because you missed it. Please schedule another appointment";
+															} 
 														}
 														}
 														while ($row = mysqli_fetch_array($res)) {
