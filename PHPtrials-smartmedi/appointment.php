@@ -297,7 +297,7 @@ if (isset($_GET['logout'])) {
 															if ($conn->query($sql) === TRUE) {
 																echo "Appointment cancelled because you missed it. Please schedule another appointment";
 															} 
-														}
+														
 														}
 														while ($row = mysqli_fetch_array($res)) {
 															$number = $counter;
@@ -321,7 +321,8 @@ if (isset($_GET['logout'])) {
 																<!-- <td><button id="delete" onclick="myFunction()">Delete</button></td> -->
 																<td><button class="delete-btn" data-id="<?php echo $IDNo; ?>">Delete</button></td>
 															</tr>
-														<?php } ?>
+														<?php }
+														} ?>
 													</tbody>
 												</table>
 											</div>
