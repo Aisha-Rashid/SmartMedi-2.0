@@ -21,7 +21,7 @@ $fname = "";
 $lname = "";
 $hospital = "";
 $workid = "";
-$randomNumber = rand(10000000,99999999);
+//$randomNumber = rand(10000000,99999999);
 $errors = array();
 $_SESSION['success'] = "";
 $workID = "";
@@ -193,8 +193,8 @@ if (isset($_POST['reg_doc'])) {
 		$password = md5($docpassword1);
 		
 		// Inserting data into table
-		$query = "INSERT INTO doctors (id, nationalid, fname, lname, hospital, workid, specialty, password)
-				VALUES('$randomNumber' , '$nationalid' , '$fname' , '$lname' , '$hospital', '$workid' , '$specialty', '$password')";
+		$query = "INSERT INTO doctors (nationalid, fname, lname, hospital, workid, specialty, password)
+				VALUES('$nationalid' , '$fname' , '$lname' , '$hospital', '$workid' , '$specialty', '$password')";
 		
 		mysqli_query($db, $query);
 
@@ -202,7 +202,7 @@ if (isset($_POST['reg_doc'])) {
 		// in the session variable
 		//$_SESSION['fname'] = $fname;
 		//$_SESSION['lname'] = $lname;
-		$_SESSION['id'] = $randomNumber;
+		$_SESSION['nationalid'] = $nationalid;
 		//$_SESSION['hospital'] = $hospital;
 		
 		
@@ -213,6 +213,55 @@ if (isset($_POST['reg_doc'])) {
 		// redirected after logging in
 		header('location: DocDashboard.php');
 }
+}
+
+// Doctor login
+if (isset($_POST['doc_login'])) {
+	
+	// Data sanitization to prevent SQL injection
+	$nationalid = mysqli_real_escape_string($db, $_POST['nationalid']);
+	$password = mysqli_real_escape_string($db, $_POST['password']);
+
+	// Error message if the input field is left blank
+	if (empty($nationalid)) {
+		array_push($errors, "ID number is required");
+	}
+	if (empty($password)) {
+		array_push($errors, "Password is required");
+	}
+
+	// Checking for the errors
+	if (count($errors) == 0) {
+		
+		// Password matching
+		  //$hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+		$password = md5($password);
+		
+		$query = "SELECT * FROM doctors WHERE nationalid=
+				'$nationalid' AND password='$password'";
+		$results = mysqli_query($db, $query);
+
+		// $results = 1 means that one user with the
+		// entered username exists
+		if (mysqli_num_rows($results) == 1) {
+			
+			// Storing username in session variable
+			//$_SESSION['FirstName'] = $FirstName;
+			$_SESSION['nationalid'] = $nationalid;
+			
+			// Welcome message
+			$_SESSION['success'] = "You have logged in!";
+			
+			// Page on which the user is sent
+			// to after logging in
+			header('location: DocDashboard.php');
+		}
+		else {
+			
+			// If the username and password doesn't match
+			array_push($errors, "ID or password incorrect");
+		}
+	}
 }
 
 
@@ -236,7 +285,7 @@ if (isset($_POST['admin_login'])) {
 	if (count($errors) == 0) {
 		
 				
-		$query = "SELECT adminFname, adminLname, workID, IDnumber, email, phone FROM `admin` WHERE workID=
+		$query = "SELECT adminFname, adminLname, workID FROM `admin` WHERE workID=
 				'$workID' AND adminpass='$adminpass'";
 		$results = mysqli_query($db, $query);
 

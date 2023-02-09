@@ -108,9 +108,11 @@
 									</SELECT>
 							
 							</TD></TR>
-							<TR><TD>Password</TD><TD><input type="password" class="form-control" name="docpassword1"></TD><TR>
+							<TR><TD>Password</TD><TD><input type="password" class="form-control" id = "docpassword1" name="docpassword1">
+							<span toggle="#docpassword1" class="fa fa-fw fa-eye field-icon toggle-password"></span></TD><TR>
 				
-							<TR><TD>Confirm Password</TD><TD><input type="password" class="form-control" name="docpassword2"></TD><TR>
+							<TR><TD>Confirm Password</TD><TD><input type="password" class="form-control" id = "docpassword2" name="docpassword2">
+							<span toggle="#docpassword2" class="fa fa-fw fa-eye field-icon toggle-password"></span></TD><TR>
 							
 							</TABLE>
 							<br>

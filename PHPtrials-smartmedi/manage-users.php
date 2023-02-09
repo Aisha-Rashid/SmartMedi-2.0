@@ -90,7 +90,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
             </a>
             <ul class="templatemo-submenu">
 			<li class="active"><a href="#"><i class="fa fa-users"></i> Manage Users</a></li>
-              <li><a href="data-visualization.php"><i class="fa fa-cubes"></i> Data Visualization</a></li>
+              <li><a href="chart.php"><i class="fa fa-cubes"></i> Data Visualization</a></li>
           <li><a href="maps.html"><i class="fa fa-file-text"></i> Reports</a></li>
           
             </ul>
@@ -356,7 +356,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 
       <footer class="templatemo-footer">
         <div class="templatemo-copyright">
-          <p>Copyright &copy; 2084 Your Company Name <!-- Credit: www.templatemo.com --></p>
+          <p>Copyright &copy; 2022 SmartMedi <!-- Credit: www.templatemo.com --></p>
         </div>
       </footer>
     </div>

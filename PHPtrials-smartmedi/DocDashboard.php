@@ -1,15 +1,7 @@
 <?php
-include('doc_signin_server.php'); 
+include('server.php'); 
 
-// Starting the session, to use and
-// store data in session variable
-// session_start();
-
-// If the session variable is empty, this
-// means the user is yet to login
-// User will be sent to 'login.php' page
-// to allow the user to login
-if (!isset($_SESSION['id'])) {
+if (!isset($_SESSION['nationalid'])) {
 	$_SESSION['msg'] = "You have to log in first";
 	header('location: DocLogin.php');
 }
@@ -20,7 +12,7 @@ if (!isset($_SESSION['id'])) {
 // after logging out
 if (isset($_GET['logout'])) {
 	session_destroy();
-	unset($_SESSION['id']);
+	unset($_SESSION['nationalid']);
 	header("location: DocLogin.php");
 }
 ?>
@@ -38,11 +30,11 @@ if (isset($_GET['logout'])) {
  
 </head>
 <body>
-<?php if (isset($_SESSION['id'])) : 
+<?php if (isset($_SESSION['nationalid'])) : 
    
    
-   $unique = $_SESSION['id'];
-   $query = "SELECT * FROM `doctors` WHERE id = '$unique'";
+   $unique = $_SESSION['nationalid'];
+   $query = "SELECT * FROM `doctors` WHERE nationalid = '$unique'";
    $res = mysqli_query($db, $query);
    $array=mysqli_fetch_row($res);
    $rows = mysqli_num_rows($res);
@@ -63,7 +55,7 @@ if (isset($_GET['logout'])) {
 				<li class="active"><a href="#"><i class="fa fa-home"></i>Dashboard</a></li>
 				
 				
-				<li><a href="#"><i class="fa fa-cog"></i>Settings</a></li>
+				<li><a href="DocSettings.php"><i class="fa fa-cog"></i>Settings</a></li>
 				<li><a href="javascript:;" data-toggle="modal" data-target="#confirmModal"><i class="fa fa-sign-out"></i>Sign Out</a></li>
 			</ul>
 		</div><!--/.navbar-collapse-->
@@ -91,7 +83,7 @@ if (isset($_GET['logout'])) {
 			echo $array[3];?><br>
 			<?php 
             
-            echo $array[0];?><br>
+            echo $array[1];?><br>
 			<?php 
             
             echo $array[6];?><br>

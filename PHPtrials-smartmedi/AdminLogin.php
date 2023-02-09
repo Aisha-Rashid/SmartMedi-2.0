@@ -106,7 +106,7 @@ include('server.php');
 		
 		<div class="contact-block">
 			<div class="template-page-wrapper" align="center">
-				<form class="form-horizontal templatemo-signin-form" method="post" action="signin.php">
+				<form class="form-horizontal templatemo-signin-form" method="post" action="server.php">
 				<!-- <?php include('errors.php'); ?> -->
 				
 				

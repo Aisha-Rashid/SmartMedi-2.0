@@ -69,7 +69,8 @@
 						<div class="col-md-6">
 							<label>Password</label>
 								<div class="col-sm-6">
-								<input type="password" class="form-control" name="password">
+								<input type="password" class="form-control" id="password" name="password" value="">
+								<span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 								</div>
 						</div>              
 				</div>

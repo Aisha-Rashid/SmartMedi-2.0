@@ -53,15 +53,15 @@
 		
 		<div class="contact-block">
 			<div class="template-page-wrapper" align="center">
-				<form class="form-horizontal templatemo-signin-form" method="post" action="doc_signin_server.php">
+				<form class="form-horizontal templatemo-signin-form" method="post" action="server.php">
 				<!-- <?php include('errors.php'); ?> -->
 				
 				
 				<div class="form-group">
 						<div class="col-md-6">
-							<label>Account ID</label>
+							<label>National ID</label>
 								<div class="col-sm-6">
-								<input type="number" class="form-control" name="id">
+								<input type="number" class="form-control" name="nationalid">
 								</div>
 						</div>              
 				</div>
@@ -69,7 +69,8 @@
 						<div class="col-md-6">
 							<label>Password</label>
 								<div class="col-sm-6">
-								<input type="password" class="form-control" name="password">
+								<input type="password" class="form-control" id="password" name="password">
+								<span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 								</div>
 						</div>              
 				</div>

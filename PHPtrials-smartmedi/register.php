@@ -52,6 +52,7 @@
 			<div class="col-lg-12">
 				<div class="title-box">
 					<h2>Create Account</h2>
+					<p>Already have an account?<a href="login.php"><u>Click here to Log in!</u></a></p>
 				</div>
 			</div>
 		</div>		

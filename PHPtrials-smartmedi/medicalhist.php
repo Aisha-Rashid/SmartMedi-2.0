@@ -1,15 +1,7 @@
 <?php
-include('doc_signin_server.php'); 
+include('server.php'); 
 
-// Starting the session, to use and
-// store data in session variable
-// session_start();
-
-// If the session variable is empty, this
-// means the user is yet to login
-// User will be sent to 'login.php' page
-// to allow the user to login
-if (!isset($_SESSION['id'])) {
+if (!isset($_SESSION['nationalid'])) {
 	$_SESSION['msg'] = "You have to log in first";
 	header('location: DocLogin.php');
 }
@@ -20,12 +12,12 @@ if (!isset($_SESSION['id'])) {
 // after logging out
 if (isset($_GET['logout'])) {
 	session_destroy();
-	unset($_SESSION['id']);
+	unset($_SESSION['nationalid']);
 	header("location: DocLogin.php");
 }
 ?>
-<?php if (isset($_SESSION['id'])) : 
-  $unique = $_SESSION['id'];
+<?php if (isset($_SESSION['nationalid'])) : 
+  $unique = $_SESSION['nationalid'];
 ?>
 
 
@@ -204,7 +196,38 @@ if(isset($_POST['submit'])!=""){
 				</td>
 				<?php } ?> 
               </tr>
-			  <tr>
+			 
+			  
+            </table>
+			
+			
+			<table  class="table table-bordered" id="docdatatable">
+  <tr>
+    <th width="30%">Doctors Notes</th>
+  </tr>
+  <?php 
+    $query = "SELECT doctors.fname, doctors.lname, doctors.hospital, docnotes.date, docnotes.notes FROM doctors, docnotes WHERE doctors.nationalid = docnotes.docid AND docnotes.IDNo ='$filename'" ;
+    $res = mysqli_query($db, $query);
+    while($row=mysqli_fetch_array($res)){
+      $date=$row['date'];
+      $fname=$row['fname'];
+      $lname=$row['lname'];
+      $hospital=$row['hospital'];
+      $notes=$row['notes'];
+  ?>
+  <tr>
+    <td>
+      <b><?php echo $row['date']?><br>
+      <?php echo $row['fname']; echo " "; echo $row['lname'];?><br>
+      <?php echo $row['hospital']?><br></b>
+      <?php echo $row['notes']?><br>
+    </td>
+  </tr>
+  <?php } ?> 
+</table>
+
+<table  class="table" id="docdatatable">
+<tr>
                 <th width="30%">Add Note</th>
                 <td width="2%">:</td>
                 
@@ -216,6 +239,7 @@ if(isset($_POST['submit'])!=""){
 				</td>
               </tr>
             </table>
+
 				
 			
 			<form>
@@ -223,58 +247,7 @@ if(isset($_POST['submit'])!=""){
 			</form>
 			
           </div>
-		  <div class="card-header bg-transparent border-0">
-            <h3 class="mb-0">Doctor Notes</h3>
-			
-          </div>
-		  <div class="card-body pt-0">
-            <table class="table table-bordered">
-			
-			<thead>
-			<th>No.</th>
-				<th>Date</th>
-				<th>Note</th>
-				<th>Doctor</th>
-			</thead>
-			<tbody>
-			<?php
-			$query="select * from docnotes WHERE IDNO = '$filename'";
-			$res = mysqli_query($db, $query);
-			$counter = 1;
-			while($row=mysqli_fetch_array($res)){
-				$number = $counter;
-				$counter++;
-							
-				$docid=$row['docid'];
-				$date=$row['date'];
-				$notes=$row['notes'];
-			?>
-			<tr>
-				<td><?php echo $number;?></td>
-                <td><?php echo $row['date']?></td>
-				<td><?php echo $row['notes']?></td>
-				<?php } ?>
-				<td>
-				<?php 
-					$query = "SELECT * FROM doctors INNER JOIN docnotes ON doctors.id = docnotes.docid"; 
-					$results = mysqli_query($db, $query);
-					while($row = mysqli_fetch_array($results)){ 
-						$fname=$row['fname'];
-					?>
-				<b>Dr. <?php echo $fname;
-							//echo " ";
-							//echo $row1['lname'];
-					}?></b>
-				</td> 
-				
-				
-				 
-			</tr>
-				
-			  
-			  </tbody>
-			  </table>
-			  </div>
+		  
 			
         </div>
          

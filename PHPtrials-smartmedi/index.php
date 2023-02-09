@@ -75,37 +75,19 @@
 	<!-- Start Banner -->
 	<div class="ulockd-home-slider">
 		<div class="container-fluid">
-			<div class="row">
+			<div class="row" >
 				<div class="pogoSlider" id="js-main-slider">
 					<div class="pogoSlider-slide" data-transition="fade" data-duration="1500" style="background-image:url(images/slider01.jpg);">
-						<div class="lbox-caption pogoSlider-slide-element">
-							<!--div class="lbox-details">
-								<h1>Welcome to SmartMedi</h1>
-								<p>The number 1 platform in medical record-keeping.</p>
-								<a href="#about" class="btn">Read More</a>
-							</div-->
-						</div>
-					</div>
-					<div class="pogoSlider-slide" data-transition="fade" data-duration="1500" style="background-image:url(images/slider-02.jpg);">
-						<div class="lbox-caption pogoSlider-slide-element">
-							<div class="lbox-details">
-								<h1>Welcome to SmartMedi.</h1>
-								<p>Our platform is able to hold thousands of records for emergency care.</p>
-								<a href="#services" class="btn">View Packages</a>
-							</div>
-						</div>
-					</div>
-					<div class="pogoSlider-slide" data-transition="fade" data-duration="1500" style="background-image:url(images/slider-03.jpg);">
-						<div class="lbox-caption pogoSlider-slide-element">
-							<div class="lbox-details">
-								<h1>We are universal</h1>
-								<p>Our platform tranverses both private and public industry.</p>
-								<a href="Signup.html" class="btn">Sign up with us today!</a>
-							</div>
-						</div>
 						
 					</div>
-				</div>
+					<div class="pogoSlider-slide" data-transition="fade" data-duration="1500" style="background-image:url(images/slider02.jpg);">
+						
+					</div>
+					<div class="pogoSlider-slide" data-transition="fade" data-duration="1500" style="background-image:url(images/slider03.jpg);">
+						
+						
+					</div>
+				</div-->
 			</div>
 		</div>
 	</div>
@@ -119,7 +101,7 @@
 					<div class="col-lg-12">
 						<div class="title-box">
 							<h2>About Us</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+							
 						</div>
 					</div>
 				</div>
@@ -127,22 +109,27 @@
 					<div class="col-lg-12 col-md-12 col-sm-12">
 						<div class="row align-items-center about-main-info">
 							<div class="col-lg-6 col-md-6 col-sm-12">
-								<h2> Welcome to Health Lab </h2>
-								<p>Fusce convallis ante id purus sagittis malesuada. Sed erat ipsum, suscipit sit amet auctor quis, vehicula ut leo. Maecenas felis nulla, tincidunt ac blandit a, consectetur quis elit. Nulla ut magna eu purus cursus sagittis. Praesent fermentum tincidunt varius. Proin sit amet tempus magna. Fusce pellentesque vulputate urna. </p>
-								<p>Fusce convallis ante id purus sagittis malesuada. Sed erat ipsum, suscipit sit amet auctor quis, vehicula ut leo. Maecenas felis nulla, tincidunt ac blandit a, consectetur quis elit. Nulla ut magna eu purus cursus sagittis. Praesent fermentum tincidunt varius. Proin sit amet tempus magna. Fusce pellentesque vulputate urna. </p>
+								<h2> Welcome to SmartMedi EEHR </h2>
+								<p>At SmartMedi, we understand the importance of having quick and easy access to critical patient information in emergency situations. 
+								That's why we've created an innovative emergency electronic health record system that provides healthcare professionals with the information they need, when they need it. </p>
+								<p>Our team of experienced technology professionals is dedicated to making the process of accessing critical patient information as seamless as possible. 
+								Our user-friendly platform is designed with the end-user in mind and can be easily customized to meet the specific needs of any healthcare organization.</p>
+								<p>At SmartMedi, we believe that access to accurate and timely patient information is a basic right for all patients. 
+								We are committed to improving the quality of care and outcomes for patients by providing healthcare professionals with the tools they need to make informed decisions. 
+								Contact us today to learn how our EHR system can benefit your family and organization.</p>
 								<a href="#" class="new-btn-d br-2">Read More</a>
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-12">
 								<div class="about-m">
 									<ul id="banner">
 										<li>
-											<img src="images/about-img-01.jpg" alt="">
+											<img src="images/doc21.png" alt="">
 										</li>
 										<li>
-											<img src="images/about-img-02.jpg" alt="">
+											<img src="images/doc11.png" alt="">
 										</li>
 										<li>
-											<img src="images/about-img-03.jpg" alt="">
+											<img src="images/doc31.png" alt="">
 										</li>
 									</ul>
 								</div>
@@ -162,7 +149,7 @@
 				<div class="col-lg-12">
 					<div class="title-box">
 						<h2>Services</h2>
-						<p>We generally offer two packages.</p>
+						<p>We generally offer services to the general public and Medical Institutions.</p>
 					</div>
 				</div>
 			</div>	
@@ -170,22 +157,23 @@
 				<div class="col-lg-12">
 					<div class="item">
 						<div class="serviceBox">
-							<div class="service-icon"><i class="fa fa-h-square" aria-hidden="true"></i></div>
-							<h3 class="title">Lorem ipsum dolor</h3>
+							<div class="service-icon"><i class="fa fa-users" aria-hidden="true"></i></div>
+							<h3 class="title">Patient Database</h3>
 							<p class="description">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium consequuntur.
+							Members of the public can now securely and privately store medical records including recently diagnosed conditions and inherited ones.
+							User dashboard also offers a platform for Appointments and file storage.
 							</p>
-							<a href="#" class="new-btn-d br-2">Read More</a>
+							<a href="register.php" class="new-btn-d br-2">Create Account</a>
 						</div>
 					</div>
 					<div class="item">
 						<div class="serviceBox">
-							<div class="service-icon"><i class="fa fa-hospital-o" aria-hidden="true"></i></div>
-							<h3 class="title">Lorem ipsum dolor</h3>
+							<div class="service-icon"><i class="fa fa-h-square" aria-hidden="true"></i></div>
+							<h3 class="title">Medical Organization Data Access</h3>
 							<p class="description">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium consequuntur.
+							Access to patients medical data can now be accessed by registered Hospitals. Send your registration application today!
 							</p>
-							<a href="#" class="new-btn-d br-2">Read More</a>
+							<a href="#" class="new-btn-d br-2">Register Organization</a>
 						</div>
 					</div>
 				</div>

@@ -182,7 +182,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 
       <footer class="templatemo-footer">
         <div class="templatemo-copyright">
-          <p>Copyright &copy; 2084 Your Company Name <!-- Credit: www.templatemo.com --></p>
+          <p>Copyright &copy; 2022 SmartMedi <!-- Credit: www.templatemo.com --></p>
         </div>
       </footer>
     </div>
@@ -229,13 +229,13 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
         value: <?php echo $totalFemales; ?> ,
         color:"#F7464A",
         highlight: "#FF5A5E",
-        label: "Female"
+        label: 'Female'
       },
       {
         value: <?php echo $totalMales; ?> ,
         color: "#46BFBD",
         highlight: "#5AD3D1",
-        label: "Male"
+        label: 'Male'
       },
       
       ] // pie chart data

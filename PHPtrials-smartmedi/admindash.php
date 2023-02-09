@@ -53,14 +53,40 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
     $res = mysqli_query($db, $query);
     $array = mysqli_fetch_row($res);
     $rows = mysqli_num_rows($res);
+	
+	// number of results per page
+	$results_per_page = 10; 
 
-    $AllPatientsQuery = "SELECT * FROM `patients` ORDER by id";
-    $AllPatientsRes = mysqli_query($db, $AllPatientsQuery);
+	if (!isset($_GET['page'])) {
+	  $page = 1;
+	} else {
+	  $page = $_GET['page'];
+	}
+	// Calculate the starting row
+	$start_row = ($page-1) * $results_per_page;
+	
+	$query="select * from patients";
+	$total_patients=mysqli_query($db, $query);
+	$total_number_patients=mysqli_num_rows($total_patients);
+	
+	$patientsquery="SELECT * FROM patients LIMIT $start_row, $results_per_page";
+    $AllPatientsRes = mysqli_query($db, $patientsquery);
     $totalPatients = mysqli_num_rows($AllPatientsRes);
+	
+	// Calculate the total number of rows
+	$total_rows_query = "SELECT COUNT(*) as total FROM patients";
+	$total_rows_result = mysqli_query($db, $total_rows_query);
+	$total_rows = mysqli_fetch_assoc($total_rows_result)['total'];
+
+	// Calculate the total number of pages
+	$total_pages = ceil($total_rows / $results_per_page);
+
+
 
     $x =  "SELECT DISTINCT hospitalname FROM `hospitals`";
     $Res = mysqli_query($db, $x);
     $totalHospitals = mysqli_num_rows($Res);
+	
 
     $doctorsQuery = "SELECT * FROM `doctors` ORDER by id";
     $doctorsRes = mysqli_query($db, $doctorsQuery);
@@ -93,7 +119,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
             </a>
             <ul class="templatemo-submenu">
               <li><a href="manage-users.php"><i class="fa fa-users"></i> Manage Users</a></li>
-              <li><a href="data-visualization.php"><i class="fa fa-cubes"></i> Data Visualization</a></li>
+              <li><a href="chart.php"><i class="fa fa-cubes"></i> Data Visualization</a></li>
               <li><a href="maps.html"><i class="fa fa-file-text"></i> Reports</a></li>
 
             </ul>
@@ -111,8 +137,8 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
             <li><a href="#">Admin Panel</a></li>
             <li>Overview</li>
           </ol>
-          <h1>SmartMedi - Admin Dashboard</h1>
-          <hr>
+          <!--h1>SmartMedi - Admin Dashboard</h1>
+          <hr-->
           <p>Work ID : <b><?php echo $array[2]; ?></b></p>
           <p>Name : <b><?php echo $array[0];
                         echo " ";
@@ -122,7 +148,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
           <div class="row margin-bottom-30">
             <div class="col-md-12">
               <ul class="nav nav-pills">
-                <li class="active"><a href="#">Total Patients Registered <span class="badge"><?php echo $totalPatients; ?></span></a></li>
+                <li class="active"><a href="#">Total Patients Registered <span class="badge"><?php echo $total_number_patients ?></span></a></li>
                 <li class="active"><a href="#">Medical Practitioners <span class="badge"><?php echo $totalDoctors; ?></span></a></li>
                 <li class="active"><a href="#">Hospitals Registered <span class="badge"><?php echo $totalHospitals; ?></span></a></li>
               </ul>
@@ -158,10 +184,9 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
                         </thead>
                         <tbody>
                           <?php
-                          //$query="select * from patients";
-                          //$res = mysqli_query($db, $query);
+                          
                           while ($row = mysqli_fetch_array($AllPatientsRes)) {
-                            //$count = $res;
+                            
 
                             $FirstName = $row['FirstName'];
                             $LastName = $row['LastName'];
@@ -176,6 +201,14 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
                           <?php } ?>
                         </tbody>
                       </table>
+					  <!-- Page navigation links -->
+<div class="pagination">
+  <?php
+  for ($i=1; $i<=$total_pages; $i++) {
+    echo "<a href='?page=".$i."'>".$i."</a> ";
+  }
+  ?>
+</div>
 
                     </div>
                   </div>
@@ -289,7 +322,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
     </div>
     <footer class="templatemo-footer">
       <div class="templatemo-copyright">
-        <p>Copyright &copy; 2084 Your Company Name</p>
+        <p>Copyright &copy; 2022 SmartMedi</p>
       </div>
     </footer>
     </div>
