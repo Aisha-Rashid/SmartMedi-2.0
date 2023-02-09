@@ -200,7 +200,9 @@ if (isset($_GET['logout'])) {
 															<label class="control-label" for="date">Preferred Date</label>
 															<input id="date" name="date" type="date" placeholder="Preferred Date" class="form-control input-md " min="<?php echo date('Y-m-d'); ?>">
 														</div>
+														
 													</div>
+
 													<!-- Select Basic -->
 													<div class="col-md-6">
 														<div class="form-group">
@@ -250,6 +252,11 @@ if (isset($_GET['logout'])) {
 															<button type="submit" class="btn" name="appointbtn">Make An Appointment</button>
 														</div>
 													</div>
+													<div class="col-md-12">
+													<div class="calendly" id="calendly-invite">
+															<div class="calendly-inline-widget" style="min-width: 320px; height: 850px"></div>
+														</div>
+													</div>
 												</div>
 											</form>
 											<!-- form end -->
@@ -281,46 +288,45 @@ if (isset($_GET['logout'])) {
 															$hospital = $row['hospital'];
 															$clinic = $row['clinic'];
 															$time = $row['time'];
-														$appointment_time = date("Y-m-d H:i:s", strtotime("$date $time"));
-														$currentTime = time();
-														echo $appointment_time;
-														$dateToday = date("Y-m-d");
-														if ($currentTime > strtotime($appointment_time)) {
+															$appointment_time = date("Y-m-d H:i:s", strtotime("$date $time"));
+															$currentTime = time();
+															echo $appointment_time;
+															$dateToday = date("Y-m-d");
+															if ($currentTime > strtotime($appointment_time)) {
 
-															$conn = new mysqli("localhost", "root", "", "phptrials-smartmedi");
-															if ($conn->connect_error) {
-																die("Connection failed: " . $conn->connect_error);
+																$conn = new mysqli("localhost", "root", "", "phptrials-smartmedi");
+																if ($conn->connect_error) {
+																	die("Connection failed: " . $conn->connect_error);
+																}
+																$appointment_time = mysqli_real_escape_string($conn, $appointment_time);
+																$dateToday = mysqli_real_escape_string($conn, $dateToday);
+																$sql = "DELETE FROM appointments WHERE `time`= '$appointment_time' && `date`='$dateToday'";
+																if ($conn->query($sql) === TRUE) {
+																	echo "Appointment cancelled because you missed it. Please schedule another appointment";
+																}
 															}
-															$appointment_time = mysqli_real_escape_string($conn, $appointment_time);
-															$dateToday = mysqli_real_escape_string($conn, $dateToday);
-															$sql = "DELETE FROM appointments WHERE `time`= '$appointment_time' && `date`='$dateToday'";
-															if ($conn->query($sql) === TRUE) {
-																echo "Appointment cancelled because you missed it. Please schedule another appointment";
-															} 
-														
-														}
-														while ($row = mysqli_fetch_array($res)) {
-															$number = $counter;
-															$counter++;
-															$IDNo = $row['IDNo'];
-															$date = $row['date'];
-															$hospital = $row['hospital'];
-															$clinic = $row['clinic'];
-															$time = $row['time'];
+															while ($row = mysqli_fetch_array($res)) {
+																$number = $counter;
+																$counter++;
+																$IDNo = $row['IDNo'];
+																$date = $row['date'];
+																$hospital = $row['hospital'];
+																$clinic = $row['clinic'];
+																$time = $row['time'];
 
-															
+
 														?>
 
-															<tr>
+																<tr>
 
-																<td><?php echo $number; ?></td>
-																<td><?php echo $row['date'] ?></td>
-																<td><?php echo $row['hospital'] ?></td>
-																<td><?php echo $row['clinic'] ?></td>
-																<td><?php echo $row['time'] ?></td>
-																<!-- <td><button id="delete" onclick="myFunction()">Delete</button></td> -->
-																<td><button class="delete-btn" data-id="<?php echo $IDNo; ?>">Delete</button></td>
-															</tr>
+																	<td><?php echo $number; ?></td>
+																	<td><?php echo $row['date'] ?></td>
+																	<td><?php echo $row['hospital'] ?></td>
+																	<td><?php echo $row['clinic'] ?></td>
+																	<td><?php echo $row['time'] ?></td>
+																	<!-- <td><button id="delete" onclick="myFunction()">Delete</button></td> -->
+																	<td><button class="delete-btn" data-id="<?php echo $IDNo; ?>">Delete</button></td>
+																</tr>
 														<?php }
 														} ?>
 													</tbody>
@@ -433,6 +439,15 @@ if (isset($_GET['logout'])) {
 				image.src = URL.createObjectURL(event.target.files[0]);
 			};
 		</script>
+		<!-- calendly -->
+		<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"></script>
+		<script>
+			window.Calendly.initInlineWidget({
+      url: "https://calendly.com/jeffkinyua64/30min?hide_gdpr_banner=1",
+      parentElement: document.querySelector(".calendly-inline-widget"),
+    })
+		</script>
+
 	<?php endif ?>
 </body>
 
