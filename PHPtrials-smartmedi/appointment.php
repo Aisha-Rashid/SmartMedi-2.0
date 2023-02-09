@@ -54,9 +54,6 @@ if (isset($_GET['logout'])) {
 		$conn = new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or die(mysqli_error($conn));
 		$date = "";
 		$time = "";
-
-
-
 		if (isset($_POST['appointbtn']) != "") {
 
 			$hospital = mysqli_real_escape_string($db, $_POST['hospital']);
@@ -73,10 +70,7 @@ if (isset($_GET['logout'])) {
 				die(mysqli_error($conn));
 			}
 		}
-
 		?>
-
-
 		<!-- Start menu -->
 		<div class="template-page-wrapper">
 			<div class="navbar-collapse collapse templatemo-sidebar">
@@ -108,9 +102,6 @@ if (isset($_GET['logout'])) {
 						<li><a href="#">Appointments</a></li>
 						<li>Overview</li>
 					</ol>
-
-
-
 					<div class="student-profile py-4">
 						<div class="container">
 							<div class="row">
@@ -203,15 +194,11 @@ if (isset($_GET['logout'])) {
 															</select>
 														</div>
 													</div>
-
-
-
-
 													<!-- Text input-->
 													<div class="col-md-6">
-														<div class="form-group">
+														<div class="form-group ">
 															<label class="control-label" for="date">Preferred Date</label>
-															<input id="date" name="date" type="date" placeholder="Preferred Date" class="form-control input-md" min="<?php echo date('Y-m-d'); ?>">
+															<input id="date" name="date" type="date" placeholder="Preferred Date" class="form-control input-md " min="<?php echo date('Y-m-d'); ?>">
 														</div>
 													</div>
 													<!-- Select Basic -->
@@ -225,41 +212,38 @@ if (isset($_GET['logout'])) {
 																$end = '16:00:00';
 																$interval = '30 minutes';
 
-																$current_time = date("H:i"); // Get the current time
-																for (
-																	$i = 0;
-																	$i < 17;
-																	$i++
-																) {
-																	for ($j = 0; $j < 60; $j += 30) {
-																		$time = str_pad($i, 2, "0", STR_PAD_LEFT) . ":" . str_pad($j, 2, "0", STR_PAD_LEFT);
-																		if (
-																			$time >= $current_time
-																		) {
-																			// Only allow times equal to or later than the current time
-																			echo "<option value='$time'>$time</option>";
-																		}
-																	}
+																// $current_time = date("H:i"); // Get the current time
+																// for (
+																// 	$i = 0;
+																// 	$i < 17;
+																// 	$i++
+																// ) {
+																// 	for ($j = 0; $j < 60; $j += 30) {
+																// 		$time = str_pad($i, 2, "0", STR_PAD_LEFT) . ":" . str_pad($j, 2, "0", STR_PAD_LEFT);
+																// 		if (
+																// 			$time >= $current_time
+																// 		) {
+																// 			// Only allow times equal to or later than the current time
+																// 			echo "<option value='$time'>$time</option>";
+																// 		}
+																// 	}
+																// }
+																$range = array();
+																$current = new DateTime($start);
+																$end = new DateTime($end);
+
+																while ($current <= $end) {
+																	$range[] = $current->format('g:i a');
+																	$current->modify($interval);
 																}
 
-																// $range = array();
-
-																// $current = new DateTime($start);
-																// $end = new DateTime($end);
-
-																// while ($current <= $end) {
-																// 	$range[] = $current->format('g:i a');
-																// 	$current->modify($interval);
-																// }
-
-																// foreach ($range as $time) {
-																// 	echo "<option value='$time'>$time</option>";
-																// }
+																foreach ($range as $time) {
+																	echo "<option value='$time'>$time</option>";
+																}
 																?>
 															</select><br>
 														</div>
 													</div>
-
 													<!-- Button -->
 													<div class="col-md-12">
 														<div class="form-group">
@@ -269,11 +253,9 @@ if (isset($_GET['logout'])) {
 												</div>
 											</form>
 											<!-- form end -->
-
 											<div class="card-header bg-transparent border-0">
 												<h3 class="mb-0">Appointments </h3>
 											</div>
-
 											<div class="card-body pt-0">
 												<table class="table table-bordered" id="appointment_list">
 													<thead>
@@ -299,18 +281,34 @@ if (isset($_GET['logout'])) {
 															$hospital = $row['hospital'];
 															$clinic = $row['clinic'];
 															$time = $row['time'];
-															$appointment_time=date("Y-m-d H:i:s", strtotime("$date $time"));
+														$appointment_time = date("Y-m-d H:i:s", strtotime("$date $time"));
+														$currentTime = time();
+														echo $appointment_time;
+														$dateToday = date("Y-m-d");
+														if ($currentTime > strtotime($appointment_time)) {
 
-															$current_time = time();
-
-															if($current_time > strtotime($appointment_time)){
-																$sql = "DELETE FROM appointments WHERE  'time'= '$appointment_time'";
-																if ($conn->query($sql) === TRUE) {
-																	echo "Appointment deleted successfully";
-																  } else {
-																	echo "Error deleting appointment: ";
-																  }
+															$conn = new mysqli("localhost", "root", "", "phptrials-smartmedi");
+															if ($conn->connect_error) {
+																die("Connection failed: " . $conn->connect_error);
 															}
+															$appointment_time = mysqli_real_escape_string($conn, $appointment_time);
+															$dateToday = mysqli_real_escape_string($conn, $dateToday);
+															$sql = "DELETE FROM appointments WHERE `time`= '$appointment_time' && `date`='$dateToday'";
+															if ($conn->query($sql) === TRUE) {
+																echo "Appointment cancelled because you missed it. Please schedule another appointment";
+															} 
+														
+														}
+														while ($row = mysqli_fetch_array($res)) {
+															$number = $counter;
+															$counter++;
+															$IDNo = $row['IDNo'];
+															$date = $row['date'];
+															$hospital = $row['hospital'];
+															$clinic = $row['clinic'];
+															$time = $row['time'];
+
+															
 														?>
 
 															<tr>
@@ -320,43 +318,25 @@ if (isset($_GET['logout'])) {
 																<td><?php echo $row['hospital'] ?></td>
 																<td><?php echo $row['clinic'] ?></td>
 																<td><?php echo $row['time'] ?></td>
-																<td><button id="delete" onclick="myFunction()">Delete</button></td>
-
-
+																<!-- <td><button id="delete" onclick="myFunction()">Delete</button></td> -->
+																<td><button class="delete-btn" data-id="<?php echo $IDNo; ?>">Delete</button></td>
 															</tr>
-
-														<?php } ?>
+														<?php }
+														} ?>
 													</tbody>
 												</table>
 											</div>
-
-
-
 										</div>
-
-
-
-
-
-
-
-
 									</div>
 								</div>
-
 							</div>
-
-
 						</div>
 					</div>
 					<!-- partial -->
-
 				</div>
 			</div>
 		</div>
 		</section>
-
-
 		<!-- End menu    -->
 
 		<!-- Start popup -->
@@ -374,7 +354,31 @@ if (isset($_GET['logout'])) {
 				</div>
 			</div>
 		</div>
+
 		<!-- End popup -->
+
+		<?php
+		$conn = new mysqli("localhost", "root", "", "phptrials-smartmedi");
+		if ($conn->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+		}
+		if (isset($_POST['delete'])) {
+			$id = $_POST['id'];
+
+			// code to delete the record from the database
+			$query = "DELETE FROM appointments WHERE IDNo = $unique";
+			$result = mysqli_query($conn, $query);
+
+			if ($result) {
+				// success message
+				echo "Record deleted successfully";
+			} else {
+				// error message
+				echo "Error deleting record";
+			}
+		}
+		?>
+
 
 		<script src="dashboardjs/jquery.min.js"></script>
 		<script src="dashboardjs/bootstrap.min.js"></script>
@@ -385,9 +389,28 @@ if (isset($_GET['logout'])) {
 		<script type="text/javascript"></script>
 
 		<script>
-			function myFunction() {
-				var query = "DELETE FROM appointments WHERE IDNO='" + unique + "' AND date='" + date + "' AND time='" + time + "'";
-			}
+			$(document).ready(function() {
+				$('.delete-btn').click(function() {
+					var id = $(this).data('id');
+
+					if (confirm("Are you sure you want to delete this record?")) {
+						$.ajax({
+							url: '',
+							method: 'POST',
+							data: {
+								delete: 1,
+								id: id
+							},
+							success: function(response) {
+								alert(response);
+							}
+						});
+					}
+				});
+			});
+			// function myFunction() {
+			// 	var query = "DELETE FROM appointments WHERE IDNO='" + unique + "' AND date='" + date + "' AND time='" + time + "'";
+			// }
 		</script>
 		<script>
 			var coll = document.getElementsByClassName("collapsible");
