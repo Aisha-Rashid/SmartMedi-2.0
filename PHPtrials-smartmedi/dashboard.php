@@ -53,48 +53,7 @@ if (isset($_GET['logout'])) {
 		//echo $array[1];
 
 	?>
-		<?php
-		$conn = new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or die(mysqli_error($conn));
-		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-			// Check if a file was uploaded
-			if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
-				// Get the file details
-				$fileName = basename($_FILES['image']['name']);
-				$fileSize = $_FILES['image']['size'];
-				$fileType = $_FILES['image']['type'];
-				$tmpName  = $_FILES['image']['tmp_name'];
-
-				// Validate the file type
-				$allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
-				if (!in_array($fileType, $allowedTypes)) {
-					// Display an error message
-					echo 'Error: Only JPEG, PNG, and GIF files are allowed';
-					exit;
-				}
-
-				// Validate the file size
-				if ($fileSize > 500000) {
-					// Display an error message
-					echo 'Error: File size must be less than 500KB';
-					exit;
-				}
-
-				// Generate a unique filename
-				$fileName = uniqid() . '.' . pathinfo($fileName, PATHINFO_EXTENSION);
-
-				// Save the uploaded file
-				move_uploaded_file($tmpName, "files/$fileName");
-
-				$query = $conn->query("INSERT INTO patients (pic) VALUES ('$fileName')");
-
-				// Display a success message
-				echo 'File uploaded successfully';
-			} else {
-				// Display an error message
-				echo 'Error: No file was uploaded';
-			}
-		}
-		?>
+		
 
 
 		<!-- Start menu -->
@@ -128,6 +87,7 @@ if (isset($_GET['logout'])) {
 
 						<li>Overview</li>
 					</ol>
+					
 					<div class="student-profile py-4">
 						<div class="container">
 							<div class="row">
@@ -139,13 +99,14 @@ if (isset($_GET['logout'])) {
 												<span class="glyphicon glyphicon-camera"></span>
 												<span>Change Image</span>
 											</label>
-											<input id="file" type="file" onchange="loadFile(event)" />
-											<img src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg" id="output" width="200" />
+											
+											<input id="file" type="file"  onchange="loadFile(event)" />
+											<img src="https://www.pngkey.com/png/detail/349-3499617_person-placeholder-person-placeholder.png" id="output" width="200" />
+											
 										</div>
-
-
+						
 										<div class="card-header bg-transparent text-center">
-											<!-- <form action="" method="post" enctype="multipart/form-data">
+											<!-- <form action="" method="post" enctype="multipart/form-data"><form method="POST" action=""></form>
 		  <input type="file" id="fileInput" accept="image/*" style="display:none !important" />
 		  <img  class="profile_img" id="preview" src="https://www.pngkey.com/png/detail/349-3499617_person-placeholder-person-placeholder.png" alt="Image preview" />
 			</form> -->
@@ -379,6 +340,7 @@ if (isset($_GET['logout'])) {
 											</div>
 										</div>
 										<br>
+										
 
 										<br>
 
@@ -442,7 +404,7 @@ if (isset($_GET['logout'])) {
 
 
 		<script>
-			function loadFile(event) {
+function loadFile(event) {
 				var output = document.getElementById("output");
 				output.src = URL.createObjectURL(event.target.files[0]);
 
@@ -451,7 +413,7 @@ if (isset($_GET['logout'])) {
 
 				$.ajax({
 					type: "POST",
-					url: "upload.php",
+					url: "pic.php",
 					data: data,
 					processData: false,
 					contentType: false,
@@ -463,7 +425,7 @@ if (isset($_GET['logout'])) {
 					}
 				});
 			}
-		</script>
+</script>
 
 
 	<?php endif ?>
