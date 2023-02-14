@@ -113,18 +113,33 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 
           </li>
           <li class="active"><a href="#"><i class="fa fa-home"></i>Dashboard</a></li>
-          <li class="sub open">
+		  <li><a href="manage-users.php"><i class="fa fa-users"></i> Manage Users</a></li>
+          <li class="sub">
             <a href="javascript:;">
-              <i class="fa fa-database"></i> Nested Menu <div class="pull-right"><span class="caret"></span></div>
+              <i class="fa fa-cubes"></i> Data Visualization<div class="pull-right"><span class="caret"></span></div>
             </a>
             <ul class="templatemo-submenu">
-              <li><a href="manage-users.php"><i class="fa fa-users"></i> Manage Users</a></li>
+              
+              <li><a href="patientchart.php"><i class="fa fa-users"></i> Patients Onboard</a></li>
+			  <li><a href="gendercomparison.php"><i class="fa fa-venus-mars" ></i> Gender Comparison</a></li>
+			  <li><a href="hospitalchart.php"><i class="fa fa-venus-mars"></i> Hospitals Onboard</a></li>
+              
+
+            </ul>
+          </li>
+		  <li class="sub">
+            <a href="javascript:;">
+              <i class="fa fa-bar-chart-o"></i> Data Analysis per county <div class="pull-right"><span class="caret"></span></div>
+            </a>
+            <ul class="templatemo-submenu">
+              <li><a href="central.php"><i class="fa fa-map-marker"></i> Central Region Counties</a></li>
+			  <li><a href="eastern.php"><i class="fa fa-map-marker"></i> Eastern Region Counties</a></li>
               <li><a href="chart.php"><i class="fa fa-cubes"></i> Data Visualization</a></li>
               <li><a href="maps.html"><i class="fa fa-file-text"></i> Reports</a></li>
 
             </ul>
           </li>
-
+			<li><a href="maps.html"><i class="fa fa-file-text"></i> Reports</a></li>
           <li><a href="preferences.html"><i class="fa fa-cog"></i>Preferences</a></li>
           <li><a href="javascript:;" data-toggle="modal" data-target="#confirmModal"><i class="fa fa-sign-out"></i>Sign Out</a></li>
         </ul>

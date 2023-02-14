@@ -40,8 +40,8 @@ if (isset($_GET['logout'])) {
 		<link rel="stylesheet" href="dashboardcss/templatemo_main.css">
 		<link rel="shortcut icon" href="dashboardimages/favicon.ico" type="image/x-icon">
 		<link rel="apple-touch-icon" href="dashboardimages/apple-touch-icon.png">
-		<!--Password eye icon>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"-->
+		<!--Password eye icon-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 		
 	</head>
 
@@ -256,11 +256,11 @@ die(mysqli_error($conn));
 									<tr><td><h4>Town :</h4></td><td><input type="text" class="form-control" name="town"></td></tr>
 									<tr><td colspan = "2" ><h4><u><b>Change Password </b></u></h4></td></tr>
 									<tr><td><h4>Enter current password :</h4></td><td><input type="password" class="form-control" id="current_password" name="current_password">
-									<!--span toggle="#current_password" class="fa fa-fw fa-eye field-icon toggle-password"></span--></td></tr>
+									<span toggle="#current_password" class="fa fa-fw fa-eye field-icon toggle-password" ></span></td></tr>
 									<tr><td><h4>New Password :</h4></td><td><input type="password" class="form-control" id="new_password" name="new_password">
-									<!--span toggle="#new_password" class="fa fa-fw fa-eye field-icon toggle-password"></span--></td></tr>
+									<span toggle="#new_password" class="fa fa-fw fa-eye field-icon toggle-password"></span></td></tr>
 									<tr><td><h4>Confirm Password :</h4></td><td><input type="password" class="form-control" id="conf_password" name="conf_password">
-									<!--span toggle="#conf_password" class="fa fa-fw fa-eye field-icon toggle-password"></span--></td></tr>
+									<span toggle="#conf_password" class="fa fa-fw fa-eye field-icon toggle-password"></span></td></tr>
 									
 								</table>
 								<br><br>
@@ -540,6 +540,7 @@ die(mysqli_error($conn));
 		<script src="dashboardjs/Graph.js"></script>
 		<script src="dashboardjs/appointment.js"></script>
 		<script type="text/javascript"></script>
+		<script src="js/passwordToggle.js"></script>
 		<!--script src="js/password-validator.js"></script-->
 
 		<script>

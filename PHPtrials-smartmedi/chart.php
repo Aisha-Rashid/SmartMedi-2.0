@@ -36,162 +36,8 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
    
    $unique = $_SESSION['workID'];
    
-   //Patient vs gender pie chart
-   $AllDataRes1 = mysqli_query($db, "select * from patients where gender = 'Female'");
-   $totalFemales = mysqli_num_rows($AllDataRes1);
    
-   $AllDataRes2 = mysqli_query($db, "select * from patients where gender = 'Male'");
-   $totalMales = mysqli_num_rows($AllDataRes2);
-   
-   
-   //Patients per county pie chart
-   $nairobi_patient_query = mysqli_query($db, "SELECT * FROM patients WHERE county='Nairobi City'");
-   $total_nairobi_patient = mysqli_num_rows($nairobi_patient_query);
-   
-   $central_patient_query = mysqli_query($db, "SELECT * FROM patients WHERE county IN ('Nyandarua', 'Nyeri', 'Kirinyaga', 'Murang''a', 'Kiambu')");
-   $total_central_patient = mysqli_num_rows($central_patient_query);
-   
-   $eastern_patient_query = mysqli_query($db, "SELECT * FROM patients WHERE county IN ('Marsabit', 'Isiolo', 'Meru', 'Tharaka-Nithi', 'Embu', 'Kitui', 'Machakos', 'Makueni')");
-   $total_eastern_patient = mysqli_num_rows($eastern_patient_query);
-   
-   $western_patient_query = mysqli_query($db, "SELECT * FROM patients WHERE county IN ('Kakamega', 'Vihiga', 'Busia', 'Bungoma')");
-   $total_western_patient = mysqli_num_rows($western_patient_query);
-   
-   $nyanza_patient_query = mysqli_query($db, "SELECT * FROM patients WHERE county IN ('Kisumu', 'Siaya', 'Homa Bay', 'Migori', 'Nyamira', 'Kisii')");
-   $total_nyanza_patient = mysqli_num_rows($nyanza_patient_query);
-   
-   $rift_patient_query = mysqli_query($db, "SELECT * FROM patients WHERE county IN ('Turkana', 'West Pokot', 'Samburu', 'Trans Nzoia', 'Uasin Gishu', 'Elgeyo/Marakwet', 'Nandi',
-   'Baringo', 'Laikipia', 'Nakuru', 'Narok', 'Kajiado', 'Kericho', 'Bomet')");
-   $total_rift_patient = mysqli_num_rows($rift_patient_query);
-   
-   $northern_patient_query = mysqli_query($db, "SELECT * FROM patients WHERE county IN ('Garissa', 'Wajir', 'Mandera')");
-   $total_northern_patient = mysqli_num_rows($northern_patient_query);
-   
-   $coast_patient_query = mysqli_query($db, "SELECT * FROM patients WHERE county IN ('Mombasa', 'Kwale', 'Kilifi', 'Tana River', 'Lamu', 'Taita/Taveta')");
-   $total_coast_patient = mysqli_num_rows($coast_patient_query);
-   
-   //Patients per county per gender pie chart
-	   //Male
-	   $nairobi_patientM_query = mysqli_query($db, "SELECT * FROM patients WHERE county ='Nairobi City' AND gender='Male'");
-	   $total_nairobi_patientM = mysqli_num_rows($nairobi_patientM_query);
-	   
-	   $central_patientM_query = mysqli_query($db, "SELECT * FROM patients WHERE county IN ('Nyandarua', 'Nyeri', 'Kirinyaga', 'Murang''a', 'Kiambu') AND gender='Male'");
-	   $total_central_patientM = mysqli_num_rows($central_patientM_query);
-	   
-	   $eastern_patientM_query = mysqli_query($db, "SELECT * FROM patients WHERE county IN ('Marsabit', 'Isiolo', 'Meru', 'Tharaka-Nithi', 'Embu', 'Kitui', 'Machakos', 'Makueni') AND gender='Male'");
-	   $total_eastern_patientM = mysqli_num_rows($eastern_patientM_query);
-	   
-	   $western_patientM_query = mysqli_query($db, "SELECT * FROM patients WHERE county IN ('Kakamega', 'Vihiga', 'Busia', 'Bungoma') AND gender='Male'");
-	   $total_western_patientM = mysqli_num_rows($western_patientM_query);
-	   
-	   $nyanza_patientM_query = mysqli_query($db, "SELECT * FROM patients WHERE county IN ('Kisumu', 'Siaya', 'Homa Bay', 'Migori', 'Nyamira', 'Kisii') AND gender='Male'");
-	   $total_nyanza_patientM = mysqli_num_rows($nyanza_patientM_query);
-	   
-	   $rift_patientM_query = mysqli_query($db, "SELECT * FROM patients WHERE county IN ('Turkana', 'West Pokot', 'Samburu', 'Trans Nzoia', 'Uasin Gishu', 'Elgeyo/Marakwet', 'Nandi',
-	   'Baringo', 'Laikipia', 'Nakuru', 'Narok', 'Kajiado', 'Kericho', 'Bomet') AND gender='Male'");
-	   $total_rift_patientM = mysqli_num_rows($rift_patientM_query);
-	   
-	   $northern_patientM_query = mysqli_query($db, "SELECT * FROM patients WHERE county IN ('Garissa', 'Wajir', 'Mandera') AND gender='Male'");
-	   $total_northern_patientM = mysqli_num_rows($northern_patientM_query);
-	   
-	   $coast_patientM_query = mysqli_query($db, "SELECT * FROM patients WHERE county IN ('Mombasa', 'Kwale', 'Kilifi', 'Tana River', 'Lamu', 'Taita/Taveta') AND gender='Male'");
-	   $total_coast_patientM = mysqli_num_rows($coast_patientM_query);
-	   
-	   //Female
-	   $nairobi_patientF_query = mysqli_query($db, "SELECT * FROM patients WHERE county IN ('Nairobi City') AND gender='Female'");
-	   $total_nairobi_patientF = mysqli_num_rows($nairobi_patientF_query);
-	   
-	   $central_patientF_query = mysqli_query($db, "SELECT * FROM patients WHERE county IN ('Nyandarua', 'Nyeri', 'Kirinyaga', 'Murang''a', 'Kiambu') AND gender='Female'");
-	   $total_central_patientF = mysqli_num_rows($central_patientF_query);
-	   
-	   $eastern_patientF_query = mysqli_query($db, "SELECT * FROM patients WHERE county IN ('Marsabit', 'Isiolo', 'Meru', 'Tharaka-Nithi', 'Embu', 'Kitui', 'Machakos', 'Makueni') AND gender='Female'");
-	   $total_eastern_patientF = mysqli_num_rows($eastern_patientF_query);
-	   
-	   $western_patientF_query = mysqli_query($db, "SELECT * FROM patients WHERE county IN ('Kakamega', 'Vihiga', 'Busia', 'Bungoma') AND gender='Female'");
-	   $total_western_patientF = mysqli_num_rows($western_patientF_query);
-	   
-	   $nyanza_patientF_query = mysqli_query($db, "SELECT * FROM patients WHERE county IN ('Kisumu', 'Siaya', 'Homa Bay', 'Migori', 'Nyamira', 'Kisii') AND gender='Female'");
-	   $total_nyanza_patientF = mysqli_num_rows($nyanza_patientF_query);
-	   
-	   $rift_patientF_query = mysqli_query($db, "SELECT * FROM patients WHERE county IN ('Turkana', 'West Pokot', 'Samburu', 'Trans Nzoia', 'Uasin Gishu', 'Elgeyo/Marakwet', 'Nandi',
-	   'Baringo', 'Laikipia', 'Nakuru', 'Narok', 'Kajiado', 'Kericho', 'Bomet') AND gender='Female'");
-	   $total_rift_patientF = mysqli_num_rows($rift_patientF_query);
-	   
-	   $northern_patientF_query = mysqli_query($db, "SELECT * FROM patients WHERE county IN ('Garissa', 'Wajir', 'Mandera') AND gender='Female'");
-	   $total_northern_patientF = mysqli_num_rows($northern_patientF_query);
-	   
-	   $coast_patientF_query = mysqli_query($db, "SELECT * FROM patients WHERE county IN ('Mombasa', 'Kwale', 'Kilifi', 'Tana River', 'Lamu', 'Taita/Taveta') AND gender='Female'");
-	   $total_coast_patientF = mysqli_num_rows($coast_patientF_query);
-   
-   
-   
-   //Hospitals per county Bar graph
-   $nairobi_hosp_query = mysqli_query($db, "SELECT hospitalname FROM hospitals WHERE county='Nairobi City'");
-   $total_nairobi_hosp = mysqli_num_rows($nairobi_hosp_query);
-   
-   $central_hosp_query = mysqli_query($db, "SELECT hospitalname FROM hospitals WHERE county IN ('Nyandarua', 'Nyeri', 'Kirinyaga', 'Murang''a', 'Kiambu')");
-   $total_central_hosp = mysqli_num_rows($central_hosp_query);
-   
-   $eastern_hosp_query = mysqli_query($db, "SELECT hospitalname FROM hospitals WHERE county IN ('Marsabit', 'Isiolo', 'Meru', 'Tharaka-Nithi', 'Embu', 'Kitui', 'Machakos', 'Makueni')");
-   $total_eastern_hosp = mysqli_num_rows($eastern_hosp_query);
-   
-   $western_hosp_query = mysqli_query($db, "SELECT hospitalname FROM hospitals WHERE county IN ('Kakamega', 'Vihiga', 'Busia', 'Bungoma')");
-   $total_western_hosp = mysqli_num_rows($western_hosp_query);
-   
-   $nyanza_hosp_query = mysqli_query($db, "SELECT hospitalname FROM hospitals WHERE county IN ('Kisumu', 'Siaya', 'Homa Bay', 'Migori', 'Nyamira', 'Kisii')");
-   $total_nyanza_hosp = mysqli_num_rows($nyanza_hosp_query);
-   
-   $rift_hosp_query = mysqli_query($db, "SELECT hospitalname FROM hospitals WHERE county IN ('Turkana', 'West Pokot', 'Samburu', 'Trans Nzoia', 'Uasin Gishu', 'Elgeyo/Marakwet', 'Nandi',
-   'Baringo', 'Laikipia', 'Nakuru', 'Narok', 'Kajiado', 'Kericho', 'Bomet')");
-   $total_rift_hosp = mysqli_num_rows($rift_hosp_query);
-   
-   $northern_hosp_query = mysqli_query($db, "SELECT hospitalname FROM hospitals WHERE county IN ('Garissa', 'Wajir', 'Mandera')");
-   $total_northern_hosp = mysqli_num_rows($northern_hosp_query);
-   
-   $coast_hosp_query = mysqli_query($db, "SELECT hospitalname FROM hospitals WHERE county IN ('Mombasa', 'Kwale', 'Kilifi', 'Tana River', 'Lamu', 'Taita/Taveta')");
-   $total_coast_hosp = mysqli_num_rows($coast_hosp_query);
-   
-   
-   //No. of patients per illness Bar graph
-	$AllDataRes1 = mysqli_query($db, "SELECT * FROM `response` WHERE `conditions` LIKE '%Cancer%'");
-   $totalCancer = mysqli_num_rows($AllDataRes1);
-   
-   $AllDataRes2 = mysqli_query($db, "SELECT * FROM `response` WHERE `conditions` LIKE '%Cardiovascular%'");
-   $totalCardiovascular = mysqli_num_rows($AllDataRes2);
-   
-   $AllDataRes3 = mysqli_query($db, "SELECT * FROM `response` WHERE `conditions` LIKE '%Respiratory%'");
-   $totalRespiratory = mysqli_num_rows($AllDataRes3);
-   
-   $AllDataRes4 = mysqli_query($db, "SELECT * FROM `response` WHERE `conditions` LIKE '%Endocrine%'");
-   $totalEndocrine = mysqli_num_rows($AllDataRes4);
-   
-   $AllDataRes5 = mysqli_query($db, "SELECT * FROM `response` WHERE `conditions` LIKE '%Eye%'");
-   $totalEye = mysqli_num_rows($AllDataRes5);
-   
-   $AllDataRes6 = mysqli_query($db, "SELECT * FROM `response` WHERE `conditions` LIKE '%Gastro-intestinal%'");
-   $totalGastro = mysqli_num_rows($AllDataRes6);
-   
-   $AllDataRes7 = mysqli_query($db, "SELECT * FROM `response` WHERE `conditions` LIKE '%Gynaecological%'");
-   $totalGynaecological = mysqli_num_rows($AllDataRes7);
-   
-   $AllDataRes8 = mysqli_query($db, "SELECT * FROM `response` WHERE `conditions` LIKE '%Genitourinary%'");
-   $totalGenitourinary = mysqli_num_rows($AllDataRes8);
-   
-   $AllDataRes9 = mysqli_query($db, "SELECT * FROM `response` WHERE `conditions` LIKE '%Musculoskeletal%'");
-   $totalMusculoskeletal = mysqli_num_rows($AllDataRes9);
-   
-   $AllDataRes10 = mysqli_query($db, "SELECT * FROM `response` WHERE `conditions` LIKE '%Neurological%'");
-   $totalNeurological = mysqli_num_rows($AllDataRes10);
-   
-   $AllDataRes11 = mysqli_query($db, "SELECT * FROM `response` WHERE `conditions` LIKE '%Blood%'");
-   $totalBlood = mysqli_num_rows($AllDataRes11);
-   
-   $AllDataRes12 = mysqli_query($db, "SELECT * FROM `response` WHERE `conditions` LIKE '%Congenital%'");
-   $totalCongenital = mysqli_num_rows($AllDataRes12);
-   
-   $AllDataRes13 = mysqli_query($db, "SELECT * FROM `response` WHERE `conditions` LIKE '%Skin%'");
-   $totalSkin = mysqli_num_rows($AllDataRes13);
-   
+   include ('data-visualization.php');
   
    ?>
   <div id="main-wrapper">
@@ -220,6 +66,18 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
               <li class="active"><a href="#"><i class="fa fa-cubes"></i> Data Visualization</a></li>
           <li><a href="maps.html"><i class="fa fa-file-text"></i> Reports</a></li>
           
+            </ul>
+          </li>
+		  <li class="sub">
+            <a href="javascript:;">
+              <i class="fa fa-bar-chart-o"></i> Data Analysis per county <div class="pull-right"><span class="caret"></span></div>
+            </a>
+            <ul class="templatemo-submenu">
+              <li><a href="central.php"><i class="fa fa-map-marker"></i> Central Region Counties</a></li>
+			  <li><a href="eastern.php"><i class="fa fa-map-marker"></i> Eastern Region Counties</a></li>
+              <li><a href="chart.php"><i class="fa fa-cubes"></i> Data Visualization</a></li>
+              <li><a href="maps.html"><i class="fa fa-file-text"></i> Reports</a></li>
+
             </ul>
           </li>
           
@@ -254,7 +112,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 					<div class="tab-pane fade in active" id="patient_data">
 						
 						<div class="table-responsive">
-						
+						<table>
 						<div class="templatemo-chart-box col-sm-6 col-xs-12">
 							<div>
 							  <canvas id="PatientPieChart"></canvas>
@@ -267,6 +125,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 							  <p><b><u><i>Total registered patients per province</i></u></b></p>
 							</div>
 						</div>
+						</table>
 						</div>
 							
 					</div>
@@ -274,44 +133,41 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 					<div class="tab-pane fade in active" id="hospital_data">
 						
 						<div class="table-responsive">
+						<table>
 							<div>
 							  <canvas id="HospitalsChart"></canvas>
 							  <p align="center"><b><u><i>Total registered hospitals per province</i></u></b></p>
 							</div>
+							</table>
 						</div>
 					</div>
 					<div class="tab-pane fade in active" id="gender_data">
 						
 						<div class="table-responsive">
+						<table>
 							<div>
 							  <canvas id="GenderChart"></canvas>
 							  <p align="center"><b><u><i>Gender comparison per province</i></u></b></p>
 							</div>
+							</table>
 						</div>
 					</div>
 					<div class="tab-pane fade in active" id="condition_data">
 						
 						<div class="table-responsive">
+						<table>
 							<div>
 							  <canvas id="ConditionChart"></canvas>
 							  <p align="center"><b><u><i>Illness concentration</i></u></b></p>
 							</div>
+							<!--div>
+							  <canvas id="CentralBarChart"></canvas>
+							  <p><b><u><i>Central Region</i></u></b></p>
+							</div-->
+							</table>
 						</div>
 					</div>
-					
-					
-					
 				</div>
-					
-
-
-
-
-
-		  
-          
-            
-			
         </div>
       </div>
 	   </div>
@@ -374,7 +230,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
   new Chart(ctx_piePatients, {
     type: 'pie',
     data: {
-      labels: ['Male', 'Female'],
+      labels: ['Female', 'Male'],
       datasets: [{
         label: '# of Patients',
         data: [<?php echo $totalFemales; ?>, <?php echo $totalMales; ?> ],
@@ -395,7 +251,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
         label: '# of Patients',
         data: [<?php echo $total_nairobi_patient; ?>, <?php echo $total_central_patient; ?>, <?php echo $total_eastern_patient; ?>, <?php echo $total_western_patient; ?>, 
 		<?php echo $total_nyanza_patient; ?>, <?php echo $total_rift_patient; ?>, <?php echo $total_northern_patient; ?>, <?php echo $total_coast_patient; ?> ],
-		 
+		 backgroundColor: ['rgba(66, 239, 245)', 'rgba(245, 170,66)', 'rgba(66, 245, 78)', 'rgba(245, 81, 66)', 'rgba(206, 66, 245)', 'rgba(223, 235, 233)', 'rgba(201, 36, 89)', 'rgba(66, 81, 245)'],
         
       }]
     },
@@ -441,13 +297,78 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
       labels: ['Cancer', 'Cardiovascular', 'Respiratory', 'Endocrine', 'Eye disorders', 'Gastro-intestinal', 'Gynaecological','Genitourinary','Musculoskeletal',
 	  'Neurological', 'Blood disorders','Congenital','Skin disorders'],
       datasets: [{
-        label: '# of Patients',
+        label: '# Nairobi',
+        data: [<?php echo $totalCancerNrb; ?>, <?php echo $totalCardiovascularNrb; ?>, <?php echo $totalRespiratoryNrb; ?>, <?php echo $totalEndocrineNrb; ?>, 
+		<?php echo $totalEyeNrb; ?>, <?php echo $totalGastroNrb; ?>, <?php echo $totalGynaecologicalNrb; ?>, <?php echo $totalGenitourinaryNrb; ?>, 
+		<?php echo $totalMusculoskeletalNrb; ?> , <?php echo $totalNeurologicalNrb; ?>, <?php echo $totalBloodNrb; ?>, <?php echo $totalCongenitalNrb; ?>, <?php echo $totalSkinNrb; ?>		],
+		 backgroundColor: 'rgba(66, 239, 245)',
+        borderWidth: 1
+      },
+	  {
+        label: '# Central',
+        data: [<?php echo $totalCancerCen; ?>, <?php echo $totalCardiovascularCen; ?>, <?php echo $totalRespiratoryCen; ?>, <?php echo $totalEndocrineCen; ?>, 
+		<?php echo $totalEyeCen; ?>, <?php echo $totalGastroCen; ?>, <?php echo $totalGynaecologicalCen; ?>, <?php echo $totalGenitourinaryCen; ?>, 
+		<?php echo $totalMusculoskeletalCen; ?> , <?php echo $totalNeurologicalCen; ?>, <?php echo $totalBloodCen; ?>, <?php echo $totalCongenitalCen; ?>, <?php echo $totalSkinCen; ?>		],
+		 backgroundColor: 'rgba(245, 170, 66)',
+        borderWidth: 1
+      },
+	  {
+        label: '# Eastern',
+        data: [<?php echo $totalCancerEast; ?>, <?php echo $totalCardiovascularEast; ?>, <?php echo $totalRespiratoryEast; ?>, <?php echo $totalEndocrineEast; ?>, 
+		<?php echo $totalEyeEast; ?>, <?php echo $totalGastroEast; ?>, <?php echo $totalGynaecologicalEast; ?>, <?php echo $totalGenitourinaryEast; ?>, 
+		<?php echo $totalMusculoskeletalEast; ?> , <?php echo $totalNeurologicalEast; ?>, <?php echo $totalBloodEast; ?>, <?php echo $totalCongenitalEast; ?>, <?php echo $totalSkinEast; ?>		],
+		 backgroundColor: 'rgba(66, 245, 78)',
+        borderWidth: 1
+      },
+	  {
+        label: '# Western',
+        data: [<?php echo $totalCancerWest; ?>, <?php echo $totalCardiovascularWest; ?>, <?php echo $totalRespiratoryWest; ?>, <?php echo $totalEndocrineWest; ?>, 
+		<?php echo $totalEyeWest; ?>, <?php echo $totalGastroWest; ?>, <?php echo $totalGynaecologicalWest; ?>, <?php echo $totalGenitourinaryWest; ?>, 
+		<?php echo $totalMusculoskeletalWest; ?> , <?php echo $totalNeurologicalWest; ?>, <?php echo $totalBloodWest; ?>, <?php echo $totalCongenitalWest; ?>, <?php echo $totalSkinWest; ?>		],
+		 backgroundColor: 'rgba(245, 81, 66)',
+        borderWidth: 1
+      },
+	  {
+        label: '# Nyanza',
+        data: [<?php echo $totalCancerNy; ?>, <?php echo $totalCardiovascularNy; ?>, <?php echo $totalRespiratoryNy; ?>, <?php echo $totalEndocrineNy; ?>, 
+		<?php echo $totalEyeNy; ?>, <?php echo $totalGastroNy; ?>, <?php echo $totalGynaecologicalNy; ?>, <?php echo $totalGenitourinaryNy; ?>, 
+		<?php echo $totalMusculoskeletalNy; ?> , <?php echo $totalNeurologicalNy; ?>, <?php echo $totalBloodNy; ?>, <?php echo $totalCongenitalNy; ?>, <?php echo $totalSkinNy; ?>		],
+		 backgroundColor: 'rgba(206, 66, 245)',
+        borderWidth: 1
+      },
+	  {
+        label: '# Rift',
+        data: [<?php echo $totalCancerRift; ?>, <?php echo $totalCardiovascularRift; ?>, <?php echo $totalRespiratoryRift; ?>, <?php echo $totalEndocrineRift; ?>, 
+		<?php echo $totalEyeRift; ?>, <?php echo $totalGastroRift; ?>, <?php echo $totalGynaecologicalRift; ?>, <?php echo $totalGenitourinaryRift; ?>, 
+		<?php echo $totalMusculoskeletalRift; ?> , <?php echo $totalNeurologicalRift; ?>, <?php echo $totalBloodRift; ?>, <?php echo $totalCongenitalRift; ?>, <?php echo $totalSkinRift; ?>		],
+		 backgroundColor: 'rgba(223, 235, 233)',
+        borderWidth: 1
+      },
+	  {
+        label: '# North',
+        data: [<?php echo $totalCancerNorth; ?>, <?php echo $totalCardiovascularNorth; ?>, <?php echo $totalRespiratoryNorth; ?>, <?php echo $totalEndocrineNorth; ?>, 
+		<?php echo $totalEyeNorth; ?>, <?php echo $totalGastroNorth; ?>, <?php echo $totalGynaecologicalNorth; ?>, <?php echo $totalGenitourinaryNorth; ?>, 
+		<?php echo $totalMusculoskeletalNorth; ?> , <?php echo $totalNeurologicalNorth; ?>, <?php echo $totalBloodNorth; ?>, <?php echo $totalCongenitalNorth; ?>, <?php echo $totalSkinNorth; ?>		],
+		 backgroundColor: 'rgba(201, 36, 89)',
+        borderWidth: 1
+      },
+	  {
+        label: '# Coast',
+        data: [<?php echo $totalCancerCoast; ?>, <?php echo $totalCardiovascularCoast; ?>, <?php echo $totalRespiratoryCoast; ?>, <?php echo $totalEndocrineCoast; ?>, 
+		<?php echo $totalEyeCoast; ?>, <?php echo $totalGastroCoast; ?>, <?php echo $totalGynaecologicalCoast; ?>, <?php echo $totalGenitourinaryCoast; ?>, 
+		<?php echo $totalMusculoskeletalCoast; ?> , <?php echo $totalNeurologicalCoast; ?>, <?php echo $totalBloodCoast; ?>, <?php echo $totalCongenitalCoast; ?>, <?php echo $totalSkinCoast; ?>		],
+		 backgroundColor: 'rgba(66, 81, 245)',
+        borderWidth: 1
+      },
+	  {
+        label: '# Total',
         data: [<?php echo $totalCancer; ?>, <?php echo $totalCardiovascular; ?>, <?php echo $totalRespiratory; ?>, <?php echo $totalEndocrine; ?>, 
 		<?php echo $totalEye; ?>, <?php echo $totalGastro; ?>, <?php echo $totalGynaecological; ?>, <?php echo $totalGenitourinary; ?>, 
 		<?php echo $totalMusculoskeletal; ?> , <?php echo $totalNeurological; ?>, <?php echo $totalBlood; ?>, <?php echo $totalCongenital; ?>, <?php echo $totalSkin; ?>		],
-		 backgroundColor: 'rgba(162, 236, 254)',
+		 backgroundColor: 'rgba(110, 224, 182)',
         borderWidth: 1
-      }]
+      }
+	  ]
     },
     options: {
       scales: {
@@ -456,6 +377,28 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
         }
       }
     }
+  });
+  
+  
+</script>
+<script>
+  $(document).ready(function(){
+    $("#templatemo-tabs a").click(function(){
+      switch($(this).attr("href")) {
+        case "#patient_data":
+          // Initialize the PatientPieChart and PatientCountyChart here
+          break;
+        case "#hospital_data":
+          // Initialize the HospitalsChart here
+          break;
+        case "#gender_data":
+          // Initialize the GenderChart here
+          break;
+        case "#condition_data":
+          // Initialize the ConditionChart here
+          break;
+      }
+    });
   });
 </script>
 

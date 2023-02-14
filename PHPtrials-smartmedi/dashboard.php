@@ -340,7 +340,6 @@ if (isset($_GET['logout'])) {
 											</div>
 										</div>
 										<br>
-										
 
 										<br>
 
