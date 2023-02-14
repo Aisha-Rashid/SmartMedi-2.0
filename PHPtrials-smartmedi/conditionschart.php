@@ -64,9 +64,9 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
             </a>
             <ul class="templatemo-submenu">
               
-              <li><a href="patientchart.php"><i class="fa fa-users"></i> Patients Onboard</a></li>
+              <li><a href="patientchart.php"><i class="fa fa-user"></i> Patients Onboard</a></li>
 			  <li><a href="gendercomparison.php"><i class="fa fa-venus-mars"></i> Gender Comparison</a></li>
-			  <li><a href="hospitalchart.php"><i class="fa fa-venus-mars"></i> Hospitals Onboard</a></li>
+			  <li class ="active"><a href="#"><i class="fa fa-hospital-o" ></i> Hospitals Onboard</a></li>
               
 
             </ul>
@@ -76,10 +76,10 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
               <i class="fa fa-bar-chart-o"></i> Data Analysis per county <div class="pull-right"><span class="caret"></span></div>
             </a>
             <ul class="templatemo-submenu">
-			  <li><a href="conditionschart.php"><i class="fa fa-medkit"></i> Conditions</a></li>
+			  <li class="active"><a href="#"><i class="fa fa-medkit"></i> Conditions</a></li>
 			  <li><a href="nairobi.php"><i class="fa fa-map-marker"></i> Nairobi Region</a></li>
               <li><a href="central.php"><i class="fa fa-map-marker"></i> Central Region Counties</a></li>
-			  <li class="active"><a href="eastern.php"><i class="fa fa-map-marker"></i> Eastern Region Counties</a></li>
+			  <li><a href="eastern.php"><i class="fa fa-map-marker"></i> Eastern Region Counties</a></li>
               
 
             </ul>
@@ -104,13 +104,16 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 
 			<div class="row">
 		  <div class="col-md-12 col-sm-12">
-		  <table>
+		 
+		 <table>
 							<div>
-							  <canvas id="EasternBarChart"></canvas>
-							  <p align="center"><b><u><i>Central Region</i></u></b></p>
+							  <canvas id="ConditionChart"></canvas>
+							  <p align="center"><b><u><i>Condition concentration per region</i></u></b></p>
 							</div>
-		  </table>
-		  
+							
+							</table>
+						
+		 
         </div>
       </div>
 	   </div>
@@ -146,75 +149,82 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-
-  const ctx_barEastern = document.getElementById('EasternBarChart');
-  new Chart(ctx_barEastern, {
+ const ctx_barCondition = document.getElementById('ConditionChart');
+  new Chart(ctx_barCondition, {
     type: 'bar',
     data: {
       labels: ['Cancer', 'Cardiovascular', 'Respiratory', 'Endocrine', 'Eye disorders', 'Gastro-intestinal', 'Gynaecological','Genitourinary','Musculoskeletal',
 	  'Neurological', 'Blood disorders','Congenital','Skin disorders'],
       datasets: [{
-        label: '# Embu',
-        data: [<?php echo $totalCancerEmbu; ?>, <?php echo $totalCardiovascularEmbu; ?>, <?php echo $totalRespiratoryEmbu; ?>, <?php echo $totalEndocrineEmbu; ?>, 
-		<?php echo $totalEyeEmbu; ?>, <?php echo $totalGastroEmbu; ?>, <?php echo $totalGynaecologicalEmbu; ?>, <?php echo $totalGenitourinaryEmbu; ?>, 
-		<?php echo $totalMusculoskeletalEmbu; ?> , <?php echo $totalNeurologicalEmbu; ?>, <?php echo $totalBloodEmbu; ?>, <?php echo $totalCongenitalEmbu; ?>, <?php echo $totalSkinEmbu; ?>		],
+        label: '# Nairobi',
+        data: [<?php echo $totalCancerNrb; ?>, <?php echo $totalCardiovascularNrb; ?>, <?php echo $totalRespiratoryNrb; ?>, <?php echo $totalEndocrineNrb; ?>, 
+		<?php echo $totalEyeNrb; ?>, <?php echo $totalGastroNrb; ?>, <?php echo $totalGynaecologicalNrb; ?>, <?php echo $totalGenitourinaryNrb; ?>, 
+		<?php echo $totalMusculoskeletalNrb; ?> , <?php echo $totalNeurologicalNrb; ?>, <?php echo $totalBloodNrb; ?>, <?php echo $totalCongenitalNrb; ?>, <?php echo $totalSkinNrb; ?>		],
 		 backgroundColor: 'rgba(66, 239, 245)',
         borderWidth: 1
       },
 	  {
-        label: '# Isiolo',
-        data: [<?php echo $totalCancerIsiolo; ?>, <?php echo $totalCardiovascularIsiolo; ?>, <?php echo $totalRespiratoryIsiolo; ?>, <?php echo $totalEndocrineIsiolo; ?>, 
-		<?php echo $totalEyeIsiolo; ?>, <?php echo $totalGastroIsiolo; ?>, <?php echo $totalGynaecologicalIsiolo; ?>, <?php echo $totalGenitourinaryIsiolo; ?>, 
-		<?php echo $totalMusculoskeletalIsiolo; ?> , <?php echo $totalNeurologicalIsiolo; ?>, <?php echo $totalBloodIsiolo; ?>, <?php echo $totalCongenitalIsiolo; ?>, <?php echo $totalSkinIsiolo; ?>		],
+        label: '# Central',
+        data: [<?php echo $totalCancerCen; ?>, <?php echo $totalCardiovascularCen; ?>, <?php echo $totalRespiratoryCen; ?>, <?php echo $totalEndocrineCen; ?>, 
+		<?php echo $totalEyeCen; ?>, <?php echo $totalGastroCen; ?>, <?php echo $totalGynaecologicalCen; ?>, <?php echo $totalGenitourinaryCen; ?>, 
+		<?php echo $totalMusculoskeletalCen; ?> , <?php echo $totalNeurologicalCen; ?>, <?php echo $totalBloodCen; ?>, <?php echo $totalCongenitalCen; ?>, <?php echo $totalSkinCen; ?>		],
 		 backgroundColor: 'rgba(245, 170, 66)',
         borderWidth: 1
       },
 	  {
-        label: '# Kitui',
-        data: [<?php echo $totalCancerKitui; ?>, <?php echo $totalCardiovascularKitui; ?>, <?php echo $totalRespiratoryKitui; ?>, <?php echo $totalEndocrineKitui; ?>, 
-		<?php echo $totalEyeKitui; ?>, <?php echo $totalGastroKitui; ?>, <?php echo $totalGynaecologicalKitui; ?>, <?php echo $totalGenitourinaryKitui; ?>, 
-		<?php echo $totalMusculoskeletalKitui; ?> , <?php echo $totalNeurologicalKitui; ?>, <?php echo $totalBloodKitui; ?>, <?php echo $totalCongenitalKitui; ?>, <?php echo $totalSkinKitui; ?>		],
+        label: '# Eastern',
+        data: [<?php echo $totalCancerEast; ?>, <?php echo $totalCardiovascularEast; ?>, <?php echo $totalRespiratoryEast; ?>, <?php echo $totalEndocrineEast; ?>, 
+		<?php echo $totalEyeEast; ?>, <?php echo $totalGastroEast; ?>, <?php echo $totalGynaecologicalEast; ?>, <?php echo $totalGenitourinaryEast; ?>, 
+		<?php echo $totalMusculoskeletalEast; ?> , <?php echo $totalNeurologicalEast; ?>, <?php echo $totalBloodEast; ?>, <?php echo $totalCongenitalEast; ?>, <?php echo $totalSkinEast; ?>		],
 		 backgroundColor: 'rgba(66, 245, 78)',
         borderWidth: 1
       },
 	  {
-        label: '# Machakos',
-        data: [<?php echo $totalCancerMachakos; ?>, <?php echo $totalCardiovascularMachakos; ?>, <?php echo $totalRespiratoryMachakos; ?>, <?php echo $totalEndocrineMachakos; ?>, 
-		<?php echo $totalEyeMachakos; ?>, <?php echo $totalGastroMachakos; ?>, <?php echo $totalGynaecologicalMachakos; ?>, <?php echo $totalGenitourinaryMachakos; ?>, 
-		<?php echo $totalMusculoskeletalMachakos; ?> , <?php echo $totalNeurologicalMachakos; ?>, <?php echo $totalBloodMachakos; ?>, <?php echo $totalCongenitalMachakos; ?>, <?php echo $totalSkinMachakos; ?>		],
+        label: '# Western',
+        data: [<?php echo $totalCancerWest; ?>, <?php echo $totalCardiovascularWest; ?>, <?php echo $totalRespiratoryWest; ?>, <?php echo $totalEndocrineWest; ?>, 
+		<?php echo $totalEyeWest; ?>, <?php echo $totalGastroWest; ?>, <?php echo $totalGynaecologicalWest; ?>, <?php echo $totalGenitourinaryWest; ?>, 
+		<?php echo $totalMusculoskeletalWest; ?> , <?php echo $totalNeurologicalWest; ?>, <?php echo $totalBloodWest; ?>, <?php echo $totalCongenitalWest; ?>, <?php echo $totalSkinWest; ?>		],
 		 backgroundColor: 'rgba(245, 81, 66)',
         borderWidth: 1
       },
 	  {
-        label: '# Makueni',
-        data: [<?php echo $totalCancerMakueni; ?>, <?php echo $totalCardiovascularMakueni; ?>, <?php echo $totalRespiratoryMakueni; ?>, <?php echo $totalEndocrineMakueni; ?>, 
-		<?php echo $totalEyeMakueni; ?>, <?php echo $totalGastroMakueni; ?>, <?php echo $totalGynaecologicalMakueni; ?>, <?php echo $totalGenitourinaryMakueni; ?>, 
-		<?php echo $totalMusculoskeletalMakueni; ?> , <?php echo $totalNeurologicalMakueni; ?>, <?php echo $totalBloodMakueni; ?>, <?php echo $totalCongenitalMakueni; ?>, <?php echo $totalSkinMakueni; ?>		],
+        label: '# Nyanza',
+        data: [<?php echo $totalCancerNy; ?>, <?php echo $totalCardiovascularNy; ?>, <?php echo $totalRespiratoryNy; ?>, <?php echo $totalEndocrineNy; ?>, 
+		<?php echo $totalEyeNy; ?>, <?php echo $totalGastroNy; ?>, <?php echo $totalGynaecologicalNy; ?>, <?php echo $totalGenitourinaryNy; ?>, 
+		<?php echo $totalMusculoskeletalNy; ?> , <?php echo $totalNeurologicalNy; ?>, <?php echo $totalBloodNy; ?>, <?php echo $totalCongenitalNy; ?>, <?php echo $totalSkinNy; ?>		],
 		 backgroundColor: 'rgba(206, 66, 245)',
         borderWidth: 1
       },
 	  {
-        label: '# Marsabit',
-        data: [<?php echo $totalCancerMarsabit; ?>, <?php echo $totalCardiovascularMarsabit; ?>, <?php echo $totalRespiratoryMarsabit; ?>, <?php echo $totalEndocrineMarsabit; ?>, 
-		<?php echo $totalEyeMarsabit; ?>, <?php echo $totalGastroMarsabit; ?>, <?php echo $totalGynaecologicalMarsabit; ?>, <?php echo $totalGenitourinaryMarsabit; ?>, 
-		<?php echo $totalMusculoskeletalMarsabit; ?> , <?php echo $totalNeurologicalMarsabit; ?>, <?php echo $totalBloodMarsabit; ?>, <?php echo $totalCongenitalMarsabit; ?>, <?php echo $totalSkinMarsabit; ?>		],
+        label: '# Rift',
+        data: [<?php echo $totalCancerRift; ?>, <?php echo $totalCardiovascularRift; ?>, <?php echo $totalRespiratoryRift; ?>, <?php echo $totalEndocrineRift; ?>, 
+		<?php echo $totalEyeRift; ?>, <?php echo $totalGastroRift; ?>, <?php echo $totalGynaecologicalRift; ?>, <?php echo $totalGenitourinaryRift; ?>, 
+		<?php echo $totalMusculoskeletalRift; ?> , <?php echo $totalNeurologicalRift; ?>, <?php echo $totalBloodRift; ?>, <?php echo $totalCongenitalRift; ?>, <?php echo $totalSkinRift; ?>		],
 		 backgroundColor: 'rgba(223, 235, 233)',
         borderWidth: 1
       },
 	  {
-        label: '# Meru',
-        data: [<?php echo $totalCancerMeru; ?>, <?php echo $totalCardiovascularMeru; ?>, <?php echo $totalRespiratoryMeru; ?>, <?php echo $totalEndocrineMeru; ?>, 
-		<?php echo $totalEyeMeru; ?>, <?php echo $totalGastroMeru; ?>, <?php echo $totalGynaecologicalMeru; ?>, <?php echo $totalGenitourinaryMeru; ?>, 
-		<?php echo $totalMusculoskeletalMeru; ?> , <?php echo $totalNeurologicalMeru; ?>, <?php echo $totalBloodMeru; ?>, <?php echo $totalCongenitalMeru; ?>, <?php echo $totalSkinMeru; ?>		],
+        label: '# North',
+        data: [<?php echo $totalCancerNorth; ?>, <?php echo $totalCardiovascularNorth; ?>, <?php echo $totalRespiratoryNorth; ?>, <?php echo $totalEndocrineNorth; ?>, 
+		<?php echo $totalEyeNorth; ?>, <?php echo $totalGastroNorth; ?>, <?php echo $totalGynaecologicalNorth; ?>, <?php echo $totalGenitourinaryNorth; ?>, 
+		<?php echo $totalMusculoskeletalNorth; ?> , <?php echo $totalNeurologicalNorth; ?>, <?php echo $totalBloodNorth; ?>, <?php echo $totalCongenitalNorth; ?>, <?php echo $totalSkinNorth; ?>		],
 		 backgroundColor: 'rgba(201, 36, 89)',
         borderWidth: 1
       },
 	  {
-        label: '# Tharaka-Nithi',
-        data: [<?php echo $totalCancerTharaka; ?>, <?php echo $totalCardiovascularTharaka; ?>, <?php echo $totalRespiratoryTharaka; ?>, <?php echo $totalEndocrineTharaka; ?>, 
-		<?php echo $totalEyeTharaka; ?>, <?php echo $totalGastroTharaka; ?>, <?php echo $totalGynaecologicalTharaka; ?>, <?php echo $totalGenitourinaryTharaka; ?>, 
-		<?php echo $totalMusculoskeletalTharaka; ?> , <?php echo $totalNeurologicalTharaka; ?>, <?php echo $totalBloodTharaka; ?>, <?php echo $totalCongenitalTharaka; ?>, <?php echo $totalSkinTharaka; ?>		],
+        label: '# Coast',
+        data: [<?php echo $totalCancerCoast; ?>, <?php echo $totalCardiovascularCoast; ?>, <?php echo $totalRespiratoryCoast; ?>, <?php echo $totalEndocrineCoast; ?>, 
+		<?php echo $totalEyeCoast; ?>, <?php echo $totalGastroCoast; ?>, <?php echo $totalGynaecologicalCoast; ?>, <?php echo $totalGenitourinaryCoast; ?>, 
+		<?php echo $totalMusculoskeletalCoast; ?> , <?php echo $totalNeurologicalCoast; ?>, <?php echo $totalBloodCoast; ?>, <?php echo $totalCongenitalCoast; ?>, <?php echo $totalSkinCoast; ?>		],
 		 backgroundColor: 'rgba(66, 81, 245)',
+        borderWidth: 1
+      },
+	  {
+        label: '# Total',
+        data: [<?php echo $totalCancer; ?>, <?php echo $totalCardiovascular; ?>, <?php echo $totalRespiratory; ?>, <?php echo $totalEndocrine; ?>, 
+		<?php echo $totalEye; ?>, <?php echo $totalGastro; ?>, <?php echo $totalGynaecological; ?>, <?php echo $totalGenitourinary; ?>, 
+		<?php echo $totalMusculoskeletal; ?> , <?php echo $totalNeurological; ?>, <?php echo $totalBlood; ?>, <?php echo $totalCongenital; ?>, <?php echo $totalSkin; ?>		],
+		 backgroundColor: 'rgba(110, 224, 182)',
         borderWidth: 1
       }
 	  ]
@@ -227,6 +237,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
       }
     }
   });
+  
 </script>
 
 

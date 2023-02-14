@@ -58,7 +58,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 				</li>
           <li ><a href="admindash.php"><i class="fa fa-home"></i>Dashboard</a></li>
           <li><a href="manage-users.php"><i class="fa fa-users"></i> Manage Users</a></li>
-          <li class="sub open">
+          <li class="sub">
             <a href="javascript:;">
               <i class="fa fa-cubes"></i> Data Visualization<div class="pull-right"><span class="caret"></span></div>
             </a>
@@ -71,13 +71,13 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 
             </ul>
           </li>
-		  <li class="sub">
+		  <li class="sub open">
             <a href="javascript:;">
               <i class="fa fa-bar-chart-o"></i> Data Analysis per county <div class="pull-right"><span class="caret"></span></div>
             </a>
             <ul class="templatemo-submenu">
 			  <li><a href="conditionschart.php"><i class="fa fa-medkit"></i> Conditions</a></li>
-			  <li><a href="nairobi.php"><i class="fa fa-map-marker"></i> Nairobi Region</a></li>
+			  <li class="active"><a href="#"><i class="fa fa-map-marker"></i> Nairobi Region</a></li>
               <li><a href="central.php"><i class="fa fa-map-marker"></i> Central Region Counties</a></li>
 			  <li><a href="eastern.php"><i class="fa fa-map-marker"></i> Eastern Region Counties</a></li>
               
@@ -107,9 +107,10 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 		 
 		 <table>
 							<div>
-							  <canvas id="HospitalsChart"></canvas>
-							  <p align="center"><b><u><i>Total registered hospitals per region</i></u></b></p>
+							  <canvas id="NairobiBarChart"></canvas>
+							  <p align="center"><b><u><i>Nairobi County</i></u></b></p>
 							</div>
+							
 							</table>
 						
 		 
@@ -148,19 +149,21 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
- const ctx_barHosp = document.getElementById('HospitalsChart');
-  new Chart(ctx_barHosp, {
+ const ctx_barNairobi = document.getElementById('NairobiBarChart');
+  new Chart(ctx_barNairobi, {
     type: 'bar',
     data: {
-      labels: ['Nairobi Province', 'Central Province', 'Eastern Province', 'Western Province', 'Nyanza Province', 'Rift Valley Province', 'North Eastern Province',
-	  'Coast Province'],
+      labels: ['Cancer', 'Cardiovascular', 'Respiratory', 'Endocrine', 'Eye disorders', 'Gastro-intestinal', 'Gynaecological','Genitourinary','Musculoskeletal',
+	  'Neurological', 'Blood disorders','Congenital','Skin disorders'],
       datasets: [{
-        label: '# of Hospitals',
-        data: [<?php echo $total_nairobi_hosp; ?>, <?php echo $total_central_hosp; ?>, <?php echo $total_eastern_hosp; ?>, <?php echo $total_western_hosp; ?>, 
-		<?php echo $total_nyanza_hosp; ?>, <?php echo $total_rift_hosp; ?>, <?php echo $total_northern_hosp; ?>, <?php echo $total_coast_hosp; ?> ],
-		 backgroundColor: 'rgba(162, 236, 254)',
+        label: '# of patients',
+        data: [<?php echo $totalCancerNrb; ?>, <?php echo $totalCardiovascularNrb; ?>, <?php echo $totalRespiratoryNrb; ?>, <?php echo $totalEndocrineNrb; ?>, 
+		<?php echo $totalEyeNrb; ?>, <?php echo $totalGastroNrb; ?>, <?php echo $totalGynaecologicalNrb; ?>, <?php echo $totalGenitourinaryNrb; ?>, 
+		<?php echo $totalMusculoskeletalNrb; ?> , <?php echo $totalNeurologicalNrb; ?>, <?php echo $totalBloodNrb; ?>, <?php echo $totalCongenitalNrb; ?>, <?php echo $totalSkinNrb; ?>		],
+		 backgroundColor: 'rgba(66, 239, 245)',
         borderWidth: 1
-      }]
+      }
+	  ]
     },
     options: {
       scales: {

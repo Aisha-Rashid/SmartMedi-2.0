@@ -160,10 +160,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 							  <canvas id="ConditionChart"></canvas>
 							  <p align="center"><b><u><i>Illness concentration</i></u></b></p>
 							</div>
-							<!--div>
-							  <canvas id="CentralBarChart"></canvas>
-							  <p><b><u><i>Central Region</i></u></b></p>
-							</div-->
+							
 							</table>
 						</div>
 					</div>

@@ -76,10 +76,11 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
               <i class="fa fa-bar-chart-o"></i> Data Analysis per county <div class="pull-right"><span class="caret"></span></div>
             </a>
             <ul class="templatemo-submenu">
+			  <li><a href="conditionschart.php"><i class="fa fa-medkit"></i> Conditions</a></li>
+			  <li><a href="nairobi.php"><i class="fa fa-map-marker"></i> Nairobi Region</a></li>
               <li><a href="central.php"><i class="fa fa-map-marker"></i> Central Region Counties</a></li>
 			  <li><a href="eastern.php"><i class="fa fa-map-marker"></i> Eastern Region Counties</a></li>
-              <li><a href="chart.php"><i class="fa fa-cubes"></i> Data Visualization</a></li>
-              <li><a href="maps.html"><i class="fa fa-file-text"></i> Reports</a></li>
+              
 
             </ul>
           </li>
@@ -108,13 +109,13 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 							<div class="templatemo-chart-box col-sm-6 col-xs-12">
 							<div>
 							  <canvas id="PatientPieChart"></canvas>
-							  <p><b><u><i>Total registered patients in terms of Gender</i></u></b></p>
+							  <p><b><u><i>Total registered patients in terms of gender</i></u></b></p>
 							</div>
 						</div>
 						<div class="templatemo-chart-box  col-sm-6 col-xs-12">
 							<div>
 							  <canvas id="PatientCountyChart"></canvas>
-							  <p><b><u><i>Total registered patients per province</i></u></b></p>
+							  <p><b><u><i>Total registered patients per region</i></u></b></p>
 							</div>
 						</div>
 		  </table>
