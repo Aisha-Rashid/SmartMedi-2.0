@@ -46,7 +46,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 
 <body>
   <?php if (isset($_SESSION['workID'])) :
-
+include ('data-visualization.php');
 
     $unique = $_SESSION['workID'];
     $query = "SELECT adminFname, adminLname, workID, IDnumber, email, phone FROM `admin` WHERE workID = '$unique'";
@@ -54,43 +54,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
     $array = mysqli_fetch_row($res);
     $rows = mysqli_num_rows($res);
 	
-	// number of results per page
-	$results_per_page = 10; 
-
-	if (!isset($_GET['page'])) {
-	  $page = 1;
-	} else {
-	  $page = $_GET['page'];
-	}
-	// Calculate the starting row
-	$start_row = ($page-1) * $results_per_page;
 	
-	$query="select * from patients";
-	$total_patients=mysqli_query($db, $query);
-	$total_number_patients=mysqli_num_rows($total_patients);
-	
-	$patientsquery="SELECT * FROM patients LIMIT $start_row, $results_per_page";
-    $AllPatientsRes = mysqli_query($db, $patientsquery);
-    $totalPatients = mysqli_num_rows($AllPatientsRes);
-	
-	// Calculate the total number of rows
-	$total_rows_query = "SELECT COUNT(*) as total FROM patients";
-	$total_rows_result = mysqli_query($db, $total_rows_query);
-	$total_rows = mysqli_fetch_assoc($total_rows_result)['total'];
-
-	// Calculate the total number of pages
-	$total_pages = ceil($total_rows / $results_per_page);
-
-
-
-    $x =  "SELECT DISTINCT hospitalname FROM `hospitals`";
-    $Res = mysqli_query($db, $x);
-    $totalHospitals = mysqli_num_rows($Res);
-	
-
-    $doctorsQuery = "SELECT * FROM `doctors` ORDER by id";
-    $doctorsRes = mysqli_query($db, $doctorsQuery);
-    $totalDoctors = mysqli_num_rows($doctorsRes);
 
   ?>
 
@@ -120,9 +84,9 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
             </a>
             <ul class="templatemo-submenu">
               
-              <li><a href="patientchart.php"><i class="fa fa-users"></i> Patients Onboard</a></li>
-			  <li><a href="gendercomparison.php"><i class="fa fa-venus-mars" ></i> Gender Comparison</a></li>
-			  <li><a href="hospitalchart.php"><i class="fa fa-venus-mars"></i> Hospitals Onboard</a></li>
+              
+			  <li><a href="gendercomparison.php"><i class="fa fa-user"></i> Gender Comparison</a></li>
+			  <li><a href="hospitalchart.php"><i class="fa fa-hospital-o"></i> Hospitals Onboard</a></li>
               
 
             </ul>
@@ -134,8 +98,13 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
             <ul class="templatemo-submenu">
 			  <li><a href="conditionschart.php"><i class="fa fa-medkit"></i> Conditions</a></li>
 			  <li><a href="nairobi.php"><i class="fa fa-map-marker"></i> Nairobi Region</a></li>
-              <li><a href="central.php"><i class="fa fa-map-marker"></i> Central Region Counties</a></li>
-			  <li><a href="eastern.php"><i class="fa fa-map-marker"></i> Eastern Region Counties</a></li>
+              <li><a href="central.php"><i class="fa fa-map-marker"></i> Central Region</a></li>
+			  <li><a href="eastern.php"><i class="fa fa-map-marker"></i> Eastern Region</a></li>
+			  <li><a href="western.php"><i class="fa fa-map-marker"></i> Western Region</a></li>
+			  <li><a href="nyanza.php"><i class="fa fa-map-marker"></i> Nyanza Region</a></li>
+			  <li><a href="rift.php"><i class="fa fa-map-marker"></i> Rift Valley Region</a></li>
+			  <li><a href="north.php"><i class="fa fa-map-marker"></i> North Eastern Region</a></li>
+			  <li><a href="coast.php"><i class="fa fa-map-marker"></i> Coast Region</a></li>
               
 
             </ul>
@@ -149,7 +118,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 
       <div class="templatemo-content-wrapper">
         <div class="templatemo-content">
-          <ol class="breadcrumb">
+          <!--ol class="breadcrumb">
             <li><a href="#">Admin Panel</a></li>
             <li>Overview</li>
           </ol>
@@ -161,12 +130,12 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
                         echo $array[1];; ?></b></p>
           <hr>
 
-          <div class="row margin-bottom-30">
+          <div class="row margin-bottom-30" >
             <div class="col-md-12">
-              <ul class="nav nav-pills">
-                <li class="active"><a href="#">Total Patients Registered <span class="badge"><?php echo $total_number_patients ?></span></a></li>
-                <li class="active"><a href="#">Medical Practitioners <span class="badge"><?php echo $totalDoctors; ?></span></a></li>
-                <li class="active"><a href="#">Hospitals Registered <span class="badge"><?php echo $totalHospitals; ?></span></a></li>
+              <ul class="nav nav-pills" >
+                <li class="active"><a href="gendercomparison.php">Total Patients Registered <span class="badge"><?php echo $total_number_patients ?></span></a></li>
+                <!--li class="active"><a href="#">Medical Practitioners <span class="badge"><?php echo $totalDoctors; ?></span></a></li-->
+                <li class="active"><a href="hospitalchart.php">Hospitals Registered <span class="badge"><?php echo $totalHospitals; ?></span></a></li>
               </ul>
             </div>
           </div>
@@ -174,146 +143,25 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 
           <div class="row">
             <div class="col-md-12 col-sm-12">
-              <!-- Nav tabs -->
-              <ul class="nav nav-tabs" role="tablist" id="templatemo-tabs">
-                <li class="active"><a href="#home" role="tab" data-toggle="tab">General Users</a></li>
-                <li><a href="#doctors" role="tab" data-toggle="tab">Medical Practitioners</a></li>
-                <li><a href="#hospitals" role="tab" data-toggle="tab">Medical institutions</a></li>
-                <!--li><a href="#admin" role="tab" data-toggle="tab">Admin</a></li-->
-              </ul>
+              
 
               <!-- General User pane -->
-              <div class="tab-content">
-                <div class="tab-pane fade in active" id="home">
-                  <div class="panel panel-primary">
-                    <div class="panel-heading"></div>
-                    <div class="panel-body">
-
-                      <table class="table table-striped">
-                        <thead>
-                          <tr>
-                            <th>First Name</th>
-                            <th>LastName</th>
-                            <th>ID Number</th>
-
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <?php
-                          
-                          while ($row = mysqli_fetch_array($AllPatientsRes)) {
-                            
-
-                            $FirstName = $row['FirstName'];
-                            $LastName = $row['LastName'];
-                            $IDNo = $row['IDNo'];
-                          ?>
-                            <tr>
-                              <td><?php echo $row['FirstName'] ?></td>
-                              <td><?php echo $row['LastName'] ?></td>
-                              <td><?php echo $row['IDNo'] ?></td>
-
-                            </tr>
-                          <?php } ?>
-                        </tbody>
-                      </table>
-					  <!-- Page navigation links -->
-<div class="pagination">
-  <?php
-  for ($i=1; $i<=$total_pages; $i++) {
-    echo "<a href='?page=".$i."'>".$i."</a> ";
-  }
-  ?>
-</div>
-
-                    </div>
-                  </div>
-                  <span class="btn btn-primary"><a href="manage-users.php">Manage</a></span>
-                </div>
-
-                <!-- Medical Practitioners pane -->
-                <div class="tab-pane fade" id="doctors">
-                  <div class="panel panel-primary">
-                    <div class="panel-heading"></div>
-                    <div class="panel-body">
-                      <table class="table table-striped">
-                        <thead>
-                          <tr>
-                            <th>Name</th>
-                            <th>ID Number</th>
-                            <th>Hospital</th>
-
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <?php
-                          //$query="select * from doctors";
-                          //$res = mysqli_query($db, $query);
-                          while ($row = mysqli_fetch_array($doctorsRes)) {
-
-                            $fname = $row['fname'];
-                            $lname = $row['lname'];
-                            $nationalid = $row['nationalid'];
-                            $hospital = $row['hospital'];
-                          ?>
-                            <tr>
-                              <td>
-                                <?php echo $row['fname'];
-                                echo " ";
-                                echo $row['lname'];; ?></td>
-                              <td><?php echo $row['nationalid'] ?></td>
-                              <td><?php echo $row['hospital'] ?></td>
-
-                            </tr>
-                          <?php } ?>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <span class="btn btn-primary"><a href="manage-users.php">Manage</a></span>
-                </div>
-
-                <!-- Medical Institutions pane -->
-                <div class="tab-pane fade" id="hospitals">
-                  <div class="panel panel-primary">
-                    <div class="panel-heading"></div>
-                    <div class="panel-body">
-                      <table class="table table-striped">
-                        <thead>
-                          <tr>
-                            <th>#</th>
-                            <th>Hospital Name</th>
-                            <th>Region</th>
-
-
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <?php
-                          $query = "select * from hospitals";
-                          $res = mysqli_query($db, $query);
-                          while ($row = mysqli_fetch_array($res)) {
-
-                            $HospitalID = $row['hospitalID'];
-                            $county = $row['county'];
-                            $hospitalname = $row['hospitalname'];
-
-                          ?>
-                            <tr>
-
-                              <td><?php echo $row['hospitalID'] ?></td>
-                              <td><?php echo $row['hospitalname'] ?></td>
-                              <td><?php echo $row['county'] ?></td>
-
-                            </tr>
-                          <?php } ?>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  <span class="btn btn-primary"><a href="manage-users.php">Manage</a></span>
-                </div>
-              </div> <!-- tab-content -->
+			  
+							<div class="templatemo-chart-box col-sm-6 col-xs-12">
+							<div>
+							  <canvas id="PatientPieChart"></canvas>
+							  <p><b><u><i>Total registered patients in terms of gender</i></u></b></p>
+							</div>
+						</div>
+						<div class="templatemo-chart-box  col-sm-6 col-xs-12">
+							<div>
+							  <canvas id="PatientCountyChart"></canvas>
+							  <p><b><u><i>Total registered patients per region</i></u></b></p>
+							</div>
+						</div>
+		  
+			  
+               <!-- tab-content -->
             </div>
 
           </div>
@@ -343,67 +191,47 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
     </footer>
     </div>
 
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx_piePatients = document.getElementById('PatientPieChart');
+  new Chart(ctx_piePatients, {
+    type: 'pie',
+    data: {
+      labels: ['Female', 'Male'],
+      datasets: [{
+        label: '# of Patients',
+        data: [<?php echo $totalFemales; ?>, <?php echo $totalMales; ?> ],
+		 backgroundColor: ['rgba(110, 224, 182)', 'rgba(162, 236, 254)'],
+        
+      }]
+    },
+    
+  });
+  
+  
+  const ctx_piePatientCounty = document.getElementById('PatientCountyChart');
+  new Chart(ctx_piePatientCounty, {
+    type: 'pie',
+    data: {
+      labels: ['Nairobi', 'Central', 'Eastern', 'Western', 'Nyanza', 'Rift Valley', 'North Eastern','Coast'],
+      datasets: [{
+        label: '# of Patients',
+        data: [<?php echo $total_nairobi_patient; ?>, <?php echo $total_central_patient; ?>, <?php echo $total_eastern_patient; ?>, <?php echo $total_western_patient; ?>, 
+		<?php echo $total_nyanza_patient; ?>, <?php echo $total_rift_patient; ?>, <?php echo $total_northern_patient; ?>, <?php echo $total_coast_patient; ?> ],
+		 backgroundColor: ['rgba(66, 239, 245)', 'rgba(245, 170,66)', 'rgba(66, 245, 78)', 'rgba(245, 81, 66)', 'rgba(206, 66, 245)', 'rgba(223, 235, 233)', 'rgba(201, 36, 89)', 'rgba(66, 81, 245)'],
+        
+      }]
+    },
+    
+  });
+  
+</script>
+	
     <script src="dashboardjs/jquery.min.js"></script>
     <script src="dashboardjs/bootstrap.min.js"></script>
     <script src="dashboardjs/Chart.min.js"></script>
     <script src="dashboardjs/templatemo_script.js"></script>
-    <script src="dashboardjs/Graph.js"></script>
-
-
-
-
-
-    <script type="text/javascript">
-      // Line chart
-      var randomScalingFactor = function() {
-        return Math.round(Math.random() * 100)
-      };
-      var lineChartData = {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
-        datasets: [{
-            label: "My First dataset",
-            fillColor: "rgba(220,220,220,0.2)",
-            strokeColor: "rgba(220,220,220,1)",
-            pointColor: "rgba(220,220,220,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
-            data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()]
-          },
-          {
-            label: "My Second dataset",
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()]
-          }
-        ]
-
-      }
-
-      window.onload = function() {
-        var ctx_line = document.getElementById("templatemo-line-chart").getContext("2d");
-        window.myLine = new Chart(ctx_line).Line(lineChartData, {
-          responsive: true
-        });
-      };
-
-      $('#myTab a').click(function(e) {
-        e.preventDefault();
-        $(this).tab('show');
-      });
-
-      $('#loading-example-btn').click(function() {
-        var btn = $(this);
-        btn.button('loading');
-        // $.ajax(...).always(function () {
-        //   btn.button('reset');
-        // });
-      });
-    </script>
+  
   <?php endif ?>
 </body>
 

@@ -64,8 +64,8 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
             </a>
             <ul class="templatemo-submenu">
               
-              <li><a href="patientchart.php"><i class="fa fa-user"></i> Patients Onboard</a></li>
-			  <li><a href="gendercomparison.php"><i class="fa fa-venus-mars"></i> Gender Comparison</a></li>
+              
+			  <li><a href="gendercomparison.php"><i class="fa fa-user"></i> Gender Comparison</a></li>
 			  <li class ="active"><a href="#"><i class="fa fa-hospital-o" ></i> Hospitals Onboard</a></li>
               
 
@@ -78,8 +78,13 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
             <ul class="templatemo-submenu">
 			  <li class="active"><a href="#"><i class="fa fa-medkit"></i> Conditions</a></li>
 			  <li><a href="nairobi.php"><i class="fa fa-map-marker"></i> Nairobi Region</a></li>
-              <li><a href="central.php"><i class="fa fa-map-marker"></i> Central Region Counties</a></li>
-			  <li><a href="eastern.php"><i class="fa fa-map-marker"></i> Eastern Region Counties</a></li>
+              <li><a href="central.php"><i class="fa fa-map-marker"></i> Central Region</a></li>
+			  <li><a href="eastern.php"><i class="fa fa-map-marker"></i> Eastern Region</a></li>
+			  <li><a href="western.php"><i class="fa fa-map-marker"></i> Western Region</a></li>
+			  <li><a href="nyanza.php"><i class="fa fa-map-marker"></i> Nyanza Region</a></li>
+			  <li><a href="rift.php"><i class="fa fa-map-marker"></i> Rift Valley Region</a></li>
+			  <li><a href="north.php"><i class="fa fa-map-marker"></i> North Eastern Region</a></li>
+			  <li><a href="coast.php"><i class="fa fa-map-marker"></i> Coast Region</a></li>
               
 
             </ul>

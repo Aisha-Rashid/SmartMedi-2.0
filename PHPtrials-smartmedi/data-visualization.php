@@ -1,4 +1,44 @@
 <?php
+//Pagination
+// number of results per page
+	$results_per_page = 10; 
+
+	if (!isset($_GET['page'])) {
+	  $page = 1;
+	} else {
+	  $page = $_GET['page'];
+	}
+	// Calculate the starting row
+	$start_row = ($page-1) * $results_per_page;
+	
+	$query="select * from patients";
+	$total_patients=mysqli_query($db, $query);
+	$total_number_patients=mysqli_num_rows($total_patients);
+	
+	$patientsquery="SELECT * FROM patients LIMIT $start_row, $results_per_page";
+    $AllPatientsRes = mysqli_query($db, $patientsquery);
+    $totalPatients = mysqli_num_rows($AllPatientsRes);
+	
+	// Calculate the total number of rows
+	$total_rows_query = "SELECT COUNT(*) as total FROM patients";
+	$total_rows_result = mysqli_query($db, $total_rows_query);
+	$total_rows = mysqli_fetch_assoc($total_rows_result)['total'];
+
+	// Calculate the total number of pages
+	$total_pages = ceil($total_rows / $results_per_page);
+
+
+
+    $x =  "SELECT DISTINCT hospitalname FROM `hospitals`";
+    $Res = mysqli_query($db, $x);
+    $totalHospitals = mysqli_num_rows($Res);
+	
+
+    $doctorsQuery = "SELECT * FROM `doctors` ORDER by id";
+    $doctorsRes = mysqli_query($db, $doctorsQuery);
+    $totalDoctors = mysqli_num_rows($doctorsRes);
+
+
 //Patient vs gender pie chart
    $AllDataRes1 = mysqli_query($db, "select * from patients where gender = 'Female'");
    $totalFemales = mysqli_num_rows($AllDataRes1);
@@ -535,7 +575,7 @@
 		   $AllDataRes12Kiambu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kiambu' AND response.conditions LIKE '%Congenital%'");
 		   $totalCongenitalKiambu= mysqli_num_rows($AllDataRes12Kiambu);
 		   
-		   $AllDataRes13Kiambu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kiambu'AND response.conditions LIKE '%Skin%'");
+		   $AllDataRes13Kiambu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kiambu' AND response.conditions LIKE '%Skin%'");
 		   $totalSkinKiambu= mysqli_num_rows($AllDataRes13Kiambu);
 		   
 		   
@@ -576,7 +616,7 @@
 		   $AllDataRes12Kiri= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kirinyaga' AND response.conditions LIKE '%Congenital%'");
 		   $totalCongenitalKiri= mysqli_num_rows($AllDataRes12Kiri);
 		   
-		   $AllDataRes13Kiri= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kirinyaga'AND response.conditions LIKE '%Skin%'");
+		   $AllDataRes13Kiri= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kirinyaga' AND response.conditions LIKE '%Skin%'");
 		   $totalSkinKiri= mysqli_num_rows($AllDataRes13Kiri);
 		   
 		   
@@ -617,7 +657,7 @@
 		   $AllDataRes12Muranga= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Murang''a' AND response.conditions LIKE '%Congenital%'");
 		   $totalCongenitalMuranga= mysqli_num_rows($AllDataRes12Muranga);
 		   
-		   $AllDataRes13Muranga= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Murang''a'AND response.conditions LIKE '%Skin%'");
+		   $AllDataRes13Muranga= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Murang''a' AND response.conditions LIKE '%Skin%'");
 		   $totalSkinMuranga= mysqli_num_rows($AllDataRes13Muranga);
 		   
 		   
@@ -658,7 +698,7 @@
 		   $AllDataRes12Nyan= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nyandarua' AND response.conditions LIKE '%Congenital%'");
 		   $totalCongenitalNyan= mysqli_num_rows($AllDataRes12Nyan);
 		   
-		   $AllDataRes13Nyan= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nyandarua'AND response.conditions LIKE '%Skin%'");
+		   $AllDataRes13Nyan= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nyandarua' AND response.conditions LIKE '%Skin%'");
 		   $totalSkinNyan= mysqli_num_rows($AllDataRes13Nyan);
 		   
 		   
@@ -699,7 +739,7 @@
 		   $AllDataRes12Nyeri= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nyeri' AND response.conditions LIKE '%Congenital%'");
 		   $totalCongenitalNyeri= mysqli_num_rows($AllDataRes12Nyeri);
 		   
-		   $AllDataRes13Nyeri= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nyeri'AND response.conditions LIKE '%Skin%'");
+		   $AllDataRes13Nyeri= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nyeri' AND response.conditions LIKE '%Skin%'");
 		   $totalSkinNyeri= mysqli_num_rows($AllDataRes13Nyeri);
 		   
 		   
@@ -742,7 +782,7 @@
 		   $AllDataRes12Embu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Embu' AND response.conditions LIKE '%Congenital%'");
 		   $totalCongenitalEmbu= mysqli_num_rows($AllDataRes12Embu);
 		   
-		   $AllDataRes13Embu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Embu'AND response.conditions LIKE '%Skin%'");
+		   $AllDataRes13Embu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Embu' AND response.conditions LIKE '%Skin%'");
 		   $totalSkinEmbu= mysqli_num_rows($AllDataRes13Embu);
 		   
 	//2. Isiolo
@@ -782,7 +822,7 @@
 		   $AllDataRes12Isiolo= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Isiolo' AND response.conditions LIKE '%Congenital%'");
 		   $totalCongenitalIsiolo= mysqli_num_rows($AllDataRes12Isiolo);
 		   
-		   $AllDataRes13Isiolo= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Isiolo'AND response.conditions LIKE '%Skin%'");
+		   $AllDataRes13Isiolo= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Isiolo' AND response.conditions LIKE '%Skin%'");
 		   $totalSkinIsiolo= mysqli_num_rows($AllDataRes13Isiolo);
 		   
 	//3. Kitui
@@ -822,7 +862,7 @@
 		   $AllDataRes12Kitui= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kitui' AND response.conditions LIKE '%Congenital%'");
 		   $totalCongenitalKitui= mysqli_num_rows($AllDataRes12Kitui);
 		   
-		   $AllDataRes13Kitui= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kitui'AND response.conditions LIKE '%Skin%'");
+		   $AllDataRes13Kitui= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kitui' AND response.conditions LIKE '%Skin%'");
 		   $totalSkinKitui= mysqli_num_rows($AllDataRes13Kitui);
 		   
 	//4. Machakos
@@ -862,10 +902,10 @@
 		   $AllDataRes12Machakos= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Machakos' AND response.conditions LIKE '%Congenital%'");
 		   $totalCongenitalMachakos= mysqli_num_rows($AllDataRes12Machakos);
 		   
-		   $AllDataRes13Machakos= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Machakos'AND response.conditions LIKE '%Skin%'");
+		   $AllDataRes13Machakos= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Machakos' AND response.conditions LIKE '%Skin%'");
 		   $totalSkinMachakos= mysqli_num_rows($AllDataRes13Machakos);
 		   
-	//4. Makueni
+	//5. Makueni
 		   $AllDataRes1Makueni= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Makueni' AND response.conditions LIKE '%Cancer%'");
 		   $totalCancerMakueni= mysqli_num_rows($AllDataRes1Makueni);
 		   
@@ -902,10 +942,10 @@
 		   $AllDataRes12Makueni= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Makueni' AND response.conditions LIKE '%Congenital%'");
 		   $totalCongenitalMakueni= mysqli_num_rows($AllDataRes12Makueni);
 		   
-		   $AllDataRes13Makueni= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Makueni'AND response.conditions LIKE '%Skin%'");
+		   $AllDataRes13Makueni= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Makueni' AND response.conditions LIKE '%Skin%'");
 		   $totalSkinMakueni= mysqli_num_rows($AllDataRes13Makueni);
 		   
-	//5. Marsabit
+	//6. Marsabit
 		   $AllDataRes1Marsabit= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Marsabit' AND response.conditions LIKE '%Cancer%'");
 		   $totalCancerMarsabit= mysqli_num_rows($AllDataRes1Marsabit);
 		   
@@ -942,10 +982,10 @@
 		   $AllDataRes12Marsabit= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Marsabit' AND response.conditions LIKE '%Congenital%'");
 		   $totalCongenitalMarsabit= mysqli_num_rows($AllDataRes12Marsabit);
 		   
-		   $AllDataRes13Marsabit= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Marsabit'AND response.conditions LIKE '%Skin%'");
+		   $AllDataRes13Marsabit= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Marsabit' AND response.conditions LIKE '%Skin%'");
 		   $totalSkinMarsabit= mysqli_num_rows($AllDataRes13Marsabit);
 		   
-	//6. Meru
+	//7. Meru
 		   $AllDataRes1Meru= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Meru' AND response.conditions LIKE '%Cancer%'");
 		   $totalCancerMeru= mysqli_num_rows($AllDataRes1Meru);
 		   
@@ -982,10 +1022,10 @@
 		   $AllDataRes12Meru= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Meru' AND response.conditions LIKE '%Congenital%'");
 		   $totalCongenitalMeru= mysqli_num_rows($AllDataRes12Meru);
 		   
-		   $AllDataRes13Meru= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Meru'AND response.conditions LIKE '%Skin%'");
+		   $AllDataRes13Meru= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Meru' AND response.conditions LIKE '%Skin%'");
 		   $totalSkinMeru= mysqli_num_rows($AllDataRes13Meru);
 		   
-	//7. Tharaka-Nithi
+	//8. Tharaka-Nithi
 		   $AllDataRes1Tharaka= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Tharaka-Nithi' AND response.conditions LIKE '%Cancer%'");
 		   $totalCancerTharaka= mysqli_num_rows($AllDataRes1Tharaka);
 		   
@@ -1022,7 +1062,1332 @@
 		   $AllDataRes12Tharaka= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Tharaka-Nithi' AND response.conditions LIKE '%Congenital%'");
 		   $totalCongenitalTharaka= mysqli_num_rows($AllDataRes12Tharaka);
 		   
-		   $AllDataRes13Tharaka= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Tharaka-Nithi'AND response.conditions LIKE '%Skin%'");
+		   $AllDataRes13Tharaka= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Tharaka-Nithi' AND response.conditions LIKE '%Skin%'");
 		   $totalSkinTharaka= mysqli_num_rows($AllDataRes13Tharaka);
+		   
+	//C. Western Region
+   //1. Bungoma
+		   $AllDataRes1Bungoma= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Bungoma' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerBungoma= mysqli_num_rows($AllDataRes1Bungoma);
+		   
+		   $AllDataRes2Bungoma= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Bungoma' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularBungoma= mysqli_num_rows($AllDataRes2Bungoma);
+		   
+		   $AllDataRes3Bungoma= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Bungoma' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryBungoma= mysqli_num_rows($AllDataRes3Bungoma);
+		   
+		   $AllDataRes4Bungoma= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Bungoma' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineBungoma= mysqli_num_rows($AllDataRes4Bungoma);
+		   
+		   $AllDataRes5Bungoma= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Bungoma' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeBungoma= mysqli_num_rows($AllDataRes5Bungoma);
+		   
+		   $AllDataRes6Bungoma= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Bungoma' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroBungoma= mysqli_num_rows($AllDataRes6Bungoma);
+		   
+		   $AllDataRes7Bungoma= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Bungoma' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalBungoma= mysqli_num_rows($AllDataRes7Bungoma);
+		   
+		   $AllDataRes8Bungoma= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Bungoma' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryBungoma= mysqli_num_rows($AllDataRes8Bungoma);
+		   
+		   $AllDataRes9Bungoma= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Bungoma' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalBungoma= mysqli_num_rows($AllDataRes9Bungoma);
+		   
+		   $AllDataRes10Bungoma= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Bungoma' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalBungoma= mysqli_num_rows($AllDataRes10Bungoma);
+		   
+		   $AllDataRes11Bungoma= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Bungoma' AND response.conditions LIKE '%connective%'");
+		   $totalBloodBungoma= mysqli_num_rows($AllDataRes11Bungoma);
+		   
+		   $AllDataRes12Bungoma= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Bungoma' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalBungoma= mysqli_num_rows($AllDataRes12Bungoma);
+		   
+		   $AllDataRes13Bungoma= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Bungoma' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinBungoma= mysqli_num_rows($AllDataRes13Bungoma);
+		   
+	//2. Busia
+		   $AllDataRes1Busia= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Busia' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerBusia= mysqli_num_rows($AllDataRes1Busia);
+		   
+		   $AllDataRes2Busia= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Busia' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularBusia= mysqli_num_rows($AllDataRes2Busia);
+		   
+		   $AllDataRes3Busia= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Busia' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryBusia= mysqli_num_rows($AllDataRes3Busia);
+		   
+		   $AllDataRes4Busia= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Busia' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineBusia= mysqli_num_rows($AllDataRes4Busia);
+		   
+		   $AllDataRes5Busia= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Busia' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeBusia= mysqli_num_rows($AllDataRes5Busia);
+		   
+		   $AllDataRes6Busia= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Busia' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroBusia= mysqli_num_rows($AllDataRes6Busia);
+		   
+		   $AllDataRes7Busia= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Busia' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalBusia= mysqli_num_rows($AllDataRes7Busia);
+		   
+		   $AllDataRes8Busia= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Busia' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryBusia= mysqli_num_rows($AllDataRes8Busia);
+		   
+		   $AllDataRes9Busia= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Busia' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalBusia= mysqli_num_rows($AllDataRes9Busia);
+		   
+		   $AllDataRes10Busia= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Busia' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalBusia= mysqli_num_rows($AllDataRes10Busia);
+		   
+		   $AllDataRes11Busia= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Busia' AND response.conditions LIKE '%connective%'");
+		   $totalBloodBusia= mysqli_num_rows($AllDataRes11Busia);
+		   
+		   $AllDataRes12Busia= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Busia' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalBusia= mysqli_num_rows($AllDataRes12Busia);
+		   
+		   $AllDataRes13Busia= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Busia' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinBusia= mysqli_num_rows($AllDataRes13Busia);
+		   
+	//3. Kakamega
+		   $AllDataRes1Kakamega= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kakamega' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerKakamega= mysqli_num_rows($AllDataRes1Kakamega);
+		   
+		   $AllDataRes2Kakamega= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kakamega' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularKakamega= mysqli_num_rows($AllDataRes2Kakamega);
+		   
+		   $AllDataRes3Kakamega= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kakamega' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryKakamega= mysqli_num_rows($AllDataRes3Kakamega);
+		   
+		   $AllDataRes4Kakamega= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kakamega' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineKakamega= mysqli_num_rows($AllDataRes4Kakamega);
+		   
+		   $AllDataRes5Kakamega= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kakamega' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeKakamega= mysqli_num_rows($AllDataRes5Kakamega);
+		   
+		   $AllDataRes6Kakamega= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kakamega' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroKakamega= mysqli_num_rows($AllDataRes6Kakamega);
+		   
+		   $AllDataRes7Kakamega= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kakamega' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalKakamega= mysqli_num_rows($AllDataRes7Kakamega);
+		   
+		   $AllDataRes8Kakamega= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kakamega' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryKakamega= mysqli_num_rows($AllDataRes8Kakamega);
+		   
+		   $AllDataRes9Kakamega= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kakamega' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalKakamega= mysqli_num_rows($AllDataRes9Kakamega);
+		   
+		   $AllDataRes10Kakamega= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kakamega' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalKakamega= mysqli_num_rows($AllDataRes10Kakamega);
+		   
+		   $AllDataRes11Kakamega= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kakamega' AND response.conditions LIKE '%connective%'");
+		   $totalBloodKakamega= mysqli_num_rows($AllDataRes11Kakamega);
+		   
+		   $AllDataRes12Kakamega= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kakamega' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalKakamega= mysqli_num_rows($AllDataRes12Kakamega);
+		   
+		   $AllDataRes13Kakamega= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kakamega' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinKakamega= mysqli_num_rows($AllDataRes13Kakamega);
+		   
+	//4. Vihiga
+		   $AllDataRes1Vihiga= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Vihiga' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerVihiga= mysqli_num_rows($AllDataRes1Vihiga);
+		   
+		   $AllDataRes2Vihiga= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Vihiga' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularVihiga= mysqli_num_rows($AllDataRes2Vihiga);
+		   
+		   $AllDataRes3Vihiga= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Vihiga' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryVihiga= mysqli_num_rows($AllDataRes3Vihiga);
+		   
+		   $AllDataRes4Vihiga= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Vihiga' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineVihiga= mysqli_num_rows($AllDataRes4Vihiga);
+		   
+		   $AllDataRes5Vihiga= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Vihiga' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeVihiga= mysqli_num_rows($AllDataRes5Vihiga);
+		   
+		   $AllDataRes6Vihiga= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Vihiga' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroVihiga= mysqli_num_rows($AllDataRes6Vihiga);
+		   
+		   $AllDataRes7Vihiga= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Vihiga' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalVihiga= mysqli_num_rows($AllDataRes7Vihiga);
+		   
+		   $AllDataRes8Vihiga= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Vihiga' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryVihiga= mysqli_num_rows($AllDataRes8Vihiga);
+		   
+		   $AllDataRes9Vihiga= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Vihiga' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalVihiga= mysqli_num_rows($AllDataRes9Vihiga);
+		   
+		   $AllDataRes10Vihiga= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Vihiga' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalVihiga= mysqli_num_rows($AllDataRes10Vihiga);
+		   
+		   $AllDataRes11Vihiga= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Vihiga' AND response.conditions LIKE '%connective%'");
+		   $totalBloodVihiga= mysqli_num_rows($AllDataRes11Vihiga);
+		   
+		   $AllDataRes12Vihiga= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Vihiga' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalVihiga= mysqli_num_rows($AllDataRes12Vihiga);
+		   
+		   $AllDataRes13Vihiga= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Vihiga' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinVihiga= mysqli_num_rows($AllDataRes13Vihiga);
+		   
+	//D. Nyanza Region
+   //1. Homa Bay
+		   $AllDataRes1Homa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Homa Bay' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerHoma= mysqli_num_rows($AllDataRes1Homa);
+		   
+		   $AllDataRes2Homa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Homa Bay' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularHoma= mysqli_num_rows($AllDataRes2Homa);
+		   
+		   $AllDataRes3Homa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Homa Bay' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryHoma= mysqli_num_rows($AllDataRes3Homa);
+		   
+		   $AllDataRes4Homa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Homa Bay' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineHoma= mysqli_num_rows($AllDataRes4Homa);
+		   
+		   $AllDataRes5Homa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Homa Bay' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeHoma= mysqli_num_rows($AllDataRes5Homa);
+		   
+		   $AllDataRes6Homa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Homa Bay' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroHoma= mysqli_num_rows($AllDataRes6Homa);
+		   
+		   $AllDataRes7Homa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Homa Bay' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalHoma= mysqli_num_rows($AllDataRes7Homa);
+		   
+		   $AllDataRes8Homa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Homa Bay' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryHoma= mysqli_num_rows($AllDataRes8Homa);
+		   
+		   $AllDataRes9Homa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Homa Bay' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalHoma= mysqli_num_rows($AllDataRes9Homa);
+		   
+		   $AllDataRes10Homa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Homa Bay' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalHoma= mysqli_num_rows($AllDataRes10Homa);
+		   
+		   $AllDataRes11Homa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Homa Bay' AND response.conditions LIKE '%connective%'");
+		   $totalBloodHoma= mysqli_num_rows($AllDataRes11Homa);
+		   
+		   $AllDataRes12Homa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Homa Bay' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalHoma= mysqli_num_rows($AllDataRes12Homa);
+		   
+		   $AllDataRes13Homa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Homa Bay' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinHoma= mysqli_num_rows($AllDataRes13Homa);
+		   
+	//2. Kisii
+		   $AllDataRes1Kisii= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kisii' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerKisii= mysqli_num_rows($AllDataRes1Kisii);
+		   
+		   $AllDataRes2Kisii= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kisii' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularKisii= mysqli_num_rows($AllDataRes2Kisii);
+		   
+		   $AllDataRes3Kisii= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kisii' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryKisii= mysqli_num_rows($AllDataRes3Kisii);
+		   
+		   $AllDataRes4Kisii= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kisii' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineKisii= mysqli_num_rows($AllDataRes4Kisii);
+		   
+		   $AllDataRes5Kisii= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kisii' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeKisii= mysqli_num_rows($AllDataRes5Kisii);
+		   
+		   $AllDataRes6Kisii= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kisii' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroKisii= mysqli_num_rows($AllDataRes6Kisii);
+		   
+		   $AllDataRes7Kisii= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kisii' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalKisii= mysqli_num_rows($AllDataRes7Kisii);
+		   
+		   $AllDataRes8Kisii= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kisii' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryKisii= mysqli_num_rows($AllDataRes8Kisii);
+		   
+		   $AllDataRes9Kisii= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kisii' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalKisii= mysqli_num_rows($AllDataRes9Kisii);
+		   
+		   $AllDataRes10Kisii= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kisii' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalKisii= mysqli_num_rows($AllDataRes10Kisii);
+		   
+		   $AllDataRes11Kisii= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kisii' AND response.conditions LIKE '%connective%'");
+		   $totalBloodKisii= mysqli_num_rows($AllDataRes11Kisii);
+		   
+		   $AllDataRes12Kisii= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kisii' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalKisii= mysqli_num_rows($AllDataRes12Kisii);
+		   
+		   $AllDataRes13Kisii= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kisii' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinKisii= mysqli_num_rows($AllDataRes13Kisii);
+		   
+	//3. Kisumu
+		   $AllDataRes1Kisumu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kisumu' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerKisumu= mysqli_num_rows($AllDataRes1Kisumu);
+		   
+		   $AllDataRes2Kisumu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kisumu' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularKisumu= mysqli_num_rows($AllDataRes2Kisumu);
+		   
+		   $AllDataRes3Kisumu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kisumu' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryKisumu= mysqli_num_rows($AllDataRes3Kisumu);
+		   
+		   $AllDataRes4Kisumu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kisumu' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineKisumu= mysqli_num_rows($AllDataRes4Kisumu);
+		   
+		   $AllDataRes5Kisumu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kisumu' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeKisumu= mysqli_num_rows($AllDataRes5Kisumu);
+		   
+		   $AllDataRes6Kisumu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kisumu' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroKisumu= mysqli_num_rows($AllDataRes6Kisumu);
+		   
+		   $AllDataRes7Kisumu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kisumu' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalKisumu= mysqli_num_rows($AllDataRes7Kisumu);
+		   
+		   $AllDataRes8Kisumu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kisumu' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryKisumu= mysqli_num_rows($AllDataRes8Kisumu);
+		   
+		   $AllDataRes9Kisumu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kisumu' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalKisumu= mysqli_num_rows($AllDataRes9Kisumu);
+		   
+		   $AllDataRes10Kisumu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kisumu' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalKisumu= mysqli_num_rows($AllDataRes10Kisumu);
+		   
+		   $AllDataRes11Kisumu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kisumu' AND response.conditions LIKE '%connective%'");
+		   $totalBloodKisumu= mysqli_num_rows($AllDataRes11Kisumu);
+		   
+		   $AllDataRes12Kisumu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kisumu' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalKisumu= mysqli_num_rows($AllDataRes12Kisumu);
+		   
+		   $AllDataRes13Kisumu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kisumu' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinKisumu= mysqli_num_rows($AllDataRes13Kisumu);
+		   
+	//4. Migori
+		   $AllDataRes1Migori= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Migori' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerMigori= mysqli_num_rows($AllDataRes1Migori);
+		   
+		   $AllDataRes2Migori= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Migori' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularMigori= mysqli_num_rows($AllDataRes2Migori);
+		   
+		   $AllDataRes3Migori= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Migori' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryMigori= mysqli_num_rows($AllDataRes3Migori);
+		   
+		   $AllDataRes4Migori= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Migori' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineMigori= mysqli_num_rows($AllDataRes4Migori);
+		   
+		   $AllDataRes5Migori= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Migori' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeMigori= mysqli_num_rows($AllDataRes5Migori);
+		   
+		   $AllDataRes6Migori= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Migori' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroMigori= mysqli_num_rows($AllDataRes6Migori);
+		   
+		   $AllDataRes7Migori= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Migori' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalMigori= mysqli_num_rows($AllDataRes7Migori);
+		   
+		   $AllDataRes8Migori= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Migori' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryMigori= mysqli_num_rows($AllDataRes8Migori);
+		   
+		   $AllDataRes9Migori= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Migori' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalMigori= mysqli_num_rows($AllDataRes9Migori);
+		   
+		   $AllDataRes10Migori= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Migori' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalMigori= mysqli_num_rows($AllDataRes10Migori);
+		   
+		   $AllDataRes11Migori= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Migori' AND response.conditions LIKE '%connective%'");
+		   $totalBloodMigori= mysqli_num_rows($AllDataRes11Migori);
+		   
+		   $AllDataRes12Migori= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Migori' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalMigori= mysqli_num_rows($AllDataRes12Migori);
+		   
+		   $AllDataRes13Migori= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Migori' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinMigori= mysqli_num_rows($AllDataRes13Migori);
+		   
+	//5. Nyamira
+		   $AllDataRes1Nyamira= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nyamira' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerNyamira= mysqli_num_rows($AllDataRes1Nyamira);
+		   
+		   $AllDataRes2Nyamira= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nyamira' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularNyamira= mysqli_num_rows($AllDataRes2Nyamira);
+		   
+		   $AllDataRes3Nyamira= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nyamira' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryNyamira= mysqli_num_rows($AllDataRes3Nyamira);
+		   
+		   $AllDataRes4Nyamira= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nyamira' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineNyamira= mysqli_num_rows($AllDataRes4Nyamira);
+		   
+		   $AllDataRes5Nyamira= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nyamira' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeNyamira= mysqli_num_rows($AllDataRes5Nyamira);
+		   
+		   $AllDataRes6Nyamira= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nyamira' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroNyamira= mysqli_num_rows($AllDataRes6Nyamira);
+		   
+		   $AllDataRes7Nyamira= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nyamira' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalNyamira= mysqli_num_rows($AllDataRes7Nyamira);
+		   
+		   $AllDataRes8Nyamira= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nyamira' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryNyamira= mysqli_num_rows($AllDataRes8Nyamira);
+		   
+		   $AllDataRes9Nyamira= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nyamira' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalNyamira= mysqli_num_rows($AllDataRes9Nyamira);
+		   
+		   $AllDataRes10Nyamira= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nyamira' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalNyamira= mysqli_num_rows($AllDataRes10Nyamira);
+		   
+		   $AllDataRes11Nyamira= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nyamira' AND response.conditions LIKE '%connective%'");
+		   $totalBloodNyamira= mysqli_num_rows($AllDataRes11Nyamira);
+		   
+		   $AllDataRes12Nyamira= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nyamira' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalNyamira= mysqli_num_rows($AllDataRes12Nyamira);
+		   
+		   $AllDataRes13Nyamira= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nyamira' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinNyamira= mysqli_num_rows($AllDataRes13Nyamira);
+		   
+	//6. Siaya
+		   $AllDataRes1Siaya= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Siaya' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerSiaya= mysqli_num_rows($AllDataRes1Siaya);
+		   
+		   $AllDataRes2Siaya= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Siaya' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularSiaya= mysqli_num_rows($AllDataRes2Siaya);
+		   
+		   $AllDataRes3Siaya= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Siaya' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratorySiaya= mysqli_num_rows($AllDataRes3Siaya);
+		   
+		   $AllDataRes4Siaya= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Siaya' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineSiaya= mysqli_num_rows($AllDataRes4Siaya);
+		   
+		   $AllDataRes5Siaya= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Siaya' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeSiaya= mysqli_num_rows($AllDataRes5Siaya);
+		   
+		   $AllDataRes6Siaya= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Siaya' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroSiaya= mysqli_num_rows($AllDataRes6Siaya);
+		   
+		   $AllDataRes7Siaya= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Siaya' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalSiaya= mysqli_num_rows($AllDataRes7Siaya);
+		   
+		   $AllDataRes8Siaya= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Siaya' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinarySiaya= mysqli_num_rows($AllDataRes8Siaya);
+		   
+		   $AllDataRes9Siaya= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Siaya' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalSiaya= mysqli_num_rows($AllDataRes9Siaya);
+		   
+		   $AllDataRes10Siaya= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Siaya' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalSiaya= mysqli_num_rows($AllDataRes10Siaya);
+		   
+		   $AllDataRes11Siaya= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Siaya' AND response.conditions LIKE '%connective%'");
+		   $totalBloodSiaya= mysqli_num_rows($AllDataRes11Siaya);
+		   
+		   $AllDataRes12Siaya= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Siaya' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalSiaya= mysqli_num_rows($AllDataRes12Siaya);
+		   
+		   $AllDataRes13Siaya= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Siaya' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinSiaya= mysqli_num_rows($AllDataRes13Siaya);
+		   
+	//E. Rift Valley Region
+    //1. Baringo
+		   $AllDataRes1Baringo= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Baringo' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerBaringo= mysqli_num_rows($AllDataRes1Baringo);
+		   
+		   $AllDataRes2Baringo= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Baringo' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularBaringo= mysqli_num_rows($AllDataRes2Baringo);
+		   
+		   $AllDataRes3Baringo= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Baringo' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryBaringo= mysqli_num_rows($AllDataRes3Baringo);
+		   
+		   $AllDataRes4Baringo= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Baringo' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineBaringo= mysqli_num_rows($AllDataRes4Baringo);
+		   
+		   $AllDataRes5Baringo= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Baringo' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeBaringo= mysqli_num_rows($AllDataRes5Baringo);
+		   
+		   $AllDataRes6Baringo= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Baringo' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroBaringo= mysqli_num_rows($AllDataRes6Baringo);
+		   
+		   $AllDataRes7Baringo= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Baringo' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalBaringo= mysqli_num_rows($AllDataRes7Baringo);
+		   
+		   $AllDataRes8Baringo= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Baringo' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryBaringo= mysqli_num_rows($AllDataRes8Baringo);
+		   
+		   $AllDataRes9Baringo= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Baringo' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalBaringo= mysqli_num_rows($AllDataRes9Baringo);
+		   
+		   $AllDataRes10Baringo= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Baringo' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalBaringo= mysqli_num_rows($AllDataRes10Baringo);
+		   
+		   $AllDataRes11Baringo= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Baringo' AND response.conditions LIKE '%connective%'");
+		   $totalBloodBaringo= mysqli_num_rows($AllDataRes11Baringo);
+		   
+		   $AllDataRes12Baringo= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Baringo' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalBaringo= mysqli_num_rows($AllDataRes12Baringo);
+		   
+		   $AllDataRes13Baringo= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Baringo' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinBaringo= mysqli_num_rows($AllDataRes13Baringo);
+		   
+	//2. Bomet
+		   $AllDataRes1Bomet= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Bomet' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerBomet= mysqli_num_rows($AllDataRes1Bomet);
+		   
+		   $AllDataRes2Bomet= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Bomet' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularBomet= mysqli_num_rows($AllDataRes2Bomet);
+		   
+		   $AllDataRes3Bomet= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Bomet' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryBomet= mysqli_num_rows($AllDataRes3Bomet);
+		   
+		   $AllDataRes4Bomet= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Bomet' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineBomet= mysqli_num_rows($AllDataRes4Bomet);
+		   
+		   $AllDataRes5Bomet= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Bomet' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeBomet= mysqli_num_rows($AllDataRes5Bomet);
+		   
+		   $AllDataRes6Bomet= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Bomet' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroBomet= mysqli_num_rows($AllDataRes6Bomet);
+		   
+		   $AllDataRes7Bomet= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Bomet' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalBomet= mysqli_num_rows($AllDataRes7Bomet);
+		   
+		   $AllDataRes8Bomet= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Bomet' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryBomet= mysqli_num_rows($AllDataRes8Bomet);
+		   
+		   $AllDataRes9Bomet= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Bomet' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalBomet= mysqli_num_rows($AllDataRes9Bomet);
+		   
+		   $AllDataRes10Bomet= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Bomet' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalBomet= mysqli_num_rows($AllDataRes10Bomet);
+		   
+		   $AllDataRes11Bomet= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Bomet' AND response.conditions LIKE '%connective%'");
+		   $totalBloodBomet= mysqli_num_rows($AllDataRes11Bomet);
+		   
+		   $AllDataRes12Bomet= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Bomet' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalBomet= mysqli_num_rows($AllDataRes12Bomet);
+		   
+		   $AllDataRes13Bomet= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Bomet' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinBomet= mysqli_num_rows($AllDataRes13Bomet);
+		   
+	//3. Elgeyo/Marakwet
+		   $AllDataRes1Elgeyo= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Elgeyo/Marakwet' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerElgeyo= mysqli_num_rows($AllDataRes1Elgeyo);
+		   
+		   $AllDataRes2Elgeyo= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Elgeyo/Marakwet' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularElgeyo= mysqli_num_rows($AllDataRes2Elgeyo);
+		   
+		   $AllDataRes3Elgeyo= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Elgeyo/Marakwet' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryElgeyo= mysqli_num_rows($AllDataRes3Elgeyo);
+		   
+		   $AllDataRes4Elgeyo= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Elgeyo/Marakwet' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineElgeyo= mysqli_num_rows($AllDataRes4Elgeyo);
+		   
+		   $AllDataRes5Elgeyo= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Elgeyo/Marakwet' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeElgeyo= mysqli_num_rows($AllDataRes5Elgeyo);
+		   
+		   $AllDataRes6Elgeyo= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Elgeyo/Marakwet' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroElgeyo= mysqli_num_rows($AllDataRes6Elgeyo);
+		   
+		   $AllDataRes7Elgeyo= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Elgeyo/Marakwet' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalElgeyo= mysqli_num_rows($AllDataRes7Elgeyo);
+		   
+		   $AllDataRes8Elgeyo= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Elgeyo/Marakwet' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryElgeyo= mysqli_num_rows($AllDataRes8Elgeyo);
+		   
+		   $AllDataRes9Elgeyo= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Elgeyo/Marakwet' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalElgeyo= mysqli_num_rows($AllDataRes9Elgeyo);
+		   
+		   $AllDataRes10Elgeyo= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Elgeyo/Marakwet' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalElgeyo= mysqli_num_rows($AllDataRes10Elgeyo);
+		   
+		   $AllDataRes11Elgeyo= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Elgeyo/Marakwet' AND response.conditions LIKE '%connective%'");
+		   $totalBloodElgeyo= mysqli_num_rows($AllDataRes11Elgeyo);
+		   
+		   $AllDataRes12Elgeyo= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Elgeyo/Marakwet' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalElgeyo= mysqli_num_rows($AllDataRes12Elgeyo);
+		   
+		   $AllDataRes13Elgeyo= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Elgeyo/Marakwet' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinElgeyo= mysqli_num_rows($AllDataRes13Elgeyo);
+		   
+	//4. Kajiado
+		   $AllDataRes1Kajiado= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kajiado' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerKajiado= mysqli_num_rows($AllDataRes1Kajiado);
+		   
+		   $AllDataRes2Kajiado= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kajiado' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularKajiado= mysqli_num_rows($AllDataRes2Kajiado);
+		   
+		   $AllDataRes3Kajiado= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kajiado' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryKajiado= mysqli_num_rows($AllDataRes3Kajiado);
+		   
+		   $AllDataRes4Kajiado= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kajiado' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineKajiado= mysqli_num_rows($AllDataRes4Kajiado);
+		   
+		   $AllDataRes5Kajiado= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kajiado' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeKajiado= mysqli_num_rows($AllDataRes5Kajiado);
+		   
+		   $AllDataRes6Kajiado= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kajiado' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroKajiado= mysqli_num_rows($AllDataRes6Kajiado);
+		   
+		   $AllDataRes7Kajiado= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kajiado' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalKajiado= mysqli_num_rows($AllDataRes7Kajiado);
+		   
+		   $AllDataRes8Kajiado= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kajiado' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryKajiado= mysqli_num_rows($AllDataRes8Kajiado);
+		   
+		   $AllDataRes9Kajiado= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kajiado' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalKajiado= mysqli_num_rows($AllDataRes9Kajiado);
+		   
+		   $AllDataRes10Kajiado= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kajiado' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalKajiado= mysqli_num_rows($AllDataRes10Kajiado);
+		   
+		   $AllDataRes11Kajiado= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kajiado' AND response.conditions LIKE '%connective%'");
+		   $totalBloodKajiado= mysqli_num_rows($AllDataRes11Kajiado);
+		   
+		   $AllDataRes12Kajiado= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kajiado' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalKajiado= mysqli_num_rows($AllDataRes12Kajiado);
+		   
+		   $AllDataRes13Kajiado= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kajiado' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinKajiado= mysqli_num_rows($AllDataRes13Kajiado);
+		   
+	//5. Kericho
+		   $AllDataRes1Kericho= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kericho' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerKericho= mysqli_num_rows($AllDataRes1Kericho);
+		   
+		   $AllDataRes2Kericho= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kericho' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularKericho= mysqli_num_rows($AllDataRes2Kericho);
+		   
+		   $AllDataRes3Kericho= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kericho' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryKericho= mysqli_num_rows($AllDataRes3Kericho);
+		   
+		   $AllDataRes4Kericho= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kericho' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineKericho= mysqli_num_rows($AllDataRes4Kericho);
+		   
+		   $AllDataRes5Kericho= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kericho' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeKericho= mysqli_num_rows($AllDataRes5Kericho);
+		   
+		   $AllDataRes6Kericho= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kericho' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroKericho= mysqli_num_rows($AllDataRes6Kericho);
+		   
+		   $AllDataRes7Kericho= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kericho' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalKericho= mysqli_num_rows($AllDataRes7Kericho);
+		   
+		   $AllDataRes8Kericho= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kericho' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryKericho= mysqli_num_rows($AllDataRes8Kericho);
+		   
+		   $AllDataRes9Kericho= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kericho' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalKericho= mysqli_num_rows($AllDataRes9Kericho);
+		   
+		   $AllDataRes10Kericho= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kericho' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalKericho= mysqli_num_rows($AllDataRes10Kericho);
+		   
+		   $AllDataRes11Kericho= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kericho' AND response.conditions LIKE '%connective%'");
+		   $totalBloodKericho= mysqli_num_rows($AllDataRes11Kericho);
+		   
+		   $AllDataRes12Kericho= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kericho' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalKericho= mysqli_num_rows($AllDataRes12Kericho);
+		   
+		   $AllDataRes13Kericho= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kericho' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinKericho= mysqli_num_rows($AllDataRes13Kericho);
+		   
+	//6. Laikipia
+		   $AllDataRes1Laikipia= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Laikipia' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerLaikipia= mysqli_num_rows($AllDataRes1Laikipia);
+		   
+		   $AllDataRes2Laikipia= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Laikipia' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularLaikipia= mysqli_num_rows($AllDataRes2Laikipia);
+		   
+		   $AllDataRes3Laikipia= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Laikipia' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryLaikipia= mysqli_num_rows($AllDataRes3Laikipia);
+		   
+		   $AllDataRes4Laikipia= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Laikipia' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineLaikipia= mysqli_num_rows($AllDataRes4Laikipia);
+		   
+		   $AllDataRes5Laikipia= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Laikipia' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeLaikipia= mysqli_num_rows($AllDataRes5Laikipia);
+		   
+		   $AllDataRes6Laikipia= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Laikipia' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroLaikipia= mysqli_num_rows($AllDataRes6Laikipia);
+		   
+		   $AllDataRes7Laikipia= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Laikipia' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalLaikipia= mysqli_num_rows($AllDataRes7Laikipia);
+		   
+		   $AllDataRes8Laikipia= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Laikipia' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryLaikipia= mysqli_num_rows($AllDataRes8Laikipia);
+		   
+		   $AllDataRes9Laikipia= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Laikipia' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalLaikipia= mysqli_num_rows($AllDataRes9Laikipia);
+		   
+		   $AllDataRes10Laikipia= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Laikipia' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalLaikipia= mysqli_num_rows($AllDataRes10Laikipia);
+		   
+		   $AllDataRes11Laikipia= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Laikipia' AND response.conditions LIKE '%connective%'");
+		   $totalBloodLaikipia= mysqli_num_rows($AllDataRes11Laikipia);
+		   
+		   $AllDataRes12Laikipia= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Laikipia' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalLaikipia= mysqli_num_rows($AllDataRes12Laikipia);
+		   
+		   $AllDataRes13Laikipia= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Laikipia' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinLaikipia= mysqli_num_rows($AllDataRes13Laikipia);
+		   
+	//7. Nakuru
+		   $AllDataRes1Nakuru= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nakuru' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerNakuru= mysqli_num_rows($AllDataRes1Nakuru);
+		   
+		   $AllDataRes2Nakuru= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nakuru' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularNakuru= mysqli_num_rows($AllDataRes2Nakuru);
+		   
+		   $AllDataRes3Nakuru= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nakuru' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryNakuru= mysqli_num_rows($AllDataRes3Nakuru);
+		   
+		   $AllDataRes4Nakuru= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nakuru' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineNakuru= mysqli_num_rows($AllDataRes4Nakuru);
+		   
+		   $AllDataRes5Nakuru= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nakuru' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeNakuru= mysqli_num_rows($AllDataRes5Nakuru);
+		   
+		   $AllDataRes6Nakuru= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nakuru' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroNakuru= mysqli_num_rows($AllDataRes6Nakuru);
+		   
+		   $AllDataRes7Nakuru= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nakuru' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalNakuru= mysqli_num_rows($AllDataRes7Nakuru);
+		   
+		   $AllDataRes8Nakuru= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nakuru' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryNakuru= mysqli_num_rows($AllDataRes8Nakuru);
+		   
+		   $AllDataRes9Nakuru= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nakuru' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalNakuru= mysqli_num_rows($AllDataRes9Nakuru);
+		   
+		   $AllDataRes10Nakuru= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nakuru' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalNakuru= mysqli_num_rows($AllDataRes10Nakuru);
+		   
+		   $AllDataRes11Nakuru= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nakuru' AND response.conditions LIKE '%connective%'");
+		   $totalBloodNakuru= mysqli_num_rows($AllDataRes11Nakuru);
+		   
+		   $AllDataRes12Nakuru= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nakuru' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalNakuru= mysqli_num_rows($AllDataRes12Nakuru);
+		   
+		   $AllDataRes13Nakuru= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nakuru' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinNakuru= mysqli_num_rows($AllDataRes13Nakuru);
+		   
+	//8. Nandi
+		   $AllDataRes1Nandi= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nandi' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerNandi= mysqli_num_rows($AllDataRes1Nandi);
+		   
+		   $AllDataRes2Nandi= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nandi' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularNandi= mysqli_num_rows($AllDataRes2Nandi);
+		   
+		   $AllDataRes3Nandi= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nandi' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryNandi= mysqli_num_rows($AllDataRes3Nandi);
+		   
+		   $AllDataRes4Nandi= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nandi' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineNandi= mysqli_num_rows($AllDataRes4Nandi);
+		   
+		   $AllDataRes5Nandi= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nandi' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeNandi= mysqli_num_rows($AllDataRes5Nandi);
+		   
+		   $AllDataRes6Nandi= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nandi' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroNandi= mysqli_num_rows($AllDataRes6Nandi);
+		   
+		   $AllDataRes7Nandi= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nandi' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalNandi= mysqli_num_rows($AllDataRes7Nandi);
+		   
+		   $AllDataRes8Nandi= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nandi' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryNandi= mysqli_num_rows($AllDataRes8Nandi);
+		   
+		   $AllDataRes9Nandi= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nandi' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalNandi= mysqli_num_rows($AllDataRes9Nandi);
+		   
+		   $AllDataRes10Nandi= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nandi' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalNandi= mysqli_num_rows($AllDataRes10Nandi);
+		   
+		   $AllDataRes11Nandi= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nandi' AND response.conditions LIKE '%connective%'");
+		   $totalBloodNandi= mysqli_num_rows($AllDataRes11Nandi);
+		   
+		   $AllDataRes12Nandi= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nandi' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalNandi= mysqli_num_rows($AllDataRes12Nandi);
+		   
+		   $AllDataRes13Nandi= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nandi' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinNandi= mysqli_num_rows($AllDataRes13Nandi);
+		   
+	//9. Narok
+		   $AllDataRes1Narok= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Narok' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerNarok= mysqli_num_rows($AllDataRes1Narok);
+		   
+		   $AllDataRes2Narok= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Narok' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularNarok= mysqli_num_rows($AllDataRes2Narok);
+		   
+		   $AllDataRes3Narok= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Narok' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryNarok= mysqli_num_rows($AllDataRes3Narok);
+		   
+		   $AllDataRes4Narok= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Narok' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineNarok= mysqli_num_rows($AllDataRes4Narok);
+		   
+		   $AllDataRes5Narok= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Narok' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeNarok= mysqli_num_rows($AllDataRes5Narok);
+		   
+		   $AllDataRes6Narok= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Narok' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroNarok= mysqli_num_rows($AllDataRes6Narok);
+		   
+		   $AllDataRes7Narok= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Narok' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalNarok= mysqli_num_rows($AllDataRes7Narok);
+		   
+		   $AllDataRes8Narok= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Narok' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryNarok= mysqli_num_rows($AllDataRes8Narok);
+		   
+		   $AllDataRes9Narok= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Narok' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalNarok= mysqli_num_rows($AllDataRes9Narok);
+		   
+		   $AllDataRes10Narok= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Narok' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalNarok= mysqli_num_rows($AllDataRes10Narok);
+		   
+		   $AllDataRes11Narok= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Narok' AND response.conditions LIKE '%connective%'");
+		   $totalBloodNarok= mysqli_num_rows($AllDataRes11Narok);
+		   
+		   $AllDataRes12Narok= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Narok' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalNarok= mysqli_num_rows($AllDataRes12Narok);
+		   
+		   $AllDataRes13Narok= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Narok' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinNarok= mysqli_num_rows($AllDataRes13Narok);
+		   
+	//10. Samburu
+		   $AllDataRes1Samburu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Samburu' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerSamburu= mysqli_num_rows($AllDataRes1Samburu);
+		   
+		   $AllDataRes2Samburu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Samburu' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularSamburu= mysqli_num_rows($AllDataRes2Samburu);
+		   
+		   $AllDataRes3Samburu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Samburu' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratorySamburu= mysqli_num_rows($AllDataRes3Samburu);
+		   
+		   $AllDataRes4Samburu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Samburu' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineSamburu= mysqli_num_rows($AllDataRes4Samburu);
+		   
+		   $AllDataRes5Samburu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Samburu' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeSamburu= mysqli_num_rows($AllDataRes5Samburu);
+		   
+		   $AllDataRes6Samburu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Samburu' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroSamburu= mysqli_num_rows($AllDataRes6Samburu);
+		   
+		   $AllDataRes7Samburu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Samburu' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalSamburu= mysqli_num_rows($AllDataRes7Samburu);
+		   
+		   $AllDataRes8Samburu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Samburu' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinarySamburu= mysqli_num_rows($AllDataRes8Samburu);
+		   
+		   $AllDataRes9Samburu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Samburu' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalSamburu= mysqli_num_rows($AllDataRes9Samburu);
+		   
+		   $AllDataRes10Samburu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Samburu' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalSamburu= mysqli_num_rows($AllDataRes10Samburu);
+		   
+		   $AllDataRes11Samburu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Samburu' AND response.conditions LIKE '%connective%'");
+		   $totalBloodSamburu= mysqli_num_rows($AllDataRes11Samburu);
+		   
+		   $AllDataRes12Samburu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Samburu' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalSamburu= mysqli_num_rows($AllDataRes12Samburu);
+		   
+		   $AllDataRes13Samburu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Samburu' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinSamburu= mysqli_num_rows($AllDataRes13Samburu);
+		   
+	//11. Trans Nzoia
+		   $AllDataRes1Trans= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Trans Nzoia' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerTrans= mysqli_num_rows($AllDataRes1Trans);
+		   
+		   $AllDataRes2Trans= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Trans Nzoia' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularTrans= mysqli_num_rows($AllDataRes2Trans);
+		   
+		   $AllDataRes3Trans= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Trans Nzoia' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryTrans= mysqli_num_rows($AllDataRes3Trans);
+		   
+		   $AllDataRes4Trans= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Trans Nzoia' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineTrans= mysqli_num_rows($AllDataRes4Trans);
+		   
+		   $AllDataRes5Trans= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Trans Nzoia' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeTrans= mysqli_num_rows($AllDataRes5Trans);
+		   
+		   $AllDataRes6Trans= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Trans Nzoia' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroTrans= mysqli_num_rows($AllDataRes6Trans);
+		   
+		   $AllDataRes7Trans= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Trans Nzoia' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalTrans= mysqli_num_rows($AllDataRes7Trans);
+		   
+		   $AllDataRes8Trans= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Trans Nzoia' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryTrans= mysqli_num_rows($AllDataRes8Trans);
+		   
+		   $AllDataRes9Trans= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Trans Nzoia' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalTrans= mysqli_num_rows($AllDataRes9Trans);
+		   
+		   $AllDataRes10Trans= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Trans Nzoia' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalTrans= mysqli_num_rows($AllDataRes10Trans);
+		   
+		   $AllDataRes11Trans= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Trans Nzoia' AND response.conditions LIKE '%connective%'");
+		   $totalBloodTrans= mysqli_num_rows($AllDataRes11Trans);
+		   
+		   $AllDataRes12Trans= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Trans Nzoia' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalTrans= mysqli_num_rows($AllDataRes12Trans);
+		   
+		   $AllDataRes13Trans= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Trans Nzoia' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinTrans= mysqli_num_rows($AllDataRes13Trans);
+		   
+	//12. Turkana
+		   $AllDataRes1Turkana= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Turkana' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerTurkana= mysqli_num_rows($AllDataRes1Turkana);
+		   
+		   $AllDataRes2Turkana= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Turkana' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularTurkana= mysqli_num_rows($AllDataRes2Turkana);
+		   
+		   $AllDataRes3Turkana= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Turkana' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryTurkana= mysqli_num_rows($AllDataRes3Turkana);
+		   
+		   $AllDataRes4Turkana= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Turkana' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineTurkana= mysqli_num_rows($AllDataRes4Turkana);
+		   
+		   $AllDataRes5Turkana= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Turkana' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeTurkana= mysqli_num_rows($AllDataRes5Turkana);
+		   
+		   $AllDataRes6Turkana= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Turkana' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroTurkana= mysqli_num_rows($AllDataRes6Turkana);
+		   
+		   $AllDataRes7Turkana= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Turkana' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalTurkana= mysqli_num_rows($AllDataRes7Turkana);
+		   
+		   $AllDataRes8Turkana= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Turkana' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryTurkana= mysqli_num_rows($AllDataRes8Turkana);
+		   
+		   $AllDataRes9Turkana= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Turkana' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalTurkana= mysqli_num_rows($AllDataRes9Turkana);
+		   
+		   $AllDataRes10Turkana= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Turkana' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalTurkana= mysqli_num_rows($AllDataRes10Turkana);
+		   
+		   $AllDataRes11Turkana= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Turkana' AND response.conditions LIKE '%connective%'");
+		   $totalBloodTurkana= mysqli_num_rows($AllDataRes11Turkana);
+		   
+		   $AllDataRes12Turkana= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Turkana' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalTurkana= mysqli_num_rows($AllDataRes12Turkana);
+		   
+		   $AllDataRes13Turkana= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Turkana' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinTurkana= mysqli_num_rows($AllDataRes13Turkana);
+		   
+	//13. Uasin Gishu
+		   $AllDataRes1Uasin= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Uasin Gishu' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerUasin= mysqli_num_rows($AllDataRes1Uasin);
+		   
+		   $AllDataRes2Uasin= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Uasin Gishu' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularUasin= mysqli_num_rows($AllDataRes2Uasin);
+		   
+		   $AllDataRes3Uasin= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Uasin Gishu' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryUasin= mysqli_num_rows($AllDataRes3Uasin);
+		   
+		   $AllDataRes4Uasin= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Uasin Gishu' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineUasin= mysqli_num_rows($AllDataRes4Uasin);
+		   
+		   $AllDataRes5Uasin= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Uasin Gishu' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeUasin= mysqli_num_rows($AllDataRes5Uasin);
+		   
+		   $AllDataRes6Uasin= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Uasin Gishu' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroUasin= mysqli_num_rows($AllDataRes6Uasin);
+		   
+		   $AllDataRes7Uasin= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Uasin Gishu' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalUasin= mysqli_num_rows($AllDataRes7Uasin);
+		   
+		   $AllDataRes8Uasin= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Uasin Gishu' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryUasin= mysqli_num_rows($AllDataRes8Uasin);
+		   
+		   $AllDataRes9Uasin= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Uasin Gishu' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalUasin= mysqli_num_rows($AllDataRes9Uasin);
+		   
+		   $AllDataRes10Uasin= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Uasin Gishu' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalUasin= mysqli_num_rows($AllDataRes10Uasin);
+		   
+		   $AllDataRes11Uasin= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Uasin Gishu' AND response.conditions LIKE '%connective%'");
+		   $totalBloodUasin= mysqli_num_rows($AllDataRes11Uasin);
+		   
+		   $AllDataRes12Uasin= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Uasin Gishu' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalUasin= mysqli_num_rows($AllDataRes12Uasin);
+		   
+		   $AllDataRes13Uasin= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Uasin Gishu' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinUasin= mysqli_num_rows($AllDataRes13Uasin);
+		   
+	//14. West Pokot
+		   $AllDataRes1Pokot= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'West Pokot' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerPokot= mysqli_num_rows($AllDataRes1Pokot);
+		   
+		   $AllDataRes2Pokot= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'West Pokot' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularPokot= mysqli_num_rows($AllDataRes2Pokot);
+		   
+		   $AllDataRes3Pokot= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'West Pokot' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryPokot= mysqli_num_rows($AllDataRes3Pokot);
+		   
+		   $AllDataRes4Pokot= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'West Pokot' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrinePokot= mysqli_num_rows($AllDataRes4Pokot);
+		   
+		   $AllDataRes5Pokot= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'West Pokot' AND response.conditions LIKE '%Eye%'");
+		   $totalEyePokot= mysqli_num_rows($AllDataRes5Pokot);
+		   
+		   $AllDataRes6Pokot= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'West Pokot' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroPokot= mysqli_num_rows($AllDataRes6Pokot);
+		   
+		   $AllDataRes7Pokot= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'West Pokot' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalPokot= mysqli_num_rows($AllDataRes7Pokot);
+		   
+		   $AllDataRes8Pokot= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'West Pokot' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryPokot= mysqli_num_rows($AllDataRes8Pokot);
+		   
+		   $AllDataRes9Pokot= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'West Pokot' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalPokot= mysqli_num_rows($AllDataRes9Pokot);
+		   
+		   $AllDataRes10Pokot= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'West Pokot' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalPokot= mysqli_num_rows($AllDataRes10Pokot);
+		   
+		   $AllDataRes11Pokot= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'West Pokot' AND response.conditions LIKE '%connective%'");
+		   $totalBloodPokot= mysqli_num_rows($AllDataRes11Pokot);
+		   
+		   $AllDataRes12Pokot= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'West Pokot' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalPokot= mysqli_num_rows($AllDataRes12Pokot);
+		   
+		   $AllDataRes13Pokot= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'West Pokot' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinPokot= mysqli_num_rows($AllDataRes13Pokot);
+		   
+	//F. North Eastern Region
+    //1. Garissa
+		   $AllDataRes1Garissa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Garissa' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerGarissa= mysqli_num_rows($AllDataRes1Garissa);
+		   
+		   $AllDataRes2Garissa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Garissa' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularGarissa= mysqli_num_rows($AllDataRes2Garissa);
+		   
+		   $AllDataRes3Garissa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Garissa' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryGarissa= mysqli_num_rows($AllDataRes3Garissa);
+		   
+		   $AllDataRes4Garissa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Garissa' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineGarissa= mysqli_num_rows($AllDataRes4Garissa);
+		   
+		   $AllDataRes5Garissa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Garissa' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeGarissa= mysqli_num_rows($AllDataRes5Garissa);
+		   
+		   $AllDataRes6Garissa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Garissa' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroGarissa= mysqli_num_rows($AllDataRes6Garissa);
+		   
+		   $AllDataRes7Garissa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Garissa' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalGarissa= mysqli_num_rows($AllDataRes7Garissa);
+		   
+		   $AllDataRes8Garissa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Garissa' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryGarissa= mysqli_num_rows($AllDataRes8Garissa);
+		   
+		   $AllDataRes9Garissa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Garissa' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalGarissa= mysqli_num_rows($AllDataRes9Garissa);
+		   
+		   $AllDataRes10Garissa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Garissa' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalGarissa= mysqli_num_rows($AllDataRes10Garissa);
+		   
+		   $AllDataRes11Garissa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Garissa' AND response.conditions LIKE '%connective%'");
+		   $totalBloodGarissa= mysqli_num_rows($AllDataRes11Garissa);
+		   
+		   $AllDataRes12Garissa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Garissa' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalGarissa= mysqli_num_rows($AllDataRes12Garissa);
+		   
+		   $AllDataRes13Garissa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Garissa' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinGarissa= mysqli_num_rows($AllDataRes13Garissa);
+		   
+	//2. Mandera
+		   $AllDataRes1Mandera= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Mandera' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerMandera= mysqli_num_rows($AllDataRes1Mandera);
+		   
+		   $AllDataRes2Mandera= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Mandera' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularMandera= mysqli_num_rows($AllDataRes2Mandera);
+		   
+		   $AllDataRes3Mandera= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Mandera' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryMandera= mysqli_num_rows($AllDataRes3Mandera);
+		   
+		   $AllDataRes4Mandera= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Mandera' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineMandera= mysqli_num_rows($AllDataRes4Mandera);
+		   
+		   $AllDataRes5Mandera= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Mandera' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeMandera= mysqli_num_rows($AllDataRes5Mandera);
+		   
+		   $AllDataRes6Mandera= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Mandera' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroMandera= mysqli_num_rows($AllDataRes6Mandera);
+		   
+		   $AllDataRes7Mandera= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Mandera' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalMandera= mysqli_num_rows($AllDataRes7Mandera);
+		   
+		   $AllDataRes8Mandera= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Mandera' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryMandera= mysqli_num_rows($AllDataRes8Mandera);
+		   
+		   $AllDataRes9Mandera= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Mandera' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalMandera= mysqli_num_rows($AllDataRes9Mandera);
+		   
+		   $AllDataRes10Mandera= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Mandera' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalMandera= mysqli_num_rows($AllDataRes10Mandera);
+		   
+		   $AllDataRes11Mandera= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Mandera' AND response.conditions LIKE '%connective%'");
+		   $totalBloodMandera= mysqli_num_rows($AllDataRes11Mandera);
+		   
+		   $AllDataRes12Mandera= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Mandera' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalMandera= mysqli_num_rows($AllDataRes12Mandera);
+		   
+		   $AllDataRes13Mandera= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Mandera' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinMandera= mysqli_num_rows($AllDataRes13Mandera);
+		   
+	//3. Wajir
+		   $AllDataRes1Wajir= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Wajir' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerWajir= mysqli_num_rows($AllDataRes1Wajir);
+		   
+		   $AllDataRes2Wajir= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Wajir' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularWajir= mysqli_num_rows($AllDataRes2Wajir);
+		   
+		   $AllDataRes3Wajir= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Wajir' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryWajir= mysqli_num_rows($AllDataRes3Wajir);
+		   
+		   $AllDataRes4Wajir= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Wajir' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineWajir= mysqli_num_rows($AllDataRes4Wajir);
+		   
+		   $AllDataRes5Wajir= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Wajir' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeWajir= mysqli_num_rows($AllDataRes5Wajir);
+		   
+		   $AllDataRes6Wajir= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Wajir' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroWajir= mysqli_num_rows($AllDataRes6Wajir);
+		   
+		   $AllDataRes7Wajir= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Wajir' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalWajir= mysqli_num_rows($AllDataRes7Wajir);
+		   
+		   $AllDataRes8Wajir= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Wajir' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryWajir= mysqli_num_rows($AllDataRes8Wajir);
+		   
+		   $AllDataRes9Wajir= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Wajir' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalWajir= mysqli_num_rows($AllDataRes9Wajir);
+		   
+		   $AllDataRes10Wajir= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Wajir' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalWajir= mysqli_num_rows($AllDataRes10Wajir);
+		   
+		   $AllDataRes11Wajir= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Wajir' AND response.conditions LIKE '%connective%'");
+		   $totalBloodWajir= mysqli_num_rows($AllDataRes11Wajir);
+		   
+		   $AllDataRes12Wajir= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Wajir' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalWajir= mysqli_num_rows($AllDataRes12Wajir);
+		   
+		   $AllDataRes13Wajir= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Wajir' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinWajir= mysqli_num_rows($AllDataRes13Wajir);
+		   
+	//G. Coast Region
+    //1. Kilifi
+		   $AllDataRes1Kilifi= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kilifi' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerKilifi= mysqli_num_rows($AllDataRes1Kilifi);
+		   
+		   $AllDataRes2Kilifi= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kilifi' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularKilifi= mysqli_num_rows($AllDataRes2Kilifi);
+		   
+		   $AllDataRes3Kilifi= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kilifi' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryKilifi= mysqli_num_rows($AllDataRes3Kilifi);
+		   
+		   $AllDataRes4Kilifi= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kilifi' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineKilifi= mysqli_num_rows($AllDataRes4Kilifi);
+		   
+		   $AllDataRes5Kilifi= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kilifi' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeKilifi= mysqli_num_rows($AllDataRes5Kilifi);
+		   
+		   $AllDataRes6Kilifi= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kilifi' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroKilifi= mysqli_num_rows($AllDataRes6Kilifi);
+		   
+		   $AllDataRes7Kilifi= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kilifi' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalKilifi= mysqli_num_rows($AllDataRes7Kilifi);
+		   
+		   $AllDataRes8Kilifi= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kilifi' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryKilifi= mysqli_num_rows($AllDataRes8Kilifi);
+		   
+		   $AllDataRes9Kilifi= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kilifi' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalKilifi= mysqli_num_rows($AllDataRes9Kilifi);
+		   
+		   $AllDataRes10Kilifi= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kilifi' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalKilifi= mysqli_num_rows($AllDataRes10Kilifi);
+		   
+		   $AllDataRes11Kilifi= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kilifi' AND response.conditions LIKE '%connective%'");
+		   $totalBloodKilifi= mysqli_num_rows($AllDataRes11Kilifi);
+		   
+		   $AllDataRes12Kilifi= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kilifi' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalKilifi= mysqli_num_rows($AllDataRes12Kilifi);
+		   
+		   $AllDataRes13Kilifi= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kilifi' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinKilifi= mysqli_num_rows($AllDataRes13Kilifi);
+		   
+	//2. Kwale
+		   $AllDataRes1Kwale= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kwale' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerKwale= mysqli_num_rows($AllDataRes1Kwale);
+		   
+		   $AllDataRes2Kwale= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kwale' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularKwale= mysqli_num_rows($AllDataRes2Kwale);
+		   
+		   $AllDataRes3Kwale= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kwale' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryKwale= mysqli_num_rows($AllDataRes3Kwale);
+		   
+		   $AllDataRes4Kwale= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kwale' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineKwale= mysqli_num_rows($AllDataRes4Kwale);
+		   
+		   $AllDataRes5Kwale= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kwale' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeKwale= mysqli_num_rows($AllDataRes5Kwale);
+		   
+		   $AllDataRes6Kwale= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kwale' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroKwale= mysqli_num_rows($AllDataRes6Kwale);
+		   
+		   $AllDataRes7Kwale= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kwale' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalKwale= mysqli_num_rows($AllDataRes7Kwale);
+		   
+		   $AllDataRes8Kwale= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kwale' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryKwale= mysqli_num_rows($AllDataRes8Kwale);
+		   
+		   $AllDataRes9Kwale= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kwale' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalKwale= mysqli_num_rows($AllDataRes9Kwale);
+		   
+		   $AllDataRes10Kwale= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kwale' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalKwale= mysqli_num_rows($AllDataRes10Kwale);
+		   
+		   $AllDataRes11Kwale= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kwale' AND response.conditions LIKE '%connective%'");
+		   $totalBloodKwale= mysqli_num_rows($AllDataRes11Kwale);
+		   
+		   $AllDataRes12Kwale= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kwale' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalKwale= mysqli_num_rows($AllDataRes12Kwale);
+		   
+		   $AllDataRes13Kwale= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Kwale' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinKwale= mysqli_num_rows($AllDataRes13Kwale);
+		   
+	//3. Lamu
+		   $AllDataRes1Lamu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Lamu' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerLamu= mysqli_num_rows($AllDataRes1Lamu);
+		   
+		   $AllDataRes2Lamu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Lamu' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularLamu= mysqli_num_rows($AllDataRes2Lamu);
+		   
+		   $AllDataRes3Lamu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Lamu' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryLamu= mysqli_num_rows($AllDataRes3Lamu);
+		   
+		   $AllDataRes4Lamu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Lamu' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineLamu= mysqli_num_rows($AllDataRes4Lamu);
+		   
+		   $AllDataRes5Lamu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Lamu' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeLamu= mysqli_num_rows($AllDataRes5Lamu);
+		   
+		   $AllDataRes6Lamu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Lamu' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroLamu= mysqli_num_rows($AllDataRes6Lamu);
+		   
+		   $AllDataRes7Lamu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Lamu' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalLamu= mysqli_num_rows($AllDataRes7Lamu);
+		   
+		   $AllDataRes8Lamu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Lamu' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryLamu= mysqli_num_rows($AllDataRes8Lamu);
+		   
+		   $AllDataRes9Lamu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Lamu' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalLamu= mysqli_num_rows($AllDataRes9Lamu);
+		   
+		   $AllDataRes10Lamu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Lamu' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalLamu= mysqli_num_rows($AllDataRes10Lamu);
+		   
+		   $AllDataRes11Lamu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Lamu' AND response.conditions LIKE '%connective%'");
+		   $totalBloodLamu= mysqli_num_rows($AllDataRes11Lamu);
+		   
+		   $AllDataRes12Lamu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Lamu' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalLamu= mysqli_num_rows($AllDataRes12Lamu);
+		   
+		   $AllDataRes13Lamu= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Lamu' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinLamu= mysqli_num_rows($AllDataRes13Lamu);
+		   
+	//4. Mombasa
+		   $AllDataRes1Mombasa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Mombasa' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerMombasa= mysqli_num_rows($AllDataRes1Mombasa);
+		   
+		   $AllDataRes2Mombasa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Mombasa' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularMombasa= mysqli_num_rows($AllDataRes2Mombasa);
+		   
+		   $AllDataRes3Mombasa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Mombasa' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryMombasa= mysqli_num_rows($AllDataRes3Mombasa);
+		   
+		   $AllDataRes4Mombasa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Mombasa' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineMombasa= mysqli_num_rows($AllDataRes4Mombasa);
+		   
+		   $AllDataRes5Mombasa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Mombasa' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeMombasa= mysqli_num_rows($AllDataRes5Mombasa);
+		   
+		   $AllDataRes6Mombasa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Mombasa' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroMombasa= mysqli_num_rows($AllDataRes6Mombasa);
+		   
+		   $AllDataRes7Mombasa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Mombasa' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalMombasa= mysqli_num_rows($AllDataRes7Mombasa);
+		   
+		   $AllDataRes8Mombasa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Mombasa' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryMombasa= mysqli_num_rows($AllDataRes8Mombasa);
+		   
+		   $AllDataRes9Mombasa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Mombasa' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalMombasa= mysqli_num_rows($AllDataRes9Mombasa);
+		   
+		   $AllDataRes10Mombasa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Mombasa' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalMombasa= mysqli_num_rows($AllDataRes10Mombasa);
+		   
+		   $AllDataRes11Mombasa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Mombasa' AND response.conditions LIKE '%connective%'");
+		   $totalBloodMombasa= mysqli_num_rows($AllDataRes11Mombasa);
+		   
+		   $AllDataRes12Mombasa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Mombasa' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalMombasa= mysqli_num_rows($AllDataRes12Mombasa);
+		   
+		   $AllDataRes13Mombasa= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Mombasa' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinMombasa= mysqli_num_rows($AllDataRes13Mombasa);
+		   
+	//5. Taita/Taveta
+		   $AllDataRes1Taita= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Taita/Taveta' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerTaita= mysqli_num_rows($AllDataRes1Taita);
+		   
+		   $AllDataRes2Taita= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Taita/Taveta' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularTaita= mysqli_num_rows($AllDataRes2Taita);
+		   
+		   $AllDataRes3Taita= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Taita/Taveta' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryTaita= mysqli_num_rows($AllDataRes3Taita);
+		   
+		   $AllDataRes4Taita= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Taita/Taveta' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineTaita= mysqli_num_rows($AllDataRes4Taita);
+		   
+		   $AllDataRes5Taita= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Taita/Taveta' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeTaita= mysqli_num_rows($AllDataRes5Taita);
+		   
+		   $AllDataRes6Taita= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Taita/Taveta' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroTaita= mysqli_num_rows($AllDataRes6Taita);
+		   
+		   $AllDataRes7Taita= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Taita/Taveta' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalTaita= mysqli_num_rows($AllDataRes7Taita);
+		   
+		   $AllDataRes8Taita= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Taita/Taveta' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryTaita= mysqli_num_rows($AllDataRes8Taita);
+		   
+		   $AllDataRes9Taita= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Taita/Taveta' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalTaita= mysqli_num_rows($AllDataRes9Taita);
+		   
+		   $AllDataRes10Taita= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Taita/Taveta' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalTaita= mysqli_num_rows($AllDataRes10Taita);
+		   
+		   $AllDataRes11Taita= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Taita/Taveta' AND response.conditions LIKE '%connective%'");
+		   $totalBloodTaita= mysqli_num_rows($AllDataRes11Taita);
+		   
+		   $AllDataRes12Taita= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Taita/Taveta' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalTaita= mysqli_num_rows($AllDataRes12Taita);
+		   
+		   $AllDataRes13Taita= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Taita/Taveta' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinTaita= mysqli_num_rows($AllDataRes13Taita);
+		   
+	//6. Tana River
+		   $AllDataRes1Tana= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Tana River' AND response.conditions LIKE '%Cancer%'");
+		   $totalCancerTana= mysqli_num_rows($AllDataRes1Tana);
+		   
+		   $AllDataRes2Tana= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Tana River' AND response.conditions LIKE '%Cardiovascular%'");
+		   $totalCardiovascularTana= mysqli_num_rows($AllDataRes2Tana);
+		   
+		   $AllDataRes3Tana= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Tana River' AND response.conditions LIKE '%Respiratory%'");
+		   $totalRespiratoryTana= mysqli_num_rows($AllDataRes3Tana);
+		   
+		   $AllDataRes4Tana= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Tana River' AND response.conditions LIKE '%Endocrine%'");
+		   $totalEndocrineTana= mysqli_num_rows($AllDataRes4Tana);
+		   
+		   $AllDataRes5Tana= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Tana River' AND response.conditions LIKE '%Eye%'");
+		   $totalEyeTana= mysqli_num_rows($AllDataRes5Tana);
+		   
+		   $AllDataRes6Tana= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Tana River' AND response.conditions LIKE '%Gastro-intestinal%'");
+		   $totalGastroTana= mysqli_num_rows($AllDataRes6Tana);
+		   
+		   $AllDataRes7Tana= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Tana River' AND response.conditions LIKE '%Gynaecological%'");
+		   $totalGynaecologicalTana= mysqli_num_rows($AllDataRes7Tana);
+		   
+		   $AllDataRes8Tana= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Tana River' AND response.conditions LIKE '%Genitourinary%'");
+		   $totalGenitourinaryTana= mysqli_num_rows($AllDataRes8Tana);
+		   
+		   $AllDataRes9Tana= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Tana River' AND response.conditions LIKE '%Musculoskeletal%'");
+		   $totalMusculoskeletalTana= mysqli_num_rows($AllDataRes9Tana);
+		   
+		   $AllDataRes10Tana= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Tana River' AND response.conditions LIKE '%Neurological%'");
+		   $totalNeurologicalTana= mysqli_num_rows($AllDataRes10Tana);
+		   
+		   $AllDataRes11Tana= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Tana River' AND response.conditions LIKE '%connective%'");
+		   $totalBloodTana= mysqli_num_rows($AllDataRes11Tana);
+		   
+		   $AllDataRes12Tana= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Tana River' AND response.conditions LIKE '%Congenital%'");
+		   $totalCongenitalTana= mysqli_num_rows($AllDataRes12Tana);
+		   
+		   $AllDataRes13Tana= mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo, response.conditions FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Tana River' AND response.conditions LIKE '%Skin%'");
+		   $totalSkinTana= mysqli_num_rows($AllDataRes13Tana);
 ?>
 

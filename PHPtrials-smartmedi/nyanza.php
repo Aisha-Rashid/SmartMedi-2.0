@@ -58,20 +58,20 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 				</li>
           <li ><a href="admindash.php"><i class="fa fa-home"></i>Dashboard</a></li>
           <li><a href="manage-users.php"><i class="fa fa-users"></i> Manage Users</a></li>
-          <li class="sub open">
+          <li class="sub">
             <a href="javascript:;">
               <i class="fa fa-cubes"></i> Data Visualization<div class="pull-right"><span class="caret"></span></div>
             </a>
             <ul class="templatemo-submenu">
               
               
-			  <li class ="active"><a href="#"><i class="fa fa-user"></i> Gender Comparison</a></li>
+			  <li><a href="gendercomparison.php"><i class="fa fa-user"></i> Gender Comparison</a></li>
 			  <li><a href="hospitalchart.php"><i class="fa fa-hospital-o"></i> Hospitals Onboard</a></li>
               
 
             </ul>
           </li>
-		  <li class="sub">
+		  <li class="sub open">
             <a href="javascript:;">
               <i class="fa fa-bar-chart-o"></i> Data Analysis per county <div class="pull-right"><span class="caret"></span></div>
             </a>
@@ -81,7 +81,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
               <li><a href="central.php"><i class="fa fa-map-marker"></i> Central Region</a></li>
 			  <li><a href="eastern.php"><i class="fa fa-map-marker"></i> Eastern Region</a></li>
 			  <li><a href="western.php"><i class="fa fa-map-marker"></i> Western Region</a></li>
-			  <li><a href="nyanza.php"><i class="fa fa-map-marker"></i> Nyanza Region</a></li>
+			  <li class ="active"><a href="#"><i class="fa fa-map-marker"></i> Nyanza Region</a></li>
 			  <li><a href="rift.php"><i class="fa fa-map-marker"></i> Rift Valley Region</a></li>
 			  <li><a href="north.php"><i class="fa fa-map-marker"></i> North Eastern Region</a></li>
 			  <li><a href="coast.php"><i class="fa fa-map-marker"></i> Coast Region</a></li>
@@ -109,14 +109,13 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 
 			<div class="row">
 		  <div class="col-md-12 col-sm-12">
-		 
-		 <table>
+		  <table>
 							<div>
-							  <canvas id="GenderChart"></canvas>
-							  <p align="center"><b><u><i>Gender comparison per region</i></u></b></p>
+							  <canvas id="NyanzaBarChart"></canvas>
+							  <p align="center"><b><u><i>Nyanza Region</i></u></b></p>
 							</div>
-							</table>
-		 
+		  </table>
+		  
         </div>
       </div>
 	   </div>
@@ -152,27 +151,61 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-  const ctx_barGender = document.getElementById('GenderChart');
-  new Chart(ctx_barGender, {
+
+  const ctx_barNyanza = document.getElementById('NyanzaBarChart');
+  new Chart(ctx_barNyanza, {
     type: 'bar',
     data: {
-      labels: ['Nairobi Province', 'Central Province', 'Eastern Province', 'Western Province', 'Nyanza Province', 'Rift Valley Province', 'North Eastern Province',
-	  'Coast Province'],
+      labels: ['Cancer', 'Cardiovascular', 'Respiratory', 'Endocrine', 'Eye disorders', 'Gastro-intestinal', 'Gynaecological','Genitourinary','Musculoskeletal',
+	  'Neurological', 'Blood disorders','Congenital','Skin disorders'],
       datasets: [{
-        label: '# of male patients',
-        data: [<?php echo $total_nairobi_patientM; ?>, <?php echo $total_central_patientM; ?>, <?php echo $total_eastern_patientM; ?>, <?php echo $total_western_patientM; ?>, 
-		<?php echo $total_nyanza_patientM; ?>, <?php echo $total_rift_patientM; ?>, <?php echo $total_northern_patientM; ?>, <?php echo $total_coast_patientM; ?> ],
-		 backgroundColor: 'rgba(110, 224, 182)',
+        label: '# Homa Bay',
+        data: [<?php echo $totalCancerHoma; ?>, <?php echo $totalCardiovascularHoma; ?>, <?php echo $totalRespiratoryHoma; ?>, <?php echo $totalEndocrineHoma; ?>, 
+		<?php echo $totalEyeHoma; ?>, <?php echo $totalGastroHoma; ?>, <?php echo $totalGynaecologicalHoma; ?>, <?php echo $totalGenitourinaryHoma; ?>, 
+		<?php echo $totalMusculoskeletalHoma; ?> , <?php echo $totalNeurologicalHoma; ?>, <?php echo $totalBloodHoma; ?>, <?php echo $totalCongenitalHoma; ?>, <?php echo $totalSkinHoma; ?>		],
+		 backgroundColor: 'rgba(66, 239, 245)',
         borderWidth: 1
       },
 	  {
-        label: '# of female patients',
-        data: [<?php echo $total_nairobi_patientF; ?>, <?php echo $total_central_patientF; ?>, <?php echo $total_eastern_patientF; ?>, <?php echo $total_western_patientF; ?>, 
-		<?php echo $total_nyanza_patientF; ?>, <?php echo $total_rift_patientF; ?>, <?php echo $total_northern_patientF; ?>, <?php echo $total_coast_patientF; ?> ],
-		 backgroundColor: 'rgba(162, 236, 254)',
+        label: '# Kisii',
+        data: [<?php echo $totalCancerKisii; ?>, <?php echo $totalCardiovascularKisii; ?>, <?php echo $totalRespiratoryKisii; ?>, <?php echo $totalEndocrineKisii; ?>, 
+		<?php echo $totalEyeKisii; ?>, <?php echo $totalGastroKisii; ?>, <?php echo $totalGynaecologicalKisii; ?>, <?php echo $totalGenitourinaryKisii; ?>, 
+		<?php echo $totalMusculoskeletalKisii; ?> , <?php echo $totalNeurologicalKisii; ?>, <?php echo $totalBloodKisii; ?>, <?php echo $totalCongenitalKisii; ?>, <?php echo $totalSkinKisii; ?>		],
+		 backgroundColor: 'rgba(245, 170, 66)',
+        borderWidth: 1
+      },
+	  {
+        label: '# Kisumu',
+        data: [<?php echo $totalCancerKisumu; ?>, <?php echo $totalCardiovascularKisumu; ?>, <?php echo $totalRespiratoryKisumu; ?>, <?php echo $totalEndocrineKisumu; ?>, 
+		<?php echo $totalEyeKisumu; ?>, <?php echo $totalGastroKisumu; ?>, <?php echo $totalGynaecologicalKisumu; ?>, <?php echo $totalGenitourinaryKisumu; ?>, 
+		<?php echo $totalMusculoskeletalKisumu; ?> , <?php echo $totalNeurologicalKisumu; ?>, <?php echo $totalBloodKisumu; ?>, <?php echo $totalCongenitalKisumu; ?>, <?php echo $totalSkinKisumu; ?>		],
+		 backgroundColor: 'rgba(66, 245, 78)',
+        borderWidth: 1
+      },
+	  {
+        label: '# Migori',
+        data: [<?php echo $totalCancerMigori; ?>, <?php echo $totalCardiovascularMigori; ?>, <?php echo $totalRespiratoryMigori; ?>, <?php echo $totalEndocrineMigori; ?>, 
+		<?php echo $totalEyeMigori; ?>, <?php echo $totalGastroMigori; ?>, <?php echo $totalGynaecologicalMigori; ?>, <?php echo $totalGenitourinaryMigori; ?>, 
+		<?php echo $totalMusculoskeletalMigori; ?> , <?php echo $totalNeurologicalMigori; ?>, <?php echo $totalBloodMigori; ?>, <?php echo $totalCongenitalMigori; ?>, <?php echo $totalSkinMigori; ?>		],
+		 backgroundColor: 'rgba(245, 81, 66)',
+        borderWidth: 1
+      },
+	  {
+        label: '# Nyamira',
+        data: [<?php echo $totalCancerNyamira; ?>, <?php echo $totalCardiovascularNyamira; ?>, <?php echo $totalRespiratoryNyamira; ?>, <?php echo $totalEndocrineNyamira; ?>, 
+		<?php echo $totalEyeNyamira; ?>, <?php echo $totalGastroNyamira; ?>, <?php echo $totalGynaecologicalNyamira; ?>, <?php echo $totalGenitourinaryNyamira; ?>, 
+		<?php echo $totalMusculoskeletalNyamira; ?> , <?php echo $totalNeurologicalNyamira; ?>, <?php echo $totalBloodNyamira; ?>, <?php echo $totalCongenitalNyamira; ?>, <?php echo $totalSkinNyamira; ?>		],
+		 backgroundColor: 'rgba(206, 66, 245)',
+        borderWidth: 1
+      },
+	  {
+        label: '# Siaya',
+        data: [<?php echo $totalCancerSiaya; ?>, <?php echo $totalCardiovascularSiaya; ?>, <?php echo $totalRespiratorySiaya; ?>, <?php echo $totalEndocrineSiaya; ?>, 
+		<?php echo $totalEyeSiaya; ?>, <?php echo $totalGastroSiaya; ?>, <?php echo $totalGynaecologicalSiaya; ?>, <?php echo $totalGenitourinarySiaya; ?>, 
+		<?php echo $totalMusculoskeletalSiaya; ?> , <?php echo $totalNeurologicalSiaya; ?>, <?php echo $totalBloodSiaya; ?>, <?php echo $totalCongenitalSiaya; ?>, <?php echo $totalSkinSiaya; ?>		],
+		 backgroundColor: 'rgba(206, 66, 245)',
         borderWidth: 1
       }
-	  
 	  ]
     },
     options: {
@@ -183,7 +216,6 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
       }
     }
   });
-  
 </script>
 
 

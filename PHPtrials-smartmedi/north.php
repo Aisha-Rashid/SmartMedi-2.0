@@ -17,7 +17,7 @@ if (isset($_GET['logout'])) {
 <!DOCTYPE html>
 <head>
   <meta charset="utf-8">
-  <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>SmartMedi EEHR</title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
@@ -58,28 +58,32 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 				</li>
           <li ><a href="admindash.php"><i class="fa fa-home"></i>Dashboard</a></li>
           <li><a href="manage-users.php"><i class="fa fa-users"></i> Manage Users</a></li>
-          <li class="sub open">
+          <li class="sub">
             <a href="javascript:;">
               <i class="fa fa-cubes"></i> Data Visualization<div class="pull-right"><span class="caret"></span></div>
             </a>
             <ul class="templatemo-submenu">
               
-              <li class ="active"><a href="#"><i class="fa fa-users"></i> Patients Onboard</a></li>
-			  <li><a href="gendercomparison.php"><i class="fa fa-venus-mars"></i> Gender Comparison</a></li>
-			  <li><a href="hospitalchart.php"><i class="fa fa-venus-mars"></i> Hospitals Onboard</a></li>
+			  <li><a href="gendercomparison.php"><i class="fa fa-user"></i> Gender Comparison</a></li>
+			  <li><a href="hospitalchart.php"><i class="fa fa-hospital-o"></i> Hospitals Onboard</a></li>
               
 
             </ul>
           </li>
-		  <li class="sub">
+		  <li class="sub open">
             <a href="javascript:;">
               <i class="fa fa-bar-chart-o"></i> Data Analysis per county <div class="pull-right"><span class="caret"></span></div>
             </a>
             <ul class="templatemo-submenu">
 			  <li><a href="conditionschart.php"><i class="fa fa-medkit"></i> Conditions</a></li>
 			  <li><a href="nairobi.php"><i class="fa fa-map-marker"></i> Nairobi Region</a></li>
-              <li><a href="central.php"><i class="fa fa-map-marker"></i> Central Region Counties</a></li>
-			  <li><a href="eastern.php"><i class="fa fa-map-marker"></i> Eastern Region Counties</a></li>
+              <li><a href="central.php"><i class="fa fa-map-marker"></i> Central Region</a></li>
+			  <li><a href="eastern.php"><i class="fa fa-map-marker"></i> Eastern Region</a></li>
+			  <li><a href="western.php"><i class="fa fa-map-marker"></i> Western Region</a></li>
+			  <li><a href="nyanza.php"><i class="fa fa-map-marker"></i> Nyanza Region</a></li>
+			  <li><a href="rift.php"><i class="fa fa-map-marker"></i> Rift Valley Region</a></li>
+			  <li class ="active"><a href="#"><i class="fa fa-map-marker"></i> North Eastern Region</a></li>
+			  <li><a href="coast.php"><i class="fa fa-map-marker"></i> Coast Region</a></li>
               
 
             </ul>
@@ -104,22 +108,13 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 
 			<div class="row">
 		  <div class="col-md-12 col-sm-12">
-		 
-		 <table>
-							<div class="templatemo-chart-box col-sm-6 col-xs-12">
+		  <table>
 							<div>
-							  <canvas id="PatientPieChart"></canvas>
-							  <p><b><u><i>Total registered patients in terms of gender</i></u></b></p>
+							  <canvas id="NorthBarChart"></canvas>
+							  <p align="center"><b><u><i>North Eastern Region</i></u></b></p>
 							</div>
-						</div>
-						<div class="templatemo-chart-box  col-sm-6 col-xs-12">
-							<div>
-							  <canvas id="PatientCountyChart"></canvas>
-							  <p><b><u><i>Total registered patients per region</i></u></b></p>
-							</div>
-						</div>
 		  </table>
-		 
+		  
         </div>
       </div>
 	   </div>
@@ -155,38 +150,47 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-  const ctx_piePatients = document.getElementById('PatientPieChart');
-  new Chart(ctx_piePatients, {
-    type: 'pie',
+
+  const ctx_barNorth = document.getElementById('NorthBarChart');
+  new Chart(ctx_barNorth, {
+    type: 'bar',
     data: {
-      labels: ['Female', 'Male'],
+      labels: ['Cancer', 'Cardiovascular', 'Respiratory', 'Endocrine', 'Eye disorders', 'Gastro-intestinal', 'Gynaecological','Genitourinary','Musculoskeletal',
+	  'Neurological', 'Blood disorders','Congenital','Skin disorders'],
       datasets: [{
-        label: '# of Patients',
-        data: [<?php echo $totalFemales; ?>, <?php echo $totalMales; ?> ],
-		 backgroundColor: ['rgba(110, 224, 182)', 'rgba(162, 236, 254)'],
-        
-      }]
+        label: '# Garissa',
+        data: [<?php echo $totalCancerGarissa; ?>, <?php echo $totalCardiovascularGarissa; ?>, <?php echo $totalRespiratoryGarissa; ?>, <?php echo $totalEndocrineGarissa; ?>, 
+		<?php echo $totalEyeGarissa; ?>, <?php echo $totalGastroGarissa; ?>, <?php echo $totalGynaecologicalGarissa; ?>, <?php echo $totalGenitourinaryGarissa; ?>, 
+		<?php echo $totalMusculoskeletalGarissa; ?> , <?php echo $totalNeurologicalGarissa; ?>, <?php echo $totalBloodGarissa; ?>, <?php echo $totalCongenitalGarissa; ?>, <?php echo $totalSkinGarissa; ?>		],
+		 backgroundColor: 'rgba(66, 239, 245)',
+        borderWidth: 1
+      },
+	  {
+        label: '# Mandera',
+        data: [<?php echo $totalCancerMandera; ?>, <?php echo $totalCardiovascularMandera; ?>, <?php echo $totalRespiratoryMandera; ?>, <?php echo $totalEndocrineMandera; ?>, 
+		<?php echo $totalEyeMandera; ?>, <?php echo $totalGastroMandera; ?>, <?php echo $totalGynaecologicalMandera; ?>, <?php echo $totalGenitourinaryMandera; ?>, 
+		<?php echo $totalMusculoskeletalMandera; ?> , <?php echo $totalNeurologicalMandera; ?>, <?php echo $totalBloodMandera; ?>, <?php echo $totalCongenitalMandera; ?>, <?php echo $totalSkinMandera; ?>		],
+		 backgroundColor: 'rgba(245, 170, 66)',
+        borderWidth: 1
+      },
+	  {
+        label: '# Wajir',
+        data: [<?php echo $totalCancerWajir; ?>, <?php echo $totalCardiovascularWajir; ?>, <?php echo $totalRespiratoryWajir; ?>, <?php echo $totalEndocrineWajir; ?>, 
+		<?php echo $totalEyeWajir; ?>, <?php echo $totalGastroWajir; ?>, <?php echo $totalGynaecologicalWajir; ?>, <?php echo $totalGenitourinaryWajir; ?>, 
+		<?php echo $totalMusculoskeletalWajir; ?> , <?php echo $totalNeurologicalWajir; ?>, <?php echo $totalBloodWajir; ?>, <?php echo $totalCongenitalWajir; ?>, <?php echo $totalSkinWajir; ?>		],
+		 backgroundColor: 'rgba(66, 245, 78)',
+        borderWidth: 1
+      }
+	  ]
     },
-    
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
   });
-  
-  
-  const ctx_piePatientCounty = document.getElementById('PatientCountyChart');
-  new Chart(ctx_piePatientCounty, {
-    type: 'pie',
-    data: {
-      labels: ['Nairobi', 'Central', 'Eastern', 'Western', 'Nyanza', 'Rift Valley', 'North Eastern','Coast'],
-      datasets: [{
-        label: '# of Patients',
-        data: [<?php echo $total_nairobi_patient; ?>, <?php echo $total_central_patient; ?>, <?php echo $total_eastern_patient; ?>, <?php echo $total_western_patient; ?>, 
-		<?php echo $total_nyanza_patient; ?>, <?php echo $total_rift_patient; ?>, <?php echo $total_northern_patient; ?>, <?php echo $total_coast_patient; ?> ],
-		 backgroundColor: ['rgba(66, 239, 245)', 'rgba(245, 170,66)', 'rgba(66, 245, 78)', 'rgba(245, 81, 66)', 'rgba(206, 66, 245)', 'rgba(223, 235, 233)', 'rgba(201, 36, 89)', 'rgba(66, 81, 245)'],
-        
-      }]
-    },
-    
-  });
-  
 </script>
 
 

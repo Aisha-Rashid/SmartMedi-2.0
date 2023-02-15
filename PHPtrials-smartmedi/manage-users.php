@@ -91,9 +91,9 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
             </a>
             <ul class="templatemo-submenu">
               
-              <li><a href="patientchart.php"><i class="fa fa-users"></i> Patients Onboard</a></li>
-			  <li><a href="gendercomparison.php"><i class="fa fa-venus-mars"></i> Gender Comparison</a></li>
-			  <li><a href="hospitalchart.php"><i class="fa fa-venus-mars"></i> Hospitals Onboard</a></li>
+              
+			  <li><a href="gendercomparison.php"><i class="fa fa-user"></i> Gender Comparison</a></li>
+			  <li><a href="hospitalchart.php"><i class="fa fa-hospital-o"></i> Hospitals Onboard</a></li>
               
 
             </ul>
@@ -105,8 +105,13 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
             <ul class="templatemo-submenu">
 			  <li><a href="conditionschart.php"><i class="fa fa-medkit"></i> Conditions</a></li>
 			  <li><a href="nairobi.php"><i class="fa fa-map-marker"></i> Nairobi Region</a></li>
-              <li><a href="central.php"><i class="fa fa-map-marker"></i> Central Region Counties</a></li>
-			  <li><a href="eastern.php"><i class="fa fa-map-marker"></i> Eastern Region Counties</a></li>
+              <li><a href="central.php"><i class="fa fa-map-marker"></i> Central Region</a></li>
+			  <li><a href="eastern.php"><i class="fa fa-map-marker"></i> Eastern Region</a></li>
+			  <li><a href="western.php"><i class="fa fa-map-marker"></i> Western Region</a></li>
+			  <li><a href="nyanza.php"><i class="fa fa-map-marker"></i> Nyanza Region</a></li>
+			  <li><a href="rift.php"><i class="fa fa-map-marker"></i> Rift Valley Region</a></li>
+			  <li><a href="north.php"><i class="fa fa-map-marker"></i> North Eastern Region</a></li>
+			  <li><a href="coast.php"><i class="fa fa-map-marker"></i> Coast Region</a></li>
               
 
             </ul>
@@ -120,15 +125,15 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 
       <div class="templatemo-content-wrapper">
         <div class="templatemo-content">
-          <ol class="breadcrumb">
+          <!--ol class="breadcrumb">
             <li><a href="admindash.php">Admin Panel</a></li>
             <li><a href="#">Manage Users</a></li>
             <li class="active">Tables</li>
-          </ol>
+          </ol-->
           <h1>Manage Users</h1>
           <hr>
 
-          <div class="row margin-bottom-30">
+          <!--div class="row margin-bottom-30">
         <div class="col-md-12">
           <ul class="nav nav-pills">
             <li class="active"><a href="#">Total Patients Registered <span class="badge"><?php echo $totalPatients; ?></span></a></li>
@@ -136,13 +141,13 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
             <li class="active"><a href="#">Hospitals Registered <span class="badge"><?php echo $totalHospitals; ?></span></a></li>
           </ul>          
         </div>
-      </div>
+      </div-->
 		  
           <div class="row">
 		  <div class="col-md-12 col-sm-12">
 		  <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist" id="templatemo-tabs">
-                  <li class="active"><a href="#home" role="tab" data-toggle="tab">General Users</a></li>
+                  <li class="active"><a href="#home" role="tab" data-toggle="tab">Patients</a></li>
                   <li><a href="#doctors" role="tab" data-toggle="tab">Medical Practitioners</a></li>
                   <li><a href="#hospitals" role="tab" data-toggle="tab">Medical institutions</a></li>
                   <!--li><a href="#admin" role="tab" data-toggle="tab">Admin</a></li-->
@@ -152,7 +157,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 					<div class="tab-pane fade in active" id="home">
 						
 						<div class="table-responsive">
-							<h4 class="margin-bottom-15">Patients Table</h4>
+							<!--h4 class="margin-bottom-15">Patients Table</h4-->
 								<table class="table table-striped table-hover table-bordered">
 								  <thead>
 									<tr>
@@ -209,7 +214,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 					<div class="tab-pane fade" id="doctors">
 						
 						<div class="table-responsive">
-                <h4 class="margin-bottom-15">Medical Practitioners Table</h4>
+                <!--h4 class="margin-bottom-15">Medical Practitioners Table</h4-->
                 <table class="table table-striped table-hover table-bordered">
                   <thead>
                     <tr>
@@ -268,7 +273,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 			  <div class="tab-pane fade" id="hospitals">
 						
 						<div class="table-responsive">
-                <h4 class="margin-bottom-15">Hospitals Table</h4>
+                <!--h4 class="margin-bottom-15">Hospitals Table</h4-->
                 <table class="table table-striped table-hover table-bordered">
                   <thead>
                     <tr>
