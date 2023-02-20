@@ -27,7 +27,7 @@ $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 
 // Return the image path
-echo "uploads/" . $row['image'].base64_encode($row['image']).;
+echo "files/" . $row['image'].base64_encode($row['image']);
 
 mysqli_close($conn);
 
