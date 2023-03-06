@@ -20,15 +20,7 @@ if (isset($_GET['logout'])) {
 	header("location: login.php");
 }
 ?>
-<?php if (isset($_SESSION['IDNo'])) :
 
-	$unique = $_SESSION['IDNo'];
-	$query = "SELECT * FROM `patients` WHERE IDNo = '$unique'";
-	$res = mysqli_query($db, $query);
-	$array=mysqli_fetch_row($res);
-	$rows = mysqli_num_rows($res);
-
-?>
 <!DOCTYPE html>
 	<head>
 		<meta charset="utf-8">
@@ -40,12 +32,21 @@ if (isset($_GET['logout'])) {
 		<link rel="stylesheet" href="dashboardcss/templatemo_main.css">
 		<link rel="shortcut icon" href="dashboardimages/favicon.ico" type="image/x-icon">
 		<link rel="apple-touch-icon" href="dashboardimages/apple-touch-icon.png">
-		<!--Password eye icon-->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+		<!--Password eye icon->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"-->
 		
 	</head>
 
 	<body>
+<?php if (isset($_SESSION['IDNo'])) :
+
+	$unique = $_SESSION['IDNo'];
+	$query = "SELECT * FROM `patients` WHERE IDNo = '$unique'";
+	$res = mysqli_query($db, $query);
+	$array=mysqli_fetch_row($res);
+	$rows = mysqli_num_rows($res);
+
+?>
 <?php 
 $conn=new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or die(mysqli_error($conn));
 //Patients details
@@ -182,21 +183,12 @@ die(mysqli_error($conn));
 				<div class="navbar-collapse collapse templatemo-sidebar">
 					<ul class="templatemo-sidebar-menu">
 						<li>
-							<form class="navbar-form">
+							
 								<img src="dashboardimages/favicon.ico" alt="Smartmedi">
-							</form>
+							
 						</li>
 						<li><a href="dashboard.php"><i class="fa fa-home"></i>Dashboard</a></li>
-						<li class="sub">
-							<a href="javascript:;">
-								<i class="fa fa-database"></i> Menu <div class="pull-right"><span class="caret"></span></div>
-							</a>
-							<ul class="templatemo-submenu">
-
-								<li><a href="attachments.php">Attachments</a></li>
-								<li><a href="appointment.php">Appointments</a></li>
-							</ul>
-						</li>
+						<li><a href="attachments.php"><i class="fa fa-folder-open"></i>Attachments</a></li>
 						<li class="active"><a href="#"><i class="fa fa-cog"></i>Settings</a></li>
 						<li><a href="javascript:;" data-toggle="modal" data-target="#confirmModal"><i class="fa fa-sign-out"></i>Sign Out</a></li>
 					</ul>
@@ -256,11 +248,11 @@ die(mysqli_error($conn));
 									<tr><td><h4>Town :</h4></td><td><input type="text" class="form-control" name="town"></td></tr>
 									<tr><td colspan = "2" ><h4><u><b>Change Password </b></u></h4></td></tr>
 									<tr><td><h4>Enter current password :</h4></td><td><input type="password" class="form-control" id="current_password" name="current_password">
-									<span toggle="#current_password" class="fa fa-fw fa-eye field-icon toggle-password" ></span></td></tr>
+									<!--span toggle="#current_password" class="fa fa-fw fa-eye field-icon toggle-password" ></span--></td></tr>
 									<tr><td><h4>New Password :</h4></td><td><input type="password" class="form-control" id="new_password" name="new_password">
-									<span toggle="#new_password" class="fa fa-fw fa-eye field-icon toggle-password"></span></td></tr>
+									<!--span toggle="#new_password" class="fa fa-fw fa-eye field-icon toggle-password"></span--></td></tr>
 									<tr><td><h4>Confirm Password :</h4></td><td><input type="password" class="form-control" id="conf_password" name="conf_password">
-									<span toggle="#conf_password" class="fa fa-fw fa-eye field-icon toggle-password"></span></td></tr>
+									<!--span toggle="#conf_password" class="fa fa-fw fa-eye field-icon toggle-password"></span--></td></tr>
 									
 								</table>
 								<br><br>
@@ -333,7 +325,7 @@ die(mysqli_error($conn));
 									<tr><td colspan = "2" ><h4><u><b>Allergies</b></u></h4></td></tr>
 									<tr><td colspan = "2" ><b><textarea disabled id="allergies" name="allergies" rows="3" cols="120" placeholder="<?php echo $row['allergies'] ?>" ></textarea></b></td></tr>
 									<tr><td colspan = "2" ><h4><u><b>Medical History</b></u></h4></td></tr>
-									<tr><td colspan = "2" ><b><textarea disabled id="allergies" name="allergies" rows="5" cols="120" placeholder="<?php echo $row['conditions'] ."\n\n". $row['notes'] ; ?>" ></textarea></b></td></tr>
+									<tr><td colspan = "2" ><b><textarea disabled id="history" name="history" rows="5" cols="120" placeholder="<?php echo $row['conditions'] ."\n\n". $row['notes'] ; ?>" ></textarea></b></td></tr>
 									<?php } ?> 
 									<tr><td colspan = "2" ><h4><b>Add conditions</b></h4></td></tr>
 									<tr><td><h4>Allergies :</h4></td><td><input type="text" name="allergies" class="form-control"></td></tr>
@@ -540,8 +532,7 @@ die(mysqli_error($conn));
 		<script src="dashboardjs/Graph.js"></script>
 		<script src="dashboardjs/appointment.js"></script>
 		<script type="text/javascript"></script>
-		<script src="js/passwordToggle.js"></script>
-		<!--script src="js/password-validator.js"></script-->
+		
 
 		<script>
 			var coll = document.getElementsByClassName("collapsible");

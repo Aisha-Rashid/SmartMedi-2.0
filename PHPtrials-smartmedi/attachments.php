@@ -80,21 +80,12 @@ die(mysqli_error($conn));
 		<div class="navbar-collapse collapse templatemo-sidebar">
 			<ul class="templatemo-sidebar-menu">
 				<li>
-				<form class="navbar-form">
+			
 				<img src="dashboardimages/favicon.ico" alt="Smartmedi">
-				</form>
+				
 				</li>
 				<li><a href="dashboard.php"><i class="fa fa-home"></i>Dashboard</a></li>
-				<li class="sub open">
-				<a href="javascript:;">
-				<i class="fa fa-database"></i> Menu <div class="pull-right"><span class="caret"></span></div>
-				</a>
-				<ul class="templatemo-submenu">
-				
-				<li><a href="#">Attachments</a></li>
-				<li><a href="appointment.php">Appointments</a></li>
-				</ul>
-				</li>
+				<li class="active"><a href="attachments.php"><i class="fa fa-folder-open"></i>Attachments</a></li>
 				<li><a href="preferences.php"><i class="fa fa-cog"></i>Settings</a></li>
 				<li><a href="javascript:;" data-toggle="modal" data-target="#confirmModal"><i class="fa fa-sign-out"></i>Sign Out</a></li>
 			</ul>
@@ -111,10 +102,20 @@ die(mysqli_error($conn));
   <div class="container">
     <div class="row">
       <div class="col-lg-4">
-        <div class="card shadow-sm">
+									<div class="card shadow-sm">
           <div class="card-header bg-transparent text-center">
-				<a href = "preferences.php"><img class="profile_img" src="https://www.pngkey.com/png/detail/349-3499617_person-placeholder-person-placeholder.png" alt="Profile Pic"></a>
+		  <?php
+			$query = " select * from patients where IDNO='$unique' ";
+			$result = mysqli_query($db, $query);
+
+			while ($data = mysqli_fetch_assoc($result)) {
+			?>
+				<a href = "uploadProfile.php"><img class="profile_img" src="./uploads/<?php echo $data['filename']; ?>" alt="Profile Pic"></a>
 				<!--input id="file" type="file" onchange="loadFile(event)"/-->
+				
+				<?php
+		}
+		?>
             <h3>
 			<?php echo $array[1]; ?>
 			</h3>
@@ -122,7 +123,7 @@ die(mysqli_error($conn));
           <div class="card-body" align = "center">
           </div>
         </div>
-      </div>
+								</div>
 	  
 	   <div class="col-lg-8">
 	   <div class="card shadow-sm">

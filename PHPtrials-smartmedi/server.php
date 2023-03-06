@@ -100,7 +100,7 @@ if (isset($_POST['reg_user'])) {
 		
 		// Page on which the user will be
 		// redirected after logging in
-		header('location: dashboard.php');
+		header('location: uploadProfile.php');
 	}
 }
 

@@ -109,7 +109,7 @@ if (isset($_GET['logout'])) {
 									<div class="card shadow-sm">
 										<div class="card-header bg-transparent text-center">
 
-											<img class="profile_img" src="https://www.pngkey.com/png/detail/349-3499617_person-placeholder-person-placeholder.png" alt="Profile Pic">
+											<img class="profile_img" src="imgsource.php?image=<?php echo $array[4] ?>" alt="Profile Pic">
 											<!--input id="file" type="file" onchange="loadFile(event)"/-->
 											<h3>
 												<?php echo $array[1]; ?>
@@ -253,9 +253,9 @@ if (isset($_GET['logout'])) {
 														</div>
 													</div>
 													<div class="col-md-12">
-													<div class="calendly" id="calendly-invite">
+													<!--div class="calendly" id="calendly-invite">
 															<div class="calendly-inline-widget" style="min-width: 320px; height: 850px"></div>
-														</div>
+														</div-->
 													</div>
 												</div>
 											</form>

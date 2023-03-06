@@ -66,7 +66,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
               
               
 			  <li><a href="gendercomparison.php"><i class="fa fa-user"></i> Gender Comparison</a></li>
-			  <li><a href="hospitalchart.php"><i class="fa fa-hospital-o></i> Hospitals Onboard</a></li>
+			  <li><a href="hospitalchart.php"><i class="fa fa-hospital-o"></i> Hospitals Onboard</a></li>
               
 
             </ul>
@@ -112,7 +112,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 		  <table>
 							<div>
 							  <canvas id="EasternBarChart"></canvas>
-							  <p align="center"><b><u><i>Central Region</i></u></b></p>
+							  <p align="center"><b><u><i>Eastern Region</i></u></b></p>
 							</div>
 		  </table>
 		  
@@ -130,7 +130,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
               <h4 class="modal-title" id="myModalLabel">Are you sure you want to sign out?</h4>
             </div>
             <div class="modal-footer">
-              <a href="sign-in.html" class="btn btn-primary">Yes</a>
+              <a href="admindash.php?logout='1'" class="btn btn-primary">Yes</a>
               <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
             </div>
           </div>

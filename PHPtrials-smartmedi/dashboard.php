@@ -66,16 +66,8 @@ if (isset($_GET['logout'])) {
 
 					</li>
 					<li class="active"><a href="#"><i class="fa fa-home"></i>Dashboard</a></li>
-					<li class="sub">
-						<a href="javascript:;">
-							<i class="fa fa-database"></i> Menu <div class="pull-right"><span class="caret"></span></div>
-						</a>
-						<ul class="templatemo-submenu">
-
-							<li><a href="attachments.php">Attachments</a></li>
-							<li><a href="appointment.php">Appointments</a></li>
-						</ul>
-					</li>
+					<li><a href="dash_medhist.php"><i class="fa fa-stethoscope"></i>User Data</a></li>
+					<li><a href="attachments.php"><i class="fa fa-folder-open"></i>Attachments</a></li>
 					<li><a href="preferences.php"><i class="fa fa-cog"></i>Settings</a></li>
 					<li><a href="javascript:;" data-toggle="modal" data-target="#confirmModal"><i class="fa fa-sign-out"></i>Sign Out</a></li>
 				</ul>
@@ -93,31 +85,26 @@ if (isset($_GET['logout'])) {
 							<div class="row">
 								<div class="col-lg-4">
 									<div class="card shadow-sm">
+          <div class="card-header bg-transparent text-center">
+		  <?php
+			$query = " select * from patients where IDNO='$unique' ";
+			$result = mysqli_query($db, $query);
 
-										<div class="profile-pic">
-											<label class="-label" for="file">
-												<span class="glyphicon glyphicon-camera"></span>
-												<span>Change Image</span>
-											</label>
-											
-											<input id="file" type="file"  onchange="loadFile(event)" />
-											<img src="https://www.pngkey.com/png/detail/349-3499617_person-placeholder-person-placeholder.png" id="output" width="200" />
-											
-										</div>
-						
-										<div class="card-header bg-transparent text-center">
-											<!-- <form action="" method="post" enctype="multipart/form-data"><form method="POST" action=""></form>
-		  <input type="file" id="fileInput" accept="image/*" style="display:none !important" />
-		  <img  class="profile_img" id="preview" src="https://www.pngkey.com/png/detail/349-3499617_person-placeholder-person-placeholder.png" alt="Image preview" />
-			</form> -->
-											<h3>
-												<?php echo $array[1]; ?>
-
-											</h3>
-										</div>
-										<div class="card-body" align="center">
-										</div>
-									</div>
+			while ($data = mysqli_fetch_assoc($result)) {
+			?>
+				<a href = "uploadProfile.php"><img class="profile_img" src="./uploads/<?php echo $data['filename']; ?>" alt="Profile Pic"></a>
+				<!--input id="file" type="file" onchange="loadFile(event)"/-->
+				
+				<?php
+		}
+		?>
+            <h3>
+			<?php echo $array[1]; ?>
+			</h3>
+          </div>
+          <div class="card-body" align = "center">
+          </div>
+        </div>
 								</div>
 								<div class="col-lg-8">
 									<div class="card shadow-sm">
@@ -400,6 +387,23 @@ if (isset($_GET['logout'])) {
 				});
 			}
 		</script>
+		<!--script>
+var uploadImage = function (event) {
+  var image = document.getElementById("output");
+  var file = event.target.files[0];
+  var formData = new FormData();
+  formData.append("file", file);
+  
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "upload.php", true);
+  xhr.onload = function () {
+    if (this.status === 200) {
+      image.src = this.responseText;
+    }
+  };
+  xhr.send(formData);
+};
+</script-->
 
 
 		<script>
@@ -412,7 +416,7 @@ function loadFile(event) {
 
 				$.ajax({
 					type: "POST",
-					url: "pic.php",
+					url: "upload2.php",
 					data: data,
 					processData: false,
 					contentType: false,

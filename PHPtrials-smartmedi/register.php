@@ -52,6 +52,7 @@
 			<div class="col-lg-12">
 				<div class="title-box">
 					<h2>Create Account</h2>
+					<h3>Step 1: User Details</h3>
 					<p>Already have an account?<a href="login.php"><u>Click here to Log in!</u></a></p>
 				</div>
 			</div>
@@ -158,6 +159,12 @@
 									<input type="text" class="form-control" name="town" value="<?php echo $town; ?>">
 									</div>   
 								</div> 
+								<!--div class="col-md-12">
+									<label>Upload Profile Picture</label>
+									<input type="file" class="form-control" name="profile" value=""><button class="btn" type="submit" name="upload_img">UPLOAD</button>
+									  
+								</div--> 
+								
 								<div class="col-md-6">
 									<label>Password</label>
 									<div class="form-group">
