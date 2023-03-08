@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 09, 2023 at 09:23 AM
+-- Generation Time: Mar 08, 2023 at 09:38 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -217,7 +217,9 @@ CREATE TABLE `docnotes` (
 INSERT INTO `docnotes` (`id`, `IDNo`, `docid`, `date`, `notes`) VALUES
 (9, 29816629, 23386746, '2023-01-24', 'PMS'),
 (17, 29816629, 23386746, '2023-01-24', 'Diagnosed with IBS'),
-(18, 29816629, 648392384, '2023-02-06', 'The patient showing signs of extreme anxiety disorder necessitating medication and therapy.');
+(18, 29816629, 648392384, '2023-02-06', 'The patient showing signs of extreme anxiety disorder necessitating medication and therapy.'),
+(20, 29816629, 263830028, '2023-02-09', 'The patient was admitted over sudden anxiety attacks.'),
+(21, 2147483647, 5986655, '2023-03-06', 'The patient shows early signs of arthritis. To keenly observe diet high in calcium and omega');
 
 -- --------------------------------------------------------
 
@@ -300,7 +302,7 @@ INSERT INTO `doctors` (`id`, `nationalid`, `fname`, `lname`, `hospital`, `workid
 (13, 56559856, 'Kelvin', 'Nzomo', 'Gatundu Level 5 Hospital', 56465565, 'Nephrology', 'b2c6de510d584484d74c9aa9f8fa9f04'),
 (14, 5696598, 'Jack ', 'Ochieng', 'Kiambu County Referral Hospital', 6655665, 'Endocrinology and Metabolism', '4ff9fc6e4e5d5f590c4f2134a8cc96d1'),
 (15, 11455985, 'Maimuna', 'Idris', 'Mandera County Referral Hospital', 2556590, 'Pediatrics', 'cbf306d2c9df16d0bd7ba7888cbb1b5e'),
-(16, 45379476, 'Alex', 'Kibiricho', 'Machakos Hospital', 3425653, 'Critical Care and Emergency', '534b44a19bf18d20b71ecc4eb77c572f');
+(16, 45379476, 'Alex', 'Kibiricho', 'Machakos Hospital', 3425653, 'Public Health and Preventive Medicine (PhPm)', '534b44a19bf18d20b71ecc4eb77c572f');
 
 -- --------------------------------------------------------
 
@@ -504,7 +506,8 @@ INSERT INTO `medicalcover` (`id`, `nhiftype`, `nhifnumber`, `insurancetype`, `in
 (3, 'Individual', 5367849, '', 0, '', '0000-00-00', 63748264),
 (4, 'Civil Servant', 6374827, '', 0, '', '0000-00-00', 68493736),
 (6, 'Employee', 3547826, '', 0, '', '0000-00-00', 367482725),
-(8, 'Individual', 35727489, 'ICEA LION General Insurance Company Limited', 64829472, 'Allan Keverenge', '2024-01-01', 2147485);
+(8, 'Individual', 35727489, 'ICEA LION General Insurance Company Limited', 64829472, 'Allan Keverenge', '2024-01-01', 2147485),
+(12, 'Individual', 456738, 'UAP Life Assurance Limited', 65378409, 'Goosey Lucy', '2024-03-07', 66388463);
 
 -- --------------------------------------------------------
 
@@ -551,14 +554,14 @@ CREATE TABLE `patients` (
   `county` varchar(100) NOT NULL,
   `town` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `pic` blob NOT NULL
+  `filename` varchar(100) CHARACTER SET latin1 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `patients`
 --
 
-INSERT INTO `patients` (`ID`, `FirstName`, `LastName`, `TelNo`, `IDNo`, `DOB`, `gender`, `bloodgroup`, `email`, `county`, `town`, `password`, `pic`) VALUES
+INSERT INTO `patients` (`ID`, `FirstName`, `LastName`, `TelNo`, `IDNo`, `DOB`, `gender`, `bloodgroup`, `email`, `county`, `town`, `password`, `filename`) VALUES
 (1, 'Fatuma', 'Rashid', '273940287', 53664673, '1995-11-09', 'Female', 'O+', 'fatuma@yahoo.com', 'Kilifi', 'Malindi', 'fdc0978bc0cc4c37c3e3d44fc63ee487', ''),
 (2, 'Ashraf', 'Mbulika', '63647828', 63748264, '2020-07-07', 'Male', 'AB+', 'ashraf@yahoo.com', 'Machakos', 'Athi River', '508924b0eac2ba101ada28841c931e44', ''),
 (3, 'Rehema', 'Rashid', '637483625', 68493736, '1998-03-10', 'Female', 'O+', 'rehema@yahoo.com', 'Nairobi City', 'Nairobi', '5eaf0467a7fdc9fe2a16b9b8a8fd8b4a', ''),
@@ -585,10 +588,37 @@ INSERT INTO `patients` (`ID`, `FirstName`, `LastName`, `TelNo`, `IDNo`, `DOB`, `
 (24, 'Vitalis', 'Junior', '+254712358256', 545586598, '1994-07-07', 'Male', 'AB+', 'vitalis@gmail.com', 'Vihiga', 'Vihiga', '92b20c90c1bc317620c82dc41b4eb9fd', ''),
 (25, 'Fatuma', 'Rashid', '254719829526', 29816629, '1993-04-02', 'Female', 'O+', 'fatumarashid4@gmail.com', 'Kajiado', 'Kitengela', '407aa911747042d7f046b62feaf8b4c4', ''),
 (26, 'Jeff', 'Githae', '254743567854', 43628735, '1996-07-05', 'Male', 'O+', 'jeffgithae@gmail.com', 'Kiambu', 'Kiambu', '166ee015c0e0934a8781e0c86a197c6e', ''),
-(27, 'Aisha', 'Rashid', '0703277202', 2147483647, '1996-06-25', 'Female', 'O+', 'chuchuaisha@gmail.com', 'Nairobi City', 'Nairobi', 'a381bedb5d4478053eb04be35f8798dd', ''),
+(27, 'Aisha', 'Rashid', '0703277202', 2147483647, '1996-06-25', 'Female', 'O+', 'chuchuaisha@gmail.com', 'Nairobi City', 'Nairobi', 'a381bedb5d4478053eb04be35f8798dd', 'ppic.jpg'),
 (28, 'Chicken', 'Licken', '0737472368', 47388377, '1992-06-06', 'Male', 'A-', 'chickenlicken@gmail.com', 'Kilifi', 'Malindi', 'cdf3aead074cf574c5ce6c9ce76c2e41', ''),
 (29, 'Henny', 'Penny', '0764537584', 53648273, '1982-09-06', 'Female', 'AB+', 'hennypenny@gmail.com', 'Nairobi City', 'Ngara', 'penny', ''),
-(30, 'Ducky', 'Lucky', '0736452749', 24367838, '1990-03-17', 'Female', 'O-', 'duckylucky@yahoo.com', 'Kakamega', 'Isulu', '339a65e93299ad8d72c42b263aa23117', '');
+(30, 'Ducky', 'Lucky', '0736452749', 24367838, '1990-03-17', 'Female', 'O-', 'duckylucky@yahoo.com', 'Kakamega', 'Isulu', '56975b83de847aa2ee9b2493b6c4bd8f', ''),
+(31, 'Goosey', 'Lucy', '0726836237', 66388463, '1990-12-09', 'Female', 'A-', 'glucy@gmail.com', 'Nairobi City', 'Umoja', 'aa7a60d9e3f05d9e068c4ba4d3608978', 'gooseyL (2).jfif'),
+(33, 'Turkey', 'Lucky', '0745384637', 33432676, '1993-03-11', 'Male', 'AB-', 'tlucky@gmail.com', 'Kiambu', 'Ndumberi', 'db77174aa34ded1b6139455a58d0a38b', ''),
+(34, 'Lemony', 'Snicket', '0736254637', 53748393, '1990-10-10', 'Male', 'O+', 'lsnicket@gmail.com', 'Nairobi City', 'Nairobi', '5684f59763b080bb179fe408b64191bd', 'juice2.jpg'),
+(35, 'Sheldon', 'Cooper', '0734973497', 33857490, '1991-06-18', 'Male', 'O+', 'scooper@gmail.com', 'Nairobi City', 'Pumwani', 'fcfff28fdbbbf75face3b3d97fdbfc15', 'pancakes.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `picture`
+--
+
+CREATE TABLE `picture` (
+  `id` int(11) NOT NULL,
+  `filename` varchar(100) CHARACTER SET latin1 NOT NULL,
+  `IDNo` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `picture`
+--
+
+INSERT INTO `picture` (`id`, `filename`, `IDNo`) VALUES
+(13, 'fruitsalad.jpg', 0),
+(14, 'drinks.jpg', 0),
+(15, 'chickenthighs.jpg', 0),
+(16, 'chickengarlic.jpg', 0),
+(17, 'menu-image1.jpg', 53748393);
 
 -- --------------------------------------------------------
 
@@ -612,12 +642,13 @@ INSERT INTO `response` (`id`, `IDNo`, `conditions`, `allergies`, `notes`) VALUES
 (2, 53664673, 'Respiratory and Ear Nose and Throat (ENT) disorders,Endocrine disorders,Gastro-intestinal disorders,Gynaecological and Obstetric disorders,Neurological and psychological disorders,Congenital/inherited/hereditary disorders,', 'peanuts, flowers', '5-year gastritis diagnosis, anxiety disorder,  stomach hernia, pelvic inflammation'),
 (3, 68493736, 'Respiratory and Ear Nose and Throat (ENT) disorders,', 'paracetamol, dust particles', 'rhinitis diagnosed in 2013'),
 (4, 63748264, 'Gastro-intestinal disorders,', 'nuts', 'gastritis detected'),
-(5, 2147483647, 'Respiratory and Ear Nose and Throat (ENT) disorders, Gastro-intestinal disorders, Gynaecological and Obstetric disorders, Neurological and psychological disorders,  ,Eye related disorders ,Skin disorders', 'reactive to iboprufen, dust particles, strong perfumes, eggsreactive to paracetamol,sulphur, pollen', 'diagnosed with allergic rhinitis, hiatus hernia, peptic ulcers, endometriosis, anxiety and panic attacks ,short-sighted ,Diagnosed with Acne'),
+(5, 2147483647, 'Respiratory and Ear Nose and Throat (ENT) disorders, Gastro-intestinal disorders, Gynaecological and Obstetric disorders, Neurological and psychological disorders,  ,Eye related disorders ,Skin disorders', 'reactive to iboprufen, dust particles, strong perfumes, eggs, reactive to paracetamol,sulphur, pollen', 'diagnosed with allergic rhinitis, hiatus hernia, peptic ulcers, endometriosis, anxiety and panic attacks ,short-sighted ,Diagnosed with Acne'),
 (6, 29816629, 'Cardiovascular (heart and blood vessels) disorders, Respiratory and Ear Nose and Throat (ENT) disorders, Endocrine disorders, Gastro-intestinal disorders, Gynaecological and Obstetric disorders, Musculoskeletal disorders, Skin disorders, ', 'Dust, Kerosene, pollen ', 'Relatives suffering from - High blood pressure, Diabetes, peptic ulcers, arthritis, keloids\r\nPatient suffering from - asthma, ovarian cyst\r\n'),
 (7, 82736745, '', 'NIL', ''),
 (8, 367482725, 'Gastro-intestinal disorders, ', 'Sulphur', 'Diagnosed with Gastritis on January 2020'),
 (9, 2147485, 'Cardiovascular (heart and blood vessels) disorders, Respiratory and Ear Nose and Throat (ENT) disorders, ', 'Dust and smoke particles,\r\nAnimal Protein', 'Close relatives diagnosed with High blood pressure and asthma'),
-(10, 49798885, 'Eye related disorders, ', '', 'Glaucoma');
+(10, 49798885, 'Eye related disorders, ', '', 'Glaucoma'),
+(11, 6598569, 'Cardiovascular (heart and blood vessels) disorders, Endocrine disorders, Musculoskeletal disorders, ', 'Dust and Pollen', 'Relatives with High Blood Pressure problems, \r\nSelf diagnosed with sporting pelvic injury and diabetes');
 
 --
 -- Indexes for dumped tables
@@ -708,6 +739,12 @@ ALTER TABLE `patients`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indexes for table `picture`
+--
+ALTER TABLE `picture`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `response`
 --
 ALTER TABLE `response`
@@ -751,7 +788,7 @@ ALTER TABLE `counties`
 -- AUTO_INCREMENT for table `docnotes`
 --
 ALTER TABLE `docnotes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `docspecialty`
@@ -787,7 +824,7 @@ ALTER TABLE `insurance`
 -- AUTO_INCREMENT for table `medicalcover`
 --
 ALTER TABLE `medicalcover`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `nextofkin`
@@ -799,13 +836,19 @@ ALTER TABLE `nextofkin`
 -- AUTO_INCREMENT for table `patients`
 --
 ALTER TABLE `patients`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
+--
+-- AUTO_INCREMENT for table `picture`
+--
+ALTER TABLE `picture`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `response`
 --
 ALTER TABLE `response`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

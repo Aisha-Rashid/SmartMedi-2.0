@@ -68,14 +68,13 @@ if (isset($_GET['logout'])) {
    
    
    $unique = $_SESSION['IDNo'];
-   $query = "SELECT * FROM `patients` WHERE IDNo = '$unique'";
+   $query = "SELECT * FROM `medicalcover` WHERE IDNo = '$unique'";
    $res = mysqli_query($db, $query);
-   $array=mysqli_fetch_row($res);
-   $rows = mysqli_num_rows($res);
-   
-   ?>
-<?php
-$conn=new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or die(mysqli_error($conn));
+   if($res->num_rows >= 1) {
+	   echo"<script>alert('Record already exists. To edit, visit the Settings page'); window.location.href ='/SmartMedi-2.0/PHPtrials-smartmedi/dashboard.php'; </script>";
+   }
+   else{
+	   $conn=new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or die(mysqli_error($conn));
 if(isset($_POST['insurancesub'])!=""){
 	
 	$nhiftype = mysqli_real_escape_string($db, $_POST['nhiftype']);
@@ -94,7 +93,12 @@ else{
 die(mysqli_error($conn));
 }
 }
-?>
+
+	} 
+   
+   ?>
+
+
 
 	<!-- LOADER -->
     <div id="preloader">

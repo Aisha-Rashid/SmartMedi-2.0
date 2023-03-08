@@ -99,9 +99,9 @@ die(mysqli_error($conn));
 				<div class="navbar-collapse collapse templatemo-sidebar">
 					<ul class="templatemo-sidebar-menu">
 						<li>
-							<form class="navbar-form">
+							
 								<img src="dashboardimages/favicon.ico" alt="Smartmedi">
-							</form>
+							
 						</li>
 						<li><a href="DocDashboard.php"><i class="fa fa-home"></i>Dashboard</a></li>
 						

@@ -197,10 +197,10 @@ include ('data-visualization.php');
   new Chart(ctx_piePatients, {
     type: 'pie',
     data: {
-      labels: ['Female', 'Male'],
+      labels: ['Male', 'Female'],
       datasets: [{
         label: '# of Patients',
-        data: [<?php echo $totalFemales; ?>, <?php echo $totalMales; ?> ],
+        data: [<?php echo $totalMales; ?>, <?php echo $totalFemales; ?> ],
 		 backgroundColor: ['rgba(110, 224, 182)', 'rgba(162, 236, 254)'],
         
       }]
