@@ -159,7 +159,6 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 									</tr>
 								  </thead>
 								  <tbody>
-								  <form method="post" action="deleteaccount.php" >
 									<?php 
 							//include ('deleteaccount.php');
 							while($row=mysqli_fetch_array($AllPatientsRes)){
@@ -182,14 +181,14 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 						onclick="return confirm('Are you sure you want to delete this patient?')">Delete</a></td>
 					
 					</tr>
-					<?php } ?>    </form>               
+					<?php } ?>                 
 								  </tbody>
 								</table>
 								<?php // Output the page links
 									echo "<div class='pagination'>";
 									for ($i = 1; $i <= $total_pages; $i++) {
 										if ($i == $page) {
-											echo "<button class='btn btn-primary' class='current-page'>$i</button>";
+											echo "<button class='current-page'>$i</button>";
 										} else {
 											echo "<a href='?page=$i'><button>$i</button></a>";
 										}

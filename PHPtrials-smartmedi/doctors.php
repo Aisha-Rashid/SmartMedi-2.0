@@ -189,7 +189,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 	echo "<div class='pagination'>";
 	for ($i = 1; $i <= $total_doc_pages; $i++) {
 		if ($i == $page) {
-			echo "<button class='btn btn-primary' class='current-page'>$i</button>";
+			echo "<button class='current-page'>$i</button>";
 		} else {
 			echo "<a href='?page=$i'><button>$i</button></a>";
 		}
