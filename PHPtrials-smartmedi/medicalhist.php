@@ -39,20 +39,23 @@ if (isset($_GET['logout'])) {
 $conn=new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or die(mysqli_error($conn));
 extract($_REQUEST);
 
-$query = "select * from patients where IDNo='$filename'";
+$encrypted_id = $_GET['filename'];
+$ID = base64_decode($encrypted_id);
+
+$query = "select * from patients where ID='$ID'";
 //$sql=mysqli_query($conn,"select * from patients where IDNo='$filename'");
 
 	$res = mysqli_query($db, $query);
    $array=mysqli_fetch_row($res);
    $rows = mysqli_num_rows($res);
-   
+   $patient = $array[4];
   
 
 if(isset($_POST['submit'])!=""){
 
 	$note = mysqli_real_escape_string($db, $_POST['note']);
 	$date = date('Y-m-d');
-	$query="insert into docnotes(IDNo, docid, date, notes) values ('$filename', '$unique', '$date', '$note')"; 
+	$query="insert into docnotes(IDNo, docid, date, notes) values ('$patient', '$unique', '$date', '$note')"; 
 	
 	mysqli_query($db, $query);
 
@@ -64,7 +67,7 @@ if(isset($_POST['submit'])!=""){
 			
 			<ol class="breadcrumb">
 			<li><a href="DocDashboard.php"><img src="dashboardimages/favicon.ico" alt="Smartmedi"></a></li>
-            <li><b>ID : <?php echo $array[4];?></b></li>
+            <li><a href="DocDashboard.php"><b>Back to Dashboard</b></a></li>
 			</ol>
 			
 
@@ -75,7 +78,16 @@ if(isset($_POST['submit'])!=""){
       <div class="col-lg-4">
         <div class="card shadow-sm">
           <div class="card-header bg-transparent text-center">
-		    <img class="profile_img" src="https://www.pngkey.com/png/detail/349-3499617_person-placeholder-person-placeholder.png" alt="Profile Pic">
+		  <?php
+			$query = " select * from patients where IDNo='$patient' ";
+			$result = mysqli_query($db, $query);
+
+			while ($data = mysqli_fetch_assoc($result)) {
+			?>
+		    <img class="profile_img" src="./uploads/<?php echo $data['filename']; ?>" alt="Profile Pic">
+			<?php
+		}
+		?>
             <h3 >
 				<?php echo $array[1];
 				echo " ";
@@ -117,7 +129,7 @@ if(isset($_POST['submit'])!=""){
                 
 				<td>
 						<?php 
-							$query="select * from response WHERE IDNO = '$filename'";
+							$query="select * from response WHERE IDNO = '$patient'";
 							$res = mysqli_query($db, $query);
 							while($row=mysqli_fetch_array($res)){
 							
@@ -150,7 +162,7 @@ if(isset($_POST['submit'])!=""){
                 <th width="30%">Insurance Details</th>
                 <td width="2%">:</td>
                 <?php 
-							$query="select * from medicalcover WHERE IDNO = '$filename'";
+							$query="select * from medicalcover WHERE IDNO = '$patient'";
 							$res = mysqli_query($db, $query);
 							while($row=mysqli_fetch_array($res)){
 							
@@ -177,7 +189,7 @@ if(isset($_POST['submit'])!=""){
                 <th width="30%">Next of Kin</th>
                 <td width="2%">:</td>
                 <?php 
-							$query="select * from nextofkin WHERE IDNO = '$filename'";
+							$query="select * from nextofkin WHERE IDNO = '$patient'";
 							$res = mysqli_query($db, $query);
 							while($row=mysqli_fetch_array($res)){
 							
@@ -206,7 +218,7 @@ if(isset($_POST['submit'])!=""){
     <th width="30%">Doctors Notes</th>
   </tr>
   <?php 
-    $query = "SELECT doctors.fname, doctors.lname, doctors.hospital, docnotes.date, docnotes.notes FROM doctors, docnotes WHERE doctors.nationalid = docnotes.docid AND docnotes.IDNo ='$filename'" ;
+    $query = "SELECT doctors.fname, doctors.lname, doctors.hospital, docnotes.date, docnotes.notes FROM doctors, docnotes WHERE doctors.nationalid = docnotes.docid AND docnotes.IDNo ='$patient'" ;
     $res = mysqli_query($db, $query);
     while($row=mysqli_fetch_array($res)){
       $date=$row['date'];
@@ -253,7 +265,7 @@ if(isset($_POST['submit'])!=""){
          
 		  
         
-		<button onClick="window.print()">Print</button>
+		<!--button onClick="window.print()">Print</button>
 		<!--button onclick="history.back()">Go Back</button-->
       </div>
     </div>
@@ -262,11 +274,7 @@ if(isset($_POST['submit'])!=""){
   </div>
 </div>
 <!-- partial -->
-           
-    		</div>
-		</div>
-    </div>
-</section>
+       
 
  	
 	<!-- End menu    -->	  

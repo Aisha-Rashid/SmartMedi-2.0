@@ -149,9 +149,12 @@ if (isset($_GET['logout'])) {
 						$FirstName=$row['FirstName'];
 						$LastName=$row['LastName'];
 						$IDNo=$row['IDNo'];
+						$ID=$row['ID'];
+						$encrypted_id = base64_encode($ID);
+						$url = "medicalhist.php?filename=$encrypted_id";
 						
 					//$ecrypt_1=(($IDNo*98365252637*34738394723*253484923846)/52637);
-					$link = urlencode(base64_encode($row['IDNo']));
+					$link = urlencode(base64_encode($row['ID']));
 					
 				
 
@@ -160,7 +163,7 @@ if (isset($_GET['logout'])) {
 						
                         <td><?php echo $row['FirstName'];  echo " "; echo $row['LastName'];  ?></td>
 						<td><?php echo $row['IDNo'] ?></td>	
-						<td><a href="medicalhist.php?filename=<?php echo $row['IDNo'] ?>" title="click to view">
+						<td><a href="<?php echo $url ?>" title="click to view">
 						<button>View</button>
 						</a></td>
 						

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 08, 2023 at 09:38 AM
+-- Generation Time: Mar 12, 2023 at 01:11 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -199,6 +199,27 @@ INSERT INTO `counties` (`id`, `county`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `dependants`
+--
+
+CREATE TABLE `dependants` (
+  `id` int(11) NOT NULL,
+  `IDNo` int(11) NOT NULL,
+  `spousename` varchar(100) NOT NULL,
+  `spousetel` int(11) NOT NULL,
+  `kidName` varchar(100) NOT NULL,
+  `kidDOB` date NOT NULL,
+  `kidGender` varchar(20) NOT NULL,
+  `kidBlood` varchar(20) NOT NULL,
+  `kidAllergies` varchar(255) NOT NULL,
+  `kidConditions` varchar(255) NOT NULL,
+  `DocID` int(11) NOT NULL,
+  `kidDocNotes` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `docnotes`
 --
 
@@ -340,7 +361,8 @@ INSERT INTO `fileupload` (`id`, `name`, `date`, `IDNo`) VALUES
 (25, '4_entropy_coding.pdf', '2022-12-13 15:34:25', 2147483647),
 (26, 'TRIAL1.pdf', '2023-01-02 11:55:52', 29816629),
 (32, 'module5.pdf', '2023-01-18 12:17:26', 29816629),
-(33, 'module5.pdf', '2023-01-18 12:18:11', 2147483647);
+(33, 'module5.pdf', '2023-01-18 12:18:11', 2147483647),
+(34, 'Betty Linter.txt', '2023-03-11 10:34:33', 66388463);
 
 -- --------------------------------------------------------
 
@@ -350,7 +372,7 @@ INSERT INTO `fileupload` (`id`, `name`, `date`, `IDNo`) VALUES
 
 CREATE TABLE `hospitals` (
   `hospitalID` int(11) NOT NULL,
-  `hospitalname` varchar(255) NOT NULL,
+  `hospital` varchar(255) NOT NULL,
   `county` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -358,7 +380,7 @@ CREATE TABLE `hospitals` (
 -- Dumping data for table `hospitals`
 --
 
-INSERT INTO `hospitals` (`hospitalID`, `hospitalname`, `county`) VALUES
+INSERT INTO `hospitals` (`hospitalID`, `hospital`, `county`) VALUES
 (1, 'AAR Hospital', 'Kiambu'),
 (2, 'Aga Khan University Hospital, Nairobi', 'Nairobi City'),
 (3, 'Avenue Hospital', 'Nairobi City'),
@@ -685,6 +707,12 @@ ALTER TABLE `counties`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `dependants`
+--
+ALTER TABLE `dependants`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `docnotes`
 --
 ALTER TABLE `docnotes`
@@ -785,6 +813,12 @@ ALTER TABLE `counties`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
+-- AUTO_INCREMENT for table `dependants`
+--
+ALTER TABLE `dependants`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `docnotes`
 --
 ALTER TABLE `docnotes`
@@ -800,13 +834,13 @@ ALTER TABLE `docspecialty`
 -- AUTO_INCREMENT for table `doctors`
 --
 ALTER TABLE `doctors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `fileupload`
 --
 ALTER TABLE `fileupload`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `hospitals`
@@ -830,13 +864,13 @@ ALTER TABLE `medicalcover`
 -- AUTO_INCREMENT for table `nextofkin`
 --
 ALTER TABLE `nextofkin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `patients`
 --
 ALTER TABLE `patients`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `picture`

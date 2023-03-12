@@ -57,7 +57,20 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 				
 				</li>
           <li ><a href="admindash.php"><i class="fa fa-home"></i>Dashboard</a></li>
-          <li><a href="manage-users.php"><i class="fa fa-users"></i> Manage Users</a></li>
+          <li class="sub">
+            <a href="javascript:;">
+              <i class="fa fa-users"></i> Manage users<div class="pull-right"><span class="caret"></span></div>
+            </a>
+            <ul class="templatemo-submenu">
+              
+              
+			  <li><a href="patients.php"><i class="fa fa-male"></i><i class="fa fa-female"></i> Patients</a></li>
+			  <li><a href="doctors.php"><i class="fa fa-user-md"></i> Medical Practitioners</a></li>
+			  <li><a href="hospitals.php"><i class="fa fa-h-square"></i> Hospitals</a></li>
+              
+
+            </ul>
+          </li>
           <li class="sub">
             <a href="javascript:;">
               <i class="fa fa-cubes"></i> Data Visualization<div class="pull-right"><span class="caret"></span></div>
@@ -66,7 +79,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
               
               
 			  <li><a href="gendercomparison.php"><i class="fa fa-user"></i> Gender Comparison</a></li>
-			  <li class ="active"><a href="#"><i class="fa fa-hospital-o" ></i> Hospitals Onboard</a></li>
+			  <li><a href="hospitalchart.php"><i class="fa fa-hospital-o" ></i> Hospitals Onboard</a></li>
               
 
             </ul>

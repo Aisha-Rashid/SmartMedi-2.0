@@ -66,6 +66,7 @@ date_default_timezone_set("Africa/Nairobi");
 				<li><a href="dashboard.php"><i class="fa fa-home"></i>Dashboard</a></li>
 				<li class="active"><a href="dash_medhist.php"><i class="fa fa-stethoscope"></i>User Data</a></li>
 				<li><a href="attachments.php"><i class="fa fa-folder-open"></i>Attachments</a></li>
+				<li><a href="children.php"><i class="fa fa-child"></i>Dependants</a></li>
 				<li><a href="preferences.php"><i class="fa fa-cog"></i>Settings</a></li>
 				<li><a href="javascript:;" data-toggle="modal" data-target="#confirmModal"><i class="fa fa-sign-out"></i>Sign Out</a></li>
 			</ul>

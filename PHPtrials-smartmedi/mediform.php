@@ -45,16 +45,14 @@ if (isset($_GET['logout'])) {
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!-- Pogo Slider CSS -->
-    <link rel="stylesheet" href="css/pogo-slider.min.css">
+    
 	<!-- Site CSS -->
     <link rel="stylesheet" href="css/style.css">    
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="css/responsive.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/custom.css">
-	<!--Password eye icon-->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+	
 
 
     <!--[if lt IE 9]>
@@ -130,7 +128,7 @@ header("location:dashboard.php");
     <!-- END LOADER -->
 	
 	<!-- Start Medical -->
-	<div id="medical" class="contact-box">
+	
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12 col-xs-12">
@@ -213,16 +211,16 @@ header("location:dashboard.php");
 				</div>
 			</div>
 		</div>
-	</div>
+
 	<!-- End Medical -->	
 	
 	<a href="#" id="scroll-to-top" class="new-btn-d br-2"><i class="fa fa-angle-up"></i></a>
 
 	<!-- ALL JS FILES -->
 	<script src="js/jquery.min.js"></script>
-	<script src="js/popper.min.js"></script>
+	
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/passwordToggle.js"></script>
+	
     <!-- ALL PLUGINS -->
 	<script src="js/jquery.magnific-popup.min.js"></script>
     <script src="js/jquery.pogo-slider.min.js"></script> 

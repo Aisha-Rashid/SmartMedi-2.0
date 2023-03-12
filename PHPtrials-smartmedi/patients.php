@@ -1,23 +1,33 @@
 <?php
 include('server.php'); 
 
+// Starting the session, to use and
+// store data in session variable
+// session_start();
+
+// If the session variable is empty, this
+// means the user is yet to login
+// User will be sent to 'login.php' page
+// to allow the user to login
 if (!isset($_SESSION['workID'])) {
 	$_SESSION['msg'] = "You have to log in first";
 	header('location: AdminLogin.php');
 }
 
-
+// Logout button will destroy the session, and
+// will unset the session variables
+// User will be headed to 'login.php'
+// after logging out
 if (isset($_GET['logout'])) {
 	session_destroy();
 	unset($_SESSION['workID']);
 	header("location: AdminLogin.php");
 }
 ?>
-
 <!DOCTYPE html>
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
   <title>SmartMedi EEHR</title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
@@ -32,23 +42,24 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 </head>
 <body>
 <?php if (isset($_SESSION['workID'])) : 
-   
+   include ('data-visualization.php');
    
    $unique = $_SESSION['workID'];
    
-   
-   include ('data-visualization.php');
-  
    ?>
   <div id="main-wrapper">
     <div class="navbar navbar-inverse" role="navigation">
       <div class="navbar-header">
         <div class="logo"><h1>SmartMedi - Admin Dashboard</h1></div>
-        
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button> 
       </div>   
     </div>
     <div class="template-page-wrapper">
-      <div class="template-page-wrapper">
       <div class="navbar-collapse collapse templatemo-sidebar">
         <ul class="templatemo-sidebar-menu">
           <li>
@@ -56,15 +67,15 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 				<img src="dashboardimages/favicon.ico" alt="Smartmedi">
 				
 				</li>
-          <li ><a href="admindash.php"><i class="fa fa-home"></i>Dashboard</a></li>
-          <li class="sub">
+          <li><a href="admindash.php"><i class="fa fa-home"></i>Dashboard</a></li>
+          <li class="sub open">
             <a href="javascript:;">
               <i class="fa fa-users"></i> Manage users<div class="pull-right"><span class="caret"></span></div>
             </a>
             <ul class="templatemo-submenu">
               
               
-			  <li><a href="patients.php"><i class="fa fa-male"></i><i class="fa fa-female"></i> Patients</a></li>
+			  <li class="active"><a href="#"><i class="fa fa-male"></i><i class="fa fa-female"></i> Patients</a></li>
 			  <li><a href="doctors.php"><i class="fa fa-user-md"></i> Medical Practitioners</a></li>
 			  <li><a href="hospitals.php"><i class="fa fa-h-square"></i> Hospitals</a></li>
               
@@ -77,13 +88,14 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
             </a>
             <ul class="templatemo-submenu">
               
+              
 			  <li><a href="gendercomparison.php"><i class="fa fa-user"></i> Gender Comparison</a></li>
 			  <li><a href="hospitalchart.php"><i class="fa fa-hospital-o"></i> Hospitals Onboard</a></li>
               
 
             </ul>
           </li>
-		  <li class="sub open">
+		  <li class="sub">
             <a href="javascript:;">
               <i class="fa fa-bar-chart-o"></i> Data Analysis per county <div class="pull-right"><span class="caret"></span></div>
             </a>
@@ -95,7 +107,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 			  <li><a href="western.php"><i class="fa fa-map-marker"></i> Western Region</a></li>
 			  <li><a href="nyanza.php"><i class="fa fa-map-marker"></i> Nyanza Region</a></li>
 			  <li><a href="rift.php"><i class="fa fa-map-marker"></i> Rift Valley Region</a></li>
-			  <li class ="active"><a href="#"><i class="fa fa-map-marker"></i> North Eastern Region</a></li>
+			  <li><a href="north.php"><i class="fa fa-map-marker"></i> North Eastern Region</a></li>
 			  <li><a href="coast.php"><i class="fa fa-map-marker"></i> Coast Region</a></li>
               
 
@@ -111,28 +123,93 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
       <div class="templatemo-content-wrapper">
         <div class="templatemo-content">
           <!--ol class="breadcrumb">
-		  <li>Admin Panel</a></li>
-					<li>Data Visualization</li>
-					<li>Company Data</li>
-            
-          </ol-->
-          
+            <li><a href="admindash.php">Admin Panel</a></li>
+            <li><a href="#">Manage Users</a></li>
+            <li class="active">Tables</li>
+          </ol->
+          <h1>Patients</h1>
+          <hr-->
 
-
-			<div class="row">
-		  <div class="col-md-12 col-sm-12">
-		  <table>
-							<div>
-							  <canvas id="NorthBarChart"></canvas>
-							  <p align="center"><b><u><i>North Eastern Region</i></u></b></p>
-							</div>
-		  </table>
-		  
+          <div class="row margin-bottom-30">
+        <div class="col-md-12">
+          <ul class="nav nav-pills">
+            <li class="active"><a href="#">Total Patients Registered <span class="badge"><?php echo $totalPatientsUsers; ?></span></a></li>
+            <li class="active"><a href="#">Total Female Patients <span class="badge"><?php echo $totalFemales; ?></span></a></li>
+            <li class="active"><a href="#">Total Male Patients <span class="badge"><?php echo $totalMales; ?></span></a></li>
+          </ul>          
         </div>
       </div>
-	   </div>
+		  
+          <div class="row">
+		  <div class="col-md-12 col-sm-12">
+		  
+		  
+		  <div class="table-responsive">
+							<!--h4 class="margin-bottom-15">Patients Table</h4-->
+								<table class="table table-striped table-hover table-bordered">
+								  <thead>
+									<tr>
+									  
+									  <th>First Name</th>
+									  <th>Last Name</th>
+									  <th>ID Number</th>
+									  <th>Phone Number</th>
+									  <th>Email</th>
+									  <th>Action</th>
+									</tr>
+								  </thead>
+								  <tbody>
+								  <form method="post" action="deleteaccount.php" >
+									<?php 
+							//include ('deleteaccount.php');
+							while($row=mysqli_fetch_array($AllPatientsRes)){
+								//$count = $res;
+							
+							$FirstName =$row['FirstName'];
+							$LastName=$row['LastName'];
+							$IDNo=$row['IDNo'];
+							$IDNo=$row['TelNo'];
+							$IDNo=$row['email'];
+							?>
+					<tr>
+					
+						<td><?php echo $row['FirstName'] ?></td>
+						<td><?php echo $row['LastName'] ?></td>
+						<td><?php echo $row['IDNo'] ?></td>
+						<td><?php echo $row['TelNo'] ?></td>
+						<td><?php echo $row['email'] ?></td>
+						<td><a href="deleteaccount.php?type=patient&id=<?php echo $row['IDNo'] ?>" class="btn btn-danger" 
+						onclick="return confirm('Are you sure you want to delete this patient?')">Delete</a></td>
+					
+					</tr>
+					<?php } ?>    </form>               
+								  </tbody>
+								</table>
+								<?php // Output the page links
+									echo "<div class='pagination'>";
+									for ($i = 1; $i <= $total_pages; $i++) {
+										if ($i == $page) {
+											echo "<button class='btn btn-primary' class='current-page'>$i</button>";
+										} else {
+											echo "<a href='?page=$i'><button>$i</button></a>";
+										}
+									}
+									echo "</div>";
+
+									// Output the patients for the current page
+									echo "<ul>";
+									while ($row = mysqli_fetch_assoc($AllPatientsRes)) {
+										echo "<li>" . $row['name'] . "</li>";
+									}
+									echo "</ul>";?>
+	
+						</div>
+		       
+            </div>
+          </div>
+        </div>
       </div>
-      
+
       <!-- Modal -->
       <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -155,65 +232,12 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
         </div>
       </footer>
     </div>
-
 </div>
-</div>
-
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script>
-
-  const ctx_barNorth = document.getElementById('NorthBarChart');
-  new Chart(ctx_barNorth, {
-    type: 'bar',
-    data: {
-      labels: ['Cancer', 'Cardiovascular', 'Respiratory', 'Endocrine', 'Eye disorders', 'Gastro-intestinal', 'Gynaecological','Genitourinary','Musculoskeletal',
-	  'Neurological', 'Blood disorders','Congenital','Skin disorders'],
-      datasets: [{
-        label: '# Garissa',
-        data: [<?php echo $totalCancerGarissa; ?>, <?php echo $totalCardiovascularGarissa; ?>, <?php echo $totalRespiratoryGarissa; ?>, <?php echo $totalEndocrineGarissa; ?>, 
-		<?php echo $totalEyeGarissa; ?>, <?php echo $totalGastroGarissa; ?>, <?php echo $totalGynaecologicalGarissa; ?>, <?php echo $totalGenitourinaryGarissa; ?>, 
-		<?php echo $totalMusculoskeletalGarissa; ?> , <?php echo $totalNeurologicalGarissa; ?>, <?php echo $totalBloodGarissa; ?>, <?php echo $totalCongenitalGarissa; ?>, <?php echo $totalSkinGarissa; ?>		],
-		 backgroundColor: 'rgba(66, 239, 245)',
-        borderWidth: 1
-      },
-	  {
-        label: '# Mandera',
-        data: [<?php echo $totalCancerMandera; ?>, <?php echo $totalCardiovascularMandera; ?>, <?php echo $totalRespiratoryMandera; ?>, <?php echo $totalEndocrineMandera; ?>, 
-		<?php echo $totalEyeMandera; ?>, <?php echo $totalGastroMandera; ?>, <?php echo $totalGynaecologicalMandera; ?>, <?php echo $totalGenitourinaryMandera; ?>, 
-		<?php echo $totalMusculoskeletalMandera; ?> , <?php echo $totalNeurologicalMandera; ?>, <?php echo $totalBloodMandera; ?>, <?php echo $totalCongenitalMandera; ?>, <?php echo $totalSkinMandera; ?>		],
-		 backgroundColor: 'rgba(245, 170, 66)',
-        borderWidth: 1
-      },
-	  {
-        label: '# Wajir',
-        data: [<?php echo $totalCancerWajir; ?>, <?php echo $totalCardiovascularWajir; ?>, <?php echo $totalRespiratoryWajir; ?>, <?php echo $totalEndocrineWajir; ?>, 
-		<?php echo $totalEyeWajir; ?>, <?php echo $totalGastroWajir; ?>, <?php echo $totalGynaecologicalWajir; ?>, <?php echo $totalGenitourinaryWajir; ?>, 
-		<?php echo $totalMusculoskeletalWajir; ?> , <?php echo $totalNeurologicalWajir; ?>, <?php echo $totalBloodWajir; ?>, <?php echo $totalCongenitalWajir; ?>, <?php echo $totalSkinWajir; ?>		],
-		 backgroundColor: 'rgba(66, 245, 78)',
-        borderWidth: 1
-      }
-	  ]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
-</script>
-
-
-
-
-     <script src="dashboardjs/jquery.min.js"></script>
+    <script src="dashboardjs/jquery.min.js"></script>
     <script src="dashboardjs/bootstrap.min.js"></script>
     <script src="dashboardjs/Chart.min.js"></script>
     <script src="dashboardjs/templatemo_script.js"></script>
-	
+	<script src="dashboardjs/Graph.js"></script>
 	<?php endif ?>
   </body>
 </html>

@@ -77,7 +77,20 @@ include ('data-visualization.php');
 
           </li>
           <li class="active"><a href="#"><i class="fa fa-home"></i>Dashboard</a></li>
-		  <li><a href="manage-users.php"><i class="fa fa-users"></i> Manage Users</a></li>
+		  <li class="sub">
+            <a href="javascript:;">
+              <i class="fa fa-users"></i> Manage users<div class="pull-right"><span class="caret"></span></div>
+            </a>
+            <ul class="templatemo-submenu">
+              
+              
+			  <li><a href="patients.php"><i class="fa fa-male"></i><i class="fa fa-female"></i> Patients</a></li>
+			  <li><a href="doctors.php"><i class="fa fa-user-md"></i> Medical Practitioners</a></li>
+			  <li><a href="hospitals.php"><i class="fa fa-h-square"></i> Hospitals</a></li>
+              
+
+            </ul>
+          </li>
           <li class="sub">
             <a href="javascript:;">
               <i class="fa fa-cubes"></i> Data Visualization<div class="pull-right"><span class="caret"></span></div>
@@ -130,15 +143,15 @@ include ('data-visualization.php');
                         echo $array[1];; ?></b></p>
           <hr>
 
-          <div class="row margin-bottom-30" >
+          <!--div class="row margin-bottom-30" >
             <div class="col-md-12">
               <ul class="nav nav-pills" >
                 <li class="active"><a href="gendercomparison.php">Total Patients Registered <span class="badge"><?php echo $total_number_patients ?></span></a></li>
-                <!--li class="active"><a href="#">Medical Practitioners <span class="badge"><?php echo $totalDoctors; ?></span></a></li-->
+                <!--li class="active"><a href="#">Medical Practitioners <span class="badge"><?php echo $totalDoctors; ?></span></a></li->
                 <li class="active"><a href="hospitalchart.php">Hospitals Registered <span class="badge"><?php echo $totalHospitals; ?></span></a></li>
               </ul>
             </div>
-          </div>
+          </div-->
 
 
           <div class="row">
@@ -149,14 +162,14 @@ include ('data-visualization.php');
 			  
 							<div class="templatemo-chart-box col-sm-6 col-xs-12">
 							<div>
-							  <canvas id="PatientPieChart"></canvas>
 							  <p><b><u><i>Total registered patients in terms of gender</i></u></b></p>
+							  <canvas id="PatientPieChart"></canvas>
 							</div>
 						</div>
 						<div class="templatemo-chart-box  col-sm-6 col-xs-12">
 							<div>
-							  <canvas id="PatientCountyChart"></canvas>
 							  <p><b><u><i>Total registered patients per region</i></u></b></p>
+							  <canvas id="PatientCountyChart"></canvas>
 							</div>
 						</div>
 		  
@@ -165,7 +178,7 @@ include ('data-visualization.php');
             </div>
 
           </div>
-          <hr>
+         
         </div>
       </div>
     </div>

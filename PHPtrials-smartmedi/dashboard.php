@@ -199,6 +199,15 @@ if (isset($_GET['logout'])) {
 										</div>
 										<br>
 										<div class="card-header bg-transparent border-0">
+											<button class="collapsible">Dependants details</button>
+											<div class="content">
+												<a href="dependants.php">Click to add Next of Kin Details</a>
+												
+
+											</div>
+										</div>
+										<br>
+										<div class="card-header bg-transparent border-0">
 											<button class="collapsible">Next of Kin details</button>
 											<div class="content">
 												<a href="nextkin.php">Click to add Next of Kin Details</a>

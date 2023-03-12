@@ -86,8 +86,8 @@ die(mysqli_error($conn));
 				</li>
 				<li><a href="dashboard.php"><i class="fa fa-home"></i>Dashboard</a></li>
 				<li><a href="dash_medhist.php"><i class="fa fa-stethoscope"></i>User Data</a></li>
-				<li class="active"><a href="attachments.php"><i class="fa fa-folder-open"></i>Attachments</a></li>
-				<li><a href="children.php"><i class="fa fa-child"></i>Dependants</a></li>
+				<li><a href="attachments.php"><i class="fa fa-folder-open"></i>Attachments</a></li>
+				<li class="active"><a href="children.php"><i class="fa fa-child"></i>Dependants</a></li>
 				<li><a href="preferences.php"><i class="fa fa-cog"></i>Settings</a></li>
 				<li><a href="javascript:;" data-toggle="modal" data-target="#confirmModal"><i class="fa fa-sign-out"></i>Sign Out</a></li>
 			</ul>
@@ -130,68 +130,34 @@ die(mysqli_error($conn));
 	   <div class="col-lg-8">
 	   <div class="card shadow-sm">
           
-         <h3 class="mb-0">Upload Files</h3>
-		 <hr>
-		 
-		<!--form enctype="multipart/form-data"  method="post" action="attachments.php"--> 
-		<form enctype="multipart/form-data"  action="" id="wb_Form1" name="form" method="post">
-			<TABLE width=70% align ="left" class="table table-bordered">
-				
-				<TR><TD><input type="file" name="photo" id="photo" required="required"></td><td><input type="submit"  value="SUBMIT" name="submit"></td></tr>
-						
-				
-			</table>
-		</form>
-            
-			<br>
-			<hr>
-		<form method="post" action="delete.php" >
-                        <TABLE width=70% align ="left" class="table table-bordered">
-                            
-                            <thead>
-						
-                                <tr>
-                                    
-                                   <th>No.</th>
-                                    <th>FILE NAME</th>
-                                   <th>Date</th>
-				<th>Download</th>
-				<th>Remove</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-								<?php 
-							$query="select * from fileupload WHERE IDNO = '$unique'";
-							$res = mysqli_query($db, $query);
-							
-							$counter = 1;
-							
-							while($row=mysqli_fetch_array($res)){
-							$number = $counter;
-							$counter++;
-							$name=$row['name'];
-							$date=$row['date'];
-							?>
-                              
-										<tr>
-										
-                                         <td><?php echo $number;?></td>
-                                         <td><?php echo $row['name'] ?></td>
-                                         <td><?php echo $row['date'] ?></td>
-										<td>
-				<a href="download.php?filename=<?php echo $name;?>" title="click to download"><i class="fa fa-download" aria-hidden="true"></i></a>
-				</td>
-				<td>
-				<a href="delete.php?del=<?php echo $row['name']?>"><i class="fa fa-minus-circle" aria-hidden="true"></i></a>
-				</td>
-				
-                                </tr>
-                         
-						         <?php } ?> 
-                            </tbody>
-                        </table>
-					</form>
-					
+        
+				<form method="post" action="children.php">
+				  <label for="num_boxes">Enter the number of children:</label>
+				  <input type="number" name="num_boxes" id="num_boxes">
+				  <button type="submit">Submit</button>
+				</form>
+
+				<?php
+				if (isset($_POST['num_boxes'])) {
+				  $num_boxes = $_POST['num_boxes'];
+				  echo '<form method="post" action="children.php">';
+				  for ($i = 1; $i <= $num_boxes; $i++) {
+					echo '<label for="box_' . $i . '">' . $i . ' Full Name:</label>';
+					echo '<input type="text" name="box_' . $i . '" id="box_' . $i . '"><br>';
+					echo '<label for="box_' . $i . '">Date of Birth :</label>';
+					echo '<input type="text" name="box_' . $i . '" id="box_' . $i . '"><br>';
+					echo '<label for="box_' . $i . '">Gender:</label>';
+					echo '<input type="text" name="box_' . $i . '" id="box_' . $i . '"><br>';
+					echo '<label for="box_' . $i . '">Blood Group:</label>';
+					echo '<input type="text" name="box_' . $i . '" id="box_' . $i . '"><br>';
+					echo '<label for="box_' . $i . '">Medical Conditions:</label>';
+					echo '<input type="text" name="box_' . $i . '" id="box_' . $i . '"><br>';
+				  }
+				  echo '<button type="submit">Submit Boxes</button>';
+				  echo '</form>';
+				}
+				?>
+	
 					
 					
 		</div>
