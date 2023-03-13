@@ -178,7 +178,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 						<td><?php echo $row['TelNo'] ?></td>
 						<td><?php echo $row['email'] ?></td>
 						<td><a href="deleteaccount.php?type=patient&id=<?php echo $row['IDNo'] ?>" class="btn btn-danger" 
-						onclick="return confirm('Are you sure you want to delete this patient?')">Delete</a></td>
+						onclick="return confirm('Are you sure you want to delete this user?')">Delete</a></td>
 					
 					</tr>
 					<?php } ?>                 

@@ -286,30 +286,32 @@ if (isset($_POST['admin_login'])) {
 	// Checking for the errors
 	if (count($errors) == 0) {
 		
-				
-		$query = "SELECT adminFname, adminLname, workID FROM `admin` WHERE workID=
-				'$workID' AND adminpass='$adminpass'";
-		$results = mysqli_query($db, $query);
-
-		// $results = 1 means that one user with the
-		// entered username exists
-		if (mysqli_num_rows($results) == 1) {
+		//$default="SMadmin@123";
+		$adminpass = md5($adminpass);
+		
+		$query = "SELECT adminFname, adminLname, workID FROM `admin` WHERE workID='$workID' AND adminpass='SMadmin@123'";
+		$res = mysqli_query($db, $query);
 			
-			// Storing username in session variable
-			//$_SESSION['FirstName'] = $FirstName;
+		if (mysqli_num_rows($res) == 1) {
 			$_SESSION['workID'] = $workID;
-			
-			// Welcome message
-			$_SESSION['success'] = "You have logged in!";
-			
-			// Page on which the user is sent
-			// to after logging in
-			header('location: admindash.php');
+			header('location: adminpassword.php');
 		}
+		
+		
 		else {
 			
-			// If the username and password doesn't match
+			$query = "SELECT adminFname, adminLname, workID FROM `admin` WHERE workID='$workID' AND adminpass='$adminpass'";
+			$res = mysqli_query($db, $query);
+			
+			if (mysqli_num_rows($res) == 1) {
+				$_SESSION['workID'] = $workID;
+				header('location: admindash.php');
+			}
+			
+			else{
+			 //If the username and password doesn't match
 			array_push($errors, "Work ID or password incorrect");
+			}
 		}
 	}
 }

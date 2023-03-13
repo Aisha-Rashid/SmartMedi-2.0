@@ -111,16 +111,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 
       <div class="templatemo-content-wrapper">
         <div class="templatemo-content">
-          <!--ol class="breadcrumb">
-		  <li>Admin Panel</a></li>
-					<li>Data Visualization</li>
-					<li>Company Data</li>
-            
-          </ol-->
-          
-
-
-			<div class="row">
+          <div class="row">
 		  <div class="col-md-12 col-sm-12">
 		 
 		 <table>
@@ -128,10 +119,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 							  <canvas id="ConditionChart"></canvas>
 							  <p align="center"><b><u><i>Condition concentration per region</i></u></b></p>
 							</div>
-							
 							</table>
-						
-		 
         </div>
       </div>
 	   </div>

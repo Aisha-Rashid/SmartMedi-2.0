@@ -79,6 +79,8 @@ h1 { font-size: 24px; }
     list-style: none;
     margin: 0;
     padding: 0;
+	max-height: 655px; /* set the maximum height for the sub-menu */
+overflow-y: auto; /* enable vertical scrolling */
 }
 .templatemo-sidebar .templatemo-sidebar-menu > li {
     display: block;
@@ -104,6 +106,7 @@ h1 { font-size: 24px; }
 .templatemo-submenu li {
     list-style: none;
     background-color: #A2EBFE;
+	
 }
 .templatemo-submenu li a {
     display: block;
@@ -113,11 +116,15 @@ h1 { font-size: 24px; }
 .templatemo-sidebar-menu > li.sub.open > a {
     background-color: rgba(162, 236, 254);
 }
+
 .templatemo-sidebar .templatemo-sidebar-menu >li.active, .templatemo-sidebar .templatemo-sidebar-menu>li>a:hover {
     background-color: rgb(110, 224, 182);
 }
 .templatemo-submenu li > a:hover {
     background-color: rgb(110, 224, 182);
+}
+.templatemo-submenu li.active{
+	background-color: rgb(110, 224, 182);
 }
 .templatemo-sidebar .templatemo-sidebar-menu > li > a > i {
     font-size: 16px;

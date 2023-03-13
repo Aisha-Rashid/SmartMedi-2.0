@@ -143,30 +143,19 @@ include ('data-visualization.php');
                         echo $array[1];; ?></b></p>
           <hr>
 
-          <!--div class="row margin-bottom-30" >
-            <div class="col-md-12">
-              <ul class="nav nav-pills" >
-                <li class="active"><a href="gendercomparison.php">Total Patients Registered <span class="badge"><?php echo $total_number_patients ?></span></a></li>
-                <!--li class="active"><a href="#">Medical Practitioners <span class="badge"><?php echo $totalDoctors; ?></span></a></li->
-                <li class="active"><a href="hospitalchart.php">Hospitals Registered <span class="badge"><?php echo $totalHospitals; ?></span></a></li>
-              </ul>
-            </div>
-          </div-->
-
-
           <div class="row">
             <div class="col-md-12 col-sm-12">
               
 
               <!-- General User pane -->
 			  
-							<div class="templatemo-chart-box col-sm-6 col-xs-12">
+							<div class="templatemo-chart-box col-sm-6 ">
 							<div>
 							  <p><b><u><i>Total registered patients in terms of gender</i></u></b></p>
 							  <canvas id="PatientPieChart"></canvas>
 							</div>
 						</div>
-						<div class="templatemo-chart-box  col-sm-6 col-xs-12">
+						<div class="templatemo-chart-box  col-sm-6 ">
 							<div>
 							  <p><b><u><i>Total registered patients per region</i></u></b></p>
 							  <canvas id="PatientCountyChart"></canvas>
@@ -216,9 +205,21 @@ include ('data-visualization.php');
         data: [<?php echo $totalMales; ?>, <?php echo $totalFemales; ?> ],
 		 backgroundColor: ['rgba(110, 224, 182)', 'rgba(162, 236, 254)'],
         
-      }]
-    },
-    
+      }]},
+	options: {
+		plugins: {
+			legend: {
+				display: true,
+				position: 'right',
+				labels: {
+					fontColor: '#333',
+					fontSize: 14,
+					padding: 20
+				}
+			}
+		}
+	}
+   
   });
   
   
@@ -235,6 +236,19 @@ include ('data-visualization.php');
         
       }]
     },
+	options: {
+		plugins: {
+			legend: {
+				display: true,
+				position: 'right',
+				labels: {
+					fontColor: '#333',
+					fontSize: 14,
+					padding: 20
+				}
+			}
+		}
+	}
     
   });
   
@@ -242,7 +256,7 @@ include ('data-visualization.php');
 	
     <script src="dashboardjs/jquery.min.js"></script>
     <script src="dashboardjs/bootstrap.min.js"></script>
-    <script src="dashboardjs/Chart.min.js"></script>
+    <!--script src="dashboardjs/Chart.min.js"></script-->
     <script src="dashboardjs/templatemo_script.js"></script>
   
   <?php endif ?>

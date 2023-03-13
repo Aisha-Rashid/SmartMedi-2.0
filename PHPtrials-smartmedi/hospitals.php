@@ -167,7 +167,8 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 					
 						<td><?php echo $row['hospitalID'] ?></td>
 						<td><?php echo $row['hospital'] ?></td>
-						<td><button type="submit" class="btn btn-primary" name="delHospital">Delete</button></td>
+						<td><a href="deleteaccount.php?type=hospital&id=<?php echo $row['hospital'] ?>" class="btn btn-danger" 
+						onclick="return confirm('Are you sure you want to delete this user?')">Delete</a></td>
 						
 					</tr>
 					<?php } ?>                   

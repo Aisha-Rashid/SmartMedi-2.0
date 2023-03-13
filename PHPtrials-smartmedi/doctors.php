@@ -179,7 +179,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 						<td><?php echo $row['workid'] ?></td>
 						<td><?php echo $row['specialty'] ?></td>
 						<td><a href="deleteaccount.php?type=doctor&id=<?php echo $row['nationalid'] ?>" class="btn btn-danger" 
-						onclick="return confirm('Are you sure you want to delete this patient?')">Delete</a></td>
+						onclick="return confirm('Are you sure you want to delete this user?')">Delete</a></td>
 						
 					</tr>
 					<?php } ?>                  
