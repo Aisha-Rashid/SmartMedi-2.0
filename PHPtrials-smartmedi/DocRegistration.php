@@ -73,7 +73,7 @@
 							<select name="hospital" class="form-control">
 										<OPTION SELECTED="TRUE" DISABLED="DISABLED">---</OPTION>  
 										<?php 
-										$query ="SELECT hospitalname FROM hospitals";
+										$query ="SELECT hospital FROM hospitals";
 										$result = mysqli_query($db, $query);
 										if($result->num_rows> 0){
 										  $options= mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -81,7 +81,7 @@
 										
 											foreach ($options as $option) {
 										?>
-										<option><?php echo $option['hospitalname']; ?> </option>
+										<option><?php echo $option['hospital']; ?> </option>
 										<?php 
 										}
 										?>
