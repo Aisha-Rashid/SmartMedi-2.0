@@ -132,7 +132,8 @@ if (isset($_POST['kidData'])) {
 								<TR bgcolor="#d3fcf3"><TD colspan="2"><p><b>Minors details (under 18 years of age) will be under the parent's account</b></p></TD></TR>
 								</TABLE>
 								<label for="num_boxes">Enter the number of children:</label><input type="number" name="num_boxes" id="num_boxes">
-								<button type="submit">Submit</button>
+								<button type="submit">Submit</button><hr>
+								<a href="dashboard.php" class="btn btn-info"><b>Back to Dashboard</b></a>
 								</form>
 								
 								<?php
