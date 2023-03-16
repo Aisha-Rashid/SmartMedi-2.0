@@ -1,13 +1,33 @@
+/* 12. print
+--------------------------------------------------*/
+@media print {
+  /* Define header style for the first page */
+  @page {
+    size: A4;
+    margin: 0;
+    padding: 0;
+    counter-reset: page;
+  }
 
-.field-icon {
-  float: right;
-  margin-left: -25px;
-  margin-top: -25px;
-  position: relative;
-  z-index: 2;
-}
+  #header2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3cm;
+    background-color: #ccc;
+    text-align: center;
+    line-height: 3cm;
+    font-size: 20pt;
+    font-weight: bold;
+  }
 
-.container{
-  padding-top:50px;
-  margin: auto;
+  /* Define header style for subsequent pages */
+  @page :first {
+    margin-top: 0;
+  }
+
+  @page:not(:first) {
+    margin-top: 3cm;
+  }
 }
