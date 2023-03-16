@@ -1,4 +1,11 @@
 <?php
+//Report Data
+$hospitalReportRes = mysqli_query($db, "SELECT * FROM `hospitals`");
+
+$doctorReportRes = mysqli_query($db, "SELECT * FROM `doctors` ORDER BY hospital");
+
+$conditionNairobiQuery = mysqli_query($db, "SELECT patients.IDNo, patients.county, response.IDNo FROM `patients`,`response`  WHERE patients.IDNo=response.IDNo AND patients.county = 'Nairobi City' ");
+$conditionNairobi = mysqli_num_rows($conditionNairobiQuery);
 //Pagination
 // number of results per page
 	$results_per_page = 10; 

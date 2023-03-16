@@ -68,7 +68,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 				
 				</li>
           <li><a href="admindash.php"><i class="fa fa-home"></i>Dashboard</a></li>
-          <li class="sub open">
+          <li class="sub">
             <a href="javascript:;">
               <i class="fa fa-users"></i> Manage users<div class="pull-right"><span class="caret"></span></div>
             </a>
@@ -77,7 +77,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
               
 			  <li><a href="patients.php"><i class="fa fa-male"></i><i class="fa fa-female"></i> Patients</a></li>
 			  <li><a href="doctors.php"><i class="fa fa-user-md"></i> Medical Practitioners</a></li>
-			  <li class="active"><a href="#"><i class="fa fa-h-square"></i> Hospitals</a></li>
+			  <li><a href="#"><i class="fa fa-h-square"></i> Hospitals</a></li>
               
 
             </ul>
@@ -113,7 +113,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 
             </ul>
           </li>
-			<li><a href="maps.html"><i class="fa fa-file-text"></i> Reports</a></li>
+			<li class="active"><a href="report.php"><i class="fa fa-file-text"></i> Reports</a></li>
           <li><a href="preferences.html"><i class="fa fa-cog"></i>Preferences</a></li>
           <li><a href="javascript:;" data-toggle="modal" data-target="#confirmModal"><i class="fa fa-sign-out"></i>Sign Out</a></li>
         </ul>
@@ -122,28 +122,28 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 
       <div class="templatemo-content-wrapper">
         <div class="templatemo-content">
-          <!--ol class="breadcrumb">
-            <li><a href="admindash.php">Admin Panel</a></li>
-            <li><a href="#">Manage Users</a></li>
-            <li class="active">Tables</li>
-          </ol->
-          <h1>Patients</h1>
-          <hr-->
-
-          <div class="row margin-bottom-30">
-        <div class="col-md-12">
-          <ul class="nav nav-pills">
-            <li class="active"><a href="#">Total Medical Organizations <span class="badge"><?php echo $totalHospitalsUsers; ?></span></a></li>
-            
-          </ul>          
-        </div>
-		
-		<a href="reportStructure.php?type=hospital" rel="noopener" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> PrintHosp</a>
-		<a href="reportStructure.php?type=doctor" rel="noopener" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Printdoc</a>
-		<a href="reportStructure.php?type=nairobi" rel="noopener" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> PrintNairobi</a>
-      </div>
+          <h3>List of available printable reports</h3><hr>
+			<div class="card-header bg-transparent border-0" >
+				<button class="collapsible">1. List of Doctors and hospitals</button>
+				<div class="content">
+					<a href="reportStructure.php?type=hospital" rel="noopener" target="_blank" ><i class="fa fa-print"></i> Print Hospital list</a><br><br>
+					<a href="reportStructure.php?type=doctor" rel="noopener" target="_blank" ><i class="fa fa-print"></i> Print Medical Practitioners list</a><br>
+				</div>
+			</div>
+			<br>
+			<div class="card-header bg-transparent border-0" >
+				<button class="collapsible">2. Illness Concentration per region</button>
+				<div class="content">
+					<a href="reportStructure.php?type=nairobi" rel="noopener" target="_blank" ><i class="fa fa-print"></i> Nairobi Region</a><br><br>
+					<a href="reportStructure.php?type=central" rel="noopener" target="_blank" ><i class="fa fa-print"></i> Central Region</a><br><br>
+					<a href="reportStructure.php?type=eastern" rel="noopener" target="_blank" ><i class="fa fa-print"></i> Eastern Region</a><br><br>
+					<a href="reportStructure.php?type=western" rel="noopener" target="_blank" ><i class="fa fa-print"></i> Western Region</a><br><br>
+					<a href="reportStructure.php?type=nyanza" rel="noopener" target="_blank" ><i class="fa fa-print"></i> Nyanza Region</a><br><br>
+					<a href="reportStructure.php?type=rift" rel="noopener" target="_blank" ><i class="fa fa-print"></i> Rift Valley Region</a><br><br>
+					<a href="reportStructure.php?type=coast" rel="noopener" target="_blank" ><i class="fa fa-print"></i> Coast Region</a><br><br>
+				</div>
+			</div>
 		  
-         
         </div>
       </div>
 
@@ -175,6 +175,22 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
     <script src="dashboardjs/Chart.min.js"></script>
     <script src="dashboardjs/templatemo_script.js"></script>
 	<script src="dashboardjs/Graph.js"></script>
+	<script>
+			var coll = document.getElementsByClassName("collapsible");
+			var i;
+
+			for (i = 0; i < coll.length; i++) {
+				coll[i].addEventListener("click", function() {
+					this.classList.toggle("active");
+					var content = this.nextElementSibling;
+					if (content.style.maxHeight) {
+						content.style.maxHeight = null;
+					} else {
+						content.style.maxHeight = content.scrollHeight + "px";
+					}
+				});
+			}
+		</script>
 	<?php endif ?>
   </body>
 </html>
