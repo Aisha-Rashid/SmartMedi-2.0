@@ -52,12 +52,7 @@
 		<nav class="navbar header-nav navbar-expand-lg">
             <div class="container">
 				<a class="navbar-brand" href="index.php"><img src="images/SM-logo3icon.png" alt="image"></a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-wd" aria-controls="navbar-wd" aria-expanded="false" aria-label="Toggle navigation">
-					<span></span>
-					<span></span>
-					<span></span>
-				</button>
-                <div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
+				<div class="collapse navbar-collapse justify-content-end" id="navbar-wd">
                     <ul class="navbar-nav">
                         <li><a class="nav-link active" href="#">Home</a></li>
                         <li><a class="nav-link" href="#about">About Us</a></li>
@@ -117,7 +112,7 @@
 								<p>At SmartMedi, we believe that access to accurate and timely patient information is a basic right for all patients. 
 								We are committed to improving the quality of care and outcomes for patients by providing healthcare professionals with the tools they need to make informed decisions. 
 								Contact us today to learn how our EHR system can benefit your family and organization.</p>
-								<a href="#" class="new-btn-d br-2">Read More</a>
+								<!--a href="#" class="new-btn-d br-2">Read More</a-->
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-12">
 								<div class="about-m">

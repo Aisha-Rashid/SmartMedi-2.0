@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2023 at 01:11 PM
+-- Generation Time: Mar 20, 2023 at 01:45 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -43,7 +43,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `adminFname`, `adminLname`, `workID`, `IDnumber`, `phone`, `email`, `adminpass`) VALUES
-(1, 'Aisha', 'Rashid', 5654, 30301518, 754347613, 'chuchuaisha@gmail.com', 'aisharashid');
+(1, 'Aisha', 'Rashid', 5654, 30301518, 754347613, 'chuchuaisha@gmail.com', 'd983d1851e82044a25e554323a4e5f29'),
+(2, 'Jeff', 'Githae', 5546, 33284746, 732746248, 'jgithae@gmail.com', '7df65bb8cd3d79810cffa57c5ae0d32a');
 
 -- --------------------------------------------------------
 
@@ -204,17 +205,11 @@ INSERT INTO `counties` (`id`, `county`) VALUES
 
 CREATE TABLE `dependants` (
   `id` int(11) NOT NULL,
-  `IDNo` int(11) NOT NULL,
-  `spousename` varchar(100) NOT NULL,
-  `spousetel` int(11) NOT NULL,
-  `kidName` varchar(100) NOT NULL,
-  `kidDOB` date NOT NULL,
-  `kidGender` varchar(20) NOT NULL,
-  `kidBlood` varchar(20) NOT NULL,
-  `kidAllergies` varchar(255) NOT NULL,
-  `kidConditions` varchar(255) NOT NULL,
-  `DocID` int(11) NOT NULL,
-  `kidDocNotes` varchar(255) NOT NULL
+  `name` varchar(100) NOT NULL,
+  `dob` date NOT NULL,
+  `gender` varchar(20) NOT NULL,
+  `blood_group` varchar(20) NOT NULL,
+  `medical_conditions` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -323,7 +318,8 @@ INSERT INTO `doctors` (`id`, `nationalid`, `fname`, `lname`, `hospital`, `workid
 (13, 56559856, 'Kelvin', 'Nzomo', 'Gatundu Level 5 Hospital', 56465565, 'Nephrology', 'b2c6de510d584484d74c9aa9f8fa9f04'),
 (14, 5696598, 'Jack ', 'Ochieng', 'Kiambu County Referral Hospital', 6655665, 'Endocrinology and Metabolism', '4ff9fc6e4e5d5f590c4f2134a8cc96d1'),
 (15, 11455985, 'Maimuna', 'Idris', 'Mandera County Referral Hospital', 2556590, 'Pediatrics', 'cbf306d2c9df16d0bd7ba7888cbb1b5e'),
-(16, 45379476, 'Alex', 'Kibiricho', 'Machakos Hospital', 3425653, 'Public Health and Preventive Medicine (PhPm)', '534b44a19bf18d20b71ecc4eb77c572f');
+(16, 45379476, 'Alex', 'Kibiricho', 'Machakos Hospital', 3425653, 'Public Health and Preventive Medicine (PhPm)', '534b44a19bf18d20b71ecc4eb77c572f'),
+(21, 23456674, 'Dexter', 'Mwilonza', 'Aga Khan Hospital, Mombasa', 32763, 'Pediatrics', '123abcd');
 
 -- --------------------------------------------------------
 
@@ -529,7 +525,8 @@ INSERT INTO `medicalcover` (`id`, `nhiftype`, `nhifnumber`, `insurancetype`, `in
 (4, 'Civil Servant', 6374827, '', 0, '', '0000-00-00', 68493736),
 (6, 'Employee', 3547826, '', 0, '', '0000-00-00', 367482725),
 (8, 'Individual', 35727489, 'ICEA LION General Insurance Company Limited', 64829472, 'Allan Keverenge', '2024-01-01', 2147485),
-(12, 'Individual', 456738, 'UAP Life Assurance Limited', 65378409, 'Goosey Lucy', '2024-03-07', 66388463);
+(12, 'Individual', 456738, 'UAP Life Assurance Limited', 65378409, 'Goosey Lucy', '2024-03-07', 66388463),
+(13, 'Individual', 14381499, 'APA Insurance Limited', 1530788, 'Aisha Wanja Rashid', '2023-07-01', 33179878);
 
 -- --------------------------------------------------------
 
@@ -555,7 +552,8 @@ INSERT INTO `nextofkin` (`id`, `kinFirstName`, `kinLastName`, `relationship`, `t
 (2, '', '', '', '', 0),
 (3, 'Farida', 'Karanja', 'Parent', '0702567348', 2147483647),
 (4, 'Dianah', 'Karanja', 'Parent', '254759320031', 29816629),
-(5, 'Fatuma', 'Rashid', 'Parent', '0719876530', 63748264);
+(5, 'Fatuma', 'Rashid', 'Parent', '0719876530', 63748264),
+(7, 'Dianah', 'Karanja', 'Parent', '0731421925', 33179878);
 
 -- --------------------------------------------------------
 
@@ -617,7 +615,9 @@ INSERT INTO `patients` (`ID`, `FirstName`, `LastName`, `TelNo`, `IDNo`, `DOB`, `
 (31, 'Goosey', 'Lucy', '0726836237', 66388463, '1990-12-09', 'Female', 'A-', 'glucy@gmail.com', 'Nairobi City', 'Umoja', 'aa7a60d9e3f05d9e068c4ba4d3608978', 'gooseyL (2).jfif'),
 (33, 'Turkey', 'Lucky', '0745384637', 33432676, '1993-03-11', 'Male', 'AB-', 'tlucky@gmail.com', 'Kiambu', 'Ndumberi', 'db77174aa34ded1b6139455a58d0a38b', ''),
 (34, 'Lemony', 'Snicket', '0736254637', 53748393, '1990-10-10', 'Male', 'O+', 'lsnicket@gmail.com', 'Nairobi City', 'Nairobi', '5684f59763b080bb179fe408b64191bd', 'juice2.jpg'),
-(35, 'Sheldon', 'Cooper', '0734973497', 33857490, '1991-06-18', 'Male', 'O+', 'scooper@gmail.com', 'Nairobi City', 'Pumwani', 'fcfff28fdbbbf75face3b3d97fdbfc15', 'pancakes.jpg');
+(35, 'Sheldon', 'Cooper', '0734973497', 33857490, '1991-06-18', 'Male', 'O+', 'scooper@gmail.com', 'Nairobi City', 'Pumwani', 'fcfff28fdbbbf75face3b3d97fdbfc15', 'pancakes.jpg'),
+(40, 'Aisha', 'Rashid', '0703277202', 33179878, '1996-06-25', 'Female', 'O+', 'chuchuaisha@gmail.com', 'Kajiado', 'Kitengela', 'aae82dfe8d1d25acb0947aad2a77d487', '20200604_120053.jpg'),
+(41, 'Meshack', 'Milimo', '0703283923', 33535687, '1989-08-07', 'Male', 'B+', 'mmilimo@gmail.com', 'Machakos', 'Kangundo', '2269d672abe86cdd5867e78b65ddb940', 'courage-the-cowardly-dog-dog-animals-tv-wallpaper-preview.jpg');
 
 -- --------------------------------------------------------
 
@@ -670,7 +670,8 @@ INSERT INTO `response` (`id`, `IDNo`, `conditions`, `allergies`, `notes`) VALUES
 (8, 367482725, 'Gastro-intestinal disorders, ', 'Sulphur', 'Diagnosed with Gastritis on January 2020'),
 (9, 2147485, 'Cardiovascular (heart and blood vessels) disorders, Respiratory and Ear Nose and Throat (ENT) disorders, ', 'Dust and smoke particles,\r\nAnimal Protein', 'Close relatives diagnosed with High blood pressure and asthma'),
 (10, 49798885, 'Eye related disorders, ', '', 'Glaucoma'),
-(11, 6598569, 'Cardiovascular (heart and blood vessels) disorders, Endocrine disorders, Musculoskeletal disorders, ', 'Dust and Pollen', 'Relatives with High Blood Pressure problems, \r\nSelf diagnosed with sporting pelvic injury and diabetes');
+(11, 6598569, 'Cardiovascular (heart and blood vessels) disorders, Endocrine disorders, Musculoskeletal disorders, ', 'Dust and Pollen', 'Relatives with High Blood Pressure problems, \r\nSelf diagnosed with sporting pelvic injury and diabetes'),
+(12, 33179878, 'Cancer, growths or tumors, Cardiovascular (heart and blood vessels) disorders, Respiratory and Ear Nose and Throat (ENT) disorders, Endocrine disorders, Eye related disorders, Gastro-intestinal disorders, Musculoskeletal disorders, ', 'Nil', 'Self - diagnosed with Hiatus hernia type 3 (Endoscopy report of 2019) and GERD(Gastro-Intestinal Reflux Disease) \r\nFamily - immediate family diagnosed with several types of cancers (including pancreatic, colon and cervical), High blood pressure, diabetes, asthma, arthritis and glaucoma.');
 
 --
 -- Indexes for dumped tables
@@ -786,7 +787,7 @@ ALTER TABLE `response`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `appointments`
@@ -816,7 +817,7 @@ ALTER TABLE `counties`
 -- AUTO_INCREMENT for table `dependants`
 --
 ALTER TABLE `dependants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `docnotes`
@@ -834,7 +835,7 @@ ALTER TABLE `docspecialty`
 -- AUTO_INCREMENT for table `doctors`
 --
 ALTER TABLE `doctors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `fileupload`
@@ -846,7 +847,7 @@ ALTER TABLE `fileupload`
 -- AUTO_INCREMENT for table `hospitals`
 --
 ALTER TABLE `hospitals`
-  MODIFY `hospitalID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `hospitalID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `insurance`
@@ -858,19 +859,19 @@ ALTER TABLE `insurance`
 -- AUTO_INCREMENT for table `medicalcover`
 --
 ALTER TABLE `medicalcover`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `nextofkin`
 --
 ALTER TABLE `nextofkin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `patients`
 --
 ALTER TABLE `patients`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `picture`
@@ -882,7 +883,7 @@ ALTER TABLE `picture`
 -- AUTO_INCREMENT for table `response`
 --
 ALTER TABLE `response`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

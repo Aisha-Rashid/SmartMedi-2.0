@@ -41,16 +41,16 @@ if (isset($_POST['reg_user'])) {
 	// in the variables
 	// Data sanitization is done to prevent
 	// SQL injections
-	$FirstName = mysqli_real_escape_string($db, $_POST['FirstName']);
-	$LastName = mysqli_real_escape_string($db, $_POST['LastName']);
-	$TelNo = mysqli_real_escape_string($db, $_POST['TelNo']);
-	$IDNo = mysqli_real_escape_string($db, $_POST['IDNo']);
+	$FirstName =filter_var ($_POST['FirstName'], FILTER_SANITIZE_STRING);
+	$LastName = filter_var($_POST['LastName'], FILTER_SANITIZE_STRING);
+	$TelNo = filter_var($_POST['TelNo'], FILTER_SANITIZE_NUMBER_INT);
+	$IDNo = filter_var($_POST['IDNo'], FILTER_SANITIZE_NUMBER_INT);
 	$DOB = mysqli_real_escape_string($db, $_POST['DOB']);
-	$gender = mysqli_real_escape_string($db, $_POST['gender']);
-	$bloodgroup = mysqli_real_escape_string($db, $_POST['bloodgroup']);
-	$email = mysqli_real_escape_string($db, $_POST['email']);
-	$county = mysqli_real_escape_string($db, $_POST['county']);
-	$town = mysqli_real_escape_string($db, $_POST['town']);
+	$gender = filter_var($_POST['gender'], FILTER_SANITIZE_STRING);
+	$bloodgroup = filter_var($_POST['bloodgroup'], FILTER_SANITIZE_STRING);
+	$email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+	$county = filter_var($_POST['county'], FILTER_SANITIZE_STRING);
+	$town = filter_var($_POST['town'], FILTER_SANITIZE_STRING);
 	$password1 = mysqli_real_escape_string($db, $_POST['password1']);
 	$password2 = mysqli_real_escape_string($db, $_POST['password2']);
 	

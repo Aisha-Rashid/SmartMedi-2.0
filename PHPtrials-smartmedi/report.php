@@ -123,6 +123,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
       <div class="templatemo-content-wrapper">
         <div class="templatemo-content">
           <h3>List of available printable reports</h3><hr>
+		  
 			<div class="card-header bg-transparent border-0" >
 				<button class="collapsible">1. List of Doctors and hospitals</button>
 				<div class="content">

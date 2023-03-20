@@ -71,40 +71,40 @@ $conn=new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or
 
 if (isset($_SESSION['IDNo'])) {
    $unique = $_SESSION['IDNo'];
-   $query = "SELECT * FROM `patients` WHERE IDNo = ?";
-   $stmt = $conn->prepare($query);
-   $stmt->execute([$unique]);
-   $array = $stmt->fetch();
-   $rows = $stmt->rowCount();
+   //$query = "SELECT * FROM `patients` WHERE IDNo = ?";
+   //$stmt = $conn->prepare($query);
+   // $stmt->execute([$unique]);
+   // $array = $stmt->fetch();
+   // $rows = $stmt->rowCount();
 }
 
-if (isset($_POST['kidData'])) {
-    $num_boxes = $_POST['num_boxes']; 
+// if (isset($_POST['kidData'])) {
+    // $num_boxes = $_POST['num_boxes']; 
     
-    $query = "INSERT INTO dependants (IDNo, spousename, spousetel, kidName, kidDOB, kidGender, kidBlood, kidAllergies, kidConditions) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($query);
+    // $query = "INSERT INTO dependants (IDNo, kidName, kidDOB, kidGender, kidBlood, kidAllergies, kidConditions) VALUES ('$unique', ?, ?, ?, ?, ?, ?)";
+    // $stmt = $conn->prepare($query);
 
-    for ($i = 1; $i <= $num_boxes; $i++) {
-        if (isset($_POST['box_' . $i])) {
-            $box_name = $_POST['box_name' . $i];
-            $box_DOB = $_POST['box_DOB' . $i];
-            $box_gender = $_POST['box_gender' . $i];
-            $box_blood = $_POST['box_blood' . $i];
-            $box_allergies = $_POST['box_allergies' . $i];
-            $box_conditions = $_POST['box_conditions' . $i];
-            $spousename = $_POST['spousename'];
-            $spousetel = $_POST['spousetel'];
+    // for ($i = 1; $i <= $num_boxes; $i++) {
+        // if (isset($_POST['box_' . $i])) {
+            // $box_name = $_POST['box_name' . $i];
+            // $box_DOB = $_POST['box_DOB' . $i];
+            // $box_gender = $_POST['box_gender' . $i];
+            // $box_blood = $_POST['box_blood' . $i];
+            // $box_allergies = $_POST['box_allergies' . $i];
+            // $box_conditions = $_POST['box_conditions' . $i];
+            // $spousename = $_POST['spousename'];
+            // $spousetel = $_POST['spousetel'];
 
-            $stmt->execute([$unique, $spousename, $spousetel, $box_name, $box_DOB, $box_gender, $box_blood, $box_allergies, $box_conditions]);
-            if ($stmt->rowCount() > 0) {
-                echo "Box $i value saved successfully.<br>";
-            } else {
-                error_log("Error inserting into dependants table: " . $stmt->errorInfo()[2]);
-                echo "Error: Unable to save box $i value.";
-            }
-        }
-    }
-}
+            // $stmt->execute([$unique, $box_name, $box_DOB, $box_gender, $box_blood, $box_allergies, $box_conditions]);
+            // if ($stmt->rowCount() > 0) {
+                // echo "Box $i value saved successfully.<br>";
+            // } else {
+                // error_log("Error inserting into dependants table: " . $stmt->errorInfo()[2]);
+                // echo "Error: Unable to save box $i value.";
+            // }
+        // }
+    // }
+// }
 ?>
 
 	<!-- LOADER -->
@@ -126,11 +126,11 @@ if (isset($_POST['kidData'])) {
 					<div class="contact-block">
 						<form class="form-horizontal templatemo-signin-form" action="" method="post">
 															
-								<TABLE width=100%>
+								<!--TABLE width=100%>
 								<TR><TD >Spouse Full Name</TD><TD><input type="text" class="form-control"  name="spousename" placeholder="---" ></TD></TR>
 								<TR><TD >Spouse Telephone Number</TD><TD><input type="number" class="form-control"  name="spousetel" placeholder="---" ></TD></TR>
 								<TR bgcolor="#d3fcf3"><TD colspan="2"><p><b>Minors details (under 18 years of age) will be under the parent's account</b></p></TD></TR>
-								</TABLE>
+								</TABLE-->
 								<label for="num_boxes">Enter the number of children:</label><input type="number" name="num_boxes" id="num_boxes">
 								<button type="submit">Submit</button><hr>
 								<a href="dashboard.php" class="btn btn-info"><b>Back to Dashboard</b></a>
@@ -155,6 +155,36 @@ if (isset($_POST['kidData'])) {
 								<?php	
 								}
 								  echo '<button type="submit" name="kidData">Submit Data</button>';
+								  
+								 if (isset($_POST['kidData'])) {
+    //$num_boxes = $_POST['num_boxes']; 
+    
+    $query = "INSERT INTO dependants (name, dob, gender, blood_group, medical_conditions) VALUES (?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($query);
+
+    for ($i = 1; $i <= $num_boxes; $i++) {
+        if (isset($_POST['box_' . $i])) {
+            $box_name = $_POST['box_name' . $i];
+            $box_DOB = $_POST['box_DOB' . $i];
+            $box_gender = $_POST['box_gender' . $i];
+            $box_blood = $_POST['box_blood' . $i];
+            $box_allergies = $_POST['box_allergies' . $i];
+            $box_conditions = $_POST['box_conditions' . $i];
+            // $spousename = $_POST['spousename'];
+            // $spousetel = $_POST['spousetel'];
+
+            $stmt->execute([$unique, $box_name, $box_DOB, $box_gender, $box_blood, $box_allergies, $box_conditions]);
+            if ($stmt->rowCount() > 0) {
+                echo "Box $i value saved successfully.<br>";
+            } else {
+                error_log("Error inserting into dependants table: " . $stmt->errorInfo()[2]);
+                echo "Error: Unable to save box $i value.";
+            }
+        }
+    } 
+	}							  
+								  
+								  
 								  echo '</form>';
 								}
 								?>

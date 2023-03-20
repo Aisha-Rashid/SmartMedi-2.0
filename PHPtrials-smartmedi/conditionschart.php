@@ -108,12 +108,12 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
         </ul>
       </div>
 	  <!--/.navbar-collapse -->
-
+		
       <div class="templatemo-content-wrapper">
         <div class="templatemo-content">
           <div class="row">
 		  <div class="col-md-12 col-sm-12">
-		 
+		 <div id="printableArea">
 		 <table>
 							<div>
 							  <canvas id="ConditionChart"></canvas>
@@ -121,9 +121,12 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 							</div>
 							</table>
         </div>
+		
       </div>
+	  
 	   </div>
       </div>
+	  </div>
       
       <!-- Modal -->
       <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

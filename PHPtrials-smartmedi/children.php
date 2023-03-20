@@ -54,26 +54,9 @@ date_default_timezone_set("Africa/Nairobi");
 ?>
 
 <?php
-$conn=new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or die(mysqli_error($conn));
-if(isset($_POST['submit'])!=""){
-  $name=$_FILES['photo']['name'];
-  $size=$_FILES['photo']['size'];
-  $type=$_FILES['photo']['type'];
-  $temp=$_FILES['photo']['tmp_name'];
-  $date = date('Y-m-d H:i:s');
-  $caption1=$_POST['caption'];
-  $link=$_POST['link'];
-  
-  move_uploaded_file($temp,"files/".$name);
+//$conn=new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or die(mysqli_error($conn));
+// Connect to the database
 
-$query=$conn->query("INSERT INTO fileupload (name,date, IDNo) VALUES ('$name','$date', '$unique')");
-if($query){
-header("location:attachments.php");
-}
-else{
-die(mysqli_error($conn));
-}
-}
 ?>
 	<!-- Start menu -->
     <div class="template-page-wrapper">
@@ -137,25 +120,59 @@ die(mysqli_error($conn));
 				  <button type="submit">Submit</button>
 				</form>
 
-				<?php
-				if (isset($_POST['num_boxes'])) {
-				  $num_boxes = $_POST['num_boxes'];
-				  echo '<form method="post" action="children.php">';
-				  for ($i = 1; $i <= $num_boxes; $i++) {
-					echo '<label for="box_' . $i . '">' . $i . ' Full Name:</label>';
-					echo '<input type="text" name="box_' . $i . '" id="box_' . $i . '"><br>';
-					echo '<label for="box_' . $i . '">Date of Birth :</label>';
-					echo '<input type="text" name="box_' . $i . '" id="box_' . $i . '"><br>';
-					echo '<label for="box_' . $i . '">Gender:</label>';
-					echo '<input type="text" name="box_' . $i . '" id="box_' . $i . '"><br>';
-					echo '<label for="box_' . $i . '">Blood Group:</label>';
-					echo '<input type="text" name="box_' . $i . '" id="box_' . $i . '"><br>';
-					echo '<label for="box_' . $i . '">Medical Conditions:</label>';
-					echo '<input type="text" name="box_' . $i . '" id="box_' . $i . '"><br>';
-				  }
-				  echo '<button type="submit">Submit Boxes</button>';
-				  echo '</form>';
-				}
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "phptrials-smartmedi";
+
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+if (!$conn) {
+  die("Connection failed: " . mysqli_connect_error());
+}
+if (isset($_POST['num_boxes'])) {
+  $num_boxes = $_POST['num_boxes'];
+	echo '<form method="post" action="">';
+  
+
+  for ($i = 1; $i <= $num_boxes; $i++) {
+	  echo '<table>';
+	  echo '<tr><td><label for="box_' . $i . '"> Full Name:</label></td>';
+	echo '<td><input type="text" name="box_' . $i . '_name" id="box_' . $i . '_name"></td></tr>';
+	echo '<tr><td><label for="box_' . $i . '">Date of Birth :</label></td>';
+	echo '<td><input type="date" name="box_' . $i . '_dob" id="box_' . $i . '_dob"></td></tr>';
+	echo '<tr><td><label for="box_' . $i . '">Gender:</label></td>';
+	echo '<td><input type="text" name="box_' . $i . '_gender" id="box_' . $i . '_gender"></td></tr>';
+	echo '<tr><td><label for="box_' . $i . '">Blood Group:</label></td>';
+	echo '<td><input type="text" name="box_' . $i . '_blood_group" id="box_' . $i . '_blood_group"></td></tr>';
+	echo '<tr><td><label for="box_' . $i . '">Medical Conditions:</label></td>';
+	echo '<td><input type="text" name="box_' . $i . '_medical_conditions" id="box_' . $i . '_medical_conditions"></td></tr>';
+	echo '</table>';
+	}
+echo '<button type="submit" name="kidData">Submit Boxes</button>';
+echo '</form>';
+			
+	if(isset($_POST['kidData'])) {  
+   $stmt = mysqli_prepare($conn, "INSERT INTO dependants (name, dob, gender, blood_group, medical_conditions) VALUES (?, ?, ?, ?, ?)");
+   echo "success1";
+mysqli_stmt_bind_param($stmt, 'sssss', $name, $dob, $gender, $blood_group, $medical_conditions);
+
+for ($i = 1; $i <= $num_boxes; $i++) {
+    $name = $_POST['box_' . $i . '_name'];
+    $dob = $_POST['box_' . $i . '_dob'];
+    $gender = $_POST['box_' . $i . '_gender'];
+    $blood_group = $_POST['box_' . $i . '_blood_group'];
+    $medical_conditions = $_POST['box_' . $i . '_medical_conditions'];
+
+    mysqli_stmt_execute($stmt);
+}
+
+mysqli_stmt_close($stmt);
+}
+}
+
+// Close the database connection
+mysqli_close($conn);
 				?>
 	
 					

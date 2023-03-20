@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
+	<!--meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">   
    
     <!-- Mobile Metas -->
@@ -47,6 +47,7 @@
     </div>
     <!-- END LOADER -->
 	
+	
 	<div id="register" class="contact-box">
 		<div class="row">
 			<div class="col-lg-12">
@@ -58,13 +59,13 @@
 			</div>
 		</div>		
 		<div class="container">
-			<div class="row">
+			<!--div class="row"-->
 			
 				<div class="col-lg-12 col-xs-12">
 					<div class="contact-block">
 						<form class="form-horizontal templatemo-signin-form" method="post" action="register.php">
 						<?php include('errors.php'); ?>
-						<div class="row">
+						<div class="row"-->
 								<div class="col-md-6">
 									<label>First Name</label>
 									<div class="form-group">
@@ -86,7 +87,7 @@
 								<div class="col-md-6">
 									<label>Telephone No</label>
 									<div class="form-group">
-									<input type="text" class="form-control" name="TelNo" value="<?php echo $TelNo; ?>">
+									<input type="tel" class="form-control" name="TelNo" value="<?php echo $TelNo; ?>">
 									</div>   
 								</div> 
 								<div class="col-md-6">
