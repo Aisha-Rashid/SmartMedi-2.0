@@ -61,7 +61,7 @@
 						<div class="col-md-6">
 							<label>National ID</label>
 								<div class="col-sm-6">
-								<input type="number" class="form-control" name="nationalid">
+								<input type="number" class="form-control" name="nationalid" required="required">
 								</div>
 						</div>              
 				</div>
@@ -69,7 +69,7 @@
 						<div class="col-md-6">
 							<label>Password</label>
 								<div class="col-sm-6">
-								<input type="password" class="form-control" id="password" name="password">
+								<input type="password" class="form-control" id="password" name="password" required="required">
 								<span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 								</div>
 						</div>              

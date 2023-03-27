@@ -37,6 +37,10 @@ if (isset($_GET['logout'])) {
   <link rel="stylesheet" href="dashboardcss/templatemo_main.css">
   <link rel="shortcut icon" href="dashboardimages/favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="dashboardimages/apple-touch-icon.png">
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+ <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" /-->
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   <!-- 
 Dashboard Template 
@@ -46,7 +50,6 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 
 <body>
   <?php if (isset($_SESSION['workID'])) :
-include ('data-visualization.php');
 
     $unique = $_SESSION['workID'];
     $query = "SELECT adminFname, adminLname, workID, IDnumber, email, phone FROM `admin` WHERE workID = '$unique'";
@@ -63,6 +66,7 @@ include ('data-visualization.php');
       <div class="navbar-header">
         <div class="logo">
           <h1>SmartMedi - Admin Dashboard</h1>
+		  
         </div>
 
       </div>
@@ -97,7 +101,7 @@ include ('data-visualization.php');
             </a>
             <ul class="templatemo-submenu">
               
-              
+              <li><a href="totalpatients.php"><i class="fa fa-user" ></i><i class="fa fa-user" ></i> Total Patients</a></li>
 			  <li><a href="gendercomparison.php"><i class="fa fa-user"></i> Gender Comparison</a></li>
 			  <li><a href="hospitalchart.php"><i class="fa fa-hospital-o"></i> Hospitals Onboard</a></li>
               
@@ -137,33 +141,99 @@ include ('data-visualization.php');
           </ol>
           <!--h1>SmartMedi - Admin Dashboard</h1>
           <hr-->
+		  <br>
           <p>Work ID : <b><?php echo $array[2]; ?></b></p>
           <p>Name : <b><?php echo $array[0];
                         echo " ";
                         echo $array[1];; ?></b></p>
           <hr>
+<?php
+/* $query = "SELECT * FROM hospitalreg WHERE approved = 0";
+$result = mysqli_query($db, $query);
+$num_rows = mysqli_num_rows($result); */
 
+?>
+<nav class="navbar navbar-inverse">
+   <div class="container-fluid">
+    <div class="navbar-header">
+     <h4>Message Board</h4>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+     <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="label label-pill label-danger count" style="border-radius:10px;"></span>
+		<i class="fa fa-bell" aria-hidden="true" style="font-size:18px;"></i></a>	  
+      <ul class="dropdown-menu">
+	  <?php /* while($row = mysqli_fetch_array($result)) { ?>
+    <li>
+      <a href="#">
+        <strong><?php echo $row['hospital']; ?></strong>
+        <br>
+        <small><em><?php echo $row['branch']; ?> - <?php echo $row['county']; ?></em></small>
+      </a>
+    </li>
+    <?php }  */?>
+	  </ul>
+     </li>
+    </ul>
+	
+   </div>
+  </nav>
+  <table class="table table-striped table-hover table-bordered">
+  
+								  <thead>
+									<tr>
+									  
+									  <th>Id</th>
+									  <th>Hospital Name</th>
+									  <th>Branch</th>
+									  <th>County</th>
+									  <th>Email</th>
+									  <th>Tel</th>
+									  <th>Applied on</th>
+									  <th>Attachment</th>
+									  <th>Reviewed By</th>
+									  <th>Approved By</th>
+									</tr>
+								  </thead>
+								  <tbody>
+								  <?php
+								 
+							$query="select * from hospitalreg WHERE status = 1";
+							$res = mysqli_query($db, $query);
+							
+							$counter = 1;
+							
+							while($row=mysqli_fetch_array($res)){
+							$number = $counter;
+							$counter++;
+							$hospital=$row['hospital'];
+							$branch=$row['branch'];
+							$county=$row['county'];
+							$email=$row['email'];
+							$tel=$row['tel'];
+							$applied=$row['applied'];
+							$file=$row['file'];
+							
+  
+  ?>
+								<tr>
+								<td><?php echo $number;?></td>
+								<td><?php echo $row['hospital'];?></td>
+								<td><?php echo $row['branch'];?></td>
+								<td><?php echo $row['county'];?></td>
+								<td><?php echo $row['email'];?></td>
+								<td><?php echo $row['tel'];?></td>
+								<td><?php echo $row['applied'];?></td>
+								<td><?php echo $row['file'];?></td>
+								<td></td>
+								<td></td>
+								</tr>
+								<?php } ?> 
+								  </tbody>
+								</table>
           <div class="row">
             <div class="col-md-12 col-sm-12">
-              
-
-              <!-- General User pane -->
-			  
-							<div class="templatemo-chart-box col-sm-6 ">
-							<div>
-							  <p><b><u><i>Total registered patients in terms of gender</i></u></b></p>
-							  <canvas id="PatientPieChart"></canvas>
-							</div>
-						</div>
-						<div class="templatemo-chart-box  col-sm-6 ">
-							<div>
-							  <p><b><u><i>Total registered patients per region</i></u></b></p>
-							  <canvas id="PatientCountyChart"></canvas>
-							</div>
-						</div>
-		  
-			  
-               <!-- tab-content -->
+             
             </div>
 
           </div>
@@ -194,65 +264,41 @@ include ('data-visualization.php');
     </div>
 
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-  const ctx_piePatients = document.getElementById('PatientPieChart');
-  new Chart(ctx_piePatients, {
-    type: 'pie',
-    data: {
-      labels: ['Male', 'Female'],
-      datasets: [{
-        label: '# of Patients',
-        data: [<?php echo $totalMales; ?>, <?php echo $totalFemales; ?> ],
-		 backgroundColor: ['rgba(110, 224, 182)', 'rgba(162, 236, 254)'],
-        
-      }]},
-	options: {
-		plugins: {
-			legend: {
-				display: true,
-				position: 'right',
-				labels: {
-					fontColor: '#333',
-					fontSize: 14,
-					padding: 20
-				}
-			}
-		}
-	}
-   
-  });
-  
-  
-  const ctx_piePatientCounty = document.getElementById('PatientCountyChart');
-  new Chart(ctx_piePatientCounty, {
-    type: 'pie',
-    data: {
-      labels: ['Nairobi', 'Central', 'Eastern', 'Western', 'Nyanza', 'Rift Valley', 'North Eastern','Coast'],
-      datasets: [{
-        label: '# of Patients',
-        data: [<?php echo $total_nairobi_patient; ?>, <?php echo $total_central_patient; ?>, <?php echo $total_eastern_patient; ?>, <?php echo $total_western_patient; ?>, 
-		<?php echo $total_nyanza_patient; ?>, <?php echo $total_rift_patient; ?>, <?php echo $total_northern_patient; ?>, <?php echo $total_coast_patient; ?> ],
-		 backgroundColor: ['rgba(66, 239, 245)', 'rgba(245, 170,66)', 'rgba(66, 245, 78)', 'rgba(245, 81, 66)', 'rgba(206, 66, 245)', 'rgba(223, 235, 233)', 'rgba(201, 36, 89)', 'rgba(66, 81, 245)'],
-        
-      }]
-    },
-	options: {
-		plugins: {
-			legend: {
-				display: true,
-				position: 'right',
-				labels: {
-					fontColor: '#333',
-					fontSize: 14,
-					padding: 20
-				}
-			}
-		}
-	}
-    
-  });
-  
+	<script>
+$(document).ready(function(){
+// updating the view with notifications using ajax
+function load_unseen_notification(view = '')
+{
+ $.ajax({
+  url:"fetch.php",
+  method:"POST",
+  data:{view:view},
+  dataType:"json",
+  success:function(data)
+  {
+   $('.dropdown-menu').html(data.notification);
+   if(data.unseen_notification > 0)
+   {
+    $('.count').html(data.unseen_notification);
+   }
+  }
+ });
+}
+load_unseen_notification();
+
+ 
+// load new notifications
+$(document).on('click', '.dropdown-toggle', function(){
+ $('.count').html('');
+ load_unseen_notification('yes');
+});
+setInterval(function(){
+ load_unseen_notification();;
+}, 5000);
+
+});
 </script>
+
 	
     <script src="dashboardjs/jquery.min.js"></script>
     <script src="dashboardjs/bootstrap.min.js"></script>

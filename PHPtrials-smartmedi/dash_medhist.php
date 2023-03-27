@@ -1,23 +1,11 @@
 <?php
 include('server.php'); 
 
-// Starting the session, to use and
-// store data in session variable
-// session_start();
-
-// If the session variable is empty, this
-// means the user is yet to login
-// User will be sent to 'login.php' page
-// to allow the user to login
 if (!isset($_SESSION['IDNo'])) {
 	$_SESSION['msg'] = "You have to log in first";
 	header('location: login.php');
 }
 
-// Logout button will destroy the session, and
-// will unset the session variables
-// User will be headed to 'login.php'
-// after logging out
 if (isset($_GET['logout'])) {
 	session_destroy();
 	unset($_SESSION['IDNo']);
@@ -55,6 +43,7 @@ date_default_timezone_set("Africa/Nairobi");
 
 
 	<!-- Start menu -->
+	
     <div class="template-page-wrapper">
 		<div class="navbar-collapse collapse templatemo-sidebar">
 			<ul class="templatemo-sidebar-menu">
@@ -73,37 +62,24 @@ date_default_timezone_set("Africa/Nairobi");
 		</div><!--/.navbar-collapse-->
 		<div class="templatemo-content-wrapper">
 			<div class="templatemo-content">
-			<ol class="breadcrumb">
-            <li><a href="dashboard.php">User Panel</a></li>
-            <li><a href="#">Attachments</a></li>
-            <li>Overview</li>
-			</ol>
 			
-<div class="student-profile py-4">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-4">
+			<div class="student-profile py-4">
+			  <div class="container">
+				<div class="row">
+				 <div class="col-lg-4">
 									<div class="card shadow-sm">
-          <div class="card-header bg-transparent text-center">
-		  <?php
-			$query = " select * from patients where IDNO='$unique' ";
-			$result = mysqli_query($db, $query);
+									  <div class="card-header bg-transparent text-center">
+									  <?php
+										$query = " select * from patients where IDNO='$unique' ";
+										$result = mysqli_query($db, $query);
 
-			while ($data = mysqli_fetch_assoc($result)) {
-			?>
-				<a href = "uploadProfile.php"><img class="profile_img" src="./uploads/<?php echo $data['filename']; ?>" alt="Profile Pic"></a>
-				<!--input id="file" type="file" onchange="loadFile(event)"/-->
-				
-				<?php
-		}
-		?>
-            <h3>
-			<?php echo $array[1]; ?>
-			</h3>
-          </div>
-          <div class="card-body" align = "center">
-          </div>
-        </div>
+										while ($data = mysqli_fetch_assoc($result)) {
+									  ?>
+									   <a href = "uploadProfile.php"><img class="profile_img" src="./uploads/<?php echo $data['filename']; ?>" alt="Profile Pic"></a>
+									  <?php } ?>
+									   <h3><?php echo $array[1]; ?></h3>
+									  </div>
+									</div>
 								</div>
 	  
 	   <div class="col-lg-8">
@@ -286,6 +262,7 @@ date_default_timezone_set("Africa/Nairobi");
            
     		</div>
 		</div>
+		
    
 
  	

@@ -77,7 +77,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
             </a>
             <ul class="templatemo-submenu">
               
-              
+              <li><a href="totalpatients.php"><i class="fa fa-user" ></i><i class="fa fa-user" ></i> Total Patients</a></li>
 			  <li><a href="gendercomparison.php"><i class="fa fa-user"></i> Gender Comparison</a></li>
 			  <li><a href="hospitalchart.php"><i class="fa fa-hospital-o" ></i> Hospitals Onboard</a></li>
               

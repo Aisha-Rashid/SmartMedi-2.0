@@ -1,9 +1,7 @@
 <?php
-
 // Starting the session, necessary
 // for using session variables
 session_start();
-
 // Declaring and hoisting the variables
 $FirstName = "";
 $LastName = "";
@@ -15,93 +13,55 @@ $gender = "";
 $email = "";
 $county ="";
 $town = "";
-$spousename = "";
-$spousetel = "";
 $id = "";
 $nationalid = "";
 $fname = "";
 $lname = "";
 $hospital = "";
+$branch = "";
 $workid = "";
-//$randomNumber = rand(10000000,99999999);
 $errors = array();
 $_SESSION['success'] = "";
 $workID = "";
 $adminpass = "";
 
-
-// DBMS connection code -> hostname,
-// username, password, database name
 $db = mysqli_connect('localhost', 'root', '', 'phptrials-smartmedi');
 
 // Patient Registration code
 if (isset($_POST['reg_user'])) {
  
-	// Receiving the values entered and storing
-	// in the variables
-	// Data sanitization is done to prevent
-	// SQL injections
+	// Receiving the values entered and storing in the variables
+	// Data sanitization is done to prevent SQL injections
 	$FirstName =filter_var ($_POST['FirstName'], FILTER_SANITIZE_STRING);
 	$LastName = filter_var($_POST['LastName'], FILTER_SANITIZE_STRING);
 	$TelNo = filter_var($_POST['TelNo'], FILTER_SANITIZE_NUMBER_INT);
 	$IDNo = filter_var($_POST['IDNo'], FILTER_SANITIZE_NUMBER_INT);
 	$DOB = mysqli_real_escape_string($db, $_POST['DOB']);
-	$gender = filter_var($_POST['gender'], FILTER_SANITIZE_STRING);
-	$bloodgroup = filter_var($_POST['bloodgroup'], FILTER_SANITIZE_STRING);
+	$gender = mysqli_real_escape_string($db, $_POST['gender']);
+	$bloodgroup = mysqli_real_escape_string($db, $_POST['bloodgroup']);
 	$email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-	$county = filter_var($_POST['county'], FILTER_SANITIZE_STRING);
+	$county = mysqli_real_escape_string($db, $_POST['county']);
 	$town = filter_var($_POST['town'], FILTER_SANITIZE_STRING);
 	$password1 = mysqli_real_escape_string($db, $_POST['password1']);
 	$password2 = mysqli_real_escape_string($db, $_POST['password2']);
 	
-	
-
-	// Ensuring that the user has not left any input field blank
-	// error messages will be displayed for every blank input
-	if (empty($FirstName)) { array_push($errors, "First Name is required"); }
-	if (empty($LastName)) { array_push($errors, "Last Name is required"); }
-	if (empty($TelNo)) { array_push($errors, "Telephone Number is required"); }
-	if (empty($IDNo)) { array_push($errors, "ID Number is required"); }
-	if (empty($DOB)) { array_push($errors, "Date of Birth is required"); }
-	if (empty($county)) { array_push($errors, "County is required"); }
-	//if (empty($email)) { array_push($errors, "Email is required"); }
-	if (empty($password1)) { array_push($errors, "Password is required"); }
-
 	if ($password1 != $password2) {
 		array_push($errors, "The two passwords do not match");
 		// Checking if the passwords match
 	}
-
 	// If the form is error free, then register the user
 	if (count($errors) == 0) {
-		
 		// Password encryption to increase data security
 		$password = md5($password1);
-		
 		// Inserting data into tables
 		$query = "INSERT INTO patients (FirstName, LastName, TelNo, IDNo, DOB, gender, bloodgroup, email, county, town, password)
 				VALUES('$FirstName' , '$LastName' , '$TelNo' , '$IDNo' , '$DOB' , '$gender', '$bloodgroup', '$email', '$county', '$town', '$password')";
 		
-		
-		
 		mysqli_query($db, $query);
 
-		// Storing username of the logged in user,
-		// in the session variable
-		//$_SESSION['FirstName'] = $FirstName;
-		//$_SESSION['LastName'] = $LastName;
-		//$_SESSION['bloodgroup'] = $bloodgroup;
-		//$_SESSION['DOB'] = $DOB;
-		//$_SESSION['gender'] = $gender;
 		$_SESSION['IDNo'] = $IDNo;
 		
-		
-		
-		// Welcome message
-		$_SESSION['success'] = "You have logged in";
-		
-		// Page on which the user will be
-		// redirected after logging in
+		// Page on which the user will be redirected after logging in
 		header('location: uploadProfile.php');
 	}
 }
@@ -113,13 +73,47 @@ if (isset($_POST['login_user'])) {
 	$IDNo = mysqli_real_escape_string($db, $_POST['IDNo']);
 	$password = mysqli_real_escape_string($db, $_POST['password']);
 
+	// Checking for the errors
+	if (count($errors) == 0) {
+		
+		// Password matching
+		$password = md5($password);
+		
+		$query = "SELECT * FROM patients WHERE IDNo=
+				'$IDNo' AND password='$password'";
+		$results = mysqli_query($db, $query);
+
+		// $results = 1 means that one user with the entered username exists
+		if (mysqli_num_rows($results) == 1) {
+			
+			// Storing username in session variable
+			$_SESSION['IDNo'] = $IDNo;
+		
+			// Page on which the user is sent to after logging in
+			header('location: dashboard.php');
+		}
+		else {
+			// If the username and password doesn't match
+			echo "Username or password incorrect";
+		}
+	}
+}
+
+
+// Doctor login
+if (isset($_POST['doc_login'])) {
+	
+	// Data sanitization to prevent SQL injection
+	$nationalid = mysqli_real_escape_string($db, $_POST['nationalid']);
+	$password = mysqli_real_escape_string($db, $_POST['password']);
+
 	// Error message if the input field is left blank
-	if (empty($IDNo)) {
+	/* if (empty($nationalid)) {
 		array_push($errors, "ID number is required");
 	}
 	if (empty($password)) {
 		array_push($errors, "Password is required");
-	}
+	} */
 
 	// Checking for the errors
 	if (count($errors) == 0) {
@@ -128,8 +122,8 @@ if (isset($_POST['login_user'])) {
 		  //$hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
 		$password = md5($password);
 		
-		$query = "SELECT * FROM patients WHERE IDNo=
-				'$IDNo' AND password='$password'";
+		$query = "SELECT * FROM doctors WHERE nationalid=
+				'$nationalid' AND password='$password'";
 		$results = mysqli_query($db, $query);
 
 		// $results = 1 means that one user with the
@@ -138,26 +132,78 @@ if (isset($_POST['login_user'])) {
 			
 			// Storing username in session variable
 			//$_SESSION['FirstName'] = $FirstName;
-			$_SESSION['IDNo'] = $IDNo;
+			$_SESSION['nationalid'] = $nationalid;
 			
 			// Welcome message
 			$_SESSION['success'] = "You have logged in!";
 			
 			// Page on which the user is sent
 			// to after logging in
-			header('location: dashboard.php');
+			header('location: DocDashboard.php');
 		}
 		else {
 			
 			// If the username and password doesn't match
-			array_push($errors, "Username or password incorrect");
+			echo "Username or password incorrect";
 		}
 	}
 }
 
 
+//Admin Login
+
+if (isset($_POST['admin_login'])) {
+	
+	// Data sanitization to prevent SQL injection
+	$workID = mysqli_real_escape_string($db, $_POST['workID']);
+	$adminpass = mysqli_real_escape_string($db, $_POST['adminpass']);
+
+	// Error message if the input field is left blank
+	/* if (empty($workID)) {
+		array_push($errors, "Work ID is required");
+	}
+	if (empty($adminpass)) {
+		array_push($errors, "Password is required");
+	} */
+
+	// Checking for the errors
+	if (count($errors) == 0) {
+		
+		//$default="SMadmin@123";
+		$adminpass = md5($adminpass);
+		
+		$query = "SELECT adminFname, adminLname, workID FROM `admin` WHERE workID='$workID' AND adminpass='SMadmin@123'";
+		$res = mysqli_query($db, $query);
+			
+		if (mysqli_num_rows($res) == 1) {
+			$_SESSION['workID'] = $workID;
+			header('location: adminpassword.php');
+		}
+		
+		
+		else {
+			
+			$query = "SELECT adminFname, adminLname, workID FROM `admin` WHERE workID='$workID' AND adminpass='$adminpass'";
+			$res = mysqli_query($db, $query);
+			
+			if (mysqli_num_rows($res) == 1) {
+				$_SESSION['workID'] = $workID;
+				header('location: admindash.php');
+			}
+			
+			else{
+			 //If the username and password doesn't match
+			array_push($errors, "Work ID or password incorrect");
+			}
+		}
+	}
+}
+
+
+
+
 // Doctor Registration code
-if (isset($_POST['reg_doc'])) {
+if (isset($_POST['reg_hosp'])) {
  
 	// Receiving the values entered and storing
 	// in the variables
@@ -216,107 +262,5 @@ if (isset($_POST['reg_doc'])) {
 		header('location: DocDashboard.php');
 }
 }
-
-// Doctor login
-if (isset($_POST['doc_login'])) {
-	
-	// Data sanitization to prevent SQL injection
-	$nationalid = mysqli_real_escape_string($db, $_POST['nationalid']);
-	$password = mysqli_real_escape_string($db, $_POST['password']);
-
-	// Error message if the input field is left blank
-	if (empty($nationalid)) {
-		array_push($errors, "ID number is required");
-	}
-	if (empty($password)) {
-		array_push($errors, "Password is required");
-	}
-
-	// Checking for the errors
-	if (count($errors) == 0) {
-		
-		// Password matching
-		  //$hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
-		$password = md5($password);
-		
-		$query = "SELECT * FROM doctors WHERE nationalid=
-				'$nationalid' AND password='$password'";
-		$results = mysqli_query($db, $query);
-
-		// $results = 1 means that one user with the
-		// entered username exists
-		if (mysqli_num_rows($results) == 1) {
-			
-			// Storing username in session variable
-			//$_SESSION['FirstName'] = $FirstName;
-			$_SESSION['nationalid'] = $nationalid;
-			
-			// Welcome message
-			$_SESSION['success'] = "You have logged in!";
-			
-			// Page on which the user is sent
-			// to after logging in
-			header('location: DocDashboard.php');
-		}
-		else {
-			
-			// If the username and password doesn't match
-			array_push($errors, "ID or password incorrect");
-		}
-	}
-}
-
-
-//Admin Login
-
-if (isset($_POST['admin_login'])) {
-	
-	// Data sanitization to prevent SQL injection
-	$workID = mysqli_real_escape_string($db, $_POST['workID']);
-	$adminpass = mysqli_real_escape_string($db, $_POST['adminpass']);
-
-	// Error message if the input field is left blank
-	if (empty($workID)) {
-		array_push($errors, "Work ID is required");
-	}
-	if (empty($adminpass)) {
-		array_push($errors, "Password is required");
-	}
-
-	// Checking for the errors
-	if (count($errors) == 0) {
-		
-		//$default="SMadmin@123";
-		$adminpass = md5($adminpass);
-		
-		$query = "SELECT adminFname, adminLname, workID FROM `admin` WHERE workID='$workID' AND adminpass='SMadmin@123'";
-		$res = mysqli_query($db, $query);
-			
-		if (mysqli_num_rows($res) == 1) {
-			$_SESSION['workID'] = $workID;
-			header('location: adminpassword.php');
-		}
-		
-		
-		else {
-			
-			$query = "SELECT adminFname, adminLname, workID FROM `admin` WHERE workID='$workID' AND adminpass='$adminpass'";
-			$res = mysqli_query($db, $query);
-			
-			if (mysqli_num_rows($res) == 1) {
-				$_SESSION['workID'] = $workID;
-				header('location: admindash.php');
-			}
-			
-			else{
-			 //If the username and password doesn't match
-			array_push($errors, "Work ID or password incorrect");
-			}
-		}
-	}
-}
-
-
-
 
 ?>

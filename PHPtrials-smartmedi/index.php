@@ -168,7 +168,7 @@
 							<p class="description">
 							Access to patients medical data can now be accessed by registered Hospitals. Send your registration application today!
 							</p>
-							<a href="#" class="new-btn-d br-2">Register Organization</a>
+							<a href="HospRegistration.php" class="new-btn-d br-2">Register Organization</a>
 						</div>
 					</div>
 				</div>

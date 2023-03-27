@@ -1,19 +1,11 @@
 <?php
 include('server.php');
 
-// If the session variable is empty, this
-// means the user is yet to login
-// User will be sent to 'login.php' page
-// to allow the user to login
 if (!isset($_SESSION['IDNo'])) {
 	$_SESSION['msg'] = "You have to log in first";
 	header('location: login.php');
 }
 
-// Logout button will destroy the session, and
-// will unset the session variables
-// User will be headed to 'login.php'
-// after logging out
 if (isset($_GET['logout'])) {
 	session_destroy(); 
 	unset($_SESSION['IDNo']);
@@ -21,7 +13,7 @@ if (isset($_GET['logout'])) {
 }
 ?>
 
-<!DOCTYPE html>
+<html>
 	<head>
 		<meta charset="utf-8">
 		<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->

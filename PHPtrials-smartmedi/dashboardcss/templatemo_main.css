@@ -25,7 +25,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 /* 2. General Styles
 --------------------------------------- */
 * { font-family: 'Open Sans', sans-serif; }
-body { background-color: rgb(195, 242, 255); }
+body { background-color: rgb(172, 247, 250); }
 h1 { font-size: 24px; }
 .btn a {
     color: white;
@@ -39,12 +39,13 @@ h1 { font-size: 24px; }
 .templatemo-content-wrapper {
     float: left;
     width: 100%;
+	
 }
 .templatemo-content {
     margin-left: 235px;
     margin-top: 0px;
-    min-height: 600px;
-    padding: 25px 20px 0 20px;
+    min-height: 700px;
+    padding: 25px 20px 0 20;
     background-color: white;
     overflow-x: hidden;
 }

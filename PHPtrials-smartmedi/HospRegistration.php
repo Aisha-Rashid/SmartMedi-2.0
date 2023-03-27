@@ -40,6 +40,36 @@
 
 </head>
 <body id="home" data-spy="scroll" data-target="#navbar-wd" data-offset="98">
+<?php
+$conn=new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or die(mysqli_error($conn));
+if(isset($_POST['submit'])!=""){
+  $name=$_FILES['file']['name'];
+  $size=$_FILES['file']['size'];
+  $type=$_FILES['file']['type'];
+  $temp=$_FILES['file']['tmp_name'];
+  $date = date('Y-m-d H:i:s');
+  //$caption1=$_POST['caption'];
+  //$link=$_POST['link'];
+  
+  $hospital =filter_var ($_POST['hospital'], FILTER_SANITIZE_STRING);
+  $branch =filter_var ($_POST['branch'], FILTER_SANITIZE_STRING);
+  $county = mysqli_real_escape_string($db, $_POST['county']);
+  $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+  $tel = filter_var($_POST['tel'], FILTER_SANITIZE_NUMBER_INT);
+  //$status = 0;
+  
+  move_uploaded_file($temp,"Hospitals/".$name);
+
+$query=$conn->query("INSERT INTO hospitalreg (hospital, branch, county, email, tel, applied, file) VALUES ('$hospital', '$branch', '$county', '$email', '$tel', '$date', '$name')");
+if($query){
+	echo "success";
+//echo"<script>alert('Thank You for registering with SmartMedi. You will receive further communication on your email.'); window.location.href ='/SmartMedi-2.0/PHPtrials-smartmedi/index.php'; </script>";
+}
+else{
+die(mysqli_error($conn));
+}
+}
+?>
 
 
 	<!-- LOADER -->
@@ -58,22 +88,22 @@
 			<div class="row">
 			
 				<div class="col-lg-12 col-xs-12">
-					<h3><b>Medical Practictioner Registration Form</b></h3>
-					<p><i>Kindly note that your organization must be registered first before filling this form. Administration must send email to SmartMedi
-					to have the organization registered</i></P>
+					<h3><b>Medical Institution Registration Form</b></h3>
+					<p><i>Kindly note that your organization is required to provide a list of medical practitioners that will be granted access to the patients' data.
+					The list must include <b>FULL</b> name of the practitioner, national ID number, word ID and specialty/department.</i></P>
 					<hr>
 					<div class="contact-block">
-						<form class="form-horizontal templatemo-signin-form" method="post" action="DocRegistration.php">
-						<!-- <?php include('errors.php'); ?> -->
+						<form enctype="multipart/form-data"  action="" id="wb_Form1" name="form" method="post" class="form-horizontal templatemo-signin-form" >
+						
 							<TABLE width=100% >
-							<TR><TD width=50%>First Name</TD><TD><input type="text" class="form-control" id="fname" name="fname" placeholder="---"></TD></TR>
-							<TR><TD>Last Name</TD><TD><input type="text" class="form-control" id="lname" name="lname" placeholder="---"></TD></TR>							
-							<TR><TD>National ID</TD><TD ><input type="number" class="form-control" id="nationalid" name="nationalid" placeholder="---"></TD></TR>
-							<TR><TD>Organization</TD><TD>
-							<select name="hospital" class="form-control">
-										<OPTION SELECTED="TRUE" DISABLED="DISABLED">---</OPTION>  
+							<TR><TD width=50%>Institution Name</TD><TD><input type="text" class="form-control" id="hospital" name="hospital" placeholder="---" required="required"></TD></TR>
+							<TR><TD>Branch</TD><TD><input type="text" class="form-control" id="branch" name="branch" placeholder="---" ></TD></TR>
+							<TR><TD>Email</TD><TD><input type="email" class="form-control" id="email" name="email" placeholder="---" required="required"></TD></TR>
+							<TR><TD>Main Telephone number</TD><TD><input type="number" class="form-control" id="tel" name="tel" placeholder="---" required="required"></TD></TR>
+							<TR><TD>County</TD><TD ><SELECT NAME="county" class="form-control" required="required">
+										<OPTION SELECTED="TRUE" DISABLED="dISABLED" >---</OPTION>
 										<?php 
-										$query ="SELECT hospital FROM hospitals";
+										$query ="SELECT county FROM counties";
 										$result = mysqli_query($db, $query);
 										if($result->num_rows> 0){
 										  $options= mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -81,43 +111,16 @@
 										
 											foreach ($options as $option) {
 										?>
-										<option><?php echo $option['hospital']; ?> </option>
-										<?php 
-										}
-										?>
-									</SELECT>
-							
-							</TD></TR>
-							<TR><TD>Work ID</TD><TD><input type="number" class="form-control" id="workid" name="workid" placeholder="---"></TD></TR>
-							<TR><TD>Specialty</TD><TD>
-							<select name="specialty" class="form-control">
-										<OPTION SELECTED="TRUE" DISABLED="DISABLED">---</OPTION>  
-										<?php 
-										$query ="SELECT specialty FROM docspecialty";
-										$result = mysqli_query($db, $query);
-										if($result->num_rows> 0){
-										  $options= mysqli_fetch_all($result, MYSQLI_ASSOC);
-										}
+										<option required="required"><?php echo $option['county']; ?> </option>
+										<?php } ?>
 										
-											foreach ($options as $option) {
-										?>
-										<option><?php echo $option['specialty']; ?> </option>
-										<?php 
-										}
-										?>
-									</SELECT>
+									</SELECT></TD></TR>
+							<TR><TD>Attachment</TD><TD><input type="file" name="file" id="file" required="required"></TD></TR>
 							
-							</TD></TR>
-							<TR><TD>Password</TD><TD><input type="password" class="form-control" id = "docpassword1" name="docpassword1">
-							<span toggle="#docpassword1" class="fa fa-fw fa-eye field-icon toggle-password"></span></TD><TR>
-				
-							<TR><TD>Confirm Password</TD><TD><input type="password" class="form-control" id = "docpassword2" name="docpassword2">
-							<span toggle="#docpassword2" class="fa fa-fw fa-eye field-icon toggle-password"></span></TD><TR>
 							
 							</TABLE>
 							<br>
-							<button type="submit" class="btn"
-										name="reg_doc">Register</button>
+							<input type="submit"  value="SUBMIT" name="submit">
 							           
 						</form>
 					</div>
@@ -134,6 +137,7 @@
 	<script src="js/popper.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/passwordToggle.js"></script>
+	
     <!-- ALL PLUGINS -->
 	<script src="js/jquery.magnific-popup.min.js"></script>
     <script src="js/jquery.pogo-slider.min.js"></script> 

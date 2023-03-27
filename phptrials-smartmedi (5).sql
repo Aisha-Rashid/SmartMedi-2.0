@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 20, 2023 at 01:45 PM
+-- Generation Time: Mar 27, 2023 at 04:32 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -44,7 +44,7 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id`, `adminFname`, `adminLname`, `workID`, `IDnumber`, `phone`, `email`, `adminpass`) VALUES
 (1, 'Aisha', 'Rashid', 5654, 30301518, 754347613, 'chuchuaisha@gmail.com', 'd983d1851e82044a25e554323a4e5f29'),
-(2, 'Jeff', 'Githae', 5546, 33284746, 732746248, 'jgithae@gmail.com', '7df65bb8cd3d79810cffa57c5ae0d32a');
+(2, 'Jeff', 'Githae', 5546, 33284746, 732746248, 'jgithae@gmail.com', '4bde84a7487581a6a3720f901127e1a5');
 
 -- --------------------------------------------------------
 
@@ -363,6 +363,41 @@ INSERT INTO `fileupload` (`id`, `name`, `date`, `IDNo`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `hospitalreg`
+--
+
+CREATE TABLE `hospitalreg` (
+  `id` int(11) NOT NULL,
+  `hospital` varchar(100) NOT NULL,
+  `branch` varchar(100) NOT NULL,
+  `county` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `tel` int(11) NOT NULL,
+  `applied` date NOT NULL,
+  `file` varchar(100) NOT NULL,
+  `status` int(1) NOT NULL,
+  `approved` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `hospitalreg`
+--
+
+INSERT INTO `hospitalreg` (`id`, `hospital`, `branch`, `county`, `email`, `tel`, `applied`, `file`, `status`, `approved`) VALUES
+(1, 'Halisi Family Hospital', 'Kitengela', 'Kajiado', 'halisifamilyhospital@gmail.com', 703298645, '2023-03-27', '', 1, 0),
+(2, 'Kitengela Medical', 'Kitengela', 'Kajiado', 'kitemedical@gmail.com', 734567463, '2023-03-27', '', 1, 0),
+(3, 'Kitengela Medical2', 'Kitengela', 'Kericho', 'kitemedical@gmail.com', 728372537, '2023-03-27', '', 1, 0),
+(4, 'trial3', '', 'Isiolo', 'trial@gmail.com', 2147483647, '2023-03-27', '', 1, 0),
+(5, 'trial3', '', 'Isiolo', 'trial@gmail.com', 2147483647, '2023-03-27', '', 1, 0),
+(6, 'trial3', 'Kitengela', 'Kakamega', 'trial@gmail.com', 537357457, '2023-03-27', 'SmartMedi EEHR- Nairobi.docx', 1, 0),
+(7, 'trial32', 'Kitengela', 'Garissa', 'trial@gmail.com', 43674676, '2023-03-27', 'SmartMedi EEHR- Doctors.pdf', 1, 0),
+(8, 'trial4', 'kite', 'Baringo', 'trial@gmail.com', 74636473, '2023-03-27', 'SmartMedi EEHR- Nairobi.pdf', 1, 0),
+(10, 'trial5', 'kite', 'Kirinyaga', 'trial@gmail.com', 5342566, '2023-03-27', 'SmartMedi EEHR- Nairobi.pdf', 1, 0),
+(11, 'trails6', 'Kitengela', 'West Pokot', 'trial@gmail.com', 874536357, '2023-03-27', 'terms-of-service.docx', 1, 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `hospitals`
 --
 
@@ -616,31 +651,9 @@ INSERT INTO `patients` (`ID`, `FirstName`, `LastName`, `TelNo`, `IDNo`, `DOB`, `
 (33, 'Turkey', 'Lucky', '0745384637', 33432676, '1993-03-11', 'Male', 'AB-', 'tlucky@gmail.com', 'Kiambu', 'Ndumberi', 'db77174aa34ded1b6139455a58d0a38b', ''),
 (34, 'Lemony', 'Snicket', '0736254637', 53748393, '1990-10-10', 'Male', 'O+', 'lsnicket@gmail.com', 'Nairobi City', 'Nairobi', '5684f59763b080bb179fe408b64191bd', 'juice2.jpg'),
 (35, 'Sheldon', 'Cooper', '0734973497', 33857490, '1991-06-18', 'Male', 'O+', 'scooper@gmail.com', 'Nairobi City', 'Pumwani', 'fcfff28fdbbbf75face3b3d97fdbfc15', 'pancakes.jpg'),
-(40, 'Aisha', 'Rashid', '0703277202', 33179878, '1996-06-25', 'Female', 'O+', 'chuchuaisha@gmail.com', 'Kajiado', 'Kitengela', 'aae82dfe8d1d25acb0947aad2a77d487', '20200604_120053.jpg'),
-(41, 'Meshack', 'Milimo', '0703283923', 33535687, '1989-08-07', 'Male', 'B+', 'mmilimo@gmail.com', 'Machakos', 'Kangundo', '2269d672abe86cdd5867e78b65ddb940', 'courage-the-cowardly-dog-dog-animals-tv-wallpaper-preview.jpg');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `picture`
---
-
-CREATE TABLE `picture` (
-  `id` int(11) NOT NULL,
-  `filename` varchar(100) CHARACTER SET latin1 NOT NULL,
-  `IDNo` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `picture`
---
-
-INSERT INTO `picture` (`id`, `filename`, `IDNo`) VALUES
-(13, 'fruitsalad.jpg', 0),
-(14, 'drinks.jpg', 0),
-(15, 'chickenthighs.jpg', 0),
-(16, 'chickengarlic.jpg', 0),
-(17, 'menu-image1.jpg', 53748393);
+(40, 'Aisha', 'Rashid', '0703277202', 33179878, '1996-06-25', 'Female', 'O+', 'chuchuaisha@gmail.com', 'Kajiado', 'Kitengela', 'aae82dfe8d1d25acb0947aad2a77d487', '20200604_120107.jpg'),
+(41, 'Meshack', 'Milimo', '0703283923', 33535687, '1989-08-07', 'Male', 'B+', 'mmilimo@gmail.com', 'Machakos', 'Kangundo', '2269d672abe86cdd5867e78b65ddb940', 'courage-the-cowardly-dog-dog-animals-tv-wallpaper-preview.jpg'),
+(42, 'Kelly', 'Kapoor', '0703277202', 35239857, '1992-11-06', '', '', 'kkapoor@gmail.com', '', 'Gede', 'ae074a5692dfb7c26aae5147e52ceb40', '');
 
 -- --------------------------------------------------------
 
@@ -671,7 +684,8 @@ INSERT INTO `response` (`id`, `IDNo`, `conditions`, `allergies`, `notes`) VALUES
 (9, 2147485, 'Cardiovascular (heart and blood vessels) disorders, Respiratory and Ear Nose and Throat (ENT) disorders, ', 'Dust and smoke particles,\r\nAnimal Protein', 'Close relatives diagnosed with High blood pressure and asthma'),
 (10, 49798885, 'Eye related disorders, ', '', 'Glaucoma'),
 (11, 6598569, 'Cardiovascular (heart and blood vessels) disorders, Endocrine disorders, Musculoskeletal disorders, ', 'Dust and Pollen', 'Relatives with High Blood Pressure problems, \r\nSelf diagnosed with sporting pelvic injury and diabetes'),
-(12, 33179878, 'Cancer, growths or tumors, Cardiovascular (heart and blood vessels) disorders, Respiratory and Ear Nose and Throat (ENT) disorders, Endocrine disorders, Eye related disorders, Gastro-intestinal disorders, Musculoskeletal disorders, ', 'Nil', 'Self - diagnosed with Hiatus hernia type 3 (Endoscopy report of 2019) and GERD(Gastro-Intestinal Reflux Disease) \r\nFamily - immediate family diagnosed with several types of cancers (including pancreatic, colon and cervical), High blood pressure, diabetes, asthma, arthritis and glaucoma.');
+(12, 33179878, 'Cancer, growths or tumors, Cardiovascular (heart and blood vessels) disorders, Respiratory and Ear Nose and Throat (ENT) disorders, Endocrine disorders, Eye related disorders, Gastro-intestinal disorders, Musculoskeletal disorders, ', 'Nil', 'Self - diagnosed with Hiatus hernia type 3 (Endoscopy report of 2019) and GERD(Gastro-Intestinal Reflux Disease) \r\nFamily - immediate family diagnosed with several types of cancers (including pancreatic, colon and cervical), High blood pressure, diabetes, asthma, arthritis and glaucoma.'),
+(13, 35239857, '', '', '');
 
 --
 -- Indexes for dumped tables
@@ -738,6 +752,12 @@ ALTER TABLE `fileupload`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `hospitalreg`
+--
+ALTER TABLE `hospitalreg`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `hospitals`
 --
 ALTER TABLE `hospitals`
@@ -766,12 +786,6 @@ ALTER TABLE `nextofkin`
 --
 ALTER TABLE `patients`
   ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `picture`
---
-ALTER TABLE `picture`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `response`
@@ -844,6 +858,12 @@ ALTER TABLE `fileupload`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
+-- AUTO_INCREMENT for table `hospitalreg`
+--
+ALTER TABLE `hospitalreg`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT for table `hospitals`
 --
 ALTER TABLE `hospitals`
@@ -871,19 +891,13 @@ ALTER TABLE `nextofkin`
 -- AUTO_INCREMENT for table `patients`
 --
 ALTER TABLE `patients`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
-
---
--- AUTO_INCREMENT for table `picture`
---
-ALTER TABLE `picture`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `response`
 --
 ALTER TABLE `response`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

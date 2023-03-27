@@ -67,15 +67,15 @@
 						<?php include('errors.php'); ?>
 						<div class="row"-->
 								<div class="col-md-6">
-									<label>First Name</label>
+									<label>First Name*</label>
 									<div class="form-group">
-									<input type="text" class="form-control" name="FirstName" value="<?php echo $FirstName; ?>">
+									<input type="text" class="form-control" name="FirstName" value="<?php echo $FirstName; ?>" required="required">
 									</div>   
 								</div> 
 								<div class="col-md-6">
-									<label>Last Name</label>
+									<label>Last Name*</label>
 									<div class="form-group">
-									<input type="text" class="form-control" name="LastName" value="<?php echo $LastName; ?>">
+									<input type="text" class="form-control" name="LastName" value="<?php echo $LastName; ?>" required="required">
 									</div>   
 								</div> 
 								<div class="col-md-6">
@@ -85,21 +85,21 @@
 									</div>   
 								</div>
 								<div class="col-md-6">
-									<label>Telephone No</label>
+									<label>Telephone No*</label>
 									<div class="form-group">
-									<input type="tel" class="form-control" name="TelNo" value="<?php echo $TelNo; ?>">
+									<input type="tel" class="form-control" name="TelNo" value="<?php echo $TelNo; ?>" required="required">
 									</div>   
 								</div> 
 								<div class="col-md-6">
-									<label>ID Number</label>
+									<label>ID Number*</label>
 									<div class="form-group">
-									<input type="number" class="form-control" name="IDNo" value="<?php echo $IDNo; ?>">
+									<input type="number" class="form-control" name="IDNo" value="<?php echo $IDNo; ?>" required="required">
 									</div>   
 								</div> 
 								<div class="col-md-6">
-									<label>Date of Birth</label>
+									<label>Date of Birth*</label>
 									<div class="form-group">
-									<input type="date" class="form-control" name="DOB" value="<?php echo $DOB; ?>">
+									<input type="date" class="form-control" name="DOB" value="<?php echo $DOB; ?>" required="required">
 									</div>   
 								</div> 
 								<div class="col-md-6">
@@ -135,10 +135,10 @@
 									</div>   
 								</div>
 								<div class="col-md-6">
-									<label>County of residence</label>
+									<label>County of residence*</label>
 									<div class="form-group">
-									<SELECT NAME="county" class="form-control">
-										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
+									<SELECT NAME="county" class="form-control" >
+										<OPTION SELECTED="TRUE" DISABLED="dISABLED" >---</OPTION>
 										<?php 
 										$query ="SELECT county FROM counties";
 										$result = mysqli_query($db, $query);
@@ -148,7 +148,7 @@
 										
 											foreach ($options as $option) {
 										?>
-										<option><?php echo $option['county']; ?> </option>
+										<option required="required"><?php echo $option['county']; ?> </option>
 										<?php } ?>
 										
 									</SELECT>
@@ -167,16 +167,16 @@
 								</div--> 
 								
 								<div class="col-md-6">
-									<label>Password</label>
+									<label>Password*</label>
 									<div class="form-group">
-									<input type="password" class="form-control" id="password1"  name="password1" value="">
+									<input type="password" class="form-control" id="password1"  name="password1" value="" required="required">
 									<span toggle="#password1" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 									</div>
 								</div> 
 								<div class="col-md-6">
-									<label> Confirm Password</label>
+									<label> Confirm Password*</label>
 									<div class="form-group">
-									<input type="password" class="form-control" id="password2"  name="password2" value="">
+									<input type="password" class="form-control" id="password2"  name="password2" value="" required="required">
 									<span toggle="#password2" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 									</div>
 								</div> 

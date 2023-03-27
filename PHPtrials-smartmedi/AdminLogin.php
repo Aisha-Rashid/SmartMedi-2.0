@@ -1,62 +1,13 @@
 <?php 
-/*session_start();
 
-$workID = "";
-$adminpass = "";
-
-$db = mysqli_connect('localhost', 'root', '', 'phptrials-smartmedi');
-
-if (isset($_POST['admin_login'])) {
-	
-	// Data sanitization to prevent SQL injection
-	$workID = mysqli_real_escape_string($db, $_POST['workID']);
-	$adminpass = mysqli_real_escape_string($db, $_POST['adminpass']);
-	
-	// Error message if the input field is left blank
-	if (empty($workID)) {
-		array_push($errors, "Work ID is required");
-	}
-	if (empty($adminpass)) {
-		array_push($errors, "Password is required");
-	}
-	
-	if (count($errors) == 0) {
-		
-		$query = "SELECT adminFname, adminLname, workID, IDnumber, email, phone FROM `admin` WHERE workID=
-				'$workID' AND adminpass='$password'";
-		$results = mysqli_query($db, $query);
-
-		// $results = 1 means that one user with the
-		// entered username exists
-		if (mysqli_num_rows($results) == 1) {
-			
-			// Storing username in session variable
-			$_SESSION['FirstName'] = $FirstName;
-			$_SESSION['workID'] = $username;B;
-			
-			// Welcome message
-			$_SESSION['success'] = "You have logged in!";
-			
-			// Page on which the user is sent
-			// to after logging in
-			header('location: admindash.html');
-		}
-		else {
-			
-			// If the username and password doesn't match
-			array_push($errors, "Work ID or password incorrect");
-		}
-	
-}
-}*/
 include('server.php'); 
 
  ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">   
+	<!--meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"-->   
    
     <!-- Mobile Metas -->
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -114,7 +65,7 @@ include('server.php');
 						<div class="col-md-6">
 							<label>Work ID</label>
 								<div class="col-sm-6">
-								<input type="number" class="form-control" name="workID">
+								<input type="number" class="form-control" name="workID" required="required">
 								</div>
 						</div>              
 				</div>
@@ -122,7 +73,8 @@ include('server.php');
 						<div class="col-md-6">
 							<label>Password</label>
 								<div class="col-sm-6">
-								<input type="password" class="form-control" name="adminpass">
+								<input type="password" class="form-control" id="adminpass" name="adminpass" required="required">
+								<span toggle="#adminpass" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 								</div>
 						</div>              
 				</div>
@@ -158,7 +110,7 @@ include('server.php');
 	<script src="js/isotope.min.js"></script>	
 	<script src="js/images-loded.min.js"></script>	
     <script src="js/custom.js"></script>
-	<!--script src="js/password-validator.js"></script-->	
+	<script src="js/password-validator.js"></script>	
 
 </body>
 

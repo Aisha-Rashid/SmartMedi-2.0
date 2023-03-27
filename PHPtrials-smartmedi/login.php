@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
+	<!--meta charset="utf-8"-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">   
    
     <!-- Mobile Metas -->
@@ -62,7 +62,7 @@
 						<div class="col-md-6">
 							<label>National ID Number</label>
 								<div class="col-sm-6">
-								<input type="number" class="form-control" name="IDNo">
+								<input type="number" class="form-control" name="IDNo" required="required">
 								</div>
 						</div>              
 				</div>
@@ -70,7 +70,7 @@
 						<div class="col-md-6">
 							<label>Password</label>
 								<div class="col-sm-6">
-								<input type="password" class="form-control" id="password" name="password" value="">
+								<input type="password" class="form-control" id="password" name="password" value="" required="required">
 								<span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 								</div>
 						</div>              

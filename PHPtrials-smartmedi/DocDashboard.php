@@ -168,7 +168,12 @@ if (isset($_GET['logout'])) {
 						</a></td>
 						
 	    	</tr>
-			<?php }}} } ?> 
+			<?php }}
+			else{
+				echo "User not found";
+			}
+			
+			} } ?> 
 	     </tbody>
 	  </table>
 		 
