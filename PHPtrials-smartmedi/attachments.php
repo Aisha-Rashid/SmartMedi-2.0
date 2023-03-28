@@ -29,7 +29,7 @@ if (isset($_GET['logout'])) {
 date_default_timezone_set("Africa/Nairobi");
 //echo date_default_timezone_get();
 ?>
-<!DOCTYPE html>
+<html>
 <head>
   <meta charset="utf-8">
   <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
@@ -94,11 +94,7 @@ die(mysqli_error($conn));
 		</div><!--/.navbar-collapse-->
 		<div class="templatemo-content-wrapper">
 			<div class="templatemo-content">
-			<ol class="breadcrumb">
-            <li><a href="dashboard.php">User Panel</a></li>
-            <li><a href="#">Attachments</a></li>
-            <li>Overview</li>
-			</ol>
+			
 			
 <div class="student-profile py-4">
   <div class="container">
@@ -229,6 +225,11 @@ die(mysqli_error($conn));
 			</div>
 		</div>
 	<!-- End popup -->
+	<footer class="templatemo-footer">
+      <div class="templatemo-copyright">
+        <p>Copyright &copy; 2022 SmartMedi</p>
+      </div>
+    </footer>
 
     <script src="dashboardjs/jquery.min.js"></script>
     <script src="dashboardjs/bootstrap.min.js"></script>

@@ -1,23 +1,11 @@
 <?php
 include('server.php');
 
-// Starting the session, to use and
-// store data in session variable
-// session_start();
-
-// If the session variable is empty, this
-// means the user is yet to login
-// User will be sent to 'login.php' page
-// to allow the user to login
 if (!isset($_SESSION['workID'])) {
   $_SESSION['msg'] = "You have to log in first";
   header('location: AdminLogin.php');
 }
 
-// Logout button will destroy the session, and
-// will unset the session variables
-// User will be headed to 'login.php'
-// after logging out
 if (isset($_GET['logout'])) {
   session_destroy();
   unset($_SESSION['workID']);
@@ -25,7 +13,7 @@ if (isset($_GET['logout'])) {
 }
 ?>
 
-<!DOCTYPE html>
+<html>
 
 <head>
   <meta charset="utf-8">
@@ -65,7 +53,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
     <div class="navbar navbar-inverse" role="navigation">
       <div class="navbar-header">
         <div class="logo">
-          <h1>SmartMedi - Admin Dashboard</h1>
+          <h3>SmartMedi - Admin Dashboard</h3>
 		  
         </div>
 
@@ -133,15 +121,10 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
       </div>
       <!--/.navbar-collapse -->
 
-      <div class="templatemo-content-wrapper">
-        <div class="templatemo-content">
-          <!--ol class="breadcrumb">
-            <li><a href="#">Admin Panel</a></li>
-            <li>Overview</li>
-          </ol>
-          <!--h1>SmartMedi - Admin Dashboard</h1>
-          <hr-->
-		  <br>
+      <!--div class="templatemo-content-wrapper"-->
+        <div class="templatemo-admincontent">
+          
+		  
           <p>Work ID : <b><?php echo $array[2]; ?></b></p>
           <p>Name : <b><?php echo $array[0];
                         echo " ";

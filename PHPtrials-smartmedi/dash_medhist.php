@@ -17,7 +17,7 @@ if (isset($_GET['logout'])) {
 date_default_timezone_set("Africa/Nairobi");
 //echo date_default_timezone_get();
 ?>
-<!DOCTYPE html>
+<html>
 <head>
   <meta charset="utf-8">
   <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
@@ -284,6 +284,11 @@ date_default_timezone_set("Africa/Nairobi");
 			</div>
 		</div>
 	<!-- End popup -->
+	<footer class="templatemo-footer">
+      <div class="templatemo-copyright">
+        <p>Copyright &copy; 2022 SmartMedi</p>
+      </div>
+    </footer>
 
     <script src="dashboardjs/jquery.min.js"></script>
     <script src="dashboardjs/bootstrap.min.js"></script>

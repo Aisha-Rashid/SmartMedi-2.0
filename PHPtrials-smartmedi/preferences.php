@@ -189,10 +189,7 @@ die(mysqli_error($conn));
 				</div>
 				<div class="templatemo-content-wrapper">
 					<div class="templatemo-content">
-						<ol class="breadcrumb">
-					<li>Patient Panel</a></li>
-					<li>Settings</li>
-					</ol>
+						
 				
 					<div class="row">
 		  <div class="col-md-12 col-sm-12">
@@ -215,13 +212,13 @@ die(mysqli_error($conn));
 								<table width = 70%>
 								
 									<tr><td colspan = "2" ><h4><u><b>Contact Details</b></u></h4></td></tr>
-									<tr><td><h4>Current Email :</h4></td><td><b><input disabled type="text" class="form-control" value="<?php echo $array[8]?>"></b></td></tr>
-									<tr><td><h4>New Email :</h4></td><td><input type="email" class="form-control" name="email"></td></tr>
-									<tr><td><h4>Telephone Number :</h4></td><td><b><input disabled type="text" class="form-control" value="<?php echo $array[3]?>"></b></td></tr>
-									<tr><td><h4>Add Telephone number :</h4></td><td><input type="text" class="form-control" name="TelNo"></td></tr>
+									<tr><td><p>Current Email :</p></td><td><b><input disabled type="text" class="form-control" value="<?php echo $array[8]?>"></b></td></tr>
+									<tr><td><p>New Email :</p></td><td><input type="email" class="form-control" name="email"></td></tr>
+									<tr><td><p>Telephone Number :</p></td><td><b><input disabled type="text" class="form-control" value="<?php echo $array[3]?>"></b></td></tr>
+									<tr><td><p>Add Telephone number :</p></td><td><input type="text" class="form-control" name="TelNo"></td></tr>
 									<tr><td colspan = "2" ><h4><u><b>Change Residence </b></u></h4></td></tr>
 									<tr>
-									<td><h4>County :</h4></td>
+									<td><p>County :</p></td>
 									<td>
 									<SELECT NAME="county" class="form-control">
 										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
@@ -239,13 +236,13 @@ die(mysqli_error($conn));
 										
 									</SELECT>
 									</td></tr>
-									<tr><td><h4>Town :</h4></td><td><input type="text" class="form-control" name="town"></td></tr>
+									<tr><td><p>Town :</p></td><td><input type="text" class="form-control" name="town"></td></tr>
 									<tr><td colspan = "2" ><h4><u><b>Change Password </b></u></h4></td></tr>
-									<tr><td><h4>Enter current password :</h4></td><td><input type="password" class="form-control" id="current_password" name="current_password">
+									<tr><td><p>Enter current password :</p></td><td><input type="password" class="form-control" id="current_password" name="current_password">
 									<!--span toggle="#current_password" class="fa fa-fw fa-eye field-icon toggle-password" ></span--></td></tr>
-									<tr><td><h4>New Password :</h4></td><td><input type="password" class="form-control" id="new_password" name="new_password">
+									<tr><td><p>New Password :</p></td><td><input type="password" class="form-control" id="new_password" name="new_password">
 									<!--span toggle="#new_password" class="fa fa-fw fa-eye field-icon toggle-password"></span--></td></tr>
-									<tr><td><h4>Confirm Password :</h4></td><td><input type="password" class="form-control" id="conf_password" name="conf_password">
+									<tr><td><p>Confirm Password :</p></td><td><input type="password" class="form-control" id="conf_password" name="conf_password">
 									<!--span toggle="#conf_password" class="fa fa-fw fa-eye field-icon toggle-password"></span--></td></tr>
 									
 								</table>
@@ -275,14 +272,14 @@ die(mysqli_error($conn));
 							$relationship=$row['relationship'];
 							$telephone=$row['telephone'];
 							?>
-									<tr><td><h4>Name :</h4></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['kinFirstName']; echo " "; echo $row['kinLastName']; ?>"></b></td></tr>
-									<tr><td><h4>Relationship :</h4></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['relationship'] ?>"></b></td></tr>
-									<tr><td><h4>Telephone Number :</h4></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['telephone'] ?>"></b></td></tr>
+									<tr><td><p>Name :</p></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['kinFirstName']; echo " "; echo $row['kinLastName']; ?>"></b></td></tr>
+									<tr><td><p>Relationship :</p></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['relationship'] ?>"></b></td></tr>
+									<tr><td><p>Telephone Number :</p></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['telephone'] ?>"></b></td></tr>
 									<?php } ?> 
 									<tr><td colspan = "2" ><h4><u><b>New Details </b></u></h4></td></tr>
-									<tr><td><h4>First Name :</h4></td><td><input type="text" class="form-control" name="kinFirstName"></td></tr>
-									<tr><td><h4>Last Name :</h4></td><td><input type="text" class="form-control" name="kinLastName"></td></tr>
-									<tr><td><h4>Relationship :</h4></td><td>
+									<tr><td><p>First Name :</p></td><td><input type="text" class="form-control" name="kinFirstName"></td></tr>
+									<tr><td><p>Last Name :</p></td><td><input type="text" class="form-control" name="kinLastName"></td></tr>
+									<tr><td><p>Relationship :</p></td><td>
 									<SELECT NAME="relationship" class="form-control">
 										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>  
 										<OPTION VALUE="Parent">Parent
@@ -293,7 +290,7 @@ die(mysqli_error($conn));
 										<OPTION VALUE="Guardian">Guardian<BR>
 									</SELECT>
 									</td></tr>
-									<tr><td><h4>Telephone Number :</h4></td><td><input type="text" class="form-control" name="telephone"></td></tr>
+									<tr><td><p>Telephone Number :</p></td><td><input type="text" class="form-control" name="telephone"></td></tr>
 									
 								</table>
 								<br><br>
@@ -322,8 +319,8 @@ die(mysqli_error($conn));
 									<tr><td colspan = "2" ><b><textarea disabled id="history" name="history" rows="5" cols="120" placeholder="<?php echo $row['conditions'] ."\n\n". $row['notes'] ; ?>" ></textarea></b></td></tr>
 									<?php } ?> 
 									<tr><td colspan = "2" ><h4><b>Add conditions</b></h4></td></tr>
-									<tr><td><h4>Allergies :</h4></td><td><input type="text" name="allergies" class="form-control"></td></tr>
-									<tr><td><h4>Condition 1 :</h4></td>
+									<tr><td><p>Allergies :</p></td><td><input type="text" name="allergies" class="form-control"></td></tr>
+									<tr><td><p>Condition 1 :</p></td>
 									<td>
 									<SELECT NAME="condition1" class="form-control">
 										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
@@ -341,7 +338,7 @@ die(mysqli_error($conn));
 										
 									</SELECT>
 									</td></tr>
-									<tr><td><h4>Condition 2 :</h4></td>
+									<tr><td><p>Condition 2 :</p></td>
 									<td>
 									<SELECT NAME="condition2" class="form-control">
 										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
@@ -359,7 +356,7 @@ die(mysqli_error($conn));
 										
 									</SELECT>
 									</td></tr>
-									<tr><td><h4>Condition 3 :</h4></td><td>
+									<tr><td><p>Condition 3 :</p></td><td>
 									<SELECT NAME="condition3" class="form-control">
 										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
 										<?php 
@@ -376,7 +373,7 @@ die(mysqli_error($conn));
 										
 									</SELECT>
 									</td></tr>
-									<tr><td><h4>Condition 4 :</h4></td><td>
+									<tr><td><p>Condition 4 :</p></td><td>
 									<SELECT NAME="condition4" class="form-control">
 										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
 										<?php 
@@ -393,7 +390,7 @@ die(mysqli_error($conn));
 										
 									</SELECT>
 									</td></tr>
-									<tr><td><h4>Condition 5 :</h4></td><td>
+									<tr><td><p>Condition 5 :</p></td><td>
 									<SELECT NAME="condition5" class="form-control">
 										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
 										<?php 
@@ -443,13 +440,13 @@ die(mysqli_error($conn));
 							?>
 									<tr><td colspan = "2" ><h4><u><b>Current Insurance Details</b></u></h4></td></tr>
 									<tr><td colspan = "2" ><h4><b>Nhif</b></h4></td></tr>
-									<tr><td><h4>Cover Type :</h4></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['nhiftype'] ?>"></b></td></tr>
-									<tr><td><h4>Member Number :</h4></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['nhifnumber'] ?>"></b></td></tr>
+									<tr><td><p>Cover Type :</p></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['nhiftype'] ?>"></b></td></tr>
+									<tr><td><p>Member Number :</p></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['nhifnumber'] ?>"></b></td></tr>
 									<tr><td colspan = "2" ><h4><b>Other Insurance</b></h4></td></tr>
-									<tr><td><h4>Insurance Name :</h4></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['insurancetype'] ?>"></b></td></tr>
-									<tr><td><h4>Member Number :</h4></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['insurancenumber'] ?>"></b></td></tr>
-									<tr><td><h4>Principal Member :</h4></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['insuranceprincipal'] ?>"></b></td></tr>
-									<tr><td><h4>Expiry Date :</h4></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['expiry'] ?>"></b></td></tr>
+									<tr><td><p>Insurance Name :</p></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['insurancetype'] ?>"></b></td></tr>
+									<tr><td><p>Member Number :</p></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['insurancenumber'] ?>"></b></td></tr>
+									<tr><td><p>Principal Member :</p></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['insuranceprincipal'] ?>"></b></td></tr>
+									<tr><td><p>Expiry Date :</p></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['expiry'] ?>"></b></td></tr>
 									<?php } ?> 
 									<tr><td colspan = "2" ><h4><u><b>New Insurance Details </b></u></h4></td></tr>
 									<tr><td><h4>Insurance Name :</h4></td>
@@ -472,9 +469,9 @@ die(mysqli_error($conn));
 										
 									</SELECT>
 									</td></tr>
-									<tr><td><h4>Member Number :</h4></td><td><input type="number" class="form-control" name="insurancenumber"></td></tr>
-									<tr><td><h4>Principal Member :</h4></td><td><input type="text" class="form-control" name="insuranceprincipal"></td></tr>
-									<tr><td><h4>Expiry Date :</h4></td><td><input type="date" class="form-control" name="expiry"></td></tr>
+									<tr><td><p>Member Number :</p></td><td><input type="number" class="form-control" name="insurancenumber"></td></tr>
+									<tr><td><p>Principal Member :</p></td><td><input type="text" class="form-control" name="insuranceprincipal"></td></tr>
+									<tr><td><p>Expiry Date :</p></td><td><input type="date" class="form-control" name="expiry"></td></tr>
 									
 								</table>
 								<br><br>
@@ -513,7 +510,11 @@ die(mysqli_error($conn));
 				</div>
 				<!-- End popup -->
 				
-				
+				<footer class="templatemo-footer">
+      <div class="templatemo-copyright">
+        <p>Copyright &copy; 2022 SmartMedi</p>
+      </div>
+    </footer>
 				
 				
 			</div>

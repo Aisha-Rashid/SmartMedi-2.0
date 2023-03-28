@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2023 at 04:32 PM
+-- Generation Time: Mar 28, 2023 at 06:31 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -205,12 +205,27 @@ INSERT INTO `counties` (`id`, `county`) VALUES
 
 CREATE TABLE `dependants` (
   `id` int(11) NOT NULL,
+  `IDNo` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `dob` date NOT NULL,
   `gender` varchar(20) NOT NULL,
   `blood_group` varchar(20) NOT NULL,
-  `medical_conditions` varchar(255) NOT NULL
+  `allergies` varchar(255) NOT NULL,
+  `medical_conditions` varchar(255) NOT NULL,
+  `filename` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `dependants`
+--
+
+INSERT INTO `dependants` (`id`, `IDNo`, `name`, `dob`, `gender`, `blood_group`, `allergies`, `medical_conditions`, `filename`) VALUES
+(13, 54737364, 'fatumajuma', '1999-06-05', 'Female', '', 'reactive to paracetamol', 'jkcadlvdbvbdvds test', ''),
+(14, 54737364, 'Aisha Rashid', '1998-06-05', 'Female', 'A+', 'reactive to paracetamol', 'jkcadlvdbvbdvds test', 'blog-img-03.jpg'),
+(15, 54737364, 'fatuma rashid', '2020-03-07', 'Female', 'O+', 'reactive to paracetamol', 'jkcadlvdbvbdvds test', 'gallery-06.jpg'),
+(16, 54737364, 'rehema rashid', '2018-06-05', 'Female', 'O-', 'sulphur, pollen', 'jkcadlvdbvbdvds test', 'gallery-03.jpg'),
+(17, 54737364, 'trial child', '2021-07-05', 'Male', 'A-', 'Pollen', 'Gastro-intestinal disorders Skin disorders   ', 'doc3.png'),
+(19, 54737364, 'trial child three', '2022-07-06', 'Male', 'A-', 'nil', 'Respiratory and Ear Nose and Throat (ENT) disorders , Musculoskeletal disorders ,  ,  ,  , asthma, arthritis', '');
 
 -- --------------------------------------------------------
 
@@ -393,7 +408,10 @@ INSERT INTO `hospitalreg` (`id`, `hospital`, `branch`, `county`, `email`, `tel`,
 (7, 'trial32', 'Kitengela', 'Garissa', 'trial@gmail.com', 43674676, '2023-03-27', 'SmartMedi EEHR- Doctors.pdf', 1, 0),
 (8, 'trial4', 'kite', 'Baringo', 'trial@gmail.com', 74636473, '2023-03-27', 'SmartMedi EEHR- Nairobi.pdf', 1, 0),
 (10, 'trial5', 'kite', 'Kirinyaga', 'trial@gmail.com', 5342566, '2023-03-27', 'SmartMedi EEHR- Nairobi.pdf', 1, 0),
-(11, 'trails6', 'Kitengela', 'West Pokot', 'trial@gmail.com', 874536357, '2023-03-27', 'terms-of-service.docx', 1, 0);
+(11, 'trails6', 'Kitengela', 'West Pokot', 'trial@gmail.com', 874536357, '2023-03-27', 'terms-of-service.docx', 1, 0),
+(12, 'trial7', 'Kitengela', 'Embu', 'trial@gmail.com', 2147483647, '2023-03-27', 'style.css', 1, 0),
+(13, 'trial8', 'kite', 'Siaya', 'trial@gmail.com', 2147483647, '2023-03-27', 'register.php', 1, 0),
+(14, 'trial9', 'Kitengela', 'Elgeyo/Marakwet', 'trial@gmail.com', 565648437, '2023-03-27', 'passwordchange.php', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -653,7 +671,9 @@ INSERT INTO `patients` (`ID`, `FirstName`, `LastName`, `TelNo`, `IDNo`, `DOB`, `
 (35, 'Sheldon', 'Cooper', '0734973497', 33857490, '1991-06-18', 'Male', 'O+', 'scooper@gmail.com', 'Nairobi City', 'Pumwani', 'fcfff28fdbbbf75face3b3d97fdbfc15', 'pancakes.jpg'),
 (40, 'Aisha', 'Rashid', '0703277202', 33179878, '1996-06-25', 'Female', 'O+', 'chuchuaisha@gmail.com', 'Kajiado', 'Kitengela', 'aae82dfe8d1d25acb0947aad2a77d487', '20200604_120107.jpg'),
 (41, 'Meshack', 'Milimo', '0703283923', 33535687, '1989-08-07', 'Male', 'B+', 'mmilimo@gmail.com', 'Machakos', 'Kangundo', '2269d672abe86cdd5867e78b65ddb940', 'courage-the-cowardly-dog-dog-animals-tv-wallpaper-preview.jpg'),
-(42, 'Kelly', 'Kapoor', '0703277202', 35239857, '1992-11-06', '', '', 'kkapoor@gmail.com', '', 'Gede', 'ae074a5692dfb7c26aae5147e52ceb40', '');
+(42, 'Kelly', 'Kapoor', '0703277202', 35239857, '1992-11-06', '', '', 'kkapoor@gmail.com', '', 'Gede', 'ae074a5692dfb7c26aae5147e52ceb40', ''),
+(43, 'trial', 'two', '245463746', 253632536, '2019-02-05', 'Female', 'AB+', 'trial@gmail.com', 'Bungoma', 'Nairobi', '58723627fcebc230ab0d53ddf5f16e34', 'gallery-04.jpg'),
+(44, 'trial', 'three', '36474836', 54737364, '1995-02-05', 'Male', 'B+', 'trial@gmail.com', 'Kericho', 'kitale', '8943be948c11e8ff266c8fc52b0a8826', 'img-3.jpg');
 
 -- --------------------------------------------------------
 
@@ -831,7 +851,7 @@ ALTER TABLE `counties`
 -- AUTO_INCREMENT for table `dependants`
 --
 ALTER TABLE `dependants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `docnotes`
@@ -861,7 +881,7 @@ ALTER TABLE `fileupload`
 -- AUTO_INCREMENT for table `hospitalreg`
 --
 ALTER TABLE `hospitalreg`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `hospitals`
@@ -891,7 +911,7 @@ ALTER TABLE `nextofkin`
 -- AUTO_INCREMENT for table `patients`
 --
 ALTER TABLE `patients`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `response`

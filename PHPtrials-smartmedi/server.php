@@ -62,7 +62,7 @@ if (isset($_POST['reg_user'])) {
 		$_SESSION['IDNo'] = $IDNo;
 		
 		// Page on which the user will be redirected after logging in
-		header('location: uploadProfile.php');
+		header('location: uploadProfile.php?type=register');
 	}
 }
 

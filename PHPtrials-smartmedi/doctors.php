@@ -24,7 +24,7 @@ if (isset($_GET['logout'])) {
 	header("location: AdminLogin.php");
 }
 ?>
-<!DOCTYPE html>
+<html>
 <head>
   <meta charset="utf-8">
   <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
@@ -50,14 +50,12 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
   <div id="main-wrapper">
     <div class="navbar navbar-inverse" role="navigation">
       <div class="navbar-header">
-        <div class="logo"><h1>SmartMedi - Admin Dashboard</h1></div>
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button> 
-      </div>   
+        <div class="logo">
+          <h3>SmartMedi - Admin Dashboard</h3>
+		  
+        </div>
+
+      </div>
     </div>
     <div class="template-page-wrapper">
       <div class="navbar-collapse collapse templatemo-sidebar">
@@ -121,7 +119,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 	  <!--/.navbar-collapse -->
 
       <div class="templatemo-content-wrapper">
-        <div class="templatemo-content">
+        <div class="templatemo-admincontent">
           <!--ol class="breadcrumb">
             <li><a href="admindash.php">Admin Panel</a></li>
             <li><a href="#">Manage Users</a></li>

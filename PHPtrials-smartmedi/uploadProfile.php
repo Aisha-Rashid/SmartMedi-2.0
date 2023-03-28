@@ -63,6 +63,8 @@ if (isset($_GET['logout'])) {
 
 <body id="home" data-spy="scroll" data-target="#navbar-wd" data-offset="98">
 <?php
+
+
 error_reporting(0);
 
 $msg = "";
@@ -75,7 +77,7 @@ if (isset($_POST['upload'])) {
 	$folder = "./uploads/" . $filename;
 
 	$db = mysqli_connect("localhost", "root", "", "phptrials-smartmedi");
-
+if ($_GET['type'] == 'register'){ 
 	// Get all the submitted data from the form
 	$sql = "update patients set filename='$filename' where IDNo='$unique'";
 
@@ -88,6 +90,23 @@ if (isset($_POST['upload'])) {
 	} else {
 		echo "<h3> Failed to upload image!</h3>";
 	}
+}
+if ($_GET['filename']){ 
+$name = $_GET['filename'];
+	// Get all the submitted data from the form
+	$sql = "update dependants set filename='$filename' where IDNo='$unique' and name = '$name'";
+
+	// Execute query
+	mysqli_query($db, $sql);
+
+	// Now let's move the uploaded image into the folder: image
+	if (move_uploaded_file($tempname, $folder)) {
+		echo"<script>alert('Image uploaded successfully!'); window.location.href ='/SmartMedi-2.0/PHPtrials-smartmedi/dependants.php'; </script>";
+		//echo "<h3> Image uploaded successfully!</h3>";
+	} else {
+		echo "<script>alert('Failed to upload image!'); window.location.href ='/SmartMedi-2.0/PHPtrials-smartmedi/dependants.php'; </script>";
+	}
+}
 }
 ?>
 

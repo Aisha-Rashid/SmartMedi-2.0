@@ -168,7 +168,7 @@ if (isset($_GET['logout'])) {
 												<a href="nextkin.php">Click to add Next of Kin Details</a>
 											</div>
 										</div>
-										<br>
+										
 									</div>
 								</div>
 							</div>
@@ -193,6 +193,11 @@ if (isset($_GET['logout'])) {
 				</div>
 			</div>
 		</div>
+		<footer class="templatemo-footer">
+      <div class="templatemo-copyright">
+        <p>Copyright &copy; 2022 SmartMedi</p>
+      </div>
+    </footer>
 		
 <!-- End popup -->
 		<script src="dashboardjs/jquery.min.js"></script>

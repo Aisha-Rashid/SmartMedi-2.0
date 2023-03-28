@@ -8,20 +8,22 @@ if($_POST['view'] != '')
 }
 $query = "SELECT * FROM hospitalreg ";
 $result = mysqli_query($con, $query);
-$output = "";
+$output = '';
 if(mysqli_num_rows($result) > 0)
 {
+	
 while($row = mysqli_fetch_array($result))
 {
   $output .= '
   <li>
   <a href="#">
-  <strong>'.$row["hospital"].'</strong><br />
-  <small><em>'.$row["applied"].'</em></small>
+  <strong>'.$row['hospital'].'</strong><br />
+  <small><em>'.$row['applied'].'</em></small>
   </a>
   </li>
   ';
 }
+
 }
 else{
     $output .= '<li><a href="#" class="text-bold text-italic">No Notification Found</a></li>';

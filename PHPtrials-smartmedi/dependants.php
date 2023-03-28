@@ -1,23 +1,11 @@
 <?php
 include('server.php'); 
 
-// Starting the session, to use and
-// store data in session variable
-// session_start();
-
-// If the session variable is empty, this
-// means the user is yet to login
-// User will be sent to 'login.php' page
-// to allow the user to login
 if (!isset($_SESSION['IDNo'])) {
 	$_SESSION['msg'] = "You have to log in first";
 	header('location: login.php');
 }
 
-// Logout button will destroy the session, and
-// will unset the session variables
-// User will be headed to 'login.php'
-// after logging out
 if (isset($_GET['logout'])) {
 	session_destroy();
 	unset($_SESSION['IDNo']);
@@ -51,9 +39,9 @@ if (isset($_GET['logout'])) {
     <link rel="stylesheet" href="css/style.css">    
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="css/responsive.css">
-    <!-- Custom CSS -->
+    <!-- Custom CSS ->
     <link rel="stylesheet" href="css/custom.css">
-	<!--Password eye icon-->
+	<!--Password eye icon->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 
 
@@ -78,33 +66,33 @@ if (isset($_SESSION['IDNo'])) {
    // $rows = $stmt->rowCount();
 }
 
-// if (isset($_POST['kidData'])) {
-    // $num_boxes = $_POST['num_boxes']; 
-    
-    // $query = "INSERT INTO dependants (IDNo, kidName, kidDOB, kidGender, kidBlood, kidAllergies, kidConditions) VALUES ('$unique', ?, ?, ?, ?, ?, ?)";
-    // $stmt = $conn->prepare($query);
-
-    // for ($i = 1; $i <= $num_boxes; $i++) {
-        // if (isset($_POST['box_' . $i])) {
-            // $box_name = $_POST['box_name' . $i];
-            // $box_DOB = $_POST['box_DOB' . $i];
-            // $box_gender = $_POST['box_gender' . $i];
-            // $box_blood = $_POST['box_blood' . $i];
-            // $box_allergies = $_POST['box_allergies' . $i];
-            // $box_conditions = $_POST['box_conditions' . $i];
-            // $spousename = $_POST['spousename'];
-            // $spousetel = $_POST['spousetel'];
-
-            // $stmt->execute([$unique, $box_name, $box_DOB, $box_gender, $box_blood, $box_allergies, $box_conditions]);
-            // if ($stmt->rowCount() > 0) {
-                // echo "Box $i value saved successfully.<br>";
-            // } else {
-                // error_log("Error inserting into dependants table: " . $stmt->errorInfo()[2]);
-                // echo "Error: Unable to save box $i value.";
-            // }
-        // }
-    // }
-// }
+if(isset($_POST['submit'])!=""){
+	
+	$name =filter_var ($_POST['name'], FILTER_SANITIZE_STRING);
+	$dob = mysqli_real_escape_string($db, $_POST['dob']);
+	$gender = mysqli_real_escape_string($db, $_POST['gender']);
+	$bloodgroup = mysqli_real_escape_string($db, $_POST['bloodgroup']);
+	$allergies =filter_var ($_POST['allergies'], FILTER_SANITIZE_STRING);
+	$notes =filter_var ($_POST['notes'], FILTER_SANITIZE_STRING);
+	//$medical_conditions =filter_var ($_POST['medical_conditions'], FILTER_SANITIZE_STRING);
+	$condition1 = mysqli_real_escape_string($db, $_POST['condition1']);
+	$condition2 = mysqli_real_escape_string($db, $_POST['condition2']);
+	$condition3 = mysqli_real_escape_string($db, $_POST['condition3']);
+	$condition4 = mysqli_real_escape_string($db, $_POST['condition4']);
+	$condition5 = mysqli_real_escape_string($db, $_POST['condition5']);
+	
+	if (!empty($condition1) || !empty($condition2) || !empty($condition3) || !empty($condition4) || !empty($condition5)) {
+	$medical_conditions = $condition1 . ' , ' . $condition2 . ' , ' . $condition3 . ' , ' . $condition4 . ' , ' . $condition5  . ' , ' . $notes;
+	}
+	$query=$conn->query("INSERT INTO dependants (`IDNo`, `name`, `dob`, `gender`, `blood_group`, `allergies`, `medical_conditions`) VALUES 
+	('$unique', '$name', '$dob', '$gender', '$bloodgroup', '$allergies', '$medical_conditions')");
+if($query){
+header("location:uploadProfile.php?filename=$name");
+}
+else{
+die(mysqli_error($conn));
+}
+}
 ?>
 
 	<!-- LOADER -->
@@ -121,77 +109,134 @@ if (isset($_SESSION['IDNo'])) {
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12 col-xs-12">
-					<h3><b>Dependants Details</b></h3>
+				<br>
+					<h1><b>Dependants Details</b></h1>
+					<a href="dashboard.php"><i class="fa fa-arrow-left" aria-hidden="true"></i> <b>Back to Dashboard</b></a>
 					<hr>
 					<div class="contact-block">
 						<form class="form-horizontal templatemo-signin-form" action="" method="post">
-															
-								<!--TABLE width=100%>
-								<TR><TD >Spouse Full Name</TD><TD><input type="text" class="form-control"  name="spousename" placeholder="---" ></TD></TR>
-								<TR><TD >Spouse Telephone Number</TD><TD><input type="number" class="form-control"  name="spousetel" placeholder="---" ></TD></TR>
-								<TR bgcolor="#d3fcf3"><TD colspan="2"><p><b>Minors details (under 18 years of age) will be under the parent's account</b></p></TD></TR>
-								</TABLE-->
-								<label for="num_boxes">Enter the number of children:</label><input type="number" name="num_boxes" id="num_boxes">
-								<button type="submit">Submit</button><hr>
-								<a href="dashboard.php" class="btn btn-info"><b>Back to Dashboard</b></a>
+								<TABLE width=100%>
+								<TR bgcolor="#d3fcf3"><TD colspan="2"><p><b>Child Data</b></p></TD></TR>
+								<TR><TD width=40%><label>Full Name:</label></TD><TD><input type="text" name="name" class="form-control" required="required"></TD></TR>
+								<TR><TD><label>Date of Birth:</label></TD><TD><input type="date" name="dob" class="form-control" required="required"></TD></TR>
+								<TR><TD><label>Gender:</label></TD><TD><select name="gender" class="form-control">
+										<OPTION SELECTED="TRUE" DISABLED="DISABLED">---</OPTION>  
+										<OPTION VALUE="Male">Male
+										<OPTION VALUE="Female">Female
+									</SELECT></TD></TR>
+								<TR><TD><label>Blood Group:</label></TD><TD><SELECT NAME="bloodgroup" class="form-control">
+										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
+										<?php 
+										$query ="SELECT bloodgroup FROM blood";
+										$result = mysqli_query($db, $query);
+										if($result->num_rows> 0){
+										  $options= mysqli_fetch_all($result, MYSQLI_ASSOC);
+										}
+										
+											foreach ($options as $option) {
+										?>
+										<option><?php echo $option['bloodgroup']; ?> </option>
+										<?php 
+										}
+										?>
+										
+									</SELECT></TD></TR>
+								<TR><TD><label>Allergies:</label></TD><TD>
+								<textarea id="allergies" name="allergies" rows="5" cols="100" placeholder="please supply full details of what you are allergic to"></textarea></TD></TR>
+								<TR><TD><label>Condition 1:</label></TD><TD>
+								<SELECT NAME="condition1" class="form-control">
+										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
+										<?php 
+										$query ="SELECT conditions FROM conditions";
+										$result = mysqli_query($db, $query);
+										if($result->num_rows> 0){
+										  $options= mysqli_fetch_all($result, MYSQLI_ASSOC);
+										}
+										
+											foreach ($options as $option) {
+										?>
+										<option><?php echo $option['conditions']; ?> </option>
+										<?php } ?>
+										
+									</SELECT>
+								</TD></TR>
+								<tr><td><p>Condition 2 :</p></td>
+									<td>
+									<SELECT NAME="condition2" class="form-control">
+										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
+										<?php 
+										$query ="SELECT conditions FROM conditions";
+										$result = mysqli_query($db, $query);
+										if($result->num_rows> 0){
+										  $options= mysqli_fetch_all($result, MYSQLI_ASSOC);
+										}
+										
+											foreach ($options as $option) {
+										?>
+										<option><?php echo $option['conditions']; ?> </option>
+										<?php } ?>
+										
+									</SELECT>
+									</td></tr>
+									<tr><td><p>Condition 3 :</p></td><td>
+									<SELECT NAME="condition3" class="form-control">
+										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
+										<?php 
+										$query ="SELECT conditions FROM conditions";
+										$result = mysqli_query($db, $query);
+										if($result->num_rows> 0){
+										  $options= mysqli_fetch_all($result, MYSQLI_ASSOC);
+										}
+										
+											foreach ($options as $option) {
+										?>
+										<option><?php echo $option['conditions']; ?> </option>
+										<?php } ?>
+										
+									</SELECT>
+									</td></tr>
+									<tr><td><p>Condition 4 :</p></td><td>
+									<SELECT NAME="condition4" class="form-control">
+										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
+										<?php 
+										$query ="SELECT conditions FROM conditions";
+										$result = mysqli_query($db, $query);
+										if($result->num_rows> 0){
+										  $options= mysqli_fetch_all($result, MYSQLI_ASSOC);
+										}
+										
+											foreach ($options as $option) {
+										?>
+										<option><?php echo $option['conditions']; ?> </option>
+										<?php } ?>
+										
+									</SELECT>
+									</td></tr>
+									<tr><td><p>Condition 5 :</p></td><td>
+									<SELECT NAME="condition5" class="form-control">
+										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
+										<?php 
+										$query ="SELECT conditions FROM conditions";
+										$result = mysqli_query($db, $query);
+										if($result->num_rows> 0){
+										  $options= mysqli_fetch_all($result, MYSQLI_ASSOC);
+										}
+										
+											foreach ($options as $option) {
+										?>
+										<option><?php echo $option['conditions']; ?> </option>
+										<?php } ?>
+										
+									</SELECT>
+									</td></tr>
+									<TR><TD><label>Notes:</label></TD><TD>
+								<textarea id="notes" name="notes" rows="5" cols="100" placeholder="please supply full details of the conditions selected"></textarea></TD></TR>
+								
+								</TABLE>
+								<button type="submit" name="submit">Submit</button>
+								
 								</form>
 								
-								<?php
-								if (isset($_POST['num_boxes'])) {
-								  $num_boxes = $_POST['num_boxes'];
-								  echo '<form method="post" action="">';
-								  for ($i = 1; $i <= $num_boxes; $i++) {
-									  ?>
-								<TABLE width=100%>
-								<TR bgcolor="#d3fcf3"><TD colspan="2"><p><b><?php echo $i ?></b></p></TD></TR>
-								<TR><TD><?php echo '<label for="box_' . $i . '"> Full Name:</label>'; ?></TD><TD><?php echo '<input type="text" name="box_name' . $i . '" id="box_' . $i . '" class="form-control">';?></TD></TR> 
-								<TR><TD><?php echo '<label for="box_' . $i . '">Date of Birth :</label>';?></TD><TD><?php echo '<input type="date" name="box_DOB' . $i . '" id="box_' . $i . '" class="form-control">';?></TD></TR>
-								<TR><TD><?php echo '<label for="box_' . $i . '">Gender:</label>';?></TD><TD><?php echo '<input type="text" name="box_gender' . $i . '" id="box_' . $i . '" class="form-control">';?></TD></TR>
-								<TR><TD><?php echo '<label for="box_' . $i . '">Blood Group:</label>';?></TD><TD><?php echo '<input type="text" name="box_blood' . $i . '" id="box_' . $i . '" class="form-control">';?></TD></TR>
-								<TR><TD><?php echo '<label for="box_' . $i . '">Allergies:</label>';?></TD><TD><?php echo '<input type="text" name="box_allergies' . $i . '" id="box_' . $i . '" class="form-control">';?></TD></TR>
-								<TR><TD><?php echo '<label for="box_' . $i . '">Medical Conditions:</label>';?></TD><TD><?php echo '<input type="text" name="box_conditions' . $i . '" id="box_' . $i . '" class="form-control">';?></TD></TR>
-								</TABLE>
-									
-								<?php	
-								}
-								  echo '<button type="submit" name="kidData">Submit Data</button>';
-								  
-								 if (isset($_POST['kidData'])) {
-    //$num_boxes = $_POST['num_boxes']; 
-    
-    $query = "INSERT INTO dependants (name, dob, gender, blood_group, medical_conditions) VALUES (?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($query);
-
-    for ($i = 1; $i <= $num_boxes; $i++) {
-        if (isset($_POST['box_' . $i])) {
-            $box_name = $_POST['box_name' . $i];
-            $box_DOB = $_POST['box_DOB' . $i];
-            $box_gender = $_POST['box_gender' . $i];
-            $box_blood = $_POST['box_blood' . $i];
-            $box_allergies = $_POST['box_allergies' . $i];
-            $box_conditions = $_POST['box_conditions' . $i];
-            // $spousename = $_POST['spousename'];
-            // $spousetel = $_POST['spousetel'];
-
-            $stmt->execute([$unique, $box_name, $box_DOB, $box_gender, $box_blood, $box_allergies, $box_conditions]);
-            if ($stmt->rowCount() > 0) {
-                echo "Box $i value saved successfully.<br>";
-            } else {
-                error_log("Error inserting into dependants table: " . $stmt->errorInfo()[2]);
-                echo "Error: Unable to save box $i value.";
-            }
-        }
-    } 
-	}							  
-								  
-								  
-								  echo '</form>';
-								}
-								?>
-								
-								
-								
-							
 							
 							<br>
 							
