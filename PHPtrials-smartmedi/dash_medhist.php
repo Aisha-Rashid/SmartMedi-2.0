@@ -159,16 +159,12 @@ date_default_timezone_set("Africa/Nairobi");
 		 
 		 
 		 <?php
-												$query = "select * from medicalcover WHERE IDNO = '$unique'";
+												$query = "select nhiftype, nhifnumber from medicalcover WHERE IDNO = '$unique' and nhiftype !='NA'";
 												$res = mysqli_query($db, $query);
 												while ($row = mysqli_fetch_array($res)) {
 
 													$nhiftype = $row['nhiftype'];
 													$nhifnumber = $row['nhifnumber'];
-													$insurancetype = $row['insurancetype'];
-													$insurancenumber = $row['insurancenumber'];
-													$insuranceprincipal = $row['insuranceprincipal'];
-													$expiry = $row['expiry'];
 												?>
 													<table class="table table-bordered">
 														<u> NHIF Details </u>
@@ -187,34 +183,34 @@ date_default_timezone_set("Africa/Nairobi");
 															</tr>
 														</tbody>
 													</table>
+													<?php } ?>
 
-
-													<table class="table table-bordered">
+													
 														<u> Other Insurance Details </u>
-														<thead>
-															<tr>
-																<th>Insurance Name</th>
-																<th>Member Number</th>
-																<th>Principal Member</th>
-																<th>Expiry Date</th>
-															</tr>
-														</thead>
-														<tbody>
-															<tr>
-																<td><?php echo $row['insurancetype'] ?></td>
-																<td><?php echo $row['insurancenumber'] ?></td>
-																<td><?php echo $row['insuranceprincipal'] ?></td>
-																<td><?php echo $row['expiry'] ?></td>
-															</tr>
-														</tbody>
-													</table>
-												<?php } ?>
-												<hr>
+														
+												<table width = 70% class="table table-bordered">
+									  <?php 
+							$query="select id, insurancetype, insurancenumber, insuranceprincipal, expiry from medicalcover WHERE IDNO = '$unique'";
+							$res = mysqli_query($db, $query);
+							while($row=mysqli_fetch_array($res)){
+							$id = $row['id'];
+							$insurancetype=$row['insurancetype'];
+							$insurancenumber=$row['insurancenumber'];
+							$insuranceprincipal=$row['insuranceprincipal'];
+							$expiry=$row['expiry'];
+							?>
+									
+									<tr><td width =40%> Insurance Name :</td><td><b><?php echo $row['insurancetype'] ?></b></td></tr>
+									<tr><td> Member Number :</td><td><?php echo $row['insurancenumber'] ?></td></tr>
+									<tr><td> Principal Member :</td><td><?php echo $row['insuranceprincipal'] ?></td></tr>
+									<tr><td> Expiry Date :</td><td><?php echo $row['expiry'] ?></td></tr>
+									<?php } ?> 
+									</table><hr>
 												
 						<h3 class="mb-0">Next of Kin Details</h3>
-		 
-				<?php
-												$query = "select * from nextofkin WHERE IDNO = '$unique'";
+						<table width = 70% class="table table-bordered">
+									  <?php 
+							$query = "select * from nextofkin WHERE IDNO = '$unique'";
 												$res = mysqli_query($db, $query);
 												while ($row = mysqli_fetch_array($res)) {
 
@@ -222,32 +218,17 @@ date_default_timezone_set("Africa/Nairobi");
 													$kinLastName = $row['kinLastName'];
 													$relationship = $row['relationship'];
 													$telephone = $row['telephone'];
-												?>
-													<table class="table table-bordered">
-														<u> Kin Details </u>
-														<thead>
-															<tr>
-																<th>Name</th>
-																<th>Relationship</th>
-																<th>Phone Number</th>
-
-															</tr>
-														</thead>
-														<tbody>
-															<tr>
-																<td>
-																	<?php echo $row['kinFirstName'];
+							?>
+									
+									<tr><td width =40%> Name :</td><td><b><?php echo $row['kinFirstName'];
 																	echo " ";
-																	echo $row['kinLastName'];; ?>
-																</td>
-																<td><?php echo $row['relationship'] ?></td>
-																<td><?php echo $row['telephone'] ?></td>
-															</tr>
-														</tbody>
-													</table>
-
-
-												<?php } ?>								
+																	echo $row['kinLastName'];; ?></b></td></tr>
+									<tr><td>Relationship :</td><td><?php echo $row['relationship'] ?></td></tr>
+									<tr><td> Phone Number :</td><td><?php echo $row['telephone'] ?></td></tr>
+									<?php } ?> 
+									</table>
+		 
+										
 					
 		</div>
         </div>

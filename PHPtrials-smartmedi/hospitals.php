@@ -24,7 +24,7 @@ if (isset($_GET['logout'])) {
 	header("location: AdminLogin.php");
 }
 ?>
-<!DOCTYPE html>
+<html>
 <head>
   <meta charset="utf-8">
   <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
@@ -185,12 +185,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 	}
 	echo "</div>";
 
-	// Output the patients for the current page
-	echo "<ul>";
-	while ($row = mysqli_fetch_assoc($hospitalRes)) {
-		echo "<li>" . $row['name'] . "</li>";
-	}
-	echo "</ul>";?>
+	?>
 						</div>
 		       
             </div>

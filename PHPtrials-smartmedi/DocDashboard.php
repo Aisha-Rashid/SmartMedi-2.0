@@ -16,7 +16,7 @@ if (isset($_GET['logout'])) {
 	header("location: DocLogin.php");
 }
 ?>
-<!DOCTYPE html>
+<html>
 <head>
   <meta charset="utf-8">
   <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
@@ -61,10 +61,7 @@ if (isset($_GET['logout'])) {
 		</div><!--/.navbar-collapse-->
 		<div class="templatemo-content-wrapper">
 			<div class="templatemo-content">
-			<ol class="breadcrumb">
-            <li><a href="#">Dashboard</a></li>
-            <li>Overview</li>
-			</ol>
+			
 			
 
 
@@ -97,19 +94,18 @@ if (isset($_GET['logout'])) {
 		
 		<form method="post" action="" >
 		<TABLE width=70% align ="center">
-			<TR><TD><input type="text" class="form-control"  name="search" placeholder="Search patient record"></td><td><button type="submit" class="btn"
+			<TR><TD><input type="text" class="form-control"  name="search" placeholder="Search patient record" required="required"></td><td><button type="submit" class="btn"
 										name = "searchsub">Search</button></td></tr>
 		</table>
             </form>
-          <div style="height: 26px"></div>
+          
 		
 		<hr>
 		
 	<div class="table-responsive">  
-		<div class="panel panel-default">
-			<div class="panel-body">
-				<div class="table-responsive">
-	  <table class="table" class="table table-condensed" id="example">
+		
+				
+	  <table class="table" class="table table-condensed" >
 	    <thead>
 	      <tr>
 	        <!--th>#</th-->
@@ -188,11 +184,7 @@ if (isset($_GET['logout'])) {
   </div>
 </div>
 <!-- partial -->
-           
-    		</div>
-		</div>
-    </div>
-</section>
+          
 
  	
 	<!-- End menu    -->	  
@@ -213,6 +205,11 @@ if (isset($_GET['logout'])) {
 			</div>
 		</div>
 	<!-- End popup -->
+	<footer class="templatemo-footer">
+      <div class="templatemo-copyright">
+        <p>Copyright &copy; 2022 SmartMedi</p>
+      </div>
+    </footer>
 
     <script src="dashboardjs/jquery.min.js"></script>
     <script src="dashboardjs/bootstrap.min.js"></script>

@@ -205,27 +205,6 @@ if (isset($_GET['logout'])) {
 		<script src="dashboardjs/templatemo_script.js"></script>
 		<script type="text/javascript"></script>
 		<script>
-			/* function loadFile(event) {
-				var output = document.getElementById("output");
-				output.src = URL.createObjectURL(event.target.files[0]);
-
-				var data = new FormData();
-				data.append("file", event.target.files[0]);
-
-				$.ajax({
-					type: "POST",
-					url: "upload2.php",
-					data: data,
-					processData: false,
-					contentType: false,
-					success: function(response) {
-						console.log(response);
-					},
-					error: function(error) {
-						console.log("Error uploading image: " + error);
-					}
-				});
-			}; */
 			var coll = document.getElementsByClassName("collapsible");
 			var i;
 			for (i = 0; i < coll.length; i++) {

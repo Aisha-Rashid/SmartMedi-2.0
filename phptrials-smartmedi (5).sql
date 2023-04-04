@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 28, 2023 at 06:31 PM
+-- Generation Time: Apr 04, 2023 at 03:26 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -49,34 +49,25 @@ INSERT INTO `admin` (`id`, `adminFname`, `adminLname`, `workID`, `IDnumber`, `ph
 -- --------------------------------------------------------
 
 --
--- Table structure for table `appointments`
+-- Table structure for table `billing`
 --
 
-CREATE TABLE `appointments` (
-  `id` int(11) NOT NULL,
-  `IDNo` int(11) NOT NULL,
-  `hospital` varchar(255) NOT NULL,
-  `clinic` varchar(255) NOT NULL,
-  `visit` varchar(20) NOT NULL,
-  `doctype` varchar(20) NOT NULL,
-  `date` date NOT NULL,
-  `time` time NOT NULL
+CREATE TABLE `billing` (
+  `ID` int(11) NOT NULL,
+  `hospitalname` varchar(255) NOT NULL,
+  `invoice` int(11) NOT NULL,
+  `amountDue` int(11) NOT NULL,
+  `amountPaid` int(11) NOT NULL,
+  `datePaid` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `appointments`
+-- Dumping data for table `billing`
 --
 
-INSERT INTO `appointments` (`id`, `IDNo`, `hospital`, `clinic`, `visit`, `doctype`, `date`, `time`) VALUES
-(1, 29816629, 'Avenue Hospital', 'Gastroenterology', 'First Visit', 'Specialist', '2023-01-10', '01:30:00'),
-(2, 2147483647, 'The Nairobi Hospital Outpatient Center', 'Gastroenterology', 'First Visit', 'Specialist', '2023-01-27', '01:30:00'),
-(3, 2147483647, 'Bristol Park Hospital Tasia Embakasi', 'Obstetrics/Gynecology', 'First Visit', 'Specialist', '2023-01-21', '10:00:00'),
-(4, 2147483647, 'AAR Hospital', '', 'Regular Patient', 'General Doctor', '2023-01-23', '09:00:00'),
-(5, 2147483647, 'AAR Hospital', 'Dermatology', 'Regular Patient', 'Specialist', '2023-01-23', '10:30:00'),
-(6, 2147483647, 'Coptic Hospital Nursing Hospital', '', 'Regular Patient', 'General Doctor', '2023-02-01', '02:30:00'),
-(7, 2147483647, 'AIC Kijabe Hospital Nairobi Medical Center', 'Endocrinology and Metabolism', 'First Visit', 'Specialist', '2023-01-25', '09:00:00'),
-(8, 24367838, 'AAR Hospital', '', 'First Visit', 'General Doctor', '2023-02-09', '09:30:00'),
-(9, 24367838, 'Aga Khan University Hospital, Nairobi', 'Neurology', 'First Visit', 'Specialist', '2023-02-07', '10:30:00');
+INSERT INTO `billing` (`ID`, `hospitalname`, `invoice`, `amountDue`, `amountPaid`, `datePaid`) VALUES
+(1, 'Halisi Family Hospital', 10005, 8000, 8000, '2023-04-04'),
+(4, 'Final Hospital', 10006, 24156, 24156, '2023-04-04');
 
 -- --------------------------------------------------------
 
@@ -204,28 +195,30 @@ INSERT INTO `counties` (`id`, `county`) VALUES
 --
 
 CREATE TABLE `dependants` (
-  `id` int(11) NOT NULL,
+  `ID` int(11) NOT NULL,
   `IDNo` int(11) NOT NULL,
-  `name` varchar(100) NOT NULL,
+  `FirstName` varchar(100) NOT NULL,
+  `LastName` varchar(100) NOT NULL,
   `dob` date NOT NULL,
   `gender` varchar(20) NOT NULL,
   `blood_group` varchar(20) NOT NULL,
   `allergies` varchar(255) NOT NULL,
   `medical_conditions` varchar(255) NOT NULL,
-  `filename` varchar(100) NOT NULL
+  `filename` varchar(100) NOT NULL,
+  `role` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `dependants`
 --
 
-INSERT INTO `dependants` (`id`, `IDNo`, `name`, `dob`, `gender`, `blood_group`, `allergies`, `medical_conditions`, `filename`) VALUES
-(13, 54737364, 'fatumajuma', '1999-06-05', 'Female', '', 'reactive to paracetamol', 'jkcadlvdbvbdvds test', ''),
-(14, 54737364, 'Aisha Rashid', '1998-06-05', 'Female', 'A+', 'reactive to paracetamol', 'jkcadlvdbvbdvds test', 'blog-img-03.jpg'),
-(15, 54737364, 'fatuma rashid', '2020-03-07', 'Female', 'O+', 'reactive to paracetamol', 'jkcadlvdbvbdvds test', 'gallery-06.jpg'),
-(16, 54737364, 'rehema rashid', '2018-06-05', 'Female', 'O-', 'sulphur, pollen', 'jkcadlvdbvbdvds test', 'gallery-03.jpg'),
-(17, 54737364, 'trial child', '2021-07-05', 'Male', 'A-', 'Pollen', 'Gastro-intestinal disorders Skin disorders   ', 'doc3.png'),
-(19, 54737364, 'trial child three', '2022-07-06', 'Male', 'A-', 'nil', 'Respiratory and Ear Nose and Throat (ENT) disorders , Musculoskeletal disorders ,  ,  ,  , asthma, arthritis', '');
+INSERT INTO `dependants` (`ID`, `IDNo`, `FirstName`, `LastName`, `dob`, `gender`, `blood_group`, `allergies`, `medical_conditions`, `filename`, `role`) VALUES
+(13, 54737364, 'fatumajuma', '', '1999-06-05', 'Female', '', 'reactive to paracetamol', 'jkcadlvdbvbdvds test', '', ''),
+(14, 54737364, 'Aisha Rashid', '', '1998-06-05', 'Female', 'A+', 'reactive to paracetamol', 'jkcadlvdbvbdvds test', 'blog-img-03.jpg', ''),
+(15, 54737364, 'fatuma rashid', '', '2020-03-07', 'Female', 'O+', 'reactive to paracetamol', 'jkcadlvdbvbdvds test', 'gallery-06.jpg', ''),
+(16, 54737364, 'rehema rashid', '', '2018-06-05', 'Female', 'O-', 'sulphur, pollen', 'jkcadlvdbvbdvds test', 'gallery-03.jpg', ''),
+(17, 54737364, 'trial child', '', '2021-07-05', 'Male', 'A-', 'Pollen', 'Gastro-intestinal disorders Skin disorders   ', 'doc3.png', ''),
+(19, 54737364, 'trial child three', '', '2022-07-06', 'Male', 'A-', 'nil', 'Respiratory and Ear Nose and Throat (ENT) disorders , Musculoskeletal disorders ,  ,  ,  , asthma, arthritis', '', '');
 
 -- --------------------------------------------------------
 
@@ -238,7 +231,7 @@ CREATE TABLE `docnotes` (
   `IDNo` int(11) NOT NULL,
   `docid` int(11) NOT NULL,
   `date` date NOT NULL,
-  `notes` varchar(255) NOT NULL
+  `notes` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -251,6 +244,23 @@ INSERT INTO `docnotes` (`id`, `IDNo`, `docid`, `date`, `notes`) VALUES
 (18, 29816629, 648392384, '2023-02-06', 'The patient showing signs of extreme anxiety disorder necessitating medication and therapy.'),
 (20, 29816629, 263830028, '2023-02-09', 'The patient was admitted over sudden anxiety attacks.'),
 (21, 2147483647, 5986655, '2023-03-06', 'The patient shows early signs of arthritis. To keenly observe diet high in calcium and omega');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `docnotesdependants`
+--
+
+CREATE TABLE `docnotesdependants` (
+  `id` int(11) NOT NULL,
+  `IDNo` int(11) NOT NULL,
+  `dependantID` int(11) NOT NULL,
+  `docid` int(11) NOT NULL,
+  `docname` varchar(100) NOT NULL,
+  `hospital` varchar(100) NOT NULL,
+  `date` date NOT NULL,
+  `notes` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -334,7 +344,12 @@ INSERT INTO `doctors` (`id`, `nationalid`, `fname`, `lname`, `hospital`, `workid
 (14, 5696598, 'Jack ', 'Ochieng', 'Kiambu County Referral Hospital', 6655665, 'Endocrinology and Metabolism', '4ff9fc6e4e5d5f590c4f2134a8cc96d1'),
 (15, 11455985, 'Maimuna', 'Idris', 'Mandera County Referral Hospital', 2556590, 'Pediatrics', 'cbf306d2c9df16d0bd7ba7888cbb1b5e'),
 (16, 45379476, 'Alex', 'Kibiricho', 'Machakos Hospital', 3425653, 'Public Health and Preventive Medicine (PhPm)', '534b44a19bf18d20b71ecc4eb77c572f'),
-(21, 23456674, 'Dexter', 'Mwilonza', 'Aga Khan Hospital, Mombasa', 32763, 'Pediatrics', '123abcd');
+(21, 23456674, 'Dexter', 'Mwilonza', 'Aga Khan Hospital, Mombasa', 32763, 'Pediatrics', '123abcd'),
+(26, 2345678, 'Aisha', 'Rashid', 'Halisi Family Hospital', 2345, 'Diagnostic Radiology', 'SMedi@123'),
+(27, 2345678, 'Katunge', 'Mwende', 'Halisi Family Hospital', 2345, 'Diagnostic Radiology', 'SMedi@123'),
+(28, 2147483647, 'Rehema', 'Rashid', 'Halisi Family Hospital', 34567, 'Nephrology', 'SMedi@123'),
+(29, 2345456, 'Aisha', 'Rashid', 'Kitengela Medical', 2345, 'Medical Oncology', 'SMedi@123'),
+(30, 2147483647, 'Fatuma', 'Rashid', 'Kitengela Medical', 45653, 'Gastroenterology', 'SMedi@123');
 
 -- --------------------------------------------------------
 
@@ -384,34 +399,23 @@ INSERT INTO `fileupload` (`id`, `name`, `date`, `IDNo`) VALUES
 CREATE TABLE `hospitalreg` (
   `id` int(11) NOT NULL,
   `hospital` varchar(100) NOT NULL,
-  `branch` varchar(100) NOT NULL,
-  `county` varchar(100) NOT NULL,
+  `branch` int(11) NOT NULL,
   `email` varchar(100) NOT NULL,
   `tel` int(11) NOT NULL,
   `applied` date NOT NULL,
   `file` varchar(100) NOT NULL,
   `status` int(1) NOT NULL,
-  `approved` int(1) NOT NULL
+  `approval` varchar(100) NOT NULL,
+  `approvalDate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `hospitalreg`
 --
 
-INSERT INTO `hospitalreg` (`id`, `hospital`, `branch`, `county`, `email`, `tel`, `applied`, `file`, `status`, `approved`) VALUES
-(1, 'Halisi Family Hospital', 'Kitengela', 'Kajiado', 'halisifamilyhospital@gmail.com', 703298645, '2023-03-27', '', 1, 0),
-(2, 'Kitengela Medical', 'Kitengela', 'Kajiado', 'kitemedical@gmail.com', 734567463, '2023-03-27', '', 1, 0),
-(3, 'Kitengela Medical2', 'Kitengela', 'Kericho', 'kitemedical@gmail.com', 728372537, '2023-03-27', '', 1, 0),
-(4, 'trial3', '', 'Isiolo', 'trial@gmail.com', 2147483647, '2023-03-27', '', 1, 0),
-(5, 'trial3', '', 'Isiolo', 'trial@gmail.com', 2147483647, '2023-03-27', '', 1, 0),
-(6, 'trial3', 'Kitengela', 'Kakamega', 'trial@gmail.com', 537357457, '2023-03-27', 'SmartMedi EEHR- Nairobi.docx', 1, 0),
-(7, 'trial32', 'Kitengela', 'Garissa', 'trial@gmail.com', 43674676, '2023-03-27', 'SmartMedi EEHR- Doctors.pdf', 1, 0),
-(8, 'trial4', 'kite', 'Baringo', 'trial@gmail.com', 74636473, '2023-03-27', 'SmartMedi EEHR- Nairobi.pdf', 1, 0),
-(10, 'trial5', 'kite', 'Kirinyaga', 'trial@gmail.com', 5342566, '2023-03-27', 'SmartMedi EEHR- Nairobi.pdf', 1, 0),
-(11, 'trails6', 'Kitengela', 'West Pokot', 'trial@gmail.com', 874536357, '2023-03-27', 'terms-of-service.docx', 1, 0),
-(12, 'trial7', 'Kitengela', 'Embu', 'trial@gmail.com', 2147483647, '2023-03-27', 'style.css', 1, 0),
-(13, 'trial8', 'kite', 'Siaya', 'trial@gmail.com', 2147483647, '2023-03-27', 'register.php', 1, 0),
-(14, 'trial9', 'Kitengela', 'Elgeyo/Marakwet', 'trial@gmail.com', 565648437, '2023-03-27', 'passwordchange.php', 1, 0);
+INSERT INTO `hospitalreg` (`id`, `hospital`, `branch`, `email`, `tel`, `applied`, `file`, `status`, `approval`, `approvalDate`) VALUES
+(1, 'Halisi Family Hospital', 5, 'halisifamilyhospital@gmail.com', 703298645, '2023-03-27', '', 1, 'approved', '2023-04-04 12:08:02'),
+(22, 'Final Hospital', 3, 'chuchuaisha@gmail.com', 345678765, '2023-04-04', 'EHR.drawio', 1, 'approved', '2023-04-04 15:24:10');
 
 -- --------------------------------------------------------
 
@@ -627,53 +631,54 @@ CREATE TABLE `patients` (
   `county` varchar(100) NOT NULL,
   `town` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `filename` varchar(100) CHARACTER SET latin1 NOT NULL
+  `filename` varchar(100) CHARACTER SET latin1 NOT NULL,
+  `role` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `patients`
 --
 
-INSERT INTO `patients` (`ID`, `FirstName`, `LastName`, `TelNo`, `IDNo`, `DOB`, `gender`, `bloodgroup`, `email`, `county`, `town`, `password`, `filename`) VALUES
-(1, 'Fatuma', 'Rashid', '273940287', 53664673, '1995-11-09', 'Female', 'O+', 'fatuma@yahoo.com', 'Kilifi', 'Malindi', 'fdc0978bc0cc4c37c3e3d44fc63ee487', ''),
-(2, 'Ashraf', 'Mbulika', '63647828', 63748264, '2020-07-07', 'Male', 'AB+', 'ashraf@yahoo.com', 'Machakos', 'Athi River', '508924b0eac2ba101ada28841c931e44', ''),
-(3, 'Rehema', 'Rashid', '637483625', 68493736, '1998-03-10', 'Female', 'O+', 'rehema@yahoo.com', 'Nairobi City', 'Nairobi', '5eaf0467a7fdc9fe2a16b9b8a8fd8b4a', ''),
-(4, 'Suhaila', 'Salim', '73849837', 82736745, '2017-07-21', 'Female', 'O+', 'suhaila@yahoo.com', 'Kajiado', 'Kitengela', 'e8b3ca806fd3c5e8e18368994a7ee305', ''),
-(5, 'Rashid', 'Thomas', '73883635', 367482725, '1988-10-13', 'Male', 'A+', 'rashid@yahoo.com', 'Nairobi City', 'Nairobi', '7d0ba610dea3dbcc848a97d8dfd767ae', ''),
-(6, 'Allan', 'Keverenge', '254795856', 2147485, '1988-03-15', 'Male', 'B-', 'allan@yahoo.com', 'Homa Bay', 'Homa Bay', 'b993e4526238d62f6b1b90e605532ff8', ''),
-(7, 'Monica', 'Ndunge', '+254788741200', 49798885, '1991-02-05', 'Female', 'O-', 'monica@gmail.com', 'Machakos', 'Machakos', 'ff0d813dd5d2f64dd372c6c4b6aed086', ''),
-(8, 'Cherlyne ', 'Obeyo', '+254719267540', 78978568, '1992-08-18', 'Female', 'AB+', 'cherlyneobeyo@gmail.com', 'Kakamega', 'Kakamega', 'b5e6859e6c6d07090ee1fc3bb85ec441', ''),
-(9, 'Satish', 'Kumar', '+254752861926', 79858912, '1987-10-08', 'Male', 'B+', 'satish@yahoo.com', 'Kilifi', 'Kilifi', 'b8377b23bb86899405d2455cc6da3556', ''),
-(10, 'Winfred', 'Kamunge', '+254752528962', 56552345, '1979-01-25', 'Female', 'A+', 'winfred@gmail.com', 'Kericho', 'Kericho', 'cfeee3fc113367fb6ea82084621e5c0d', ''),
-(11, 'Annastacia', 'Mbula', '+254718097856', 66989559, '1972-07-01', 'Female', 'A-', 'annastacia@gmail.com', 'Makueni', 'Wote', '2708535b89a179fe383b3b548048687f', ''),
-(12, 'Mary', 'Wambui', '+254725898989', 9873268, '1993-09-17', 'Female', 'O+', 'mary@gmail.com', 'Kiambu', 'Kiambu', 'b8e7be5dfa2ce0714d21dcfc7d72382c', ''),
-(13, 'Martin ', 'Sendeyo', '+254710252863', 4879885, '1983-02-17', 'Male', 'AB+', 'martin@gmail.com', 'Busia', 'Busia', '925d7518fc597af0e43f5606f9a51512', ''),
-(14, 'Peter', 'Mburu', '+254716688262', 6598569, '1976-05-13', 'Male', 'O-', 'peter@yahoo.com', 'Kirinyaga', 'Kirinyaga', '51dc30ddc473d43a6011e9ebba6ca770', ''),
-(15, 'Timothy', 'Oketch', '+254720858623', 123456789, '1996-04-02', 'Male', 'AB-', 'timothy@gmail.com', 'Kisumu', 'Kisumu', 'ecb97d53d2d35b8ba98cf82a8d78cad9', ''),
-(16, 'Erastus', 'Kinyua', '+254734528692', 544856500, '1977-10-09', 'Male', 'B-', 'erastus@yahoo.com', 'Embu', 'Embu', '029028fb57ad37f32281997724b97949', ''),
-(17, 'Faith', 'Katunge', '+25478595596', 56588966, '1995-11-20', 'Female', 'O+', 'faith@gmail.com', 'Elgeyo/Marakwet', 'Marakwet', 'ecee7df9bbac50b9b428483bfea1dd7c', ''),
-(18, 'Mark', 'Njoroge', '+2547285689', 30562389, '1999-03-18', 'Male', 'B-', 'mark@gmail.com', 'Kajiado', 'kajiado', 'ea82410c7a9991816b5eeeebe195e20a', ''),
-(19, 'Abdi', 'Osman', '+254720548562', 678456566, '2002-03-29', 'Male', 'AB-', 'abdi@gmail.com', 'Garissa', 'Garissa', '311eba6dada049960e16974e652ef134', ''),
-(20, 'Abdul', 'Imboha', '+2547856622', 6588689, '1988-12-23', 'Male', 'B+', 'abdul@gmail', 'Bungoma', 'Bungoma', '82027888c5bb8fc395411cb6804a066c', ''),
-(21, 'Sophia', 'Mwenje', '+2547582544', 2559655, '1983-06-08', 'Female', 'AB-', 'sophia@gmail.com', 'Trans Nzoia', 'Trans Nzoia', '2ee0272b8e1a9705dc3ebe91c10b32f4', ''),
-(22, 'Biko', 'Biko', '+254710566555', 874797989, '1996-05-14', 'Male', 'O-', 'biko@gmail.com', 'Nairobi City', 'Nairobi', '3aeb4f9aab7e034b7722f070831bce41', ''),
-(23, 'Samantha', 'Makori', '+254720586321', 96542356, '1967-04-10', 'Female', 'A+', 'samantha@gmail.com', 'Nairobi City', 'Nairobi', 'f01e0d7992a3b7748538d02291b0beae', ''),
-(24, 'Vitalis', 'Junior', '+254712358256', 545586598, '1994-07-07', 'Male', 'AB+', 'vitalis@gmail.com', 'Vihiga', 'Vihiga', '92b20c90c1bc317620c82dc41b4eb9fd', ''),
-(25, 'Fatuma', 'Rashid', '254719829526', 29816629, '1993-04-02', 'Female', 'O+', 'fatumarashid4@gmail.com', 'Kajiado', 'Kitengela', '407aa911747042d7f046b62feaf8b4c4', ''),
-(26, 'Jeff', 'Githae', '254743567854', 43628735, '1996-07-05', 'Male', 'O+', 'jeffgithae@gmail.com', 'Kiambu', 'Kiambu', '166ee015c0e0934a8781e0c86a197c6e', ''),
-(27, 'Aisha', 'Rashid', '0703277202', 2147483647, '1996-06-25', 'Female', 'O+', 'chuchuaisha@gmail.com', 'Nairobi City', 'Nairobi', 'a381bedb5d4478053eb04be35f8798dd', 'ppic.jpg'),
-(28, 'Chicken', 'Licken', '0737472368', 47388377, '1992-06-06', 'Male', 'A-', 'chickenlicken@gmail.com', 'Kilifi', 'Malindi', 'cdf3aead074cf574c5ce6c9ce76c2e41', ''),
-(29, 'Henny', 'Penny', '0764537584', 53648273, '1982-09-06', 'Female', 'AB+', 'hennypenny@gmail.com', 'Nairobi City', 'Ngara', 'penny', ''),
-(30, 'Ducky', 'Lucky', '0736452749', 24367838, '1990-03-17', 'Female', 'O-', 'duckylucky@yahoo.com', 'Kakamega', 'Isulu', '56975b83de847aa2ee9b2493b6c4bd8f', ''),
-(31, 'Goosey', 'Lucy', '0726836237', 66388463, '1990-12-09', 'Female', 'A-', 'glucy@gmail.com', 'Nairobi City', 'Umoja', 'aa7a60d9e3f05d9e068c4ba4d3608978', 'gooseyL (2).jfif'),
-(33, 'Turkey', 'Lucky', '0745384637', 33432676, '1993-03-11', 'Male', 'AB-', 'tlucky@gmail.com', 'Kiambu', 'Ndumberi', 'db77174aa34ded1b6139455a58d0a38b', ''),
-(34, 'Lemony', 'Snicket', '0736254637', 53748393, '1990-10-10', 'Male', 'O+', 'lsnicket@gmail.com', 'Nairobi City', 'Nairobi', '5684f59763b080bb179fe408b64191bd', 'juice2.jpg'),
-(35, 'Sheldon', 'Cooper', '0734973497', 33857490, '1991-06-18', 'Male', 'O+', 'scooper@gmail.com', 'Nairobi City', 'Pumwani', 'fcfff28fdbbbf75face3b3d97fdbfc15', 'pancakes.jpg'),
-(40, 'Aisha', 'Rashid', '0703277202', 33179878, '1996-06-25', 'Female', 'O+', 'chuchuaisha@gmail.com', 'Kajiado', 'Kitengela', 'aae82dfe8d1d25acb0947aad2a77d487', '20200604_120107.jpg'),
-(41, 'Meshack', 'Milimo', '0703283923', 33535687, '1989-08-07', 'Male', 'B+', 'mmilimo@gmail.com', 'Machakos', 'Kangundo', '2269d672abe86cdd5867e78b65ddb940', 'courage-the-cowardly-dog-dog-animals-tv-wallpaper-preview.jpg'),
-(42, 'Kelly', 'Kapoor', '0703277202', 35239857, '1992-11-06', '', '', 'kkapoor@gmail.com', '', 'Gede', 'ae074a5692dfb7c26aae5147e52ceb40', ''),
-(43, 'trial', 'two', '245463746', 253632536, '2019-02-05', 'Female', 'AB+', 'trial@gmail.com', 'Bungoma', 'Nairobi', '58723627fcebc230ab0d53ddf5f16e34', 'gallery-04.jpg'),
-(44, 'trial', 'three', '36474836', 54737364, '1995-02-05', 'Male', 'B+', 'trial@gmail.com', 'Kericho', 'kitale', '8943be948c11e8ff266c8fc52b0a8826', 'img-3.jpg');
+INSERT INTO `patients` (`ID`, `FirstName`, `LastName`, `TelNo`, `IDNo`, `DOB`, `gender`, `bloodgroup`, `email`, `county`, `town`, `password`, `filename`, `role`) VALUES
+(1, 'Fatuma', 'Rashid', '273940287', 53664673, '1995-11-09', 'Female', 'O+', 'fatuma@yahoo.com', 'Kilifi', 'Malindi', 'fdc0978bc0cc4c37c3e3d44fc63ee487', '', 'patient'),
+(2, 'Ashraf', 'Mbulika', '63647828', 63748264, '2020-07-07', 'Male', 'AB+', 'ashraf@yahoo.com', 'Machakos', 'Athi River', '508924b0eac2ba101ada28841c931e44', '', 'patient'),
+(3, 'Rehema', 'Rashid', '637483625', 68493736, '1998-03-10', 'Female', 'O+', 'rehema@yahoo.com', 'Nairobi City', 'Nairobi', '5eaf0467a7fdc9fe2a16b9b8a8fd8b4a', '', 'patient'),
+(4, 'Suhaila', 'Salim', '73849837', 82736745, '2017-07-21', 'Female', 'O+', 'suhaila@yahoo.com', 'Kajiado', 'Kitengela', 'e8b3ca806fd3c5e8e18368994a7ee305', '', 'patient'),
+(5, 'Rashid', 'Thomas', '73883635', 367482725, '1988-10-13', 'Male', 'A+', 'rashid@yahoo.com', 'Nairobi City', 'Nairobi', '7d0ba610dea3dbcc848a97d8dfd767ae', '', 'patient'),
+(6, 'Allan', 'Keverenge', '254795856', 2147485, '1988-03-15', 'Male', 'B-', 'allan@yahoo.com', 'Homa Bay', 'Homa Bay', 'b993e4526238d62f6b1b90e605532ff8', '', 'patient'),
+(7, 'Monica', 'Ndunge', '+254788741200', 49798885, '1991-02-05', 'Female', 'O-', 'monica@gmail.com', 'Machakos', 'Machakos', 'ff0d813dd5d2f64dd372c6c4b6aed086', '', 'patient'),
+(8, 'Cherlyne ', 'Obeyo', '+254719267540', 78978568, '1992-08-18', 'Female', 'AB+', 'cherlyneobeyo@gmail.com', 'Kakamega', 'Kakamega', 'b5e6859e6c6d07090ee1fc3bb85ec441', '', 'patient'),
+(9, 'Satish', 'Kumar', '+254752861926', 79858912, '1987-10-08', 'Male', 'B+', 'satish@yahoo.com', 'Kilifi', 'Kilifi', 'b8377b23bb86899405d2455cc6da3556', '', 'patient'),
+(10, 'Winfred', 'Kamunge', '+254752528962', 56552345, '1979-01-25', 'Female', 'A+', 'winfred@gmail.com', 'Kericho', 'Kericho', 'cfeee3fc113367fb6ea82084621e5c0d', '', 'patient'),
+(11, 'Annastacia', 'Mbula', '+254718097856', 66989559, '1972-07-01', 'Female', 'A-', 'annastacia@gmail.com', 'Makueni', 'Wote', '2708535b89a179fe383b3b548048687f', '', 'patient'),
+(12, 'Mary', 'Wambui', '+254725898989', 9873268, '1993-09-17', 'Female', 'O+', 'mary@gmail.com', 'Kiambu', 'Kiambu', 'b8e7be5dfa2ce0714d21dcfc7d72382c', '', 'patient'),
+(13, 'Martin ', 'Sendeyo', '+254710252863', 4879885, '1983-02-17', 'Male', 'AB+', 'martin@gmail.com', 'Busia', 'Busia', '925d7518fc597af0e43f5606f9a51512', '', 'patient'),
+(14, 'Peter', 'Mburu', '+254716688262', 6598569, '1976-05-13', 'Male', 'O-', 'peter@yahoo.com', 'Kirinyaga', 'Kirinyaga', '51dc30ddc473d43a6011e9ebba6ca770', '', 'patient'),
+(15, 'Timothy', 'Oketch', '+254720858623', 123456789, '1996-04-02', 'Male', 'AB-', 'timothy@gmail.com', 'Kisumu', 'Kisumu', 'ecb97d53d2d35b8ba98cf82a8d78cad9', '', 'patient'),
+(16, 'Erastus', 'Kinyua', '+254734528692', 544856500, '1977-10-09', 'Male', 'B-', 'erastus@yahoo.com', 'Embu', 'Embu', '029028fb57ad37f32281997724b97949', '', 'patient'),
+(17, 'Faith', 'Katunge', '+25478595596', 56588966, '1995-11-20', 'Female', 'O+', 'faith@gmail.com', 'Elgeyo/Marakwet', 'Marakwet', 'ecee7df9bbac50b9b428483bfea1dd7c', '', 'patient'),
+(18, 'Mark', 'Njoroge', '+2547285689', 30562389, '1999-03-18', 'Male', 'B-', 'mark@gmail.com', 'Kajiado', 'kajiado', 'ea82410c7a9991816b5eeeebe195e20a', '', 'patient'),
+(19, 'Abdi', 'Osman', '+254720548562', 678456566, '2002-03-29', 'Male', 'AB-', 'abdi@gmail.com', 'Garissa', 'Garissa', '311eba6dada049960e16974e652ef134', '', 'patient'),
+(20, 'Abdul', 'Imboha', '+2547856622', 6588689, '1988-12-23', 'Male', 'B+', 'abdul@gmail', 'Bungoma', 'Bungoma', '82027888c5bb8fc395411cb6804a066c', '', 'patient'),
+(21, 'Sophia', 'Mwenje', '+2547582544', 2559655, '1983-06-08', 'Female', 'AB-', 'sophia@gmail.com', 'Trans Nzoia', 'Trans Nzoia', '2ee0272b8e1a9705dc3ebe91c10b32f4', '', 'patient'),
+(22, 'Biko', 'Biko', '+254710566555', 874797989, '1996-05-14', 'Male', 'O-', 'biko@gmail.com', 'Nairobi City', 'Nairobi', '3aeb4f9aab7e034b7722f070831bce41', '', 'patient'),
+(23, 'Samantha', 'Makori', '+254720586321', 96542356, '1967-04-10', 'Female', 'A+', 'samantha@gmail.com', 'Nairobi City', 'Nairobi', 'f01e0d7992a3b7748538d02291b0beae', '', 'patient'),
+(24, 'Vitalis', 'Junior', '+254712358256', 545586598, '1994-07-07', 'Male', 'AB+', 'vitalis@gmail.com', 'Vihiga', 'Vihiga', '92b20c90c1bc317620c82dc41b4eb9fd', '', 'patient'),
+(25, 'Fatuma', 'Rashid', '254719829526', 29816629, '1993-04-02', 'Female', 'O+', 'fatumarashid4@gmail.com', 'Kajiado', 'Kitengela', '407aa911747042d7f046b62feaf8b4c4', '', 'patient'),
+(26, 'Jeff', 'Githae', '254743567854', 43628735, '1996-07-05', 'Male', 'O+', 'jeffgithae@gmail.com', 'Kiambu', 'Kiambu', '166ee015c0e0934a8781e0c86a197c6e', '', 'patient'),
+(27, 'Aisha', 'Rashid', '0703277202', 2147483647, '1996-06-25', 'Female', 'O+', 'chuchuaisha@gmail.com', 'Nairobi City', 'Nairobi', 'a381bedb5d4478053eb04be35f8798dd', 'ppic.jpg', 'patient'),
+(28, 'Chicken', 'Licken', '0737472368', 47388377, '1992-06-06', 'Male', 'A-', 'chickenlicken@gmail.com', 'Kilifi', 'Malindi', 'cdf3aead074cf574c5ce6c9ce76c2e41', '', 'patient'),
+(29, 'Henny', 'Penny', '0764537584', 53648273, '1982-09-06', 'Female', 'AB+', 'hennypenny@gmail.com', 'Nairobi City', 'Ngara', 'penny', '', 'patient'),
+(30, 'Ducky', 'Lucky', '0736452749', 24367838, '1990-03-17', 'Female', 'O-', 'duckylucky@yahoo.com', 'Kakamega', 'Isulu', '56975b83de847aa2ee9b2493b6c4bd8f', '', 'patient'),
+(31, 'Goosey', 'Lucy', '0726836237', 66388463, '1990-12-09', 'Female', 'A-', 'glucy@gmail.com', 'Nairobi City', 'Umoja', 'aa7a60d9e3f05d9e068c4ba4d3608978', 'gooseyL (2).jfif', 'patient'),
+(33, 'Turkey', 'Lucky', '0745384637', 33432676, '1993-03-11', 'Male', 'AB-', 'tlucky@gmail.com', 'Kiambu', 'Ndumberi', 'db77174aa34ded1b6139455a58d0a38b', '', 'patient'),
+(34, 'Lemony', 'Snicket', '0736254637', 53748393, '1990-10-10', 'Male', 'O+', 'lsnicket@gmail.com', 'Nairobi City', 'Nairobi', '5684f59763b080bb179fe408b64191bd', 'juice2.jpg', 'patient'),
+(35, 'Sheldon', 'Cooper', '0734973497', 33857490, '1991-06-18', 'Male', 'O+', 'scooper@gmail.com', 'Nairobi City', 'Pumwani', 'fcfff28fdbbbf75face3b3d97fdbfc15', 'pancakes.jpg', 'patient'),
+(40, 'Aisha', 'Rashid', '0703277202', 33179878, '1996-06-25', 'Female', 'O+', 'chuchuaisha@gmail.com', 'Kajiado', 'Kitengela', 'aae82dfe8d1d25acb0947aad2a77d487', '20200604_120107.jpg', 'patient'),
+(41, 'Meshack', 'Milimo', '0703283923', 33535687, '1989-08-07', 'Male', 'B+', 'mmilimo@gmail.com', 'Machakos', 'Kangundo', '2269d672abe86cdd5867e78b65ddb940', 'courage-the-cowardly-dog-dog-animals-tv-wallpaper-preview.jpg', 'patient'),
+(42, 'Kelly', 'Kapoor', '0703277202', 35239857, '1992-11-06', '', '', 'kkapoor@gmail.com', '', 'Gede', 'ae074a5692dfb7c26aae5147e52ceb40', '', 'patient'),
+(43, 'trial', 'two', '245463746', 253632536, '2019-02-05', 'Female', 'AB+', 'trial@gmail.com', 'Bungoma', 'Nairobi', '58723627fcebc230ab0d53ddf5f16e34', 'gallery-04.jpg', 'patient'),
+(44, 'trial', 'three', '36474836', 54737364, '1995-02-05', 'Male', 'B+', 'trial@gmail.com', 'Kericho', 'kitale', '8943be948c11e8ff266c8fc52b0a8826', 'img-3.jpg', 'patient');
 
 -- --------------------------------------------------------
 
@@ -718,10 +723,10 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `appointments`
+-- Indexes for table `billing`
 --
-ALTER TABLE `appointments`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `billing`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `blood`
@@ -745,7 +750,7 @@ ALTER TABLE `counties`
 -- Indexes for table `dependants`
 --
 ALTER TABLE `dependants`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `docnotes`
@@ -824,10 +829,10 @@ ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `appointments`
+-- AUTO_INCREMENT for table `billing`
 --
-ALTER TABLE `appointments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+ALTER TABLE `billing`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `blood`
@@ -851,7 +856,7 @@ ALTER TABLE `counties`
 -- AUTO_INCREMENT for table `dependants`
 --
 ALTER TABLE `dependants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `docnotes`
@@ -869,7 +874,7 @@ ALTER TABLE `docspecialty`
 -- AUTO_INCREMENT for table `doctors`
 --
 ALTER TABLE `doctors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `fileupload`
@@ -881,7 +886,7 @@ ALTER TABLE `fileupload`
 -- AUTO_INCREMENT for table `hospitalreg`
 --
 ALTER TABLE `hospitalreg`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `hospitals`

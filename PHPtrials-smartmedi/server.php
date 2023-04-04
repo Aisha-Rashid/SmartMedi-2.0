@@ -44,7 +44,7 @@ if (isset($_POST['reg_user'])) {
 	$town = filter_var($_POST['town'], FILTER_SANITIZE_STRING);
 	$password1 = mysqli_real_escape_string($db, $_POST['password1']);
 	$password2 = mysqli_real_escape_string($db, $_POST['password2']);
-	
+	$role="patient";
 	if ($password1 != $password2) {
 		array_push($errors, "The two passwords do not match");
 		// Checking if the passwords match
@@ -54,8 +54,8 @@ if (isset($_POST['reg_user'])) {
 		// Password encryption to increase data security
 		$password = md5($password1);
 		// Inserting data into tables
-		$query = "INSERT INTO patients (FirstName, LastName, TelNo, IDNo, DOB, gender, bloodgroup, email, county, town, password)
-				VALUES('$FirstName' , '$LastName' , '$TelNo' , '$IDNo' , '$DOB' , '$gender', '$bloodgroup', '$email', '$county', '$town', '$password')";
+		$query = "INSERT INTO patients (FirstName, LastName, TelNo, IDNo, DOB, gender, bloodgroup, email, county, town, password, role)
+				VALUES('$FirstName' , '$LastName' , '$TelNo' , '$IDNo' , '$DOB' , '$gender', '$bloodgroup', '$email', '$county', '$town', '$password', '$role')";
 		
 		mysqli_query($db, $query);
 
@@ -158,14 +158,6 @@ if (isset($_POST['admin_login'])) {
 	$workID = mysqli_real_escape_string($db, $_POST['workID']);
 	$adminpass = mysqli_real_escape_string($db, $_POST['adminpass']);
 
-	// Error message if the input field is left blank
-	/* if (empty($workID)) {
-		array_push($errors, "Work ID is required");
-	}
-	if (empty($adminpass)) {
-		array_push($errors, "Password is required");
-	} */
-
 	// Checking for the errors
 	if (count($errors) == 0) {
 		
@@ -199,68 +191,34 @@ if (isset($_POST['admin_login'])) {
 	}
 }
 
+// Hospital Registration code
+if(isset($_POST['submitHosp'])!=""){
+  $name=$_FILES['file']['name'];
+  $size=$_FILES['file']['size'];
+  $type=$_FILES['file']['type'];
+  $temp=$_FILES['file']['tmp_name'];
+  $date = date('Y-m-d_H:i:s');
+  //$caption1=$_POST['caption'];
+  //$link=$_POST['link'];
+  
+  $hospital =filter_var ($_POST['hospital'], FILTER_SANITIZE_STRING);
+  $branch =filter_var ($_POST['branch'], FILTER_SANITIZE_NUMBER_INT);
+  $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+  $tel = filter_var($_POST['tel'], FILTER_SANITIZE_NUMBER_INT);
+  //$status = 0;
+  
+  move_uploaded_file($temp,"files/".$name);
 
-
-
-// Doctor Registration code
-if (isset($_POST['reg_hosp'])) {
- 
-	// Receiving the values entered and storing
-	// in the variables
-	// Data sanitization is done to prevent
-	// SQL injections
-	$nationalid = mysqli_real_escape_string($db, $_POST['nationalid']);
-	$fname = mysqli_real_escape_string($db, $_POST['fname']);
-	$lname = mysqli_real_escape_string($db, $_POST['lname']);
-	$hospital = mysqli_real_escape_string($db, $_POST['hospital']);
-	$workid = mysqli_real_escape_string($db, $_POST['workid']);
-	$specialty = mysqli_real_escape_string($db, $_POST['specialty']);
-	$docpassword1 = mysqli_real_escape_string($db, $_POST['docpassword1']);
-	$docpassword2 = mysqli_real_escape_string($db, $_POST['docpassword2']);
-	
-
-	// Ensuring that the user has not left any input field blank
-	// error messages will be displayed for every blank input
-	if (empty($nationalid)) { array_push($errors, "required"); }
-	if (empty($fname)) { array_push($errors, "required"); }
-	if (empty($lname)) { array_push($errors, "required"); }
-	if (empty($hospital)) { array_push($errors, "required"); }
-	if (empty($workid)) { array_push($errors, "required"); }
-	if (empty($specialty)) { array_push($errors, "required"); }
-	if (empty($docpassword1)) { array_push($errors, "Password is required"); }
-
-	if ($docpassword1 != $docpassword2) {
-		array_push($errors, "The two passwords do not match");
-		// Checking if the passwords match
-	}
-		
-	// If the form is error free, then register the user
-	if (count($errors) == 0) {
-		
-		// Password encryption to increase data security
-		$password = md5($docpassword1);
-		
-		// Inserting data into table
-		$query = "INSERT INTO doctors (nationalid, fname, lname, hospital, workid, specialty, password)
-				VALUES('$nationalid' , '$fname' , '$lname' , '$hospital', '$workid' , '$specialty', '$password')";
-		
-		mysqli_query($db, $query);
-
-		// Storing username of the logged in user,
-		// in the session variable
-		//$_SESSION['fname'] = $fname;
-		//$_SESSION['lname'] = $lname;
-		$_SESSION['nationalid'] = $nationalid;
-		//$_SESSION['hospital'] = $hospital;
-		
-		
-		// Welcome message
-		$_SESSION['success'] = "You have logged in";
-		
-		// Page on which the user will be
-		// redirected after logging in
-		header('location: DocDashboard.php');
+$query="INSERT INTO hospitalreg (hospital, branch, email, tel, applied, file) VALUES ('$hospital', '$branch', '$email', '$tel', '$date', '$name')";
+$results= mysqli_query($db, $query);
+if($results){
+$_SESSION['hospital'] = $hospital;	
+echo"<script>alert('Thank You for registering with SmartMedi. You will receive further communication on your email after making payment.'); window.location.href ='/SmartMedi-2.0/PHPtrials-smartmedi/invoice.php'; </script>";
+}
+else{
+echo "Failed to register";
 }
 }
+
 
 ?>

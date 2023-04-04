@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Kilimanjaro Resort</title>
+</head>
+<body BGcolor=#77F8FB>
+<hr>
+<h2 align = "center"> Kilimanjaro Resort</h2>
+<h5 align = "center"> Best in town!</h2>
+<p align = "left" >
+Founded by Chef Wanja and set in the heart of Nairobi,
+Kilimanjaro Resort invites guests to be at the centre of the action.
+<br>
+<br>
+With romantic views of sunsets and sunrises,Kilimanjaro Resort is sure the best place to be.<br>
+We have a range of cuisines, healthy juices and salads.
+<br>
+<br>
+In addition to that, one can also find various fun activities for the family.<br>
+We offer:
+<ul>
+	<li>Horse riding</li>
+	<li>Swimming</li>
+	<li>Go-Cart racing</li>
+	<li>Zip lining</li>
+	<li>Foosball and board games</li>
+	<li>Bowling</li>
+</ul>
+</p>
+				   
+<p align = "center">We are located at <b>Southern Bypass, 3rd exit along Mombasa road</b>, 500 meters from Nextgen Mall.</p>
+				   
+
+</body>
+</html>

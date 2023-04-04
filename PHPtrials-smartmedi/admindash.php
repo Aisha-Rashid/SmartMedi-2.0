@@ -45,7 +45,11 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
     $array = mysqli_fetch_row($res);
     $rows = mysqli_num_rows($res);
 	
+	include ('data-visualization.php');
 	
+	$Rquery="select * from hospitalreg WHERE status = 0";
+	$Res = mysqli_query($db, $Rquery);
+	$totalRegistered = mysqli_num_rows($Res);
 
   ?>
 
@@ -89,7 +93,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
             </a>
             <ul class="templatemo-submenu">
               
-              <li><a href="totalpatients.php"><i class="fa fa-user" ></i><i class="fa fa-user" ></i> Total Patients</a></li>
+              <!--li><a href="totalpatients.php"><i class="fa fa-user" ></i><i class="fa fa-user" ></i> Total Patients</a></li-->
 			  <li><a href="gendercomparison.php"><i class="fa fa-user"></i> Gender Comparison</a></li>
 			  <li><a href="hospitalchart.php"><i class="fa fa-hospital-o"></i> Hospitals Onboard</a></li>
               
@@ -122,7 +126,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
       <!--/.navbar-collapse -->
 
       <!--div class="templatemo-content-wrapper"-->
-        <div class="templatemo-admincontent">
+        <div class="templatemo-content">
           
 		  
           <p>Work ID : <b><?php echo $array[2]; ?></b></p>
@@ -130,36 +134,13 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
                         echo " ";
                         echo $array[1];; ?></b></p>
           <hr>
-<?php
-/* $query = "SELECT * FROM hospitalreg WHERE approved = 0";
-$result = mysqli_query($db, $query);
-$num_rows = mysqli_num_rows($result); */
 
-?>
-<nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse">
    <div class="container-fluid">
     <div class="navbar-header">
-     <h4>Message Board</h4>
-    </div>
-    <ul class="nav navbar-nav navbar-right">
-     <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="label label-pill label-danger count" style="border-radius:10px;"></span>
-		<i class="fa fa-bell" aria-hidden="true" style="font-size:18px;"></i></a>	  
-      <ul class="dropdown-menu">
-	  <?php /* while($row = mysqli_fetch_array($result)) { ?>
-    <li>
-      <a href="#">
-        <strong><?php echo $row['hospital']; ?></strong>
-        <br>
-        <small><em><?php echo $row['branch']; ?> - <?php echo $row['county']; ?></em></small>
-      </a>
-    </li>
-    <?php }  */?>
-	  </ul>
-     </li>
-    </ul>
-	
-   </div>
+     <h4>Onboarding Hospitals <span class="label label-pill label-danger" style="border-radius:5px;"><?php echo $totalRegistered?></span></h4>
+	 </div>
+	 </div>
   </nav>
   <table class="table table-striped table-hover table-bordered">
   
@@ -168,21 +149,87 @@ $num_rows = mysqli_num_rows($result); */
 									  
 									  <th>Id</th>
 									  <th>Hospital Name</th>
-									  <th>Branch</th>
-									  <th>County</th>
+									  <th>Branches</th>
 									  <th>Email</th>
 									  <th>Tel</th>
 									  <th>Applied on</th>
-									  <th>Attachment</th>
-									  <th>Reviewed By</th>
-									  <th>Approved By</th>
+									  <th>Review</th>
+									  
 									</tr>
 								  </thead>
 								  <tbody>
 								  <?php
 								 
-							$query="select * from hospitalreg WHERE status = 1";
+							
+							
+							$counter = 1;
+							
+							while($row=mysqli_fetch_array($Res)){
+							$number = $counter;
+							$counter++;
+							$id=$row['id'];
+							$hospital=$row['hospital'];
+							$branch=$row['branch'];
+							$email=$row['email'];
+							$tel=$row['tel'];
+							$applied=$row['applied'];
+							$encrypted_id = base64_encode($id);
+						$url = "HospReview.php?filename=$encrypted_id";
+ ?>
+								<tr>
+								<td><?php echo $number;?></td>
+								<td><?php echo $row['hospital'];?></td>
+								<td><?php echo $row['branch'];?></td>
+								<td><?php echo $row['email'];?></td>
+								<td><?php echo $row['tel'];?></td>
+								<td><?php echo $row['applied'];?></td>
+								<td><a href="<?php echo $url ?>" class="btn btn-primary">View</a></td>
+								</tr>
+								<?php } ?> 
+								  </tbody>
+								  
+								</table>
+								
+								<br>
+								
+								<hr>
+								<div>
+								<nav class="navbar navbar-inverse">
+   <div class="container-fluid">
+    <div class="navbar-header">
+     <h4>Approved Hospitals</h4>
+	 </div>
+	 </div>
+  </nav>
+  <table class="table table-striped table-hover table-bordered">
+  
+								  <thead>
+									<tr>
+									  
+									  <th>Id</th>
+									  <th>Hospital Name</th>
+									  <th>Branches</th>
+									  <th>Email</th>
+									  <th>Tel</th>
+									  <th>Applied on</th>
+									  <th>Approval</th>
+									  <th>Approved Date</th>
+									</tr>
+								  </thead>
+								  <tbody>
+								  <?php
+								 
+							$query="select * from hospitalreg WHERE status = 1 LIMIT $start_row, $results_per_page";
 							$res = mysqli_query($db, $query);
+							$totalRegHosp = mysqli_num_rows($res);
+		
+							// Calculate the total number of rows
+							$total_Reg_query = "SELECT COUNT(*) as total FROM hospitalreg";
+							$total_Reg_result = mysqli_query($db, $total_Reg_query);
+							$total_Reg_rows = mysqli_fetch_assoc($total_Reg_result)['total'];
+
+							// Calculate the total number of pages
+							$total_Reg_pages = ceil($total_Reg_rows / $results_per_page);
 							
 							$counter = 1;
 							
@@ -191,10 +238,11 @@ $num_rows = mysqli_num_rows($result); */
 							$counter++;
 							$hospital=$row['hospital'];
 							$branch=$row['branch'];
-							$county=$row['county'];
 							$email=$row['email'];
 							$tel=$row['tel'];
 							$applied=$row['applied'];
+							$approval=$row['approval'];
+							$approvalDate=$row['approvalDate'];
 							$file=$row['file'];
 							
   
@@ -203,27 +251,31 @@ $num_rows = mysqli_num_rows($result); */
 								<td><?php echo $number;?></td>
 								<td><?php echo $row['hospital'];?></td>
 								<td><?php echo $row['branch'];?></td>
-								<td><?php echo $row['county'];?></td>
 								<td><?php echo $row['email'];?></td>
 								<td><?php echo $row['tel'];?></td>
 								<td><?php echo $row['applied'];?></td>
-								<td><?php echo $row['file'];?></td>
-								<td></td>
-								<td></td>
+								<td><?php echo $row['approval'];?></td>
+								<td><?php if ($row['approvalDate'] != "0000-00-00 00:00:00") {echo $row['approvalDate'];}?></td>
 								</tr>
 								<?php } ?> 
 								  </tbody>
 								</table>
-          <div class="row">
-            <div class="col-md-12 col-sm-12">
-             
-            </div>
+								<?php // Output the page links
+	echo "<div class='pagination'>";
+	for ($i = 1; $i <= $total_Reg_pages; $i++) {
+		if ($i == $page) {
+			echo "<button class='current-page'>$i</button>";
+		} else {
+			echo "<a href='?page=$i'><button>$i</button></a>";
+		}
+	}
+	echo "</div>";
 
-          </div>
-         
+	?>
+         </div>
         </div>
       </div>
-    </div>
+    
     <!-- Modal -->
     <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -245,45 +297,7 @@ $num_rows = mysqli_num_rows($result); */
       </div>
     </footer>
     </div>
-
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	<script>
-$(document).ready(function(){
-// updating the view with notifications using ajax
-function load_unseen_notification(view = '')
-{
- $.ajax({
-  url:"fetch.php",
-  method:"POST",
-  data:{view:view},
-  dataType:"json",
-  success:function(data)
-  {
-   $('.dropdown-menu').html(data.notification);
-   if(data.unseen_notification > 0)
-   {
-    $('.count').html(data.unseen_notification);
-   }
-  }
- });
-}
-load_unseen_notification();
-
- 
-// load new notifications
-$(document).on('click', '.dropdown-toggle', function(){
- $('.count').html('');
- load_unseen_notification('yes');
-});
-setInterval(function(){
- load_unseen_notification();;
-}, 5000);
-
-});
-</script>
-
-	
-    <script src="dashboardjs/jquery.min.js"></script>
+	<script src="dashboardjs/jquery.min.js"></script>
     <script src="dashboardjs/bootstrap.min.js"></script>
     <!--script src="dashboardjs/Chart.min.js"></script-->
     <script src="dashboardjs/templatemo_script.js"></script>

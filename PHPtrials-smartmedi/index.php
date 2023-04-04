@@ -196,7 +196,8 @@
 							</div>
 							<div class="media-body dit-right">
 							<h4>Address</h4>
-							<a href="https://www.google.ae/maps/place/Allimex+Plaza/@-1.3264314,36.841163,17z/data=!3m1!4b1!4m5!3m4!1s0x182f11c085fe364b:0xb5d84beae3a3cd8d!8m2!3d-1.3264314!4d36.8433517?hl=en&authuser=0">Ground floor, room 105<br>Allimex Plaza, Mombasa Road, Nairobi</a>
+							<a href="https://www.google.ae/maps/place/Allimex+Plaza/@-1.3264314,36.841163,17z/data=!3m1!4b1!4m5!3m4!1s0x182f11c085fe364b:0xb5d84beae3a3cd8d!8m2!3d-1.3264314!4d36.8433517?hl=en&authuser=0">
+							Ground floor, room 105<br>Allimex Plaza, Mombasa Road, Nairobi</a>
 							</div>
 						</div>
 						<div class="media cont-line">

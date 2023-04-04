@@ -61,7 +61,6 @@ $conditionNairobi = mysqli_num_rows($conditionNairobiQuery);
 		// Calculate the total number of pages
 		$total_hosp_pages = ceil($total_hosp_rows / $results_per_page);
 	
-	
 //Total users
    $AllDataRes0 = mysqli_query($db, "select * from patients");
    $totalPatientsUsers = mysqli_num_rows($AllDataRes0);

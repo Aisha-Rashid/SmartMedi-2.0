@@ -40,36 +40,7 @@
 
 </head>
 <body id="home" data-spy="scroll" data-target="#navbar-wd" data-offset="98">
-<?php
-$conn=new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or die(mysqli_error($conn));
-if(isset($_POST['submit'])!=""){
-  $name=$_FILES['file']['name'];
-  $size=$_FILES['file']['size'];
-  $type=$_FILES['file']['type'];
-  $temp=$_FILES['file']['tmp_name'];
-  $date = date('Y-m-d H:i:s');
-  //$caption1=$_POST['caption'];
-  //$link=$_POST['link'];
-  
-  $hospital =filter_var ($_POST['hospital'], FILTER_SANITIZE_STRING);
-  $branch =filter_var ($_POST['branch'], FILTER_SANITIZE_STRING);
-  $county = mysqli_real_escape_string($db, $_POST['county']);
-  $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-  $tel = filter_var($_POST['tel'], FILTER_SANITIZE_NUMBER_INT);
-  //$status = 0;
-  
-  move_uploaded_file($temp,"Hospitals/".$name);
 
-$query=$conn->query("INSERT INTO hospitalreg (hospital, branch, county, email, tel, applied, file) VALUES ('$hospital', '$branch', '$county', '$email', '$tel', '$date', '$name')");
-if($query){
-	echo "success";
-//echo"<script>alert('Thank You for registering with SmartMedi. You will receive further communication on your email.'); window.location.href ='/SmartMedi-2.0/PHPtrials-smartmedi/index.php'; </script>";
-}
-else{
-die(mysqli_error($conn));
-}
-}
-?>
 
 
 	<!-- LOADER -->
@@ -97,30 +68,16 @@ die(mysqli_error($conn));
 						
 							<TABLE width=100% >
 							<TR><TD width=50%>Institution Name</TD><TD><input type="text" class="form-control" id="hospital" name="hospital" placeholder="---" required="required"></TD></TR>
-							<TR><TD>Branch</TD><TD><input type="text" class="form-control" id="branch" name="branch" placeholder="---" ></TD></TR>
+							<TR><TD>Branches</TD><TD><input type="number" class="form-control" id="branch" name="branch" placeholder="---" ></TD></TR>
 							<TR><TD>Email</TD><TD><input type="email" class="form-control" id="email" name="email" placeholder="---" required="required"></TD></TR>
 							<TR><TD>Main Telephone number</TD><TD><input type="number" class="form-control" id="tel" name="tel" placeholder="---" required="required"></TD></TR>
-							<TR><TD>County</TD><TD ><SELECT NAME="county" class="form-control" required="required">
-										<OPTION SELECTED="TRUE" DISABLED="dISABLED" >---</OPTION>
-										<?php 
-										$query ="SELECT county FROM counties";
-										$result = mysqli_query($db, $query);
-										if($result->num_rows> 0){
-										  $options= mysqli_fetch_all($result, MYSQLI_ASSOC);
-										}
-										
-											foreach ($options as $option) {
-										?>
-										<option required="required"><?php echo $option['county']; ?> </option>
-										<?php } ?>
-										
-									</SELECT></TD></TR>
+							
 							<TR><TD>Attachment</TD><TD><input type="file" name="file" id="file" required="required"></TD></TR>
 							
 							
 							</TABLE>
 							<br>
-							<input type="submit"  value="SUBMIT" name="submit">
+							<input type="submit"  value="SUBMIT" name="submitHosp">
 							           
 						</form>
 					</div>

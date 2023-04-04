@@ -21,7 +21,7 @@ if (isset($_GET['logout'])) {
 }
 ?>
 
-<!DOCTYPE html>
+<html>
 	<head>
 		<meta charset="utf-8">
 		<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
@@ -111,25 +111,42 @@ die(mysqli_error($conn));
 				</div>
 				<div class="templatemo-content-wrapper">
 					<div class="templatemo-content">
-						<ol class="breadcrumb">
-					<li>Dashboard</a></li>
-					<li>Settings</li>
-					</ol>
+						
 				
-					<div class="row">
-		  <div class="col-md-12 col-sm-12">
-		  	
-              
+			<div class="student-profile py-4">
+  <div class="container">
+		  	<div class="row">
+              <div class="card shadow-sm">
+         
+		  <p><b>
+		  Dr. 
+						<?php 
+            
+            echo $array[2];
+			echo " ";
+			echo $array[3];?><br>
+			<?php 
+            
+            echo $array[1];?><br>
+			<?php 
+            
+            echo $array[6];?><br>
+			<?php 
+            
+            echo $array[4];?><br>
+		  </b></p>
+          
+        </div><hr>
 							<form id="personal-details" method="post" action="">
 								<table width = 70%>
 								
 									<tr><td colspan = "2" ><h4><u><b>User Details</b></u></h4></td></tr>
-									<tr><td><h4>Workplace :</h4></td>
+									<tr><td><p>Workplace :</p></td>
 									<td>
 									<SELECT NAME="hospital" class="form-control">
 										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
 										<?php 
-										$query ="SELECT hospitalname FROM hospitals";
+										$query ="SELECT hospital FROM hospitals";
 										$result = mysqli_query($db, $query);
 										if($result->num_rows> 0){
 										  $options= mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -137,13 +154,13 @@ die(mysqli_error($conn));
 										
 											foreach ($options as $option) {
 										?>
-										<option><?php echo $option['hospitalname']; ?> </option>
+										<option><?php echo $option['hospital']; ?> </option>
 										<?php } ?>
 										
 									</SELECT>
 									</td></tr>
-									<tr><td><h4>Work ID :</h4></td><td><input type="number" class="form-control" name="workid"></td></tr>
-									<tr><td><h4>Specialty :</h4></td>
+									<tr><td><p>Work ID :</p></td><td><input type="number" class="form-control" name="workid"></td></tr>
+									<tr><td><p>Specialty :</p></td>
 									<td>
 									<SELECT NAME="specialty" class="form-control">
 										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
@@ -162,9 +179,9 @@ die(mysqli_error($conn));
 									</SELECT>
 									</td></tr>
 									<tr><td colspan = "2" ><h4><u><b>Change Password </b></u></h4></td></tr>
-									<tr><td><h4>Enter current password :</h4></td><td><input type="password" class="form-control" name="current_password"></td></tr>
-									<tr><td><h4>New Password :</h4></td><td><input type="password" class="form-control" name="new_password"></td></tr>
-									<tr><td><h4>Confirm Password :</h4></td><td><input type="password" class="form-control" name="conf_password"></td></tr>
+									<tr><td><p>Enter current password :</p></td><td><input type="password" class="form-control" name="current_password"></td></tr>
+									<tr><td><p>New Password :</p></td><td><input type="password" class="form-control" name="new_password"></td></tr>
+									<tr><td><p>Confirm Password :</p></td><td><input type="password" class="form-control" name="conf_password"></td></tr>
 									
 								</table>
 								<br><br>
@@ -202,7 +219,11 @@ die(mysqli_error($conn));
 					</div>
 				</div>
 				<!-- End popup -->
-				
+			<footer class="templatemo-footer">
+      <div class="templatemo-copyright">
+        <p>Copyright &copy; 2022 SmartMedi</p>
+      </div>
+    </footer>	
 				
 				
 				

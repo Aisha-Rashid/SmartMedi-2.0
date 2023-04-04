@@ -97,7 +97,7 @@ if(isset($_POST['sub2'])!=""){
 	$telephone = mysqli_real_escape_string($db, $_POST['telephone']);
 	
 	if (!empty($kinFirstName) && !empty($kinLastName) && !empty($relationship) && !empty($telephone)) {
-	$query=$conn->query("update nextofkin set kinFirstName='$kinFirstName', kinLastName='$kinLastName', relationship='$relationship', telephone='$telephone' where IDNo='$unique'");
+	$query=$conn->query("INSERT INTO nextofkin (kinFirstName, kinLastName, relationship, telephone, IDNo) VALUES ('$kinFirstName', '$kinLastName', '$relationship', '$telephone', '$unique')");
 	}
 	
 if($query){
@@ -150,13 +150,15 @@ die(mysqli_error($conn));
 //Insurance Details
 if(isset($_POST['sub4'])!=""){
 	
-	$insurancetype = mysqli_real_escape_string($db, $_POST['insurancetype']);
+	$insurer = mysqli_real_escape_string($db, $_POST['insurer']);
 	$insurancenumber = mysqli_real_escape_string($db, $_POST['insurancenumber']);
 	$insuranceprincipal = mysqli_real_escape_string($db, $_POST['insuranceprincipal']);
 	$expiry = mysqli_real_escape_string($db, $_POST['expiry']);
+	$NA = "NA";
+	$NIL = 0;
 	
-	if (!empty($insurancetype) && !empty($insurancenumber) && !empty($insuranceprincipal) && !empty($expiry)) {
-	$query=$conn->query("update medicalcover set insurancetype='$insurancetype', insurancenumber='$insurancenumber', insuranceprincipal='$insuranceprincipal', expiry='$expiry' where IDNo='$unique'");
+	if (!empty($insurer) && !empty($insurancenumber) && !empty($insuranceprincipal) && !empty($expiry)) {
+	$query=$conn->query("INSERT INTO medicalcover (nhiftype, nhifnumber, insurancetype, insurancenumber, insuranceprincipal, expiry, IDNo) VALUES ('$NA', '$NIL', '$insurer', '$insurancenumber', '$insuranceprincipal', '$expiry', '$unique')");
 	}
 	
 if($query){
@@ -266,7 +268,7 @@ die(mysqli_error($conn));
 							$query="select * from nextofkin WHERE IDNO = '$unique'";
 							$res = mysqli_query($db, $query);
 							while($row=mysqli_fetch_array($res)){
-							
+							$id=$row['id'];
 							$kinFirstName=$row['kinFirstName'];
 							$kinLastName=$row['kinLastName'];
 							$relationship=$row['relationship'];
@@ -274,14 +276,16 @@ die(mysqli_error($conn));
 							?>
 									<tr><td><p>Name :</p></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['kinFirstName']; echo " "; echo $row['kinLastName']; ?>"></b></td></tr>
 									<tr><td><p>Relationship :</p></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['relationship'] ?>"></b></td></tr>
-									<tr><td><p>Telephone Number :</p></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['telephone'] ?>"></b></td></tr>
+									<tr><td><p>Telephone Number :</p></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['telephone'] ?>"></b>
+									<a href="deleteaccount.php?type=kin&id=<?php echo $row['id'] ?>" class="btn btn-danger" 
+						onclick="return confirm('Are you sure you want to delete this record?')">Delete</a></td></tr>
 									<?php } ?> 
 									<tr><td colspan = "2" ><h4><u><b>New Details </b></u></h4></td></tr>
 									<tr><td><p>First Name :</p></td><td><input type="text" class="form-control" name="kinFirstName"></td></tr>
 									<tr><td><p>Last Name :</p></td><td><input type="text" class="form-control" name="kinLastName"></td></tr>
 									<tr><td><p>Relationship :</p></td><td>
 									<SELECT NAME="relationship" class="form-control">
-										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>  
+										<OPTION SELECTED="TRUE" DISABLED="disabled">---</OPTION>  
 										<OPTION VALUE="Parent">Parent
 										<OPTION VALUE="Significant other">Significant other
 										<OPTION VALUE="Sibling">Sibling
@@ -427,31 +431,41 @@ die(mysqli_error($conn));
 								<table width = 70%>
 								  
 								  <?php 
-							$query="select * from medicalcover WHERE IDNO = '$unique'";
+							$query="select nhiftype, nhifnumber from medicalcover WHERE IDNO = '$unique' and nhiftype !='NA'";
 							$res = mysqli_query($db, $query);
 							while($row=mysqli_fetch_array($res)){
 							
 							$nhiftype=$row['nhiftype'];
 							$nhifnumber=$row['nhifnumber'];
-							$insurancetype=$row['insurancetype'];
-							$insurancenumber=$row['insurancenumber'];
-							$insuranceprincipal=$row['insuranceprincipal'];
-							$expiry=$row['expiry'];
 							?>
 									<tr><td colspan = "2" ><h4><u><b>Current Insurance Details</b></u></h4></td></tr>
 									<tr><td colspan = "2" ><h4><b>Nhif</b></h4></td></tr>
 									<tr><td><p>Cover Type :</p></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['nhiftype'] ?>"></b></td></tr>
 									<tr><td><p>Member Number :</p></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['nhifnumber'] ?>"></b></td></tr>
+									</table><?php } ?>
+									<table width = 70%>
+									  <?php 
+							$query="select id, insurancetype, insurancenumber, insuranceprincipal, expiry from medicalcover WHERE IDNO = '$unique'";
+							$res = mysqli_query($db, $query);
+							while($row=mysqli_fetch_array($res)){
+							$id = $row['id'];
+							$insurancetype=$row['insurancetype'];
+							$insurancenumber=$row['insurancenumber'];
+							$insuranceprincipal=$row['insuranceprincipal'];
+							$expiry=$row['expiry'];
+							?>
 									<tr><td colspan = "2" ><h4><b>Other Insurance</b></h4></td></tr>
-									<tr><td><p>Insurance Name :</p></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['insurancetype'] ?>"></b></td></tr>
+									<tr><td width =40%><p>Insurance Name :</p></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['insurancetype'] ?>"></b></td></tr>
 									<tr><td><p>Member Number :</p></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['insurancenumber'] ?>"></b></td></tr>
 									<tr><td><p>Principal Member :</p></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['insuranceprincipal'] ?>"></b></td></tr>
-									<tr><td><p>Expiry Date :</p></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['expiry'] ?>"></b></td></tr>
+									<tr><td><p>Expiry Date :</p></td><td><b><input disabled type="text" class="form-control" value="<?php echo $row['expiry'] ?>"></b>
+									<a href="deleteaccount.php?type=insurance&id=<?php echo $row['id'] ?>" class="btn btn-danger" 
+						onclick="return confirm('Are you sure you want to delete this record?')">Delete</a></td></tr>
 									<?php } ?> 
 									<tr><td colspan = "2" ><h4><u><b>New Insurance Details </b></u></h4></td></tr>
 									<tr><td><h4>Insurance Name :</h4></td>
 									<td>
-									<SELECT NAME="insurancetype" class="form-control">
+									<SELECT NAME="insurer" class="form-control">
 										<OPTION SELECTED="TRUE" DISABLED="dISABLED">---</OPTION>
 										<?php 
 										$query ="SELECT insurer FROM insurance";

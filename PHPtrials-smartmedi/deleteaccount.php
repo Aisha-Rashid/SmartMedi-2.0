@@ -30,7 +30,7 @@ $conn=new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or
 	}
 	
 	//Delete Hospital
-	if ($_GET['type'] == 'hospital'){
+	elseif ($_GET['type'] == 'hospital'){
 		
 		$tables = array("doctors","hospitals");
 		foreach($tables as $table) {
@@ -44,4 +44,28 @@ $conn=new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or
 		}
 		}
 }
+//Delete kin
+	elseif ($_GET['type'] == 'kin') {
+		
+		$query = $conn->query("DELETE FROM nextofkin WHERE id = '$id'");
+		
+		if($query){
+		header("location:preferences.php");
+		}
+		else{
+		die(mysqli_error($conn));
+		}
+	}
+//Delete insurance
+	elseif ($_GET['type'] == 'insurance') {
+		
+		$query = $conn->query("DELETE FROM medicalcover WHERE id = '$id'");
+		
+		if($query){
+		header("location:preferences.php");
+		}
+		else{
+		die(mysqli_error($conn));
+		}
+	}
 ?>

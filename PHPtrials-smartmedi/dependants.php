@@ -68,7 +68,8 @@ if (isset($_SESSION['IDNo'])) {
 
 if(isset($_POST['submit'])!=""){
 	
-	$name =filter_var ($_POST['name'], FILTER_SANITIZE_STRING);
+	$FirstName =filter_var ($_POST['FirstName'], FILTER_SANITIZE_STRING);
+	$LastName =filter_var ($_POST['LastName'], FILTER_SANITIZE_STRING);
 	$dob = mysqli_real_escape_string($db, $_POST['dob']);
 	$gender = mysqli_real_escape_string($db, $_POST['gender']);
 	$bloodgroup = mysqli_real_escape_string($db, $_POST['bloodgroup']);
@@ -80,12 +81,13 @@ if(isset($_POST['submit'])!=""){
 	$condition3 = mysqli_real_escape_string($db, $_POST['condition3']);
 	$condition4 = mysqli_real_escape_string($db, $_POST['condition4']);
 	$condition5 = mysqli_real_escape_string($db, $_POST['condition5']);
+	$role="dependant";
 	
 	if (!empty($condition1) || !empty($condition2) || !empty($condition3) || !empty($condition4) || !empty($condition5)) {
 	$medical_conditions = $condition1 . ' , ' . $condition2 . ' , ' . $condition3 . ' , ' . $condition4 . ' , ' . $condition5  . ' , ' . $notes;
 	}
-	$query=$conn->query("INSERT INTO dependants (`IDNo`, `name`, `dob`, `gender`, `blood_group`, `allergies`, `medical_conditions`) VALUES 
-	('$unique', '$name', '$dob', '$gender', '$bloodgroup', '$allergies', '$medical_conditions')");
+	$query=$conn->query("INSERT INTO dependants (`IDNo`, `FirstName`, `LastName`, `dob`, `gender`, `blood_group`, `allergies`, `medical_conditions`, `role`) VALUES 
+	('$unique', '$FirstName', '$LastName', '$dob', '$gender', '$bloodgroup', '$allergies', '$medical_conditions', '$role')");
 if($query){
 header("location:uploadProfile.php?filename=$name");
 }
@@ -117,7 +119,8 @@ die(mysqli_error($conn));
 						<form class="form-horizontal templatemo-signin-form" action="" method="post">
 								<TABLE width=100%>
 								<TR bgcolor="#d3fcf3"><TD colspan="2"><p><b>Child Data</b></p></TD></TR>
-								<TR><TD width=40%><label>Full Name:</label></TD><TD><input type="text" name="name" class="form-control" required="required"></TD></TR>
+								<TR><TD width=40%><label>First Name:</label></TD><TD><input type="text" name="FirstName" class="form-control" required="required"></TD></TR>
+								<TR><TD width=40%><label>Last Name:</label></TD><TD><input type="text" name="LastName" class="form-control" required="required"></TD></TR>
 								<TR><TD><label>Date of Birth:</label></TD><TD><input type="date" name="dob" class="form-control" required="required"></TD></TR>
 								<TR><TD><label>Gender:</label></TD><TD><select name="gender" class="form-control">
 										<OPTION SELECTED="TRUE" DISABLED="DISABLED">---</OPTION>  

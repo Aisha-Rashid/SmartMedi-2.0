@@ -43,7 +43,14 @@ if (isset($_GET['logout'])) {
     <link rel="stylesheet" href="css/custom.css"-->
 	<!--Password eye icon-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-	
+	 <!-- table CSS ->
+    <link rel="stylesheet" href="css/table.css"-->
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
 <body id="home" data-spy="scroll" data-target="#navbar-wd" data-offset="98">
 <?php
@@ -55,50 +62,17 @@ extract($_REQUEST);
 
 $encrypted_id = $_GET['filename'];
 $id = base64_decode($encrypted_id);
-$date = date('Y-m-d_H:i:s');
 
-$Hospitalapproval= mysqli_query($db, "select * from hospitalreg where id='$id'");
-if (mysqli_num_rows($Hospitalapproval) == 1) {
-$update_query = "UPDATE hospitalreg SET approval='approved', approvalDate='$date' WHERE id='$id'";
+$Hospitalregistered= mysqli_query($db, "select * from hospitalreg where id='$id'");
+if (mysqli_num_rows($Hospitalregistered) == 1) {
+$update_query = "UPDATE hospitalreg SET status = 1, approval='pending' WHERE id='$id'";
 mysqli_query($db, $update_query);
 
-} 
- 
-$query = "select * from hospitalreg where id='$id'";
-$res = mysqli_query($db, $query);
-$array=mysqli_fetch_row($res);
-   $rows = mysqli_num_rows($res);
-   $hospital = $array[1];
-   
-  
-
-if (isset($_POST['reg_doc'])) {
- 
-	$fname =filter_var ($_POST['fname'], FILTER_SANITIZE_STRING);
-	$lname =filter_var ($_POST['lname'], FILTER_SANITIZE_STRING);
-	$nationalid = filter_var($_POST['nationalid'], FILTER_SANITIZE_NUMBER_INT);
-	$workid = filter_var($_POST['workid'], FILTER_SANITIZE_NUMBER_INT);
-	$specialty = mysqli_real_escape_string($db, $_POST['specialty']);
-	$password ="SMedi@123";
-	$organization = $_POST['organization'];
-	
-	
-	
-		// Inserting data into table
-		$query = "INSERT INTO doctors (nationalid, fname, lname, hospital, workid, specialty, password)
-				VALUES('$nationalid' , '$fname' , '$lname' , '$organization', '$workid' , '$specialty', '$password')";
-		
-		mysqli_query($db, $query);
-$hospitalregistered=mysqli_query($db, "select * from hospitalreg where hospital='$organization'");
-	$row = mysqli_fetch_array($hospitalregistered);
-	if ($row) {
-        // Extract the value from the array into a variable
-        $id = $row['id'];
-		$encrypted_id = base64_encode($id);
-     
-header("Location: DocRegistration.php?filename=$encrypted_id");}
-exit();
 }
+ 
+/* $query = "select * from hospitalreg where id='$id'";
+$res = mysqli_query($db, $query);
+ */
 ?>
 
 	<!-- LOADER -->
@@ -110,50 +84,52 @@ exit();
     <!-- END LOADER -->
 	
 	<!-- Start Medical -->
-	<div id="medical" class="contact-box">
+	<div  class="contact-box">
 	
 		<div class="container">
 		<img src="dashboardimages/favicon.ico" alt="Smartmedi">
 			<div class="row">
-			
+			<?php 
+			 $billingquery = "SELECT hospitalreg.id, hospitalreg.hospital, hospitalreg.email, hospitalreg.applied, hospitalreg.file, 
+			 billing.hospitalname, billing.amountDue, billing.amountPaid, billing.datePaid, billing.invoice
+			 FROM hospitalreg, billing WHERE hospitalreg.hospital = billing.hospitalname AND hospitalreg.id ='$id'" ;
+			$res = mysqli_query($db, $billingquery);
+			while($row=mysqli_fetch_array($res)){
+				$hospital=$row['hospital'];
+				$email=$row['email'];
+				$applied=$row['applied'];
+				$file=$row['file'];
+				$amountDue=$row['amountDue'];
+				$amountPaid=$row['amountPaid'];
+				$invoice=$row['invoice'];
+				$datePaid=$row['datePaid'];
+				$encrypted_id = base64_encode($id);
+				$url = "DocRegistration.php?filename=$encrypted_id";
+				?>
 				<div class="col-lg-12 col-xs-12">
-					<h3><b>Medical Practictioner Registration Form</b></h3>
-					<a href="admindash.php"><i class="fa fa-arrow-left" aria-hidden="true"></i><b> Back to Dashboard</b></a>
+					<h3><b>Medical Organization Registration Form</b></h3>
+					
+					<a href="admindash.php"><i class="fa fa-arrow-left" aria-hidden="true"></i><b> Back to Dashboard</b></a><br>
+					<font size="2"><i><b>Note: </b>Only when the dues are fully paid will one be able to register staff.</i></font>
 					<hr>
 					<div class="contact-block">
 						<form class="form-horizontal templatemo-signin-form" method="post" action="DocRegistration.php">
 						
 							<TABLE width=100% >
-							<input type="hidden" name="organization" value="<?php echo $array[1]; ?>">
-							<TR><TD width=50%>First Name</TD><TD><input type="text" class="form-control" id="fname" name="fname" placeholder="---" required="required"></TD></TR>
-							<TR><TD>Last Name</TD><TD><input type="text" class="form-control" id="lname" name="lname" placeholder="---" required="required"></TD></TR>							
-							<TR><TD>National ID</TD><TD ><input type="number" class="form-control" id="nationalid" name="nationalid" placeholder="---" required="required"></TD></TR>
-							<TR><TD>Organization</TD><TD><input disabled type="text" class="form-control" value="<?php echo $array[1];?>"></TD>
-							 </TR>
-							<TR><TD>Work ID</TD><TD><input type="number" class="form-control" id="workid" name="workid" placeholder="---" required="required"></TD></TR>
-							<TR><TD>Specialty</TD><TD>
-							<select name="specialty" class="form-control">
-										<OPTION SELECTED="TRUE" DISABLED="DISABLED">---</OPTION>  
-										<?php 
-										$query ="SELECT specialty FROM docspecialty";
-										$result = mysqli_query($db, $query);
-										if($result->num_rows> 0){
-										  $options= mysqli_fetch_all($result, MYSQLI_ASSOC);
-										}
-										
-											foreach ($options as $option) {
-										?>
-										<option><?php echo $option['specialty']; ?> </option>
-										<?php 
-										}
-										?>
-									</SELECT>
-							
-							</TD></TR>
+							<TR><TD width=50%>Name</TD><TD><p><b><?php echo $row['hospital'];?></b></p></TD></TR>
+							<TR><TD>Email</TD><TD><p><?php echo $row['email'];?></p></TD></TR>							
+							<TR><TD>Applied on</TD><TD><p><?php echo $row['applied'];?></p></TD></TR>
+							<TR><TD>Amount Due:</TD><TD><p><?php echo $row['amountDue'];?></p></TD></TR>
+							<TR><TD>Amount paid:</TD><TD><p><?php echo $row['amountPaid']; ?></p></TD></TR>
+							<TR><TD>Invoice No:</TD><TD><p><?php echo $row['invoice']; ?></p></TD></TR>
+							<TR><TD>Date paid:</TD><TD><p><?php echo $row['datePaid']; ?></p></TD></TR>
+							<TR><TD>File</TD><TD><a href="download.php?filename=<?php echo $row['file'];?>">
+							<?php echo $row['file'];?><i class="fa fa-download" aria-hidden="true"></i></a></TD></TR>
+							<?php } ?>
 							</TABLE>
 							<br>
-							<button type="submit" class="btn"
-										name="reg_doc">Register</button>
+							
+							<a href="<?php echo $url?>" class="btn btn-primary <?php echo ($row['amountDue'] !== $row['amountPaid']) ? 'disabled' : ''; ?> ">Register Staff</a>
 							           
 						</form>
 					</div>
