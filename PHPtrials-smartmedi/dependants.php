@@ -81,15 +81,15 @@ if(isset($_POST['submit'])!=""){
 	$condition3 = mysqli_real_escape_string($db, $_POST['condition3']);
 	$condition4 = mysqli_real_escape_string($db, $_POST['condition4']);
 	$condition5 = mysqli_real_escape_string($db, $_POST['condition5']);
-	$role="dependant";
+	
 	
 	if (!empty($condition1) || !empty($condition2) || !empty($condition3) || !empty($condition4) || !empty($condition5)) {
 	$medical_conditions = $condition1 . ' , ' . $condition2 . ' , ' . $condition3 . ' , ' . $condition4 . ' , ' . $condition5  . ' , ' . $notes;
 	}
-	$query=$conn->query("INSERT INTO dependants (`IDNo`, `FirstName`, `LastName`, `dob`, `gender`, `blood_group`, `allergies`, `medical_conditions`, `role`) VALUES 
-	('$unique', '$FirstName', '$LastName', '$dob', '$gender', '$bloodgroup', '$allergies', '$medical_conditions', '$role')");
+	$query=$conn->query("INSERT INTO dependants (`IDNo`, `FirstName_dep`, `LastName_dep`, `dob`, `gender_dep`, `blood_group`, `allergies`, `medical_conditions`, `notes`) VALUES 
+	('$unique', '$FirstName', '$LastName', '$dob', '$gender', '$bloodgroup', '$allergies', '$medical_conditions', '$notes')");
 if($query){
-header("location:uploadProfile.php?filename=$name");
+header("location:uploadProfile.php?filename=$FirstName");
 }
 else{
 die(mysqli_error($conn));

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 04, 2023 at 03:26 PM
+-- Generation Time: Apr 04, 2023 at 06:51 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -195,29 +195,29 @@ INSERT INTO `counties` (`id`, `county`) VALUES
 --
 
 CREATE TABLE `dependants` (
-  `ID` int(11) NOT NULL,
+  `ID_dep` int(11) NOT NULL,
   `IDNo` int(11) NOT NULL,
-  `FirstName` varchar(100) NOT NULL,
-  `LastName` varchar(100) NOT NULL,
+  `FirstName_dep` varchar(100) NOT NULL,
+  `LastName_dep` varchar(100) NOT NULL,
   `dob` date NOT NULL,
-  `gender` varchar(20) NOT NULL,
+  `gender_dep` varchar(20) NOT NULL,
   `blood_group` varchar(20) NOT NULL,
   `allergies` varchar(255) NOT NULL,
   `medical_conditions` varchar(255) NOT NULL,
-  `filename` varchar(100) NOT NULL,
-  `role` varchar(100) NOT NULL
+  `notes` text NOT NULL,
+  `filename` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `dependants`
 --
 
-INSERT INTO `dependants` (`ID`, `IDNo`, `FirstName`, `LastName`, `dob`, `gender`, `blood_group`, `allergies`, `medical_conditions`, `filename`, `role`) VALUES
+INSERT INTO `dependants` (`ID_dep`, `IDNo`, `FirstName_dep`, `LastName_dep`, `dob`, `gender_dep`, `blood_group`, `allergies`, `medical_conditions`, `notes`, `filename`) VALUES
 (13, 54737364, 'fatumajuma', '', '1999-06-05', 'Female', '', 'reactive to paracetamol', 'jkcadlvdbvbdvds test', '', ''),
-(14, 54737364, 'Aisha Rashid', '', '1998-06-05', 'Female', 'A+', 'reactive to paracetamol', 'jkcadlvdbvbdvds test', 'blog-img-03.jpg', ''),
-(15, 54737364, 'fatuma rashid', '', '2020-03-07', 'Female', 'O+', 'reactive to paracetamol', 'jkcadlvdbvbdvds test', 'gallery-06.jpg', ''),
-(16, 54737364, 'rehema rashid', '', '2018-06-05', 'Female', 'O-', 'sulphur, pollen', 'jkcadlvdbvbdvds test', 'gallery-03.jpg', ''),
-(17, 54737364, 'trial child', '', '2021-07-05', 'Male', 'A-', 'Pollen', 'Gastro-intestinal disorders Skin disorders   ', 'doc3.png', ''),
+(14, 54737364, 'Aisha Rashid', '', '1998-06-05', 'Female', 'A+', 'reactive to paracetamol', 'jkcadlvdbvbdvds test', '', 'blog-img-03.jpg'),
+(15, 54737364, 'fatuma rashid', '', '2020-03-07', 'Female', 'O+', 'reactive to paracetamol', 'jkcadlvdbvbdvds test', '', 'gallery-06.jpg'),
+(16, 54737364, 'rehema rashid', '', '2018-06-05', 'Female', 'O-', 'sulphur, pollen', 'jkcadlvdbvbdvds test', '', 'gallery-03.jpg'),
+(17, 54737364, 'trial child', '', '2021-07-05', 'Male', 'A-', 'Pollen', 'Gastro-intestinal disorders Skin disorders   ', '', 'doc3.png'),
 (19, 54737364, 'trial child three', '', '2022-07-06', 'Male', 'A-', 'nil', 'Respiratory and Ear Nose and Throat (ENT) disorders , Musculoskeletal disorders ,  ,  ,  , asthma, arthritis', '', '');
 
 -- --------------------------------------------------------
@@ -253,14 +253,18 @@ INSERT INTO `docnotes` (`id`, `IDNo`, `docid`, `date`, `notes`) VALUES
 
 CREATE TABLE `docnotesdependants` (
   `id` int(11) NOT NULL,
-  `IDNo` int(11) NOT NULL,
   `dependantID` int(11) NOT NULL,
   `docid` int(11) NOT NULL,
-  `docname` varchar(100) NOT NULL,
-  `hospital` varchar(100) NOT NULL,
   `date` date NOT NULL,
   `notes` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `docnotesdependants`
+--
+
+INSERT INTO `docnotesdependants` (`id`, `dependantID`, `docid`, `date`, `notes`) VALUES
+(1, 15, 648392384, '2023-04-04', 'Developed Asthma- Mild stages');
 
 -- --------------------------------------------------------
 
@@ -583,7 +587,8 @@ INSERT INTO `medicalcover` (`id`, `nhiftype`, `nhifnumber`, `insurancetype`, `in
 (6, 'Employee', 3547826, '', 0, '', '0000-00-00', 367482725),
 (8, 'Individual', 35727489, 'ICEA LION General Insurance Company Limited', 64829472, 'Allan Keverenge', '2024-01-01', 2147485),
 (12, 'Individual', 456738, 'UAP Life Assurance Limited', 65378409, 'Goosey Lucy', '2024-03-07', 66388463),
-(13, 'Individual', 14381499, 'APA Insurance Limited', 1530788, 'Aisha Wanja Rashid', '2023-07-01', 33179878);
+(13, 'Individual', 14381499, 'APA Insurance Limited', 1530788, 'Aisha Wanja Rashid', '2023-07-01', 33179878),
+(14, 'Individual', 5638463, 'Metropolitan Life Insurance Kenya Limited', 34566543, 'Trial Three', '2024-01-09', 54737364);
 
 -- --------------------------------------------------------
 
@@ -750,12 +755,18 @@ ALTER TABLE `counties`
 -- Indexes for table `dependants`
 --
 ALTER TABLE `dependants`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID_dep`);
 
 --
 -- Indexes for table `docnotes`
 --
 ALTER TABLE `docnotes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `docnotesdependants`
+--
+ALTER TABLE `docnotesdependants`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -856,13 +867,19 @@ ALTER TABLE `counties`
 -- AUTO_INCREMENT for table `dependants`
 --
 ALTER TABLE `dependants`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `ID_dep` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `docnotes`
 --
 ALTER TABLE `docnotes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `docnotesdependants`
+--
+ALTER TABLE `docnotesdependants`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `docspecialty`
@@ -904,7 +921,7 @@ ALTER TABLE `insurance`
 -- AUTO_INCREMENT for table `medicalcover`
 --
 ALTER TABLE `medicalcover`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `nextofkin`

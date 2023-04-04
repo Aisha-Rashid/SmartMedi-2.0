@@ -37,6 +37,9 @@ if (isset($_GET['logout'])) {
 		<link rel="stylesheet" href="dashboardcss/templatemo_main.css">
 		<link rel="shortcut icon" href="dashboardimages/favicon.ico" type="image/x-icon">
 		<link rel="apple-touch-icon" href="dashboardimages/apple-touch-icon.png">
+		<link rel="stylesheet" href="dashboardcss/custom.css">
+		<!--Password eye icon-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 		
 	</head>
  <?php if (isset($_SESSION['workID'])) :
@@ -88,19 +91,7 @@ die(mysqli_error($conn));
 		<!-- Start Preferences -->
 		<div id="main-wrapper">
 			<div class="template-page-wrapper">
-				<!--div class="navbar-collapse collapse templatemo-sidebar">
-					<ul class="templatemo-sidebar-menu">
-						<li>
-							
-								<img src="dashboardimages/favicon.ico" alt="Smartmedi">
-							
-						</li>
-						<li><a href="DocDashboard.php"><i class="fa fa-home"></i>Dashboard</a></li>
-						
-						<li class="active"><a href="#"><i class="fa fa-cog"></i>Settings</a></li>
-						<li><a href="javascript:;" data-toggle="modal" data-target="#confirmModal"><i class="fa fa-sign-out"></i>Sign Out</a></li>
-					</ul>
-				</div-->
+				
 				<div class="templatemo-content-wrapper">
 					<div class="templatemo-content">
 						<!--ol class="breadcrumb">
@@ -116,9 +107,12 @@ die(mysqli_error($conn));
 								<table width = 70%>
 								
 									<tr><td colspan = "2" ><h4><u><b>Change Password </b></u></h4></td></tr>
-									<tr><td><h4>Enter current password :</h4></td><td><input type="password" class="form-control" name="current_password"></td></tr>
-									<tr><td><h4>New Password :</h4></td><td><input type="password" class="form-control" name="new_password"></td></tr>
-									<tr><td><h4>Confirm Password :</h4></td><td><input type="password" class="form-control" name="conf_password"></td></tr>
+									<tr><td><h4>Enter current password :</h4></td><td><input type="password" class="form-control" id="current_password" name="current_password">
+									<span toggle="#current_password" class="fa fa-fw fa-eye field-icon toggle-password" ></span></td></tr>
+									<tr><td><h4>New Password :</h4></td><td><input type="password" class="form-control" name="new_password" id="new_password">
+									<span toggle="#new_password" class="fa fa-fw fa-eye field-icon toggle-password" ></span></td></tr>
+									<tr><td><h4>Confirm Password :</h4></td><td><input type="password" class="form-control" name="conf_password" id="conf_password">
+									<span toggle="#conf_password" class="fa fa-fw fa-eye field-icon toggle-password" ></span></td></tr>
 									
 								</table>
 								<br><br>
@@ -172,25 +166,16 @@ die(mysqli_error($conn));
 		<script type="text/javascript"></script>
 
 		<script>
-			var coll = document.getElementsByClassName("collapsible");
-			var i;
+			$(".toggle-password").click(function() {
 
-			for (i = 0; i < coll.length; i++) {
-				coll[i].addEventListener("click", function() {
-					this.classList.toggle("active");
-					var content = this.nextElementSibling;
-					if (content.style.maxHeight) {
-						content.style.maxHeight = null;
-					} else {
-						content.style.maxHeight = content.scrollHeight + "px";
-					}
-				});
-			}
-
-			var loadFile = function(event) {
-				var image = document.getElementById("output");
-				image.src = URL.createObjectURL(event.target.files[0]);
-			};
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  var input = $($(this).attr("toggle"));
+  if (input.attr("type") == "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+});
 		</script>
 	<?php endif ?>
 	</body>

@@ -6,10 +6,6 @@ if (!isset($_SESSION['nationalid'])) {
 	header('location: DocLogin.php');
 }
 
-// Logout button will destroy the session, and
-// will unset the session variables
-// User will be headed to 'login.php'
-// after logging out
 if (isset($_GET['logout'])) {
 	session_destroy();
 	unset($_SESSION['nationalid']);
@@ -31,14 +27,13 @@ if (isset($_GET['logout'])) {
 </head>
 <body>
 <?php if (isset($_SESSION['nationalid'])) : 
-   
-   
+ 
    $unique = $_SESSION['nationalid'];
    $query = "SELECT * FROM `doctors` WHERE nationalid = '$unique'";
    $res = mysqli_query($db, $query);
    $array=mysqli_fetch_row($res);
    $rows = mysqli_num_rows($res);
-   
+
    ?>
  
   
@@ -52,8 +47,9 @@ if (isset($_GET['logout'])) {
 				<img src="dashboardimages/favicon.ico" alt="Smartmedi">
 				
 				</li>
-				<li class="active"><a href="#"><i class="fa fa-home"></i>Dashboard</a></li>
-				<li><a href="minors.php"><i class="fa fa-child"></i>Children Records</a></li>
+				<li><a href="DocDashboard.php"><i class="fa fa-home"></i>Dashboard</a></li>
+				<li class="active"><a href="#"><i class="fa fa-child"></i>Children Records</a></li>
+				
 				<li><a href="DocSettings.php"><i class="fa fa-cog"></i>Settings</a></li>
 				<li><a href="javascript:;" data-toggle="modal" data-target="#confirmModal"><i class="fa fa-sign-out"></i>Sign Out</a></li>
 			</ul>
@@ -89,7 +85,7 @@ if (isset($_GET['logout'])) {
 		  </b></p>
           
         </div><hr>
-		<h3 class="mb-0" align ="center" ><i class="far fa-clone pr-1"></i>Record Search</h3>
+		<h3 class="mb-0" align ="center" ><i class="far fa-clone pr-1"></i>Minors Record Search</h3>
 		
 		<form method="post" action="" >
 		<TABLE width=70% align ="center">
@@ -109,7 +105,6 @@ if (isset($_GET['logout'])) {
 	      <tr>
 	        <!--th>#</th-->
 	        <th>Patient Name</th>
-	        <th>ID No</th>
 			<th>Age</th>
 			<th>Gender</th>
 			<th>Action</th>
@@ -125,30 +120,29 @@ if (isset($_GET['logout'])) {
 					$db = "phptrials-smartmedi";
 					$conn = new mysqli($servername, $username, $password, $db);
 					if(!empty($_POST['search'])) {
-					$result = $conn->query("select * from patients where FirstName like '%$search%' or LastName like '%$search%' or IDNo like '%$search'");
+					$result = $conn->query("select * from dependants where FirstName_dep like '%$search%' or LastName_dep like '%$search%'");
 
 					if ($result->num_rows > 0){
 					while($row = $result->fetch_assoc() ){
 						$rowcount=mysqli_num_rows($result);
 						
-						$DOB=$row['DOB'];
-						$age = $DOB;
+						$dob=$row['dob'];
+						$age = $dob;
 						$year = explode('-', $age);
 						$patientAge = date("Y") - $year[0];
-						$FirstName=$row['FirstName'];
-						$LastName=$row['LastName'];
-						$IDNo=$row['IDNo'];
-						$gender=$row['gender'];
-						$ID=$row['ID'];
-						$encrypted_id = base64_encode($ID);
-						$url = "medicalhist.php?filename=$encrypted_id";
-						$link = urlencode(base64_encode($row['ID']));
+						
+						$FirstName_dep=$row['FirstName_dep'];
+						$LastName_dep=$row['LastName_dep'];
+						$gender_dep=$row['gender_dep'];
+						$ID_dep=$row['ID_dep'];
+						$encrypted_id = base64_encode($ID_dep);
+						$url = "medicalhist_dep.php?filename=$encrypted_id";
+						$link = urlencode(base64_encode($row['ID_dep']));
 ?>				
      			<tr>	
-                        <td><?php echo $row['FirstName'];  echo " "; echo $row['LastName'];  ?></td>
-						<td><?php echo $row['IDNo'] ?></td>	
+                        <td><?php echo $row['FirstName_dep'];  echo " "; echo $row['LastName_dep'];  ?></td>
 						<td><?php echo $patientAge ?></td>
-						<td><?php echo $row['gender'] ?></td>
+						<td><?php echo $row['gender_dep'] ?></td>
 						<td><a href="<?php echo $url ?>" title="click to view">
 						<button>View</button>
 						</a></td>

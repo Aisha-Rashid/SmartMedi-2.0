@@ -82,18 +82,18 @@ if (isset($_GET['logout'])) {
 											$query = "SELECT * FROM dependants WHERE IDNo = '$unique'";
 											$res = mysqli_query($db, $query);
 											while($row=mysqli_fetch_array($res)){
-											  $name=$row['name'];
+											  $FirstName_dep=$row['FirstName_dep'];
 											  $dob=$row['dob'];
-											  $gender=$row['gender'];
+											  $gender_dep=$row['gender_dep'];
 											  $blood_group=$row['blood_group'];
 											  $allergies=$row['allergies'];
 											  $medical_conditions=$row['medical_conditions'];
 										  ?>
 										  <tr>
 											<td>
-											  <u><b><?php echo $row['name']?><br><br></b></u>
+											  <u><b><?php echo $row['FirstName_dep']?><br><br></b></u>
 											  <?php echo $row['dob']?><br>
-											  <?php echo $row['gender']?><br>
+											  <?php echo $row['gender_dep']?><br>
 											  <?php echo $row['blood_group']?><br>
 											  <?php echo $row['allergies']?><br>
 											  <?php echo $row['medical_conditions']?><br>
