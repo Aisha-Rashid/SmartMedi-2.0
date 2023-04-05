@@ -138,20 +138,20 @@ include ('data-visualization.php');
 					</tbody>
 						
 </table>
-<?php } if ($_GET['type'] == 'nairobi'){ ?>
+<?php } if ($_GET['type'] == 'region'){ ?>
 
 <h1 align = "center"><u>Report Title: List of Illnesses per Region.</u></h1>
+<?php if ($_GET['location'] == 'nairobi' ){ ?>
 <h3 align = "center">Nairobi Region</h3>
 <TABLE width=100% class=" table-bordered" align="center">
 <thead>
-<tr>
+					<tr>
 					 <th colspan=2 bgcolor="#d3fcf3"><b>Nairobi County</b></th></tr>
 					 <tr>
                       <th>Illness</th>
                       <th>No. of affected persons</th>
                     </tr>
                   </thead>
-				  
 				  <tbody>
 				  <tr><td>Blood and connective tissue disorder</td><td><?php echo $totalBloodNrb ?></td></tr>
 				  <tr><td>Cancer, growths or tumors</td><td><?php echo $totalCancerNrb ?></td></tr>
@@ -172,49 +172,16 @@ include ('data-visualization.php');
 				  ?></b></h3></td></b></tr>
 					
 					
-					</tbody>
-						
-</table>
-<hr>
-<h4>Index</h4>
-<font size="1">
-<TABLE width=100%  class=" table-bordered" align="center">
-		
-				  <tr><td colspan=2><b>The following ailments include, but not limited to, the specified conditions listed below:</b></td></tr>
-				  <tr><td width=20%>Blood and connective tissue disorder</td><td><i>Leukemia, HIV and AIDS, Systemic lupus erythematosus (SLE) and any other.<i></td></tr>
-				  <tr><td>Cancer, growths or tumors</td><td><i>Any type, whether benign or malignant.</i></td></tr>
-				  <tr><td>Cardiovascular (heart and blood vessels) disorders</td><td><i>High blood pressure, heart disease, deep venous thrombosis (DVT), congenital heart disease,
-											chest pain, coronery artery disease/ ischaemic heart disease, valvular heart disease, arrhythmias, varicose veins, coronary artery stenting, peripheral artery
-											disease, aneurysm, palpitations, rheumatic fever and any other.</i></td></tr>
-				  <tr><td>Congenital/inherited/hereditary disorders</td><td><i>Any form of birth defects, sickle cell disease, umbilical hernia and any other.</i></td></tr>
-				  <tr><td>Endocrine disorders</td><td><i>High cholestrol, diabetes, thyroid abnormalities, obesity, hormonal imbalances, diabetic coma and any other.</i></td></tr>
-				  <tr><td>Eye related disorders</td><td><i>Glaucoma, blindness, cataracts, renitis pigmentosa, lens implants, laser eye surgery, retinoblastoma and any other.</i></td></tr>
-				  <tr><td>Gastro-intestinal disorders</td><td><i>Peptic ulcer disease, chronic heartburn, reflux, dyspepsia, haemorrhoids,pancreatis, gall bladder disease, hepatitis, hernias, anal 
-											fissures, rectal bleeding and any other.</i></td></tr>
-				  <tr><td>Genitourinary disorders</td><td><i>Enlarged postrate, kidney failure, on dialysis, kidney stones, bladder disorders, pyelonephritis, syphilis, gonorrhea, chlamydia 
-											genital herpes and any other.</i></td></tr>
-				  <tr><td>Gynaecological and Obstetric disorders</td><td><i>Caesarian section complications, fibroids, ovarian cysts, infertility, pelvic inflammatory disease, menstrual 
-											irregularities, abnormal pap smear, hormonal treatment, miscarriages, endometriosis and any other.</i></td></tr>
-				  <tr><td>Musculoskeletal disorders</td><td><i>Arthritis, gout, back problems, physical disabilities, joint problems, sporting injuries, osteoporosis, scoliosis, kyphosis 
-											and any other.</i></td></tr>
-				  <tr><td>Neurological and psychological disorders</td><td><i>Epilepsy, mental disabilities, paralysis, schizophrenia, depression, bipolar disorder, panic attack, personality
-											disorder, anxiety, attention deficit disorder, post traumatic stress disorder, anorexia nervosa, bulimia, alcohol or drug dependency/ addiction and any other.</i></td></tr>
-				  <tr><td>Respiratory and Ear Nose and Throat (ENT) disorders</td><td><i>Asthma, tuberculosis, hearing and speech imapirment, adenoids, cleft lip and palate, tonsils, nose 
-											injuries, nose bleeding, sinus, cigarette smoking bronchitis, allergic rhinitis, chronic obstructive pulmonary disease and any other.</i></td></tr>
-				  <tr><td>Skin disorders</td><td><i>Eczema keloids, warts, acne, moles, melanoma, hypertrophic scars, burns and any other.</i></td></tr>
-</table>
-</font>
-
-<?php } if ($_GET['type'] == 'central'){ ?>
-<h1 align = "center"><u>Report Title: Illnesses per Region.</u></h1>
-<h3 align = "center">Central Region</h3>
-<!--TABLE width=90% class=" table-bordered" align="center">
-<tr><td colspan=2 bgcolor="#d3fcf3"><b>Kiambu County</b></td></tr>
-</table-->
-<TABLE width=90% class=" table-bordered" align="center">
 					
+					
+					
+					</tbody>
+</table>
+<?php } if ($_GET['location'] == 'central'){?>
+<h3 align = "center">Central Region</h3>
+<TABLE width=90% class=" table-bordered" align="center">
 					<tr>
-					 <th colspan=2 bgcolor="#d3fcf3"><b>Kirinyaga County</b></th></tr>
+					 <th colspan=2 bgcolor="#d3fcf3"><b>Kiambu County</b></th></tr>
 					 <tr>
 					 <thead>
                       <th>Illness</th>
@@ -361,9 +328,8 @@ include ('data-visualization.php');
 					</tbody>
 						
 </table>
-<?php } if ($_GET['type'] == 'eastern'){ ?>
 
-<h1 align = "center"><u>Report Title: List of Illnesses per Region.</u></h1>
+<?php } if ($_GET['location'] == 'eastern'){?>
 <h3 align = "center">Eastern Region</h3>
 <TABLE width=90% class=" table-bordered" align="center">
 <thead>
@@ -601,8 +567,8 @@ include ('data-visualization.php');
 					</tbody>
 						
 </table>
-<?php } if ($_GET['type'] == 'western'){  ?>
-<h1 align = "center"><u>Report Title: List of Illnesses per Region.</u></h1>
+
+<?php } if ($_GET['location'] == 'western'){  ?>
 <h3 align = "center">Western Region</h3>
 <TABLE width=90% class=" table-bordered" align="center">
 <thead>
@@ -730,8 +696,7 @@ include ('data-visualization.php');
 					</tbody>
 						
 </table>
-<?php } if ($_GET['type'] == 'nyanza'){ ?>
-<h1 align = "center"><u>Report Title: List of Illnesses per Region.</u></h1>
+<?php }  if ($_GET['location'] == 'nyanza'){?>
 <h3 align = "center">Nyanza Region</h3>
 <TABLE width=90% class=" table-bordered" align="center">
 <thead>
@@ -919,10 +884,7 @@ include ('data-visualization.php');
 					
 					
 					</tbody></table>
-						
-
-<?php } if ($_GET['type'] == 'rift'){ ?>
-<h1 align = "center"><u>Report Title: List of Illnesses per Region.</u></h1>
+<?php }  if ($_GET['location'] == 'rift'){?>
 <h3 align = "center">Rift Valley Region</h3>
 <TABLE width=90% class=" table-bordered" align="center">
 <thead>
@@ -1358,8 +1320,7 @@ include ('data-visualization.php');
 					
 					
 					</tbody></table>
-<?php } if ($_GET['type'] == 'north'){ ?>
-<h1 align = "center"><u>Report Title: List of Illnesses per Region.</u></h1>
+<?php } if ($_GET['location'] == 'north'){ ?>
 <h3 align = "center">North Eastern Region</h3>
 <TABLE width=90% class=" table-bordered" align="center">
 <thead>
@@ -1454,8 +1415,7 @@ include ('data-visualization.php');
 					
 					
 					</tbody></table>
-<?php } if ($_GET['type'] == 'coast'){ ?>
-<h1 align = "center"><u>Report Title: List of Illnesses per Region.</u></h1>
+<?php }  if ($_GET['location'] == 'coast'){?>
 <h3 align = "center">Coastal Region</h3>
 <TABLE width=90% class=" table-bordered" align="center">
 <thead>
@@ -1643,8 +1603,41 @@ include ('data-visualization.php');
 					
 					
 					</tbody></table>
+<?php }  ?>
+<hr>
+<h4>Index</h4>
+<font size="1">
+<TABLE width=100%  class=" table-bordered" align="center">
+		
+				  <tr><td colspan=2><b>The following ailments include, but not limited to, the specified conditions listed below:</b></td></tr>
+				  <tr><td width=20%>Blood and connective tissue disorder</td><td><i>Leukemia, HIV and AIDS, Systemic lupus erythematosus (SLE) and any other.<i></td></tr>
+				  <tr><td>Cancer, growths or tumors</td><td><i>Any type, whether benign or malignant.</i></td></tr>
+				  <tr><td>Cardiovascular (heart and blood vessels) disorders</td><td><i>High blood pressure, heart disease, deep venous thrombosis (DVT), congenital heart disease,
+											chest pain, coronery artery disease/ ischaemic heart disease, valvular heart disease, arrhythmias, varicose veins, coronary artery stenting, peripheral artery
+											disease, aneurysm, palpitations, rheumatic fever and any other.</i></td></tr>
+				  <tr><td>Congenital/inherited/hereditary disorders</td><td><i>Any form of birth defects, sickle cell disease, umbilical hernia and any other.</i></td></tr>
+				  <tr><td>Endocrine disorders</td><td><i>High cholestrol, diabetes, thyroid abnormalities, obesity, hormonal imbalances, diabetic coma and any other.</i></td></tr>
+				  <tr><td>Eye related disorders</td><td><i>Glaucoma, blindness, cataracts, renitis pigmentosa, lens implants, laser eye surgery, retinoblastoma and any other.</i></td></tr>
+				  <tr><td>Gastro-intestinal disorders</td><td><i>Peptic ulcer disease, chronic heartburn, reflux, dyspepsia, haemorrhoids,pancreatis, gall bladder disease, hepatitis, hernias, anal 
+											fissures, rectal bleeding and any other.</i></td></tr>
+				  <tr><td>Genitourinary disorders</td><td><i>Enlarged postrate, kidney failure, on dialysis, kidney stones, bladder disorders, pyelonephritis, syphilis, gonorrhea, chlamydia 
+											genital herpes and any other.</i></td></tr>
+				  <tr><td>Gynaecological and Obstetric disorders</td><td><i>Caesarian section complications, fibroids, ovarian cysts, infertility, pelvic inflammatory disease, menstrual 
+											irregularities, abnormal pap smear, hormonal treatment, miscarriages, endometriosis and any other.</i></td></tr>
+				  <tr><td>Musculoskeletal disorders</td><td><i>Arthritis, gout, back problems, physical disabilities, joint problems, sporting injuries, osteoporosis, scoliosis, kyphosis 
+											and any other.</i></td></tr>
+				  <tr><td>Neurological and psychological disorders</td><td><i>Epilepsy, mental disabilities, paralysis, schizophrenia, depression, bipolar disorder, panic attack, personality
+											disorder, anxiety, attention deficit disorder, post traumatic stress disorder, anorexia nervosa, bulimia, alcohol or drug dependency/ addiction and any other.</i></td></tr>
+				  <tr><td>Respiratory and Ear Nose and Throat (ENT) disorders</td><td><i>Asthma, tuberculosis, hearing and speech imapirment, adenoids, cleft lip and palate, tonsils, nose 
+											injuries, nose bleeding, sinus, cigarette smoking bronchitis, allergic rhinitis, chronic obstructive pulmonary disease and any other.</i></td></tr>
+				  <tr><td>Skin disorders</td><td><i>Eczema keloids, warts, acne, moles, melanoma, hypertrophic scars, burns and any other.</i></td></tr>
+</table>
+</font>
 
-<?php }?>
+
+
+<?php }  ?>
+
 </div>
 <script>
  window.addEventListener("load", window.print());

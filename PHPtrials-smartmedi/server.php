@@ -107,14 +107,6 @@ if (isset($_POST['doc_login'])) {
 	$nationalid = mysqli_real_escape_string($db, $_POST['nationalid']);
 	$password = mysqli_real_escape_string($db, $_POST['password']);
 
-	// Error message if the input field is left blank
-	/* if (empty($nationalid)) {
-		array_push($errors, "ID number is required");
-	}
-	if (empty($password)) {
-		array_push($errors, "Password is required");
-	} */
-
 	// Checking for the errors
 	if (count($errors) == 0) {
 		
@@ -123,29 +115,36 @@ if (isset($_POST['doc_login'])) {
 		$password = md5($password);
 		
 		$query = "SELECT * FROM doctors WHERE nationalid=
+				'$nationalid' AND password='SMedi@123'";
+		$results = mysqli_query($db, $query);
+		
+		if (mysqli_num_rows($results) == 1) {
+			$_SESSION['nationalid'] = $nationalid;
+			header('location: Docpassword.php');
+		}
+
+		else{
+			$query = "SELECT * FROM doctors WHERE nationalid=
 				'$nationalid' AND password='$password'";
 		$results = mysqli_query($db, $query);
-
-		// $results = 1 means that one user with the
-		// entered username exists
+		
 		if (mysqli_num_rows($results) == 1) {
 			
 			// Storing username in session variable
 			//$_SESSION['FirstName'] = $FirstName;
 			$_SESSION['nationalid'] = $nationalid;
 			
-			// Welcome message
-			$_SESSION['success'] = "You have logged in!";
 			
-			// Page on which the user is sent
-			// to after logging in
 			header('location: DocDashboard.php');
 		}
-		else {
+			else {
 			
 			// If the username and password doesn't match
 			echo "Username or password incorrect";
 		}
+		}
+		
+		
 	}
 }
 

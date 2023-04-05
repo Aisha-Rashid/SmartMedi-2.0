@@ -174,7 +174,7 @@ echo "Failed to register";
 				  You can make payments via the below details. Once payment is done and Mpesa message received,
 				click on submit payment button.<br><b>
                     Paybill Number: 303030<br>
-					Account Number: 205867485945 </b>
+					Account Number: <?php echo $array[1]?> </b>
                   </p>
                 </div>
                 <!-- /.col -->

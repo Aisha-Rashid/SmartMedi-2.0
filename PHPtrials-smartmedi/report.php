@@ -135,13 +135,14 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 			<div class="card-header bg-transparent border-0" >
 				<button class="collapsible">2. Illness Concentration per region</button>
 				<div class="content">
-					<a href="reportStructure.php?type=nairobi" rel="noopener" target="_blank" ><i class="fa fa-print"></i> Nairobi Region</a><br><br>
-					<a href="reportStructure.php?type=central" rel="noopener" target="_blank" ><i class="fa fa-print"></i> Central Region</a><br><br>
-					<a href="reportStructure.php?type=eastern" rel="noopener" target="_blank" ><i class="fa fa-print"></i> Eastern Region</a><br><br>
-					<a href="reportStructure.php?type=western" rel="noopener" target="_blank" ><i class="fa fa-print"></i> Western Region</a><br><br>
-					<a href="reportStructure.php?type=nyanza" rel="noopener" target="_blank" ><i class="fa fa-print"></i> Nyanza Region</a><br><br>
-					<a href="reportStructure.php?type=rift" rel="noopener" target="_blank" ><i class="fa fa-print"></i> Rift Valley Region</a><br><br>
-					<a href="reportStructure.php?type=coast" rel="noopener" target="_blank" ><i class="fa fa-print"></i> Coast Region</a><br><br>
+					<a href="reportStructure.php?type=region&location=nairobi" rel="noopener" target="_blank" ><i class="fa fa-print"></i> Nairobi Region</a><br><br>
+					<a href="reportStructure.php?type=region&location=central" rel="noopener" target="_blank" ><i class="fa fa-print"></i> Central Region</a><br><br>
+					<a href="reportStructure.php?type=region&location=eastern" rel="noopener" target="_blank" ><i class="fa fa-print"></i> Eastern Region</a><br><br>
+					<a href="reportStructure.php?type=region&location=western" rel="noopener" target="_blank" ><i class="fa fa-print"></i> Western Region</a><br><br>
+					<a href="reportStructure.php?type=region&location=nyanza" rel="noopener" target="_blank" ><i class="fa fa-print"></i> Nyanza Region</a><br><br>
+					<a href="reportStructure.php?type=region&location=rift" rel="noopener" target="_blank" ><i class="fa fa-print"></i> Rift Valley Region</a><br><br>
+					<a href="reportStructure.php?type=region&location=coast" rel="noopener" target="_blank" ><i class="fa fa-print"></i> Coast Region</a><br><br>
+					<a href="reportStructure.php?type=region&location=north" rel="noopener" target="_blank" ><i class="fa fa-print"></i> North Eastern Region</a><br><br>
 				</div>
 			</div>
 		  

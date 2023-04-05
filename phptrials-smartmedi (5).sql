@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 04, 2023 at 06:51 PM
+-- Generation Time: Apr 05, 2023 at 04:21 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -67,7 +67,8 @@ CREATE TABLE `billing` (
 
 INSERT INTO `billing` (`ID`, `hospitalname`, `invoice`, `amountDue`, `amountPaid`, `datePaid`) VALUES
 (1, 'Halisi Family Hospital', 10005, 8000, 8000, '2023-04-04'),
-(4, 'Final Hospital', 10006, 24156, 24156, '2023-04-04');
+(4, 'Final Hospital', 10006, 24156, 24156, '2023-04-04'),
+(5, 'Kitengela Medical', 10007, 16156, 16156, '2023-04-05');
 
 -- --------------------------------------------------------
 
@@ -352,7 +353,7 @@ INSERT INTO `doctors` (`id`, `nationalid`, `fname`, `lname`, `hospital`, `workid
 (26, 2345678, 'Aisha', 'Rashid', 'Halisi Family Hospital', 2345, 'Diagnostic Radiology', 'SMedi@123'),
 (27, 2345678, 'Katunge', 'Mwende', 'Halisi Family Hospital', 2345, 'Diagnostic Radiology', 'SMedi@123'),
 (28, 2147483647, 'Rehema', 'Rashid', 'Halisi Family Hospital', 34567, 'Nephrology', 'SMedi@123'),
-(29, 2345456, 'Aisha', 'Rashid', 'Kitengela Medical', 2345, 'Medical Oncology', 'SMedi@123'),
+(29, 2345456, 'Aisha', 'Rashid', 'Kitengela Medical', 2345, 'Medical Oncology', 'fcf613bb97eda9c59956c4ddfeb0426e'),
 (30, 2147483647, 'Fatuma', 'Rashid', 'Kitengela Medical', 45653, 'Gastroenterology', 'SMedi@123');
 
 -- --------------------------------------------------------
@@ -419,7 +420,8 @@ CREATE TABLE `hospitalreg` (
 
 INSERT INTO `hospitalreg` (`id`, `hospital`, `branch`, `email`, `tel`, `applied`, `file`, `status`, `approval`, `approvalDate`) VALUES
 (1, 'Halisi Family Hospital', 5, 'halisifamilyhospital@gmail.com', 703298645, '2023-03-27', '', 1, 'approved', '2023-04-04 12:08:02'),
-(22, 'Final Hospital', 3, 'chuchuaisha@gmail.com', 345678765, '2023-04-04', 'EHR.drawio', 1, 'approved', '2023-04-04 15:24:10');
+(22, 'Final Hospital', 3, 'chuchuaisha@gmail.com', 345678765, '2023-04-04', 'EHR.drawio', 1, 'approved', '2023-04-04 15:24:10'),
+(23, 'Kitengela Medical', 2, 'kitemedikenya@gmail.com', 724635271, '2023-04-05', 'code remnants.txt', 0, '', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -843,7 +845,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `billing`
 --
 ALTER TABLE `billing`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `blood`
@@ -903,7 +905,7 @@ ALTER TABLE `fileupload`
 -- AUTO_INCREMENT for table `hospitalreg`
 --
 ALTER TABLE `hospitalreg`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `hospitals`
