@@ -1,6 +1,6 @@
 <?php
 //Report Data
-$hospitalReportRes = mysqli_query($db, "SELECT * FROM `hospitals`");
+$hospitalReportRes = mysqli_query($db, "SELECT * FROM `hospitalreg` WHERE status = 1 and approval='approved'");
 
 $doctorReportRes = mysqli_query($db, "SELECT * FROM `doctors` ORDER BY hospital");
 
@@ -49,12 +49,12 @@ $conditionNairobi = mysqli_num_rows($conditionNairobiQuery);
 		$total_doc_pages = ceil($total_doc_rows / $results_per_page);
 		
 	//Hospitals
-		$hospitalQuery =  "SELECT * FROM `hospitals` LIMIT $start_row, $results_per_page";
+		$hospitalQuery =  "SELECT * FROM `hospitalreg` WHERE status = 1 and approval='approved' LIMIT $start_row, $results_per_page";
 		$hospitalRes = mysqli_query($db, $hospitalQuery);
 		$totalHospitals = mysqli_num_rows($hospitalRes);
 		
 		// Calculate the total number of rows
-		$total_hosp_rows_query = "SELECT COUNT(*) as total FROM hospitals";
+		$total_hosp_rows_query = "SELECT COUNT(*) as total FROM hospitalreg";
 		$total_hosp_rows_result = mysqli_query($db, $total_hosp_rows_query);
 		$total_hosp_rows = mysqli_fetch_assoc($total_hosp_rows_result)['total'];
 
@@ -68,7 +68,7 @@ $conditionNairobi = mysqli_num_rows($conditionNairobiQuery);
    $AllDataRes1 = mysqli_query($db, "select * from doctors");
    $totalDoctorsUsers = mysqli_num_rows($AllDataRes1);
    
-   $AllDataRes2 = mysqli_query($db, "select * from hospitals");
+   $AllDataRes2 = mysqli_query($db, "select * from hospitalreg where status =1 and approval='approved'");
    $totalHospitalsUsers = mysqli_num_rows($AllDataRes2);
 
 //Patient vs gender pie chart
@@ -157,33 +157,7 @@ $conditionNairobi = mysqli_num_rows($conditionNairobiQuery);
 	   $coast_patientF_query = mysqli_query($db, "SELECT * FROM patients WHERE county IN ('Mombasa', 'Kwale', 'Kilifi', 'Tana River', 'Lamu', 'Taita/Taveta') AND gender='Female'");
 	   $total_coast_patientF = mysqli_num_rows($coast_patientF_query);
    
-   
-   //Hospitals per county Bar graph
-   $nairobi_hosp_query = mysqli_query($db, "SELECT hospital FROM hospitals WHERE county='Nairobi City'");
-   $total_nairobi_hosp = mysqli_num_rows($nairobi_hosp_query);
-   
-   $central_hosp_query = mysqli_query($db, "SELECT hospital FROM hospitals WHERE county IN ('Nyandarua', 'Nyeri', 'Kirinyaga', 'Murang''a', 'Kiambu')");
-   $total_central_hosp = mysqli_num_rows($central_hosp_query);
-   
-   $eastern_hosp_query = mysqli_query($db, "SELECT hospital FROM hospitals WHERE county IN ('Marsabit', 'Isiolo', 'Meru', 'Tharaka-Nithi', 'Embu', 'Kitui', 'Machakos', 'Makueni')");
-   $total_eastern_hosp = mysqli_num_rows($eastern_hosp_query);
-   
-   $western_hosp_query = mysqli_query($db, "SELECT hospital FROM hospitals WHERE county IN ('Kakamega', 'Vihiga', 'Busia', 'Bungoma')");
-   $total_western_hosp = mysqli_num_rows($western_hosp_query);
-   
-   $nyanza_hosp_query = mysqli_query($db, "SELECT hospital FROM hospitals WHERE county IN ('Kisumu', 'Siaya', 'Homa Bay', 'Migori', 'Nyamira', 'Kisii')");
-   $total_nyanza_hosp = mysqli_num_rows($nyanza_hosp_query);
-   
-   $rift_hosp_query = mysqli_query($db, "SELECT hospital FROM hospitals WHERE county IN ('Turkana', 'West Pokot', 'Samburu', 'Trans Nzoia', 'Uasin Gishu', 'Elgeyo/Marakwet', 'Nandi',
-   'Baringo', 'Laikipia', 'Nakuru', 'Narok', 'Kajiado', 'Kericho', 'Bomet')");
-   $total_rift_hosp = mysqli_num_rows($rift_hosp_query);
-   
-   $northern_hosp_query = mysqli_query($db, "SELECT hospital FROM hospitals WHERE county IN ('Garissa', 'Wajir', 'Mandera')");
-   $total_northern_hosp = mysqli_num_rows($northern_hosp_query);
-   
-   $coast_hosp_query = mysqli_query($db, "SELECT hospital FROM hospitals WHERE county IN ('Mombasa', 'Kwale', 'Kilifi', 'Tana River', 'Lamu', 'Taita/Taveta')");
-   $total_coast_hosp = mysqli_num_rows($coast_hosp_query);
-   
+    
    
    //No. of patients per illness Bar graph
 	//Nairobi

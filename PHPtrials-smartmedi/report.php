@@ -1,23 +1,12 @@
 <?php
 include('server.php'); 
 
-// Starting the session, to use and
-// store data in session variable
-// session_start();
-
-// If the session variable is empty, this
-// means the user is yet to login
-// User will be sent to 'login.php' page
-// to allow the user to login
 if (!isset($_SESSION['workID'])) {
 	$_SESSION['msg'] = "You have to log in first";
 	header('location: AdminLogin.php');
 }
 
-// Logout button will destroy the session, and
-// will unset the session variables
-// User will be headed to 'login.php'
-// after logging out
+
 if (isset($_GET['logout'])) {
 	session_destroy();
 	unset($_SESSION['workID']);
@@ -50,7 +39,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
   <div id="main-wrapper">
     <div class="navbar navbar-inverse" role="navigation">
       <div class="navbar-header">
-        <div class="logo"><h1>SmartMedi - Admin Dashboard</h1></div>
+        <div class="logo"><h3>SmartMedi - Admin Dashboard</h3></div>
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
@@ -118,10 +107,10 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
           <li><a href="javascript:;" data-toggle="modal" data-target="#confirmModal"><i class="fa fa-sign-out"></i>Sign Out</a></li>
         </ul>
       </div>
-	  <!--/.navbar-collapse -->
+	  <!--/.navbar-collapse ->
 
-      <div class="templatemo-content-wrapper">
-        <div class="templatemo-content">
+      <div class="templatemo-content-wrapper"-->
+        <div class="templatemo-admincontent">
           <h3>List of available printable reports</h3><hr>
 		  
 			<div class="card-header bg-transparent border-0" >

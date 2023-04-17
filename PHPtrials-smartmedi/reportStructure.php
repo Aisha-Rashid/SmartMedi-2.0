@@ -72,28 +72,44 @@ include ('data-visualization.php');
 <?php
 	if ($_GET['type'] == 'hospital'){ 
 	?>
- <h1 align = "center">Report Title: List of Hospitals</h1>
-<TABLE width=50% class=" table-bordered" align="center" >
+ <h1 align = "center">Report Title: List of  Registered Hospitals</h1>
+<TABLE width=80% class=" table-bordered" align="center" >
 <thead>
 <tr bgcolor="#d3fcf3">
                       <th>#</th>
                       <th>Name</th>
+					  <th>No. of branches</th>
+					  <th>Email</th>
+					  <th>Tel No.</th>
+					  <th>Onboarded on</th>
+					  
                     </tr>
                   </thead>
 <?php
-
+	$counter = 1;
 	while($row=mysqli_fetch_array($hospitalReportRes)){
-							
-	$HospitalID =$row['hospitalID'];
-	$hospital=$row['hospital']; ?>
+		
+	$number = $counter;
+	$counter++;						
+	$hospital=$row['hospital'];
+	$branch=$row['branch'];
+	$email=$row['email'];
+	$tel=$row['tel'];
+	$applied=$row['applied'];
+	$approvalDate=$row['approvalDate']; ?>
 				  <tbody>
 				  <tr>
-						<td ><?php echo $row['hospitalID'] ?></td>
+						<td><?php echo $number;?></td>
 						<td><?php echo $row['hospital'] ?></td>
+						<td><?php echo $row['branch'];?></td>
+						<td><?php echo $row['email'];?></td>
+						<td>0<?php echo $row['tel'];?></td>
+						<td><?php if ($row['approvalDate'] != "0000-00-00 00:00:00") {echo $row['approvalDate'];}?></td>
+						
 					</tr>
 					</tbody>
 					<?php } ?> 	
-					<tr><td></td><td><h3><b>Total: <?php echo $totalHospitalsUsers; ?></b></h3></td></tr>		
+					<tr ><td colspan=6><h3><b>Total: <?php echo $totalHospitalsUsers; ?></b></h3></td></tr>		
 </table>
 
 <?php } if ($_GET['type'] == 'doctor'){  ?>

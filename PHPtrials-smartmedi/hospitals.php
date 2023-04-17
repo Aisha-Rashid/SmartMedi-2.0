@@ -1,23 +1,11 @@
 <?php
 include('server.php'); 
 
-// Starting the session, to use and
-// store data in session variable
-// session_start();
-
-// If the session variable is empty, this
-// means the user is yet to login
-// User will be sent to 'login.php' page
-// to allow the user to login
 if (!isset($_SESSION['workID'])) {
 	$_SESSION['msg'] = "You have to log in first";
 	header('location: AdminLogin.php');
 }
 
-// Logout button will destroy the session, and
-// will unset the session variables
-// User will be headed to 'login.php'
-// after logging out
 if (isset($_GET['logout'])) {
 	session_destroy();
 	unset($_SESSION['workID']);
@@ -50,13 +38,10 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
   <div id="main-wrapper">
     <div class="navbar navbar-inverse" role="navigation">
       <div class="navbar-header">
-        <div class="logo"><h1>SmartMedi - Admin Dashboard</h1></div>
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button> 
+        <div class="logo">
+		<h3>SmartMedi - Admin Dashboard</h3>
+		</div>
+        
       </div>   
     </div>
     <div class="template-page-wrapper">
@@ -90,7 +75,6 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
               
               <li><a href="totalpatients.php"><i class="fa fa-user" ></i><i class="fa fa-user" ></i> Total Patients</a></li>
 			  <li><a href="gendercomparison.php"><i class="fa fa-user"></i> Gender Comparison</a></li>
-			  <li><a href="hospitalchart.php"><i class="fa fa-hospital-o"></i> Hospitals Onboard</a></li>
               
 
             </ul>
@@ -118,10 +102,10 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
           <li><a href="javascript:;" data-toggle="modal" data-target="#confirmModal"><i class="fa fa-sign-out"></i>Sign Out</a></li>
         </ul>
       </div>
-	  <!--/.navbar-collapse -->
+	  <!--/.navbar-collapse ->
 
-      <div class="templatemo-content-wrapper">
-        <div class="templatemo-content">
+      <div class="templatemo-content-wrapper"-->
+        <div class="templatemo-admincontent">
           <!--ol class="breadcrumb">
             <li><a href="admindash.php">Admin Panel</a></li>
             <li><a href="#">Manage Users</a></li>
@@ -147,26 +131,45 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 							<!--h4 class="margin-bottom-15">Patients Table</h4-->
 								<table class="table table-striped table-hover table-bordered">
                   <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Name</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
+									<tr>
+									  
+									  <th>Id</th>
+									  <th>Hospital Name</th>
+									  <th>Branches</th>
+									  <th>Email</th>
+									  <th>Tel</th>
+									  <th>Applied on</th>
+									  <th>Approved Date</th>
+									  <th>Action</th>
+									</tr>
+								  </thead>
+                      
                   <tbody>
                     <?php 
 							//$query="select * from hospitals";
 							//$res = mysqli_query($db, $query);
+							$counter = 1;
 							while($row=mysqli_fetch_array($hospitalRes)){
+							$number = $counter;
+							$counter++;
+							$id =$row['id'];
 							
-							$HospitalID =$row['hospitalID'];
-							
-							$hospitalname=$row['hospital'];
+							$hospital=$row['hospital'];
+							$branch=$row['branch'];
+							$email=$row['email'];
+							$tel=$row['tel'];
+							$applied=$row['applied'];
+							$approvalDate=$row['approvalDate'];
 							?>
 					<tr>
 					
-						<td><?php echo $row['hospitalID'] ?></td>
+						<td><?php echo $number;?></td>
 						<td><?php echo $row['hospital'] ?></td>
+						<td><?php echo $row['branch'];?></td>
+						<td><?php echo $row['email'];?></td>
+						<td>0<?php echo $row['tel'];?></td>
+						<td><?php echo $row['applied'];?></td>
+						<td><?php if ($row['approvalDate'] != "0000-00-00 00:00:00") {echo $row['approvalDate'];}?></td>
 						<td><a href="deleteaccount.php?type=hospital&id=<?php echo $row['hospital'] ?>" class="btn btn-danger" 
 						onclick="return confirm('Are you sure you want to delete this user?')">Delete</a></td>
 						

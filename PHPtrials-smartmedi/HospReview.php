@@ -98,6 +98,7 @@ $res = mysqli_query($db, $query);
 				$hospital=$row['hospital'];
 				$email=$row['email'];
 				$applied=$row['applied'];
+				$id = $row['id'];
 				$file=$row['file'];
 				$amountDue=$row['amountDue'];
 				$amountPaid=$row['amountPaid'];

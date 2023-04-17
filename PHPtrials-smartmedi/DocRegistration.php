@@ -11,6 +11,8 @@ if (isset($_GET['logout'])) {
   unset($_SESSION['workID']);
   header("location: AdminLogin.php");
 }
+if (isset($_SESSION['workID'])) : 
+  $unique = $_SESSION['workID'];
 ?>
 <!DOCTYPE html>
 <html lang="en"><!-- Basic -->
@@ -47,9 +49,7 @@ if (isset($_GET['logout'])) {
 </head>
 <body id="home" data-spy="scroll" data-target="#navbar-wd" data-offset="98">
 <?php
-if (isset($_SESSION['workID'])) : 
-  $unique = $_SESSION['workID'];
-  
+ 
 $conn=new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or die(mysqli_error($conn));
 extract($_REQUEST);
 
@@ -183,6 +183,6 @@ exit();
 	<script src="js/isotope.min.js"></script>	
 	<script src="js/images-loded.min.js"></script>	
     <script src="js/custom.js"></script>
-<?php endif ?>
+<?php  endif  ?>
 </body>
 </html>

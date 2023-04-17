@@ -93,9 +93,8 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
             </a>
             <ul class="templatemo-submenu">
               
-              <!--li><a href="totalpatients.php"><i class="fa fa-user" ></i><i class="fa fa-user" ></i> Total Patients</a></li-->
+              <li><a href="totalpatients.php"><i class="fa fa-user" ></i><i class="fa fa-user" ></i> Total Patients</a></li>
 			  <li><a href="gendercomparison.php"><i class="fa fa-user"></i> Gender Comparison</a></li>
-			  <li><a href="hospitalchart.php"><i class="fa fa-hospital-o"></i> Hospitals Onboard</a></li>
               
 
             </ul>
@@ -181,7 +180,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 								<td><?php echo $row['hospital'];?></td>
 								<td><?php echo $row['branch'];?></td>
 								<td><?php echo $row['email'];?></td>
-								<td><?php echo $row['tel'];?></td>
+								<td>0<?php echo $row['tel'];?></td>
 								<td><?php echo $row['applied'];?></td>
 								<td><a href="<?php echo $url ?>" class="btn btn-primary">View</a></td>
 								</tr>
@@ -197,7 +196,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 								<nav class="navbar navbar-inverse">
    <div class="container-fluid">
     <div class="navbar-header">
-     <h4>Approved Hospitals</h4>
+     <h4>Pending Requests</h4>
 	 </div>
 	 </div>
   </nav>
@@ -213,13 +212,13 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 									  <th>Tel</th>
 									  <th>Applied on</th>
 									  <th>Approval</th>
-									  <th>Approved Date</th>
+									  <th>Action</th>
 									</tr>
 								  </thead>
 								  <tbody>
 								  <?php
 								 
-							$query="select * from hospitalreg WHERE status = 1 LIMIT $start_row, $results_per_page";
+							$query="select * from hospitalreg WHERE approval = 'pending' LIMIT $start_row, $results_per_page";
 							$res = mysqli_query($db, $query);
 							$totalRegHosp = mysqli_num_rows($res);
 		
@@ -244,7 +243,9 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 							$approval=$row['approval'];
 							$approvalDate=$row['approvalDate'];
 							$file=$row['file'];
-							
+							$id=$row['id'];
+							$encrypted_id = base64_encode($id);
+						$url = "HospReview.php?filename=$encrypted_id";
   
   ?>
 								<tr>
@@ -252,10 +253,10 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 								<td><?php echo $row['hospital'];?></td>
 								<td><?php echo $row['branch'];?></td>
 								<td><?php echo $row['email'];?></td>
-								<td><?php echo $row['tel'];?></td>
+								<td>0<?php echo $row['tel'];?></td>
 								<td><?php echo $row['applied'];?></td>
 								<td><?php echo $row['approval'];?></td>
-								<td><?php if ($row['approvalDate'] != "0000-00-00 00:00:00") {echo $row['approvalDate'];}?></td>
+								<td><a href="<?php echo $url ?>" class="btn btn-primary">Register</a></td>
 								</tr>
 								<?php } ?> 
 								  </tbody>

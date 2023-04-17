@@ -65,7 +65,7 @@ if (isset($_GET['logout'])) {
 
 										while ($data = mysqli_fetch_assoc($result)) {
 									  ?>
-									   <a href = "uploadProfile.php"><img class="profile_img" src="./uploads/<?php echo $data['filename']; ?>" alt="Profile Pic"></a>
+									   <a href = "uploadProfile.php?type=register"><img class="profile_img" src="./uploads/<?php echo $data['filename']; ?>" alt="Profile Pic"></a>
 									  <?php } ?>
 									   <h3><?php echo $array[1]; ?></h3>
 									  </div>

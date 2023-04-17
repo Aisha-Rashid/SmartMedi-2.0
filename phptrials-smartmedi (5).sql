@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 05, 2023 at 04:21 PM
+-- Generation Time: Apr 17, 2023 at 02:17 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -68,7 +68,14 @@ CREATE TABLE `billing` (
 INSERT INTO `billing` (`ID`, `hospitalname`, `invoice`, `amountDue`, `amountPaid`, `datePaid`) VALUES
 (1, 'Halisi Family Hospital', 10005, 8000, 8000, '2023-04-04'),
 (4, 'Final Hospital', 10006, 24156, 24156, '2023-04-04'),
-(5, 'Kitengela Medical', 10007, 16156, 16156, '2023-04-05');
+(5, 'Kitengela Medical', 10007, 16156, 16156, '2023-04-05'),
+(6, 'AAR Hospital', 10008, 176156, 176156, '2023-04-12'),
+(7, 'Aga Khan University Hospital', 10009, 160156, 160156, '2023-04-12'),
+(8, 'Avenue Hospital', 10010, 56156, 56156, '2023-04-12'),
+(9, 'Bristol Park Hospital', 10011, 40156, 40156, '2023-04-12'),
+(10, 'Brother André Medical Center', 10012, 8156, 8156, '2023-04-12'),
+(11, 'Coptic Hospital', 10013, 8156, 8156, '2023-04-12'),
+(12, 'Gertrude&#39;s Children&#39;s Hospital', 10014, 216156, 216156, '2023-04-12');
 
 -- --------------------------------------------------------
 
@@ -333,28 +340,19 @@ CREATE TABLE `doctors` (
 --
 
 INSERT INTO `doctors` (`id`, `nationalid`, `fname`, `lname`, `hospital`, `workid`, `specialty`, `password`) VALUES
-(1, 648392384, 'Fatuma', 'Wairimu', 'Aga Khan University Hospital, Nairobi', 896566, 'Endocrinology and Metabolism', 'fdc0978bc0cc4c37c3e3d44fc63ee487'),
-(2, 545678, 'Sarah', 'Waithaka', 'Bosongo Hospital', 6568986, 'Hematology', '9e9d7a08e048e9d604b79460b54969c3'),
-(3, 263830028, 'Imran', 'Mbulika', 'Brother André Medical Center Dandora', 2474357, 'General/Clinical Pathology', 'e18fdc9fa7cc2b5f4e497d21a48ea3b7'),
-(4, 5986655, 'Mitch', 'Odhiambo', 'Consolata Hospital Nkubu', 5686656, 'Respirology', 'fae53351b9effc708e764e871bef3119'),
-(5, 7455685, 'Abdul Aziz', 'Guyo', 'Kakamega County General Teaching & Referral Hospital', 46986565, 'Radiation Oncology', '82027888c5bb8fc395411cb6804a066c'),
-(6, 2236566, 'Vincent', 'Mwanza', 'Narok County Referral Hospital', 4564652, 'Neurosurgery', 'b15ab3f829f0f897fe507ef548741afb'),
-(7, 6865865, 'Samuel', 'Ratemo', 'Diani Beach Hospital', 6666666, 'Plastic Surgery', 'd8ae5776067290c4712fa454006c8ec6'),
-(8, 4455635, 'Rachael', 'Nzioka', 'Machakos Hospital', 5646687, 'Gastroenterology', '3676efb616c47897b2d427b4cd8b9253'),
-(9, 654689, 'Pamela', 'Oteng', 'Nanyuki Cottage Hospital', 45665625, 'Ophthalmology', '669ffc150d1f875819183addfc842cab'),
-(10, 6556968, 'Patricia', 'Chemutai', 'Aga Khan Hospital, Mombasa', 6666666, 'Urology', '823fec7a2632ea7b498c1d0d11c11377'),
-(11, 2252652, 'Julius', 'Chepkorir', 'Maua Methodist Hospital', 3465468, 'General Surgery', '30e6d8432ce54710f9c09f305e7b9829'),
-(12, 6486650, 'Brenda', 'Wangui', 'Mandera County Referral Hospital', 5858758, 'Obstetrics/Gynecology', 'e5e9b41c8f1ad39ffb22df4a7aa7d876'),
-(13, 56559856, 'Kelvin', 'Nzomo', 'Gatundu Level 5 Hospital', 56465565, 'Nephrology', 'b2c6de510d584484d74c9aa9f8fa9f04'),
-(14, 5696598, 'Jack ', 'Ochieng', 'Kiambu County Referral Hospital', 6655665, 'Endocrinology and Metabolism', '4ff9fc6e4e5d5f590c4f2134a8cc96d1'),
-(15, 11455985, 'Maimuna', 'Idris', 'Mandera County Referral Hospital', 2556590, 'Pediatrics', 'cbf306d2c9df16d0bd7ba7888cbb1b5e'),
-(16, 45379476, 'Alex', 'Kibiricho', 'Machakos Hospital', 3425653, 'Public Health and Preventive Medicine (PhPm)', '534b44a19bf18d20b71ecc4eb77c572f'),
-(21, 23456674, 'Dexter', 'Mwilonza', 'Aga Khan Hospital, Mombasa', 32763, 'Pediatrics', '123abcd'),
-(26, 2345678, 'Aisha', 'Rashid', 'Halisi Family Hospital', 2345, 'Diagnostic Radiology', 'SMedi@123'),
-(27, 2345678, 'Katunge', 'Mwende', 'Halisi Family Hospital', 2345, 'Diagnostic Radiology', 'SMedi@123'),
-(28, 2147483647, 'Rehema', 'Rashid', 'Halisi Family Hospital', 34567, 'Nephrology', 'SMedi@123'),
-(29, 2345456, 'Aisha', 'Rashid', 'Kitengela Medical', 2345, 'Medical Oncology', 'fcf613bb97eda9c59956c4ddfeb0426e'),
-(30, 2147483647, 'Fatuma', 'Rashid', 'Kitengela Medical', 45653, 'Gastroenterology', 'SMedi@123');
+(1, 26738463, 'Sarah', 'Waithaka', 'Gertrude&#39;s Children&#39;s Hospital', 256543, 'Critical Care and Emergency', '9e9d7a08e048e9d604b79460b54969c3'),
+(2, 30475486, 'Mitch', 'Odhiambo', 'Coptic Hospital', 653567, 'General Surgery', 'SMedi@123'),
+(3, 10364846, 'Racheal', 'Nzioka', 'Coptic Hospital', 653521, 'Critical Care and Emergency', 'SMedi@123'),
+(4, 25467384, 'Abdul Aziz', 'Guyo', 'Coptic Hospital', 653577, 'Pediatrics', 'SMedi@123'),
+(5, 35435643, 'Vincent', 'Mwanza', 'Brother André Medical Center', 4286941, 'Pediatrics', 'SMedi@123'),
+(6, 23456549, 'Samuel', 'Ratemo', 'Brother André Medical Center', 4286947, 'General/Clinical Pathology', 'SMedi@123'),
+(7, 34565439, 'Pamela', 'Oteng', 'Brother André Medical Center', 4286935, 'Critical Care and Emergency', 'SMedi@123'),
+(8, 34567876, 'Patricia', 'Chemutai', 'Bristol Park Hospital', 309452, 'Medical Microbiology and Infectious Diseases', 'SMedi@123'),
+(9, 23456541, 'Julius', 'Chepkorir', 'Bristol Park Hospital', 309457, 'Public Health and Preventive Medicine (PhPm)', 'SMedi@123'),
+(10, 23565432, 'Brenda', 'Wangui', 'Bristol Park Hospital', 309464, 'Critical Care and Emergency', 'SMedi@123'),
+(11, 12345676, 'Kelvin', 'Nzomo', 'Avenue Hospital', 9875634, 'Critical Care and Emergency', 'SMedi@123'),
+(12, 12345439, 'Jack', 'Ochieng', 'Aga Khan University Hospital', 98700054, 'Critical Care and Emergency', 'SMedi@123'),
+(13, 12398765, 'Maimuna', 'Idris', 'Aga Khan University Hospital', 98700022, 'Pediatrics', 'SMedi@123');
 
 -- --------------------------------------------------------
 
@@ -419,9 +417,13 @@ CREATE TABLE `hospitalreg` (
 --
 
 INSERT INTO `hospitalreg` (`id`, `hospital`, `branch`, `email`, `tel`, `applied`, `file`, `status`, `approval`, `approvalDate`) VALUES
-(1, 'Halisi Family Hospital', 5, 'halisifamilyhospital@gmail.com', 703298645, '2023-03-27', '', 1, 'approved', '2023-04-04 12:08:02'),
-(22, 'Final Hospital', 3, 'chuchuaisha@gmail.com', 345678765, '2023-04-04', 'EHR.drawio', 1, 'approved', '2023-04-04 15:24:10'),
-(23, 'Kitengela Medical', 2, 'kitemedikenya@gmail.com', 724635271, '2023-04-05', 'code remnants.txt', 0, '', '0000-00-00 00:00:00');
+(1, 'AAR Hospital', 22, 'info@aarhospital.com', 730605500, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'pending', '0000-00-00 00:00:00'),
+(2, 'Aga Khan University Hospital', 20, 'akuh.nairobi@aku.edu', 111011888, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-17 14:19:08'),
+(3, 'Avenue Hospital', 7, 'admin@avenuehealthcare.com', 711060200, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-17 14:10:09'),
+(4, 'Bristol Park Hospital', 5, 'bpembasi@bristolpark.or.ke', 784178015, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-17 14:08:52'),
+(5, 'Brother André Medical Center', 1, 'info@brotherandremedicalcentre.org', 792591950, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-17 14:04:00'),
+(6, 'Coptic Hospital', 1, 'info@coptichospitals.org', 711043000, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-12 10:54:37'),
+(7, 'Gertrude&#39;s Children&#39;s Hospital', 27, 'info@gerties.org', 207206000, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-12 10:36:20');
 
 -- --------------------------------------------------------
 
@@ -431,68 +433,67 @@ INSERT INTO `hospitalreg` (`id`, `hospital`, `branch`, `email`, `tel`, `applied`
 
 CREATE TABLE `hospitals` (
   `hospitalID` int(11) NOT NULL,
-  `hospital` varchar(255) NOT NULL,
-  `county` varchar(100) NOT NULL
+  `hospital` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `hospitals`
 --
 
-INSERT INTO `hospitals` (`hospitalID`, `hospital`, `county`) VALUES
-(1, 'AAR Hospital', 'Kiambu'),
-(2, 'Aga Khan University Hospital, Nairobi', 'Nairobi City'),
-(3, 'Avenue Hospital', 'Nairobi City'),
-(4, 'Bristol Park Hospital Tasia Embakasi', 'Nairobi City'),
-(5, 'Brother André Medical Center Dandora', 'Nairobi City'),
-(6, 'Coptic Hospital Nursing Hospital', 'Nairobi City'),
-(7, 'Gertrude\'s Children\'s Hospital Muthaiga', 'Kiambu'),
-(8, 'Guru Nanak Ramgarhia Sikh Hospital', 'Nairobi City'),
-(9, 'The Karen Hospital', 'Kajiado'),
-(10, 'Kenyatta National Hospital', 'Nairobi City'),
-(11, 'Kenyatta University Teaching, Referral, and Research Hospital', 'Kiambu'),
-(12, 'AIC Kijabe Hospital Nairobi Medical Center', 'Nairobi City'),
-(13, 'Lifecare Hospitals Kenya', 'Nairobi City'),
-(14, 'The Nairobi Hospital Outpatient Center', 'Nairobi City'),
-(15, 'Kenya Defense Forces Memorial Hospital', 'Nairobi City'),
-(16, 'Mediheal Group of Hospitals, Upperhill', 'Nairobi City'),
-(17, 'Gatundu Level 5 Hospital', 'Nyeri'),
-(18, 'Kerugoya County Referral Hospital', 'Kirinyaga'),
-(19, 'Kiambu County Referral Hospital', 'Kiambu'),
-(20, 'Murang\'a County Referral Hospital', 'Murang\'a'),
-(21, 'Afya International Hospital', 'Kwale'),
-(22, 'Alfarooq Hospital', 'Mombasa'),
-(23, 'Bomu Hospital', 'Mombasa'),
-(24, 'Diani Beach Hospital', 'Kwale'),
-(25, 'Hola County Referral Hospital', 'Tana River'),
-(26, 'Pandya Memorial Hospital', 'Mombasa'),
-(27, 'Aga Khan Hospital, Mombasa', 'Mombasa'),
-(28, 'Consolata Hospital Nkubu', 'Meru'),
-(29, 'Embu Provincial General Hospital', 'Embu'),
-(30, 'Galaxy Hospital', 'Isiolo'),
-(31, 'Kitui County Referral Hospital', 'Kitui'),
-(32, 'Machakos Hospital', 'Machakos'),
-(33, 'Makueni County Referral Hospital', 'Makueni'),
-(34, 'Maua Methodist Hospital', 'Meru'),
-(35, 'Our Lady of Lourdes Mutomo Hospital', 'Kitui'),
-(36, 'PCEA Chogoria Hospital', 'Tharaka-Nithi'),
-(37, 'Mandera County Referral Hospital', 'Mandera'),
-(38, 'Shamaal Hospital', 'Mandera'),
-(39, 'Aga Khan Hospital, Kisumu', 'Kisumu'),
-(40, 'Bosongo Hospital', 'Kisii'),
-(41, 'Jaramogi Oginga Odinga Teaching & Referral Hospital', 'Kisumu'),
-(42, 'Kendu Adventist Hospital', 'Homa Bay'),
-(43, 'Tenwek Hospital', 'Bomet'),
-(44, 'Barnet Memorial Hospital, Kabarnet', 'Baringo'),
-(45, 'Nakuru Level 6 Hospital', 'Nakuru'),
-(46, 'Nanyuki Cottage Hospital', 'Laikipia'),
-(47, 'Mediheal Hospital and Fertility Center, Uasin Gishu', 'Uasin Gishu'),
-(48, 'Narok County Referral Hospital', 'Narok'),
-(49, 'Catholic Hospital Wamba', 'Samburu'),
-(50, 'Bungoma County Referral Hospital', 'Bungoma'),
-(51, 'Busia County Referral Hospital', 'Busia'),
-(52, 'Jumuia Friends Hospital Kaimosi', 'Vihiga'),
-(53, 'Kakamega County General Teaching & Referral Hospital', 'Kakamega');
+INSERT INTO `hospitals` (`hospitalID`, `hospital`) VALUES
+(1, 'AAR Hospital'),
+(2, 'Aga Khan University Hospital, Nairobi'),
+(3, 'Avenue Hospital'),
+(4, 'Bristol Park Hospital Tasia Embakasi'),
+(5, 'Brother André Medical Center Dandora'),
+(6, 'Coptic Hospital Nursing Hospital'),
+(7, 'Gertrude\'s Children\'s Hospital Muthaiga'),
+(8, 'Guru Nanak Ramgarhia Sikh Hospital'),
+(9, 'The Karen Hospital'),
+(10, 'Kenyatta National Hospital'),
+(11, 'Kenyatta University Teaching, Referral, and Research Hospital'),
+(12, 'AIC Kijabe Hospital Nairobi Medical Center'),
+(13, 'Lifecare Hospitals Kenya'),
+(14, 'The Nairobi Hospital Outpatient Center'),
+(15, 'Kenya Defense Forces Memorial Hospital'),
+(16, 'Mediheal Group of Hospitals, Upperhill'),
+(17, 'Gatundu Level 5 Hospital'),
+(18, 'Kerugoya County Referral Hospital'),
+(19, 'Kiambu County Referral Hospital'),
+(20, 'Murang\'a County Referral Hospital'),
+(21, 'Afya International Hospital'),
+(22, 'Alfarooq Hospital'),
+(23, 'Bomu Hospital'),
+(24, 'Diani Beach Hospital'),
+(25, 'Hola County Referral Hospital'),
+(26, 'Pandya Memorial Hospital'),
+(27, 'Aga Khan Hospital, Mombasa'),
+(28, 'Consolata Hospital Nkubu'),
+(29, 'Embu Provincial General Hospital'),
+(30, 'Galaxy Hospital'),
+(31, 'Kitui County Referral Hospital'),
+(32, 'Machakos Hospital'),
+(33, 'Makueni County Referral Hospital'),
+(34, 'Maua Methodist Hospital'),
+(35, 'Our Lady of Lourdes Mutomo Hospital'),
+(36, 'PCEA Chogoria Hospital'),
+(37, 'Mandera County Referral Hospital'),
+(38, 'Shamaal Hospital'),
+(39, 'Aga Khan Hospital, Kisumu'),
+(40, 'Bosongo Hospital'),
+(41, 'Jaramogi Oginga Odinga Teaching & Referral Hospital'),
+(42, 'Kendu Adventist Hospital'),
+(43, 'Tenwek Hospital'),
+(44, 'Barnet Memorial Hospital, Kabarnet'),
+(45, 'Nakuru Level 6 Hospital'),
+(46, 'Nanyuki Cottage Hospital'),
+(47, 'Mediheal Hospital and Fertility Center, Uasin Gishu'),
+(48, 'Narok County Referral Hospital'),
+(49, 'Catholic Hospital Wamba'),
+(50, 'Bungoma County Referral Hospital'),
+(51, 'Busia County Referral Hospital'),
+(52, 'Jumuia Friends Hospital Kaimosi'),
+(53, 'Kakamega County General Teaching & Referral Hospital');
 
 -- --------------------------------------------------------
 
@@ -685,7 +686,8 @@ INSERT INTO `patients` (`ID`, `FirstName`, `LastName`, `TelNo`, `IDNo`, `DOB`, `
 (41, 'Meshack', 'Milimo', '0703283923', 33535687, '1989-08-07', 'Male', 'B+', 'mmilimo@gmail.com', 'Machakos', 'Kangundo', '2269d672abe86cdd5867e78b65ddb940', 'courage-the-cowardly-dog-dog-animals-tv-wallpaper-preview.jpg', 'patient'),
 (42, 'Kelly', 'Kapoor', '0703277202', 35239857, '1992-11-06', '', '', 'kkapoor@gmail.com', '', 'Gede', 'ae074a5692dfb7c26aae5147e52ceb40', '', 'patient'),
 (43, 'trial', 'two', '245463746', 253632536, '2019-02-05', 'Female', 'AB+', 'trial@gmail.com', 'Bungoma', 'Nairobi', '58723627fcebc230ab0d53ddf5f16e34', 'gallery-04.jpg', 'patient'),
-(44, 'trial', 'three', '36474836', 54737364, '1995-02-05', 'Male', 'B+', 'trial@gmail.com', 'Kericho', 'kitale', '8943be948c11e8ff266c8fc52b0a8826', 'img-3.jpg', 'patient');
+(44, 'trial', 'three', '36474836', 54737364, '1995-02-05', 'Male', 'B+', 'trial@gmail.com', 'Kericho', 'kitale', '8943be948c11e8ff266c8fc52b0a8826', 'img-3.jpg', 'patient'),
+(45, 'Patient', 'One', '0744377736', 29735438, '1999-02-17', 'Male', 'O+', 'pt1one@gmail.com', 'Nairobi City', 'Nairobi', 'c7ec2916ae31da9734952741ed70d08d', 'userMale.JPG', 'patient');
 
 -- --------------------------------------------------------
 
@@ -845,7 +847,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `billing`
 --
 ALTER TABLE `billing`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `blood`
@@ -893,7 +895,7 @@ ALTER TABLE `docspecialty`
 -- AUTO_INCREMENT for table `doctors`
 --
 ALTER TABLE `doctors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `fileupload`
@@ -905,7 +907,7 @@ ALTER TABLE `fileupload`
 -- AUTO_INCREMENT for table `hospitalreg`
 --
 ALTER TABLE `hospitalreg`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `hospitals`
@@ -935,7 +937,7 @@ ALTER TABLE `nextofkin`
 -- AUTO_INCREMENT for table `patients`
 --
 ALTER TABLE `patients`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `response`

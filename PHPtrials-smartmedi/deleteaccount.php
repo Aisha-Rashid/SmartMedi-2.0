@@ -4,7 +4,7 @@ $conn=new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or
 	//Delete Patient record
 	if ($_GET['type'] == 'patient'){
 		
-		$tables = array("patients","nextofkin","fileupload","response","medicalcover","docnotes");
+		$tables = array("patients","nextofkin","fileupload","response","medicalcover","docnotes", "dependants");
 		foreach($tables as $table) {
 		$query=$conn->query("DELETE FROM $table WHERE IDNo = '$id'");	
 			
@@ -32,7 +32,7 @@ $conn=new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or
 	//Delete Hospital
 	elseif ($_GET['type'] == 'hospital'){
 		
-		$tables = array("doctors","hospitals");
+		$tables = array("doctors","hospitalreg");
 		foreach($tables as $table) {
 		$query=$conn->query("DELETE FROM $table WHERE hospital = '$id'");	
 			
