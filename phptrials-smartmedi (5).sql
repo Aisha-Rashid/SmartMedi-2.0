@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2023 at 02:17 PM
+-- Generation Time: Apr 20, 2023 at 01:14 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -75,7 +75,12 @@ INSERT INTO `billing` (`ID`, `hospitalname`, `invoice`, `amountDue`, `amountPaid
 (9, 'Bristol Park Hospital', 10011, 40156, 40156, '2023-04-12'),
 (10, 'Brother André Medical Center', 10012, 8156, 8156, '2023-04-12'),
 (11, 'Coptic Hospital', 10013, 8156, 8156, '2023-04-12'),
-(12, 'Gertrude&#39;s Children&#39;s Hospital', 10014, 216156, 216156, '2023-04-12');
+(12, 'Gertrude&#39;s Children&#39;s Hospital', 10014, 216156, 216156, '2023-04-12'),
+(13, 'Institution Trial', 10015, 160156, 160156, '2023-04-18'),
+(14, 'Institution Trial 2', 10016, 96156, 96156, '2023-04-18'),
+(15, 'Halisi Family Hospital nanyuki', 10017, 80156, 80156, '2023-04-18'),
+(16, 'Final Hospital email', 10018, 112156, 112156, '2023-04-18'),
+(23, 'Pona Hospital', 10019, 40156, 40156, '2023-04-20');
 
 -- --------------------------------------------------------
 
@@ -352,7 +357,8 @@ INSERT INTO `doctors` (`id`, `nationalid`, `fname`, `lname`, `hospital`, `workid
 (10, 23565432, 'Brenda', 'Wangui', 'Bristol Park Hospital', 309464, 'Critical Care and Emergency', 'SMedi@123'),
 (11, 12345676, 'Kelvin', 'Nzomo', 'Avenue Hospital', 9875634, 'Critical Care and Emergency', 'SMedi@123'),
 (12, 12345439, 'Jack', 'Ochieng', 'Aga Khan University Hospital', 98700054, 'Critical Care and Emergency', 'SMedi@123'),
-(13, 12398765, 'Maimuna', 'Idris', 'Aga Khan University Hospital', 98700022, 'Pediatrics', 'SMedi@123');
+(13, 12398765, 'Maimuna', 'Idris', 'Aga Khan University Hospital', 98700022, 'Pediatrics', 'SMedi@123'),
+(14, 29836547, 'Dexter', 'Mwilonza', 'AAR Hospital', 40570036, 'Critical Care and Emergency', 'SMedi@123');
 
 -- --------------------------------------------------------
 
@@ -409,21 +415,27 @@ CREATE TABLE `hospitalreg` (
   `file` varchar(100) NOT NULL,
   `status` int(1) NOT NULL,
   `approval` varchar(100) NOT NULL,
-  `approvalDate` datetime NOT NULL
+  `approvalDate` datetime NOT NULL,
+  `mail` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `hospitalreg`
 --
 
-INSERT INTO `hospitalreg` (`id`, `hospital`, `branch`, `email`, `tel`, `applied`, `file`, `status`, `approval`, `approvalDate`) VALUES
-(1, 'AAR Hospital', 22, 'info@aarhospital.com', 730605500, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'pending', '0000-00-00 00:00:00'),
-(2, 'Aga Khan University Hospital', 20, 'akuh.nairobi@aku.edu', 111011888, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-17 14:19:08'),
-(3, 'Avenue Hospital', 7, 'admin@avenuehealthcare.com', 711060200, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-17 14:10:09'),
-(4, 'Bristol Park Hospital', 5, 'bpembasi@bristolpark.or.ke', 784178015, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-17 14:08:52'),
-(5, 'Brother André Medical Center', 1, 'info@brotherandremedicalcentre.org', 792591950, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-17 14:04:00'),
-(6, 'Coptic Hospital', 1, 'info@coptichospitals.org', 711043000, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-12 10:54:37'),
-(7, 'Gertrude&#39;s Children&#39;s Hospital', 27, 'info@gerties.org', 207206000, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-12 10:36:20');
+INSERT INTO `hospitalreg` (`id`, `hospital`, `branch`, `email`, `tel`, `applied`, `file`, `status`, `approval`, `approvalDate`, `mail`) VALUES
+(1, 'AAR Hospital', 22, 'chuchuaisha@gmail.com', 730605500, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-20 13:03:56', 1),
+(2, 'Aga Khan University Hospital', 20, 'akuh.nairobi@aku.edu', 111011888, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-20 09:29:57', 1),
+(3, 'Avenue Hospital', 7, 'admin@avenuehealthcare.com', 711060200, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-17 14:10:09', 0),
+(4, 'Bristol Park Hospital', 5, 'bpembasi@bristolpark.or.ke', 784178015, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-20 10:06:08', 1),
+(5, 'Brother André Medical Center', 1, 'chuchuaisha@gmail.com', 792591950, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-20 12:06:58', 1),
+(6, 'Coptic Hospital', 1, 'info@coptichospitals.org', 711043000, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-12 10:54:37', 0),
+(7, 'Gertrude&#39;s Children&#39;s Hospital', 27, 'info@gerties.org', 207206000, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-12 10:36:20', 0),
+(8, 'Institution Trial', 20, 'aisha.wrashid64@gmail.com', 764567744, '2023-04-18', 'README.md', 0, 'Not-Reveiwed', '0000-00-00 00:00:00', 0),
+(9, 'Institution Trial 2', 12, 'aisha.wrashid64@gmail.com', 76434567, '2023-04-18', 'README.md', 0, 'Not-Reveiwed', '0000-00-00 00:00:00', 0),
+(10, 'Halisi Family Hospital nanyuki', 10, 'aisha.wrashid64@gmail.com', 78654567, '2023-04-18', 'README.md', 0, 'Not-Reveiwed', '0000-00-00 00:00:00', 0),
+(11, 'Final Hospital email', 14, 'aisha.wrashid64@gmail.com', 756378463, '2023-04-18', 'README.md', 0, 'Not-Reveiwed', '0000-00-00 00:00:00', 0),
+(17, 'Pona Hospital', 5, 'ponamedicalfacility@gmail.com', 745676543, '2023-04-20', 'README.md', 0, 'Not-Reveiwed', '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -847,7 +859,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `billing`
 --
 ALTER TABLE `billing`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `blood`
@@ -895,7 +907,7 @@ ALTER TABLE `docspecialty`
 -- AUTO_INCREMENT for table `doctors`
 --
 ALTER TABLE `doctors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `fileupload`
@@ -907,7 +919,7 @@ ALTER TABLE `fileupload`
 -- AUTO_INCREMENT for table `hospitalreg`
 --
 ALTER TABLE `hospitalreg`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `hospitals`

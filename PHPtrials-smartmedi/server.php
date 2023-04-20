@@ -205,10 +205,10 @@ if(isset($_POST['submitHosp'])!=""){
   $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
   $tel = filter_var($_POST['tel'], FILTER_SANITIZE_NUMBER_INT);
   //$status = 0;
-  
+  $status ="Not-Reveiwed";
   move_uploaded_file($temp,"files/".$name);
 
-$query="INSERT INTO hospitalreg (hospital, branch, email, tel, applied, file) VALUES ('$hospital', '$branch', '$email', '$tel', '$date', '$name')";
+$query="INSERT INTO hospitalreg (hospital, branch, email, tel, applied, file, approval) VALUES ('$hospital', '$branch', '$email', '$tel', '$date', '$name', '$status')";
 $results= mysqli_query($db, $query);
 if($results){
 $_SESSION['hospital'] = $hospital;	

@@ -59,12 +59,14 @@ $row = $result->fetch_assoc();
 $next_invoice = $row["max_invoice"] + 1;
 	
 if(isset($_POST['payment'])!=""){
+	
   $datepaid = date('Y-m-d');
 $query="INSERT INTO billing (hospitalname, invoice, amountDue, amountPaid, datePaid) VALUES ('$unique', '$next_invoice', '$total', '$total', '$datepaid')";
 $results= mysqli_query($db, $query);
 if($results){
-$_SESSION['hospital'] = $hospital;	
-echo"<script>alert('Payment Successful.'); window.location.href ='/SmartMedi-2.0/PHPtrials-smartmedi/index.php'; </script>";
+$_SESSION['hospital'] = $hospital;
+	
+echo"<script>alert('Payment Successful.'); window.location.href ='/SmartMedi-2.0/PHPtrials-smartmedi/sendmail.php?type=receipt&filename=".$unique."'; </script>";
 }
 else{
 echo "Failed to register";

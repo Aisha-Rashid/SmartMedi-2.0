@@ -59,7 +59,7 @@ $date = date('Y-m-d_H:i:s');
 
 $Hospitalapproval= mysqli_query($db, "select * from hospitalreg where id='$id'");
 if (mysqli_num_rows($Hospitalapproval) == 1) {
-$update_query = "UPDATE hospitalreg SET approval='approved', approvalDate='$date' WHERE id='$id'";
+$update_query = "UPDATE hospitalreg SET approval='pending', approvalDate='$date' WHERE id='$id'";
 mysqli_query($db, $update_query);
 
 } 

@@ -216,7 +216,7 @@
 							</div>
 							<div class="media-body dit-right">
 							<h4>Phone Number</h4>
-							<a href="tel:+254 743 234567">+254 743 234567</a><br>
+							<a href="tel:+254 733 364547">+254 733 364547</a><br>
 							<a href="tel:+254 790 453627">+254 790 453627</a>
 							</div>
 						</div>

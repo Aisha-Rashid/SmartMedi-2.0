@@ -65,7 +65,7 @@ $id = base64_decode($encrypted_id);
 
 $Hospitalregistered= mysqli_query($db, "select * from hospitalreg where id='$id'");
 if (mysqli_num_rows($Hospitalregistered) == 1) {
-$update_query = "UPDATE hospitalreg SET status = 1, approval='pending' WHERE id='$id'";
+$update_query = "UPDATE hospitalreg SET status = 1, approval='Inprogress' WHERE id='$id'";
 mysqli_query($db, $update_query);
 
 }

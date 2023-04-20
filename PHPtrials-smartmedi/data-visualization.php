@@ -54,12 +54,12 @@ $conditionNairobi = mysqli_num_rows($conditionNairobiQuery);
 		$totalHospitals = mysqli_num_rows($hospitalRes);
 		
 		// Calculate the total number of rows
-		$total_hosp_rows_query = "SELECT COUNT(*) as total FROM hospitalreg";
+		/* $total_hosp_rows_query = "SELECT COUNT(*) as total FROM hospitalreg";
 		$total_hosp_rows_result = mysqli_query($db, $total_hosp_rows_query);
-		$total_hosp_rows = mysqli_fetch_assoc($total_hosp_rows_result)['total'];
+		$total_hosp_rows = mysqli_fetch_assoc($total_hosp_rows_result)['total']; */
 
 		// Calculate the total number of pages
-		$total_hosp_pages = ceil($total_hosp_rows / $results_per_page);
+		$total_hosp_pages = ceil($totalHospitals / $results_per_page);
 	
 //Total users
    $AllDataRes0 = mysqli_query($db, "select * from patients");

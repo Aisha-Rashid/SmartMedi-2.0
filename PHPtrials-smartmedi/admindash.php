@@ -47,10 +47,9 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 	
 	include ('data-visualization.php');
 	
-	$Rquery="select * from hospitalreg WHERE status = 0";
+	$Rquery="select * from hospitalreg WHERE status = 0 or approval = 'Inprogress' ";
 	$Res = mysqli_query($db, $Rquery);
 	$totalRegistered = mysqli_num_rows($Res);
-
   ?>
 
 
@@ -152,15 +151,13 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 									  <th>Email</th>
 									  <th>Tel</th>
 									  <th>Applied on</th>
+									  <th>Status</th>
 									  <th>Review</th>
 									  
 									</tr>
 								  </thead>
 								  <tbody>
 								  <?php
-								 
-							
-							
 							$counter = 1;
 							
 							while($row=mysqli_fetch_array($Res)){
@@ -182,6 +179,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 								<td><?php echo $row['email'];?></td>
 								<td>0<?php echo $row['tel'];?></td>
 								<td><?php echo $row['applied'];?></td>
+								<td><?php echo $row['approval'];?></td>
 								<td><a href="<?php echo $url ?>" class="btn btn-primary">View</a></td>
 								</tr>
 								<?php } ?> 
@@ -189,9 +187,8 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 								  
 								</table>
 								
-								<br>
-								
 								<hr>
+							
 								<div>
 								<nav class="navbar navbar-inverse">
    <div class="container-fluid">
@@ -211,25 +208,18 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 									  <th>Email</th>
 									  <th>Tel</th>
 									  <th>Applied on</th>
-									  <th>Approval</th>
+									  <th>Status</th>
 									  <th>Action</th>
 									</tr>
 								  </thead>
 								  <tbody>
 								  <?php
-								 
-							$query="select * from hospitalreg WHERE approval = 'pending' LIMIT $start_row, $results_per_page";
+								 $status = "pending";
+							$query="select * from hospitalreg WHERE approval ='$status' LIMIT $start_row, $results_per_page";
 							$res = mysqli_query($db, $query);
 							$totalRegHosp = mysqli_num_rows($res);
-		
-							// Calculate the total number of rows
-							$total_Reg_query = "SELECT COUNT(*) as total FROM hospitalreg";
-							$total_Reg_result = mysqli_query($db, $total_Reg_query);
-							$total_Reg_rows = mysqli_fetch_assoc($total_Reg_result)['total'];
 
-							// Calculate the total number of pages
-							$total_Reg_pages = ceil($total_Reg_rows / $results_per_page);
-							
+							$total_Reg_pages = ceil($totalRegHosp / $results_per_page);
 							$counter = 1;
 							
 							while($row=mysqli_fetch_array($res)){
@@ -245,7 +235,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 							$file=$row['file'];
 							$id=$row['id'];
 							$encrypted_id = base64_encode($id);
-						$url = "HospReview.php?filename=$encrypted_id";
+							$link= "sendmail.php?type=approved&filename='$encrypted_id'";
   
   ?>
 								<tr>
@@ -256,7 +246,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 								<td>0<?php echo $row['tel'];?></td>
 								<td><?php echo $row['applied'];?></td>
 								<td><?php echo $row['approval'];?></td>
-								<td><a href="<?php echo $url ?>" class="btn btn-primary">Register</a></td>
+								<td><a href="<?php echo $link ?>" class="btn btn-primary">Send Mail</a></td>
 								</tr>
 								<?php } ?> 
 								  </tbody>
