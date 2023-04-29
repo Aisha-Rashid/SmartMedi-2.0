@@ -101,7 +101,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
             </ul>
           </li>
 			<li><a href="report.php"><i class="fa fa-file-text"></i> Reports</a></li>
-          <li><a href="adminpassword.php"><i class="fa fa-cog"></i>Preferences</a></li>
+          <li><a href="adminsettings.php"><i class="fa fa-cog"></i>Preferences</a></li>
           <li><a href="javascript:;" data-toggle="modal" data-target="#confirmModal"><i class="fa fa-sign-out"></i>Sign Out</a></li>
         </ul>
       </div>
