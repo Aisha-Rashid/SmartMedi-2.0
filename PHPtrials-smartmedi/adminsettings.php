@@ -25,9 +25,9 @@ if (isset($_GET['logout'])) {
   <link rel="stylesheet" href="dashboardcss/templatemo_main.css">
   <link rel="shortcut icon" href="dashboardimages/favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="dashboardimages/apple-touch-icon.png">
+  <link rel="stylesheet" href="dashboardcss/custom.css">
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
- <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" /-->
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   <!-- 
@@ -45,11 +45,31 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
     $array = mysqli_fetch_row($res);
     $rows = mysqli_num_rows($res);
 	
-	include ('data-visualization.php');
+	if(isset($_POST['submit'])!=""){
+		
+	$current_password = mysqli_real_escape_string($db, $_POST['current_password']);
+	$new_password = mysqli_real_escape_string($db, $_POST['new_password']);
+	$conf_password = mysqli_real_escape_string($db, $_POST['conf_password']);
 	
-	$Rquery="select * from hospitalreg WHERE status = 0 or approval = 'Inprogress' ";
-	$Res = mysqli_query($db, $Rquery);
-	$totalRegistered = mysqli_num_rows($Res);
+	
+	if (!empty($current_password)) {
+		
+			if ($new_password == $conf_password) {
+				
+				$enc_password = md5($new_password);
+				$result =mysqli_query($db,"UPDATE admin SET adminpass='$enc_password' WHERE workID='$unique' ");
+				
+				if($result){
+				header("location:admindash.php");	
+				}
+				
+			}
+			 else {
+      echo "Error: new password and confirm password do not match.";
+			
+			
+		}
+	}}
   ?>
 
 
@@ -71,7 +91,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
             <img src="dashboardimages/favicon.ico" alt="Smartmedi">
 
           </li>
-          <li class="active"><a href="#"><i class="fa fa-home"></i>Dashboard</a></li>
+          <li><a href="admindash.php"><i class="fa fa-home"></i>Dashboard</a></li>
 		  <li class="sub">
             <a href="javascript:;">
               <i class="fa fa-users"></i> Manage users<div class="pull-right"><span class="caret"></span></div>
@@ -117,7 +137,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
             </ul>
           </li>
 			<li><a href="report.php"><i class="fa fa-file-text"></i> Reports</a></li>
-          <li><a href="adminsettings.php"><i class="fa fa-cog"></i>Preferences</a></li>
+          <li class="active"><a href="#"><i class="fa fa-cog"></i>Preferences</a></li>
           <li><a href="javascript:;" data-toggle="modal" data-target="#confirmModal"><i class="fa fa-sign-out"></i>Sign Out</a></li>
         </ul>
       </div>
@@ -132,137 +152,27 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
                         echo " ";
                         echo $array[1];; ?></b></p>
           <hr>
-
-    <nav class="navbar navbar-inverse">
-   <div class="container-fluid">
-    <div class="navbar-header">
-     <h4>Onboarding Hospitals <span class="label label-pill label-danger" style="border-radius:5px;"><?php echo $totalRegistered?></span></h4>
-	 </div>
-	 </div>
-  </nav>
-  <table class="table table-striped table-hover table-bordered">
-  
-								  <thead>
-									<tr>
-									  
-									  <th>Id</th>
-									  <th>Hospital Name</th>
-									  <th>Branches</th>
-									  <th>Email</th>
-									  <th>Tel</th>
-									  <th>Applied on</th>
-									  <th>Status</th>
-									  <th>Review</th>
-									  
-									</tr>
-								  </thead>
-								  <tbody>
-								  <?php
-							$counter = 1;
-							
-							while($row=mysqli_fetch_array($Res)){
-							$number = $counter;
-							$counter++;
-							$id=$row['id'];
-							$hospital=$row['hospital'];
-							$branch=$row['branch'];
-							$email=$row['email'];
-							$tel=$row['tel'];
-							$applied=$row['applied'];
-							$encrypted_id = base64_encode($id);
-						$url = "HospReview.php?filename=$encrypted_id";
- ?>
-								<tr>
-								<td><?php echo $number;?></td>
-								<td><?php echo $row['hospital'];?></td>
-								<td><?php echo $row['branch'];?></td>
-								<td><?php echo $row['email'];?></td>
-								<td>0<?php echo $row['tel'];?></td>
-								<td><?php echo $row['applied'];?></td>
-								<td><?php echo $row['approval'];?></td>
-								<td><a href="<?php echo $url ?>" class="btn btn-primary">View</a></td>
-								</tr>
-								<?php } ?> 
-								  </tbody>
-								  
-								</table>
+<div class="row">
+		  <div class="col-md-12 col-sm-12">
+		  	
+              
+							<form id="personal-details" method="post" action="">
+								<table width = 70%>
 								
-								<hr>
-							
-								<div>
-								<nav class="navbar navbar-inverse">
-   <div class="container-fluid">
-    <div class="navbar-header">
-     <h4>Pending Requests</h4>
-	 </div>
-	 </div>
-  </nav>
-  <table class="table table-striped table-hover table-bordered">
-  
-								  <thead>
-									<tr>
-									  
-									  <th>Id</th>
-									  <th>Hospital Name</th>
-									  <th>Branches</th>
-									  <th>Email</th>
-									  <th>Tel</th>
-									  <th>Applied on</th>
-									  <th>Status</th>
-									  <th>Action</th>
-									</tr>
-								  </thead>
-								  <tbody>
-								  <?php
-								 $status = "pending";
-							$query="select * from hospitalreg WHERE approval ='$status' LIMIT $start_row, $results_per_page";
-							$res = mysqli_query($db, $query);
-							$totalRegHosp = mysqli_num_rows($res);
-
-							$total_Reg_pages = ceil($totalRegHosp / $results_per_page);
-							$counter = 1;
-							
-							while($row=mysqli_fetch_array($res)){
-							$number = $counter;
-							$counter++;
-							$hospital=$row['hospital'];
-							$branch=$row['branch'];
-							$email=$row['email'];
-							$tel=$row['tel'];
-							$applied=$row['applied'];
-							$approval=$row['approval'];
-							$approvalDate=$row['approvalDate'];
-							$file=$row['file'];
-							$id=$row['id'];
-							$encrypted_id = base64_encode($id);
-							$link= "sendmail.php?type=approved&filename='$encrypted_id'";
-  
-  ?>
-								<tr>
-								<td><?php echo $number;?></td>
-								<td><?php echo $row['hospital'];?></td>
-								<td><?php echo $row['branch'];?></td>
-								<td><?php echo $row['email'];?></td>
-								<td>0<?php echo $row['tel'];?></td>
-								<td><?php echo $row['applied'];?></td>
-								<td><?php echo $row['approval'];?></td>
-								<td><a href="<?php echo $link ?>" class="btn btn-primary">Send Mail</a></td>
-								</tr>
-								<?php } ?> 
-								  </tbody>
+									<tr><td colspan = "2" ><h4><u><b>Change Password </b></u></h4></td></tr>
+									<tr><td><h4>Enter current password :</h4></td><td><input type="password" class="form-control" id="current_password" name="current_password">
+									<span toggle="#current_password" class="fa fa-fw fa-eye field-icon toggle-password" ></span></td></tr>
+									<tr><td><h4>New Password :</h4></td><td><input type="password" class="form-control" name="new_password" id="new_password">
+									<span toggle="#new_password" class="fa fa-fw fa-eye field-icon toggle-password" ></span></td></tr>
+									<tr><td><h4>Confirm Password :</h4></td><td><input type="password" class="form-control" name="conf_password" id="conf_password">
+									<span toggle="#conf_password" class="fa fa-fw fa-eye field-icon toggle-password" ></span></td></tr>
+									
 								</table>
-								<?php // Output the page links
-	echo "<div class='pagination'>";
-	for ($i = 1; $i <= $total_Reg_pages; $i++) {
-		if ($i == $page) {
-			echo "<button class='current-page'>$i</button>";
-		} else {
-			echo "<a href='?page=$i'><button>$i</button></a>";
-		}
-	}
-	echo "</div>";
-
-	?>
+								<br><br>
+								<button type="submit" class="btn btn-primary" name="submit">Submit</button>
+								</form>
+						</div>
+    
          </div>
         </div>
       </div>
@@ -292,6 +202,18 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
     <script src="dashboardjs/bootstrap.min.js"></script>
     <!--script src="dashboardjs/Chart.min.js"></script-->
     <script src="dashboardjs/templatemo_script.js"></script>
+	<script>
+			$(".toggle-password").click(function() {
+
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  var input = $($(this).attr("toggle"));
+  if (input.attr("type") == "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+});
+		</script>
   
   <?php endif ?>
 </body>

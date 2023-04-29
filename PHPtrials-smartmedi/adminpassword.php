@@ -52,7 +52,7 @@ if (isset($_GET['logout'])) {
 
 <?php 
 $conn=new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or die(mysqli_error($conn));
-//Doctor's details
+
 if(isset($_POST['submit'])!=""){
 		
 	$current_password = mysqli_real_escape_string($db, $_POST['current_password']);

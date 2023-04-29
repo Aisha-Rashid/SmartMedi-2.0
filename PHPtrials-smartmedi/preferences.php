@@ -25,8 +25,10 @@ if (isset($_GET['logout'])) {
 		<link rel="shortcut icon" href="dashboardimages/favicon.ico" type="image/x-icon">
 		<link rel="apple-touch-icon" href="dashboardimages/apple-touch-icon.png">
 		<link rel="stylesheet" href="dashboardcss/custom.css">
-		<!--Password eye icon-->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+		<!--Password eye icon->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"-->
+	
+
 		
 	</head>
 

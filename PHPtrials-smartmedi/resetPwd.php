@@ -41,13 +41,15 @@
 		</div>
     </div>
     <!-- END LOADER -->
-	
+	<?php if (isset($_GET['type']) && $_GET['type'] == 'request') { ?>
 	
 	<div id="login" class="contact-box">
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="title-box">
-					<h2>Log In</h2>
+					<h2>Reset Password</h2>
+					
+					<p>Enter the following details matching the ones used to register your account.</p>
 				</div>
 			</div>
 		</div>
@@ -68,10 +70,9 @@
 				</div>
 				<div class="form-group">
 						<div class="col-md-6">
-							<label>Password</label>
+							<label>Email Address</label>
 								<div class="col-sm-6">
-								<input type="password" class="form-control" id="password" name="password" value="" required="required">
-								<span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+								<input type="email" class="form-control" name="email" required="required">
 								</div>
 						</div>              
 				</div>
@@ -79,22 +80,71 @@
 						<div class="col-md-12">
 							<div class="col-sm-offset-2 col-sm-10">
 							<button type="submit" class="btn"
-							name="login_user">Log In</button>
+							name="resetpwd">Send mail.</button>
 							</div>
 						</div>
 				</div>
-				<div class="form-group">
-						<div class="col-md-6">
-							<p>New Here?
-							<a href="register.php"><u>Click here to register!</u></a><br>
-							<a href="resetPwd.php?type=request"><u>Forgot password.</u></a>
-							</p>
-							
-						</div>              
-				</div>
+				</form>
+					<?php }
+					if (isset($_GET['type']) && $_GET['type'] == 'newpwd'){
+						$encrypted_id = $_GET['filename'];
+						$IDNo = base64_decode($encrypted_id);
+						
+					if(isset($_POST['newpassword'])!=""){	
+						$new_password = mysqli_real_escape_string($db, $_POST['new_password']);
+						$conf_password = mysqli_real_escape_string($db, $_POST['conf_password']);
+						
+						if ($new_password == $conf_password) {
+				
+				$enc_password = md5($new_password);
+				$query=mysqli_query($db,"UPDATE patients SET password='$enc_password' WHERE IDNo='$IDNo' ");
+				if ($query){
+				//echo"<script>alert('Password Successfully changed.'); window.location.href ='localhost/SmartMedi-2.0/PHPtrials-smartmedi/login.php; </script>";				
+						header("Location: login.php");
+						}
+						}
+						 else {
+				  echo "Error: new password and confirm password do not match.";			
+					}}
+						
+						?>
+						<div id="login" class="contact-box">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="title-box">
+					<h2>Reset Password</h2>
+					</div>
 			</div>
 		</div>
-	</form>
+					<div class="contact-block">
+					<div class="template-page-wrapper" align="center">
+					<form class="form-horizontal templatemo-signin-form" method="post" action="">
+					<div class="form-group">
+					<div class="col-md-6">
+									<label>New Password*</label>
+									<div class="col-sm-6">
+									<input type="password" class="form-control" id="new_password"  name="new_password" value="" required="required">
+									<span toggle="#new_password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+									</div>
+								</div> 
+								<div class="col-md-6">
+									<label> Confirm Password*</label>
+									<div class="col-sm-6">
+									<input type="password" class="form-control" id="conf_password"  name="conf_password" value="" required="required">
+									<span toggle="#conf_password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+									</div>
+								</div> 
+								</div>
+								<div class="col-md-6">
+										<div class="col-sm-offset-2 col-sm-10">
+										<button type="submit" class="btn" name="newpassword">Update</button>
+										</div>
+									</div>
+									</form>
+					
+					<?php }?>
+			</div>
+		</div>
 	</div>
 	
 <!-- ALL JS FILES -->

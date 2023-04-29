@@ -68,4 +68,5 @@ $conn=new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or
 		die(mysqli_error($conn));
 		}
 	}
+
 ?>

@@ -98,6 +98,39 @@ if (isset($_POST['login_user'])) {
 		}
 	}
 }
+// Password Reset
+if (isset($_POST['resetpwd'])) {
+	
+	// Data sanitization to prevent SQL injection
+	$IDNo = filter_var($_POST['IDNo'], FILTER_SANITIZE_NUMBER_INT);
+	$email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+
+	// Checking for the errors
+	if (count($errors) == 0) {
+		$query = "SELECT * FROM patients WHERE IDNo=
+				'$IDNo' AND email='$email'";
+		$results = mysqli_query($db, $query);
+
+		// $results = 1 means that one user with the entered username exists
+		if (mysqli_num_rows($results) == 1) {
+			
+			$query="update patients set password='' where IDNo='$IDNo' and email='$email'";
+			$result = mysqli_query($db, $query);
+			
+			if($results){	
+			header("Location: sendmail.php?type=reset&filename=" . $email);
+			exit(); 
+		}
+		else {
+			// If the username and password doesn't match
+			echo "Unable to update";
+		}}
+		else {
+			// If the username and password doesn't match
+			echo "Email or ID incorrect";
+		}
+	}
+}
 
 
 // Doctor login

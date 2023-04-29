@@ -68,6 +68,9 @@ $message = "
 			border: thin solid #d4d4d4;
 			padding: 10px;
 		}
+		table td1{
+			padding: 10px;
+		}
 
 		footer{
 			padding: 20px;
@@ -235,6 +238,63 @@ while($row=mysqli_fetch_array($result)){
 								
 header('location: index.php');
 }
- 
+//Password reset
+if ($_GET['type'] == 'reset'){ 
+$to = $_GET['filename'];
+
+$query="SELECT * from patients WHERE email = '$to'"; 
+$result = mysqli_query($db, $query);
+$rows = array();
+
+    while($row=mysqli_fetch_array($result)){
+    $rows[] = array(
+        'FirstName' => $row['FirstName'],
+        'LastName' => $row['LastName'],
+        'IDNo' => $row['IDNo'],
+    );
+	
+}
+
+
+	ob_start();
+	//include("invoicereceipt.php");
+	$message .= "
+	<body>
+
+	<div class='page'>
+		<h1>Password Reset</h1><br>";
+		foreach ($rows as $row){
+		$encrypted_id = base64_encode($row['IDNo']);
+		$url = "localhost/SmartMedi-2.0/PHPtrials-smartmedi/resetPwd.php?type=newpwd&filename=$encrypted_id'";
+		
+		$message .="	
+		<p>Dear <b>" . $row['FirstName'] . " " . $row['LastName'] . ",</b><br>
+		A password reset request has been recieved. Use the link below to create a new password.<br>
+		<a href='$url'>Create new password</a><br>
+			
+		For any enquiries, kindly get in touch via the contact details below.
+		
+		</p>
+		
+		<footer>
+			<address>
+                    <strong>SmartMedi Kenya.</strong><br>
+                    Ground floor, room 105<br>
+                    Allimex Plaza, Mombasa Road<br>
+                    Phone: (+254)743 234567 / (+254) 790 453627<br>
+                    Email: admin@smartmedike.com
+                  </address>
+		</footer>
+			</div>
+		</body>
+		</html>";
+		}
+        
+	ob_end_clean();
+	
+	mail($to, $subject, $message, $headers);
+								
+header('location: login.php');
+}
 
 ?>
