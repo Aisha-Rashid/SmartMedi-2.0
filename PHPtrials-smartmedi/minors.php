@@ -114,13 +114,9 @@ if (isset($_GET['logout'])) {
 	    <tbody>
 		 <?php if(isset($_POST['searchsub'])!=""){
 					$search = $_POST['search'];
-					$servername = "localhost";
-					$username = "root";
-					$password = "";
-					$db = "phptrials-smartmedi";
-					$conn = new mysqli($servername, $username, $password, $db);
+					
 					if(!empty($_POST['search'])) {
-					$result = $conn->query("select * from dependants where FirstName_dep like '%$search%' or LastName_dep like '%$search%'");
+					$result = mysqli_query($db,"select * from dependants where FirstName_dep like '%$search%' or LastName_dep like '%$search%'");
 
 					if ($result->num_rows > 0){
 					while($row = $result->fetch_assoc() ){

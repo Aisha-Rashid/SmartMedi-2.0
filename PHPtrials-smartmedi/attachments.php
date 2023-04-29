@@ -1,23 +1,11 @@
 <?php
 include('server.php'); 
 
-// Starting the session, to use and
-// store data in session variable
-// session_start();
-
-// If the session variable is empty, this
-// means the user is yet to login
-// User will be sent to 'login.php' page
-// to allow the user to login
 if (!isset($_SESSION['IDNo'])) {
 	$_SESSION['msg'] = "You have to log in first";
 	header('location: login.php');
 }
 
-// Logout button will destroy the session, and
-// will unset the session variables
-// User will be headed to 'login.php'
-// after logging out
 if (isset($_GET['logout'])) {
 	session_destroy();
 	unset($_SESSION['IDNo']);
@@ -54,7 +42,7 @@ date_default_timezone_set("Africa/Nairobi");
 ?>
 
 <?php
-$conn=new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or die(mysqli_error($conn));
+//$conn=new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or die(mysqli_error($conn));
 if(isset($_POST['submit'])!=""){
   $name=$_FILES['photo']['name'];
   $size=$_FILES['photo']['size'];
@@ -66,12 +54,14 @@ if(isset($_POST['submit'])!=""){
   
   move_uploaded_file($temp,"files/".$name);
 
-$query=$conn->query("INSERT INTO fileupload (name,date, IDNo) VALUES ('$name','$date', '$unique')");
+//$query=$conn->query("INSERT INTO fileupload (name,date, IDNo) VALUES ('$name','$date', '$unique')");
+$query=mysqli_query($db,"INSERT INTO fileupload (name,date, IDNo) VALUES ('$name','$date', '$unique')");
 if($query){
 header("location:attachments.php");
 }
 else{
-die(mysqli_error($conn));
+//die(mysqli_error($conn));
+echo "File not uploaded";
 }
 }
 ?>

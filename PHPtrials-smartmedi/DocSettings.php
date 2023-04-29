@@ -1,19 +1,11 @@
 <?php
 include('server.php');
 
-// If the session variable is empty, this
-// means the user is yet to login
-// User will be sent to 'login.php' page
-// to allow the user to login
 if (!isset($_SESSION['nationalid'])) {
 	$_SESSION['msg'] = "You have to log in first";
 	header('location: DocLogin.php');
 }
 
-// Logout button will destroy the session, and
-// will unset the session variables
-// User will be headed to 'login.php'
-// after logging out
 if (isset($_GET['logout'])) {
 	session_destroy(); 
 	unset($_SESSION['nationalid']);
@@ -46,11 +38,8 @@ if (isset($_GET['logout'])) {
    $res = mysqli_query($db, $query);
    $array=mysqli_fetch_row($res);
    $rows = mysqli_num_rows($res);
-?>
-<?php 
-$conn=new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or die(mysqli_error($conn));
-//Doctor's details
-if(isset($_POST['submit'])!=""){
+   
+   if(isset($_POST['submit'])!=""){
 		
 	$hospital = mysqli_real_escape_string($db, $_POST['hospital']);
 	$workid = mysqli_real_escape_string($db, $_POST['workid']);
@@ -60,40 +49,33 @@ if(isset($_POST['submit'])!=""){
 	$conf_password = mysqli_real_escape_string($db, $_POST['conf_password']);
 	
 	if (!empty($hospital)) {
-	$query=$conn->query("update doctors set hospital='$hospital' where nationalid='$unique'");
+	$query=mysqli_query($db,"update doctors set hospital='$hospital' where nationalid='$unique'");
 	}
 	if (!empty($workid)) {
-	$query=$conn->query("update doctors set workid='$workid' where nationalid='$unique'");
+	$query=mysqli_query($db,"update doctors set workid='$workid' where nationalid='$unique'");
 	}
 	if (!empty($specialty)) {
-	$query=$conn->query("update doctors set specialty='$specialty' where nationalid='$unique'");
+	$query=mysqli_query($db,"update doctors set specialty='$specialty' where nationalid='$unique'");
 	}
 	if (!empty($current_password)) {
 		
 			if ($new_password == $conf_password) {
 				
 				$enc_password = md5($new_password);
-				$query=$conn->query("UPDATE doctors SET password='$enc_password' WHERE nationalid='$unique' ");
+				$query=mysqli_query($db,"UPDATE doctors SET password='$enc_password' WHERE nationalid='$unique' ");
 				
 			}
 			 else {
       echo "Error: new password and confirm password do not match.";
-			
-			
-		}
-	
-	}
-	
-	
-	if($query){
+		}}
+if($query){
 header("location:DocDashboard.php");
 }
 else{
-die(mysqli_error($conn));
+echo "Change Failure";}
 }
-}
-
 ?>
+
 
 
 		<!-- Start Preferences -->

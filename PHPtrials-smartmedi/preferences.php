@@ -31,7 +31,8 @@ if (isset($_GET['logout'])) {
 	</head>
 
 	<body>
-<?php if (isset($_SESSION['IDNo'])) :
+<?php 
+	if (isset($_SESSION['IDNo'])) :
 
 	$unique = $_SESSION['IDNo'];
 	$query = "SELECT * FROM `patients` WHERE IDNo = '$unique'";
@@ -39,9 +40,6 @@ if (isset($_GET['logout'])) {
 	$array=mysqli_fetch_row($res);
 	$rows = mysqli_num_rows($res);
 
-?>
-<?php 
-$conn=new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or die(mysqli_error($conn));
 //Patients details
 if(isset($_POST['sub1'])!=""){
 		
@@ -54,29 +52,26 @@ if(isset($_POST['sub1'])!=""){
 	$conf_password = mysqli_real_escape_string($db, $_POST['conf_password']);
 	
 	if (!empty($email)) {
-	$query=$conn->query("update patients set email='$email' where IDNo='$unique'");
+		$query=mysqli_query($db,"update patients set email='$email' where IDNo='$unique'");
 	}
 	if (!empty($TelNo)) {
-	$query=$conn->query("update patients set TelNo='$TelNo' where IDNo='$unique'");
+		$query=mysqli_query($db,"update patients set TelNo='$TelNo' where IDNo='$unique'");
 	}
 	if (!empty($county)) {
-	$query=$conn->query("update patients set county='$county' where IDNo='$unique'");
+		$query=mysqli_query($db,"update patients set county='$county' where IDNo='$unique'");
 	}
 	if (!empty($town)) {
-	$query=$conn->query("update patients set town='$town' where IDNo='$unique'");
+		$query=mysqli_query($db,"update patients set town='$town' where IDNo='$unique'");
 	}
 	if (!empty($current_password)) {
 		
 			if ($new_password == $conf_password) {
 				
 				$enc_password = md5($new_password);
-				$query=$conn->query("UPDATE patients SET password='$enc_password' WHERE IDNo='$unique' ");
-				
+				$query=mysqli_query($db,"UPDATE patients SET password='$enc_password' WHERE IDNo='$unique' ");			
 			}
 			 else {
-      echo "Error: new password and confirm password do not match.";
-			
-			
+      echo "Error: new password and confirm password do not match.";			
 		}
 	
 	}
@@ -86,7 +81,7 @@ if(isset($_POST['sub1'])!=""){
 header("location:preferences.php");
 }
 else{
-die(mysqli_error($conn));
+	echo "Change Failure";
 }
 }
 //Next of kin details
@@ -98,14 +93,14 @@ if(isset($_POST['sub2'])!=""){
 	$telephone = mysqli_real_escape_string($db, $_POST['telephone']);
 	
 	if (!empty($kinFirstName) && !empty($kinLastName) && !empty($relationship) && !empty($telephone)) {
-	$query=$conn->query("INSERT INTO nextofkin (kinFirstName, kinLastName, relationship, telephone, IDNo) VALUES ('$kinFirstName', '$kinLastName', '$relationship', '$telephone', '$unique')");
+	$query=mysqli_query($db,"INSERT INTO nextofkin (kinFirstName, kinLastName, relationship, telephone, IDNo) VALUES ('$kinFirstName', '$kinLastName', '$relationship', '$telephone', '$unique')");
 	}
 	
 if($query){
 header("location:preferences.php");
 }
 else{
-die(mysqli_error($conn));
+echo "Change Failure";
 }	
 }
 //Medical records
@@ -120,32 +115,32 @@ if(isset($_POST['sub3'])!=""){
 	$notes = mysqli_real_escape_string($db, $_POST['notes']);
 	
 	if (!empty($allergies)) {
-	$query=$conn->query("update response set allergies = CONCAT_WS(' ,', allergies, '$allergies') where IDNo='$unique'");
+	$query=mysqli_query($db,"update response set allergies = CONCAT_WS(' ,', allergies, '$allergies') where IDNo='$unique'");
 	}
 	if (!empty($condition1)) {
-	$query=$conn->query("update response set conditions = CONCAT_WS(' ,', conditions, '$condition1') where IDNo='$unique'");
+	$query=mysqli_query($db,"update response set conditions = CONCAT_WS(' ,', conditions, '$condition1') where IDNo='$unique'");
 	}
 	if (!empty($condition2)) {
-	$query=$conn->query("update response set conditions = CONCAT_WS(' ,', conditions, '$condition2') where IDNo='$unique'");
+	$query=mysqli_query($db,"update response set conditions = CONCAT_WS(' ,', conditions, '$condition2') where IDNo='$unique'");
 	}
 	if (!empty($condition3)) {
-	$query=$conn->query("update response set conditions = CONCAT_WS(' ,', conditions, '$condition3') where IDNo='$unique'");
+	$query=mysqli_query($db,"update response set conditions = CONCAT_WS(' ,', conditions, '$condition3') where IDNo='$unique'");
 	}
 	if (!empty($condition4)) {
-	$query=$conn->query("update response set conditions = CONCAT_WS(' ,', conditions, '$condition4') where IDNo='$unique'");
+	$query=mysqli_query($db,"update response set conditions = CONCAT_WS(' ,', conditions, '$condition4') where IDNo='$unique'");
 	}
 	if (!empty($condition5)) {
-	$query=$conn->query("update response set conditions = CONCAT_WS(' ,', conditions, '$condition5') where IDNo='$unique'");
+	$query=mysqli_query($db,"update response set conditions = CONCAT_WS(' ,', conditions, '$condition5') where IDNo='$unique'");
 	}
 	if (!empty($notes)) {
-	$query=$conn->query("update response set notes = CONCAT_WS(' ,',notes, '$notes') where IDNo='$unique'");
+	$query=mysqli_query($db,"update response set notes = CONCAT_WS(' ,',notes, '$notes') where IDNo='$unique'");
 	}
 	
 if($query){
 header("location:preferences.php");
 }
 else{
-die(mysqli_error($conn));
+echo "Change Failure";
 }	
 }
 //Insurance Details
@@ -159,17 +154,16 @@ if(isset($_POST['sub4'])!=""){
 	$NIL = 0;
 	
 	if (!empty($insurer) && !empty($insurancenumber) && !empty($insuranceprincipal) && !empty($expiry)) {
-	$query=$conn->query("INSERT INTO medicalcover (nhiftype, nhifnumber, insurancetype, insurancenumber, insuranceprincipal, expiry, IDNo) VALUES ('$NA', '$NIL', '$insurer', '$insurancenumber', '$insuranceprincipal', '$expiry', '$unique')");
+	$query=mysqli_query($db,"INSERT INTO medicalcover (nhiftype, nhifnumber, insurancetype, insurancenumber, insuranceprincipal, expiry, IDNo) VALUES ('$NA', '$NIL', '$insurer', '$insurancenumber', '$insuranceprincipal', '$expiry', '$unique')");
 	}
 	
 if($query){
 header("location:preferences.php");
 }
 else{
-die(mysqli_error($conn));
+echo "Change Failure";
 }	
 }
-
 ?>
 
 		<!-- Start Preferences -->

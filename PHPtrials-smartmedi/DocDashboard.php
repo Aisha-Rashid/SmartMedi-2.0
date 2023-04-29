@@ -6,10 +6,6 @@ if (!isset($_SESSION['nationalid'])) {
 	header('location: DocLogin.php');
 }
 
-// Logout button will destroy the session, and
-// will unset the session variables
-// User will be headed to 'login.php'
-// after logging out
 if (isset($_GET['logout'])) {
 	session_destroy();
 	unset($_SESSION['nationalid']);
@@ -119,14 +115,10 @@ if (isset($_GET['logout'])) {
 	    <tbody>
 		 <?php if(isset($_POST['searchsub'])!=""){
 					$search = $_POST['search'];
-					$servername = "localhost";
-					$username = "root";
-					$password = "";
-					$db = "phptrials-smartmedi";
-					$conn = new mysqli($servername, $username, $password, $db);
+					
 					if(!empty($_POST['search'])) {
-					$result = $conn->query("select * from patients where FirstName like '%$search%' or LastName like '%$search%' or IDNo like '%$search'");
-
+					$result =mysqli_query($db,"select * from patients where FirstName like '%$search%' or LastName like '%$search%' or IDNo like '%$search'");
+						
 					if ($result->num_rows > 0){
 					while($row = $result->fetch_assoc() ){
 						$rowcount=mysqli_num_rows($result);
