@@ -1,14 +1,6 @@
 <?php
 include('server.php');
 
-// Starting the session, to use and
-// store data in session variable
-// session_start();
-
-// If the session variable is empty, this
-// means the user is yet to login
-// User will be sent to 'login.php' page
-// to allow the user to login
 if (!isset($_SESSION['workID'])) {
   $_SESSION['msg'] = "You have to log in first";
   header('location: AdminLogin.php');
@@ -129,32 +121,7 @@ die(mysqli_error($conn));
             </div>
           </div>
 </div>
-
-
-
-
-
-				<!-- Start popup -->
-				<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-								<h4 class="modal-title" id="myModalLabel">Are you sure you want to sign out?</h4>
-							</div>
-							<div class="modal-footer">
-								<a href="DocSettings.php?logout='1'" class="btn btn-primary">Yes</a>
-								<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- End popup -->
-				
-				
-				
-				
-			</div>
+</div>
 		</div>
 		<!-- ALL JS FILES -->
 		<script src="dashboardjs/jquery.min.js"></script>

@@ -258,7 +258,7 @@ date_default_timezone_set("Africa/Nairobi");
 					<h4 class="modal-title" id="myModalLabel">Are you sure you want to sign out?</h4>
 					</div>
 					<div class="modal-footer">
-					<a href="medicalhist.php?logout='1'" class="btn btn-primary">Yes</a>
+					<a href="dash_medhist.php?logout='1'" class="btn btn-primary">Yes</a>
 					<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
 					</div>
 				</div>

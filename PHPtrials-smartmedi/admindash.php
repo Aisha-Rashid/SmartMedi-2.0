@@ -124,7 +124,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
       <!--/.navbar-collapse -->
 
       <!--div class="templatemo-content-wrapper"-->
-        <div class="templatemo-content">
+        <div class="templatemo-admincontent">
           
 		  
           <p>Work ID : <b><?php echo $array[2]; ?></b></p>

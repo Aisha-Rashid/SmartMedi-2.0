@@ -106,14 +106,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 
       <div class="templatemo-content-wrapper"-->
         <div class="templatemo-admincontent">
-          <!--ol class="breadcrumb">
-            <li><a href="admindash.php">Admin Panel</a></li>
-            <li><a href="#">Manage Users</a></li>
-            <li class="active">Tables</li>
-          </ol->
-          <h1>Patients</h1>
-          <hr-->
-
+          
           <div class="row margin-bottom-30">
         <div class="col-md-12">
           <ul class="nav nav-pills">
@@ -123,8 +116,8 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
         </div>
       </div>
 		  
-          <div class="row">
-		  <div class="col-md-12 col-sm-12">
+          <!--div class="row"->
+		  <div class="col-md-12 col-sm-12"-->
 		  
 		  
 		  <div class="table-responsive">
@@ -205,7 +198,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
               <h4 class="modal-title" id="myModalLabel">Are you sure you want to sign out?</h4>
             </div>
             <div class="modal-footer">
-              <a href="admindash.php?logout='1'" class="btn btn-primary">Yes</a>
+              <a href="hospitals.php?logout='1'" class="btn btn-primary">Yes</a>
               <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
             </div>
           </div>
