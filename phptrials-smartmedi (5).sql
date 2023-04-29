@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2023 at 01:14 PM
+-- Generation Time: Apr 29, 2023 at 03:51 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -231,7 +231,8 @@ INSERT INTO `dependants` (`ID_dep`, `IDNo`, `FirstName_dep`, `LastName_dep`, `do
 (15, 54737364, 'fatuma rashid', '', '2020-03-07', 'Female', 'O+', 'reactive to paracetamol', 'jkcadlvdbvbdvds test', '', 'gallery-06.jpg'),
 (16, 54737364, 'rehema rashid', '', '2018-06-05', 'Female', 'O-', 'sulphur, pollen', 'jkcadlvdbvbdvds test', '', 'gallery-03.jpg'),
 (17, 54737364, 'trial child', '', '2021-07-05', 'Male', 'A-', 'Pollen', 'Gastro-intestinal disorders Skin disorders   ', '', 'doc3.png'),
-(19, 54737364, 'trial child three', '', '2022-07-06', 'Male', 'A-', 'nil', 'Respiratory and Ear Nose and Throat (ENT) disorders , Musculoskeletal disorders ,  ,  ,  , asthma, arthritis', '', '');
+(19, 54737364, 'trial child three', '', '2022-07-06', 'Male', 'A-', 'nil', 'Respiratory and Ear Nose and Throat (ENT) disorders , Musculoskeletal disorders ,  ,  ,  , asthma, arthritis', '', ''),
+(20, 33179878, 'Turkey', 'bieber', '2022-02-10', 'Male', 'A+', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -428,7 +429,7 @@ INSERT INTO `hospitalreg` (`id`, `hospital`, `branch`, `email`, `tel`, `applied`
 (2, 'Aga Khan University Hospital', 20, 'akuh.nairobi@aku.edu', 111011888, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-20 09:29:57', 1),
 (3, 'Avenue Hospital', 7, 'admin@avenuehealthcare.com', 711060200, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-17 14:10:09', 0),
 (4, 'Bristol Park Hospital', 5, 'bpembasi@bristolpark.or.ke', 784178015, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-20 10:06:08', 1),
-(5, 'Brother André Medical Center', 1, 'chuchuaisha@gmail.com', 792591950, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-20 12:06:58', 1),
+(5, 'Brother André Medical Center', 1, 'fatumarashid4@gmail.com', 792591950, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-22 12:25:55', 1),
 (6, 'Coptic Hospital', 1, 'info@coptichospitals.org', 711043000, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-12 10:54:37', 0),
 (7, 'Gertrude&#39;s Children&#39;s Hospital', 27, 'info@gerties.org', 207206000, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-12 10:36:20', 0),
 (8, 'Institution Trial', 20, 'aisha.wrashid64@gmail.com', 764567744, '2023-04-18', 'README.md', 0, 'Not-Reveiwed', '0000-00-00 00:00:00', 0),
@@ -686,7 +687,6 @@ INSERT INTO `patients` (`ID`, `FirstName`, `LastName`, `TelNo`, `IDNo`, `DOB`, `
 (24, 'Vitalis', 'Junior', '+254712358256', 545586598, '1994-07-07', 'Male', 'AB+', 'vitalis@gmail.com', 'Vihiga', 'Vihiga', '92b20c90c1bc317620c82dc41b4eb9fd', '', 'patient'),
 (25, 'Fatuma', 'Rashid', '254719829526', 29816629, '1993-04-02', 'Female', 'O+', 'fatumarashid4@gmail.com', 'Kajiado', 'Kitengela', '407aa911747042d7f046b62feaf8b4c4', '', 'patient'),
 (26, 'Jeff', 'Githae', '254743567854', 43628735, '1996-07-05', 'Male', 'O+', 'jeffgithae@gmail.com', 'Kiambu', 'Kiambu', '166ee015c0e0934a8781e0c86a197c6e', '', 'patient'),
-(27, 'Aisha', 'Rashid', '0703277202', 2147483647, '1996-06-25', 'Female', 'O+', 'chuchuaisha@gmail.com', 'Nairobi City', 'Nairobi', 'a381bedb5d4478053eb04be35f8798dd', 'ppic.jpg', 'patient'),
 (28, 'Chicken', 'Licken', '0737472368', 47388377, '1992-06-06', 'Male', 'A-', 'chickenlicken@gmail.com', 'Kilifi', 'Malindi', 'cdf3aead074cf574c5ce6c9ce76c2e41', '', 'patient'),
 (29, 'Henny', 'Penny', '0764537584', 53648273, '1982-09-06', 'Female', 'AB+', 'hennypenny@gmail.com', 'Nairobi City', 'Ngara', 'penny', '', 'patient'),
 (30, 'Ducky', 'Lucky', '0736452749', 24367838, '1990-03-17', 'Female', 'O-', 'duckylucky@yahoo.com', 'Kakamega', 'Isulu', '56975b83de847aa2ee9b2493b6c4bd8f', '', 'patient'),
@@ -883,7 +883,7 @@ ALTER TABLE `counties`
 -- AUTO_INCREMENT for table `dependants`
 --
 ALTER TABLE `dependants`
-  MODIFY `ID_dep` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `ID_dep` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `docnotes`
@@ -913,7 +913,7 @@ ALTER TABLE `doctors`
 -- AUTO_INCREMENT for table `fileupload`
 --
 ALTER TABLE `fileupload`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `hospitalreg`
