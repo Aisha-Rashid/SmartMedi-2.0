@@ -134,11 +134,7 @@ include ('data-visualization.php');
 	$lname=$row['lname'];
 	$specialty=$row['specialty'];
 	 if($id != $previous_hospital){
-          // New hospital, start a new row
-          //if($previous_hospital !== null){
-            //echo "<tr><td rowspan=\"$rowspan\"></td></tr>"; // Close the previous row
-          //}
-          // Start a new row
+          
           echo "<tr><td>$id</td><td>$fname $lname</td><td>$specialty</td></tr>";
           $previous_hospital = $id;
           //$rowspan = 1;

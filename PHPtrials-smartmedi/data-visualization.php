@@ -35,6 +35,20 @@ $conditionNairobi = mysqli_num_rows($conditionNairobiQuery);
 		// Calculate the total number of pages
 		$total_pages = ceil($total_rows / $results_per_page);
 		
+	//minors pagination query
+		$minorsquery="SELECT dependants.FirstName_dep, dependants.LastName_dep, patients.IDNo, patients.FirstName, patients.LastName, patients.TelNo  
+		FROM dependants, patients where dependants.IDNo=patients.IDNo LIMIT $start_row, $results_per_page";
+		$minorsRes = mysqli_query($db, $minorsquery);
+		$totalminors = mysqli_num_rows($minorsRes);
+		
+		// Calculate the total number of rows
+		$total_minors_rows_query = "SELECT COUNT(*) as total FROM dependants";
+		$total_minors_rows_result = mysqli_query($db, $total_minors_rows_query);
+		$total_minors_rows = mysqli_fetch_assoc($total_minors_rows_result)['total'];
+
+		// Calculate the total number of pages
+		$total_minors_pages = ceil($total_minors_rows / $results_per_page);
+		
 	//doctors
 		$doctorsQuery =  "SELECT * FROM `doctors` LIMIT $start_row, $results_per_page";
 		$doctorsRes = mysqli_query($db, $doctorsQuery);

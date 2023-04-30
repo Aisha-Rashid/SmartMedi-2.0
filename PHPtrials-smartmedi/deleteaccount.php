@@ -16,6 +16,18 @@ $conn=new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or
 		}
 		}
 }
+//Delete child record
+	elseif ($_GET['type'] == 'minor'){
+		
+		$query = $conn->query("DELETE FROM dependants WHERE IDNo = '$id' and FirstName_dep='$fname'");
+		
+		if($query){
+		header("location:minorpatients.php");
+		}
+		else{
+		die(mysqli_error($conn));
+		}
+}
 	//Delete Doc
 	elseif ($_GET['type'] == 'doctor') {
 		// Delete a doctor

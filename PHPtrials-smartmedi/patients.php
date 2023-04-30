@@ -62,6 +62,7 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
               
               
 			  <li class="active"><a href="#"><i class="fa fa-male"></i><i class="fa fa-female"></i> Patients</a></li>
+			  <li><a href="minorPatients.php"><i class="fa fa-child"></i> Minors</a></li>
 			  <li><a href="doctors.php"><i class="fa fa-user-md"></i> Medical Practitioners</a></li>
 			  <li><a href="hospitals.php"><i class="fa fa-h-square"></i> Hospitals</a></li>
               
@@ -152,8 +153,8 @@ http://www.templatemo.com/preview/templatemo_415_dashboard
 							$FirstName =$row['FirstName'];
 							$LastName=$row['LastName'];
 							$IDNo=$row['IDNo'];
-							$IDNo=$row['TelNo'];
-							$IDNo=$row['email'];
+							$TelNo=$row['TelNo'];
+							$email=$row['email'];
 							?>
 					<tr>
 					
