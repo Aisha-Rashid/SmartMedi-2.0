@@ -1,201 +1,147 @@
 <?php
 include('server.php');
 
-// If the session variable is empty, this
-// means the user is yet to login
-// User will be sent to 'login.php' page
-// to allow the user to login
-if (!isset($_SESSION['nationalid'])) {
-	$_SESSION['msg'] = "You have to log in first";
-	header('location: DocLogin.php');
-}
-
-// Logout button will destroy the session, and
-// will unset the session variables
-// User will be headed to 'login.php'
-// after logging out
-if (isset($_GET['logout'])) {
-	session_destroy(); 
-	unset($_SESSION['nationalid']);
-	header("location: DocLogin.php");
-}
 ?>
+<!DOCTYPE html>
+<html lang="en"><!-- Basic -->
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">   
+   
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+ 
+     <!-- Site Metas -->
+    <title>SmartMedi EHR</title>  
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<html>
-	<head>
-		<meta charset="utf-8">
-		<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
-		<title>SmartMedi User Dashboard</title>
-		<meta name="keywords" content="" />
-		<meta name="description" content="" />
-		<meta name="viewport" content="width=device-width">
-		<link rel="stylesheet" href="dashboardcss/templatemo_main.css">
-		<link rel="shortcut icon" href="dashboardimages/favicon.ico" type="image/x-icon">
-		<link rel="apple-touch-icon" href="dashboardimages/apple-touch-icon.png">
-		<link rel="stylesheet" href="dashboardcss/custom.css">
-		<!--Password eye icon-->
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Pogo Slider CSS -->
+    <link rel="stylesheet" href="css/pogo-slider.min.css">
+	<!-- Site CSS -->
+    <link rel="stylesheet" href="css/style.css">    
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- Custom CSS -->
+	<link rel="stylesheet" href="dashboardcss/custom.css">
+    
+	<!--Password eye icon-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-		
-	</head>
-
-	<body>
-<?php if (isset($_SESSION['nationalid'])) :
-
-	$unique = $_SESSION['nationalid'];
-   $query = "SELECT * FROM `doctors` WHERE nationalid = '$unique'";
-   $res = mysqli_query($db, $query);
-   $array=mysqli_fetch_row($res);
-   $rows = mysqli_num_rows($res);
-?>
-<?php 
-$conn=new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or die(mysqli_error($conn));
+	
+</head>
+<body id="home" data-spy="scroll" data-target="#navbar-wd" data-offset="98">
+<?php
+//$conn=new PDO('mysql:host=localhost; dbname=phptrials-smartmedi', 'root', '') or die(mysqli_error($conn));
 //Doctor's details
 if(isset($_POST['submit'])!=""){
-	$current_password = mysqli_real_escape_string($db, $_POST['current_password']);
+	$fname =filter_var ($_POST['fname'], FILTER_SANITIZE_STRING);
+	$lname =filter_var ($_POST['lname'], FILTER_SANITIZE_STRING);
+	$nationalid = filter_var($_POST['nationalid'], FILTER_SANITIZE_NUMBER_INT);
+	$workid = filter_var($_POST['workid'], FILTER_SANITIZE_NUMBER_INT);
 	$new_password = mysqli_real_escape_string($db, $_POST['new_password']);
 	$conf_password = mysqli_real_escape_string($db, $_POST['conf_password']);
-
-	if (!empty($current_password)) {
+	
+	$query= "select * from doctors where fname='$fname' and lname = '$lname' and nationalid = '$nationalid' and workid='$workid'";
+	$result= mysqli_query($db, $query);
+	if ($result){
 		
-			if ($new_password == $conf_password) {
+		if ($new_password == $conf_password) {
+					$enc_password = md5($new_password);
+					$query=mysqli_query($db, "UPDATE doctors SET password='$enc_password' WHERE nationalid='$nationalid' ");
+					if($query){
+					header("location:DocLogin.php");
+					}
+					else{
+					echo "Registration Unsuccessful";
+					}
+				}
+				 else {
+		  echo "Error: new password and confirm password do not match.";
 				
-				$enc_password = md5($new_password);
-				$query=$conn->query("UPDATE doctors SET password='$enc_password' WHERE nationalid='$unique' ");
 				
 			}
-			 else {
-      echo "Error: new password and confirm password do not match.";
-			
-			
-		}
 	
-	}
-	
-	
-	if($query){
-header("location:DocDashboard.php");
 }
 else{
-die(mysqli_error($conn));
+	echo "Error: Details do not match our records";
 }
-}
+	
+	
+	
 
+}
 ?>
 
-
-		<!-- Start Preferences -->
-		<div id="main-wrapper">
-			<div class="template-page-wrapper">
-				
-				<div class="templatemo-content-wrapper">
-					<div class="templatemo-content">
-						
-				
-			<div class="student-profile py-4">
-  <div class="container">
-		  	<div class="row">
-              <div class="card shadow-sm">
-         
-		  <p><b>
-		  Dr. 
-						<?php 
-            
-            echo $array[2];
-			echo " ";
-			echo $array[3];?><br>
-			<?php 
-            
-            echo $array[1];?><br>
-			<?php 
-            
-            echo $array[6];?><br>
-			<?php 
-            
-            echo $array[4];?><br>
-		  </b></p>
-          
-        </div><hr>
-							<form id="personal-details" method="post" action="">
-								<table width = 70%>
-								
-									
-									<tr><td colspan = "2" ><h4><u><b>Change Password </b></u></h4></td></tr>
-									<tr><td><p>Enter current password :</p></td><td><input type="password" class="form-control" name="current_password" id="current_password">
-									<span toggle="#current_password" class="fa fa-fw fa-eye field-icon toggle-password" ></span></td></tr>
-									<tr><td><p>New Password :</p></td><td><input type="password" class="form-control" name="new_password" id="new_password">
-									<span toggle="#new_password" class="fa fa-fw fa-eye field-icon toggle-password" ></span></td></tr>
-									<tr><td><p>Confirm Password :</p></td><td><input type="password" class="form-control" name="conf_password" id="conf_password">
-									<span toggle="#conf_password" class="fa fa-fw fa-eye field-icon toggle-password" ></span></td></tr>
-									
-								</table>
-								<br><br>
-								<button type="submit" class="btn btn-primary" name="submit">Submit</button>
-								</form>
-						</div>
-					
-							
-			  </div>
+	<!-- LOADER -->
+    <div id="preloader">
+		<div class="loader">
+			<img src="images/preloader.gif" alt="" />
+		</div>
+    </div>
+    <!-- END LOADER -->
+	
+	<!-- Start Medical -->
+	<div id="medical" class="contact-box">
+	
+		<div class="container">
+		<img src="dashboardimages/favicon.ico" alt="Smartmedi">
+			<div class="row">
 			
-			  </div>
-		  
-                
-            </div>
-          </div>
-</div>
-
-
-
-
-
-				<!-- Start popup -->
-				<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-								<h4 class="modal-title" id="myModalLabel">Are you sure you want to sign out?</h4>
-							</div>
-							<div class="modal-footer">
-								<a href="DocSettings.php?logout='1'" class="btn btn-primary">Yes</a>
-								<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-							</div>
-						</div>
+				<div class="col-lg-12 col-xs-12">
+					<h3><b>Medical Practictioner Registration Form</b></h3>
+					<hr>
+					<div class="contact-block">
+						<form class="form-horizontal templatemo-signin-form" method="post" action="">
+						
+							<TABLE width=100% >
+							<input type="hidden" name="organization" value="<?php echo $array[1]; ?>">
+							<TR><TD width=50%>First Name</TD><TD><input type="text" class="form-control" id="fname" name="fname" placeholder="---" required="required"></TD></TR>
+							<TR><TD>Last Name</TD><TD><input type="text" class="form-control" id="lname" name="lname" placeholder="---" required="required"></TD></TR>							
+							<TR><TD>National ID</TD><TD ><input type="number" class="form-control" id="nationalid" name="nationalid" placeholder="---" required="required"></TD></TR>
+							<TR><TD>Work ID</TD><TD><input type="number" class="form-control" id="workid" name="workid" placeholder="---" required="required"></TD></TR>
+							<tr><td><p>New Password :</p></td><td><input type="password" class="form-control" name="new_password" id="new_password" required="required">
+							<span toggle="#new_password" class="fa fa-fw fa-eye field-icon toggle-password" ></span></td></tr>
+							<tr><td><p>Confirm Password :</p></td><td><input type="password" class="form-control" name="conf_password" id="conf_password" required="required">
+							<span toggle="#conf_password" class="fa fa-fw fa-eye field-icon toggle-password" ></span></td></tr>
+							</TABLE>
+							<br>
+							<button type="submit" class="btn"
+										name="submit">Register</button>
+							           
+						</form>
 					</div>
 				</div>
-				<!-- End popup -->
-			<footer class="templatemo-footer">
-      <div class="templatemo-copyright">
-        <p>Copyright &copy; 2022 SmartMedi</p>
-      </div>
-    </footer>	
-				
-				
-				
 			</div>
 		</div>
-		<!-- ALL JS FILES -->
-		<script src="dashboardjs/jquery.min.js"></script>
-		<script src="dashboardjs/bootstrap.min.js"></script>
-		<script src="dashboardjs/Chart.min.js"></script>
-		<script src="dashboardjs/templatemo_script.js"></script>
-		<script src="dashboardjs/Graph.js"></script>
-		<script src="dashboardjs/appointment.js"></script>
-		<script type="text/javascript"></script>
+	</div>
+	<!-- End Medical -->	
+	
+	<a href="#" id="scroll-to-top" class="new-btn-d br-2"><i class="fa fa-angle-up"></i></a>
 
-		<script>
-			$(".toggle-password").click(function() {
-
-  $(this).toggleClass("fa-eye fa-eye-slash");
-  var input = $($(this).attr("toggle"));
-  if (input.attr("type") == "password") {
-    input.attr("type", "text");
-  } else {
-    input.attr("type", "password");
-  }
-});
-
-		</script>
-	<?php endif ?>
-	</body>
-
-	</html>
+	<!-- ALL JS FILES -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/passwordToggle.js"></script>
+    <!-- ALL PLUGINS -->
+	<script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.pogo-slider.min.js"></script> 
+	<script src="js/slider-index.js"></script>
+	<script src="js/smoothscroll.js"></script>
+	<script src="js/TweenMax.min.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/form-validator.min.js"></script>
+    <script src="js/contact-form-script.js"></script>
+	<script src="js/isotope.min.js"></script>	
+	<script src="js/images-loded.min.js"></script>	
+    <script src="js/custom.js"></script>
+</body>
+</html>

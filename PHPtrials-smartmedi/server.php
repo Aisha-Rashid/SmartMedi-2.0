@@ -148,36 +148,16 @@ if (isset($_POST['doc_login'])) {
 		$password = md5($password);
 		
 		$query = "SELECT * FROM doctors WHERE nationalid=
-				'$nationalid' AND password='SMedi@123'";
-		$results = mysqli_query($db, $query);
-		
-		if (mysqli_num_rows($results) == 1) {
-			$_SESSION['nationalid'] = $nationalid;
-			header('location: Docpassword.php');
-		}
-
-		else{
-			$query = "SELECT * FROM doctors WHERE nationalid=
 				'$nationalid' AND password='$password'";
 		$results = mysqli_query($db, $query);
 		
 		if (mysqli_num_rows($results) == 1) {
-			
-			// Storing username in session variable
-			//$_SESSION['FirstName'] = $FirstName;
 			$_SESSION['nationalid'] = $nationalid;
-			
-			
 			header('location: DocDashboard.php');
 		}
-			else {
-			
-			// If the username and password doesn't match
+		else {
 			echo "Username or password incorrect";
 		}
-		}
-		
-		
 	}
 }
 

@@ -208,7 +208,32 @@ if(isset($_POST['submit'])!=""){
 				</td>
 				<?php } ?> 
               </tr>
-			 
+			  </table>
+			  <table  class="table table-bordered" id="dependants">
+			 <tr>
+                <th width="30%">Dependents</th></tr>
+                <?php 
+							$query="select * from dependants WHERE IDNO = '$patient'";
+							$res = mysqli_query($db, $query);
+							while($row=mysqli_fetch_array($res)){
+							
+							$FirstName_dep=$row['FirstName_dep'];
+							$LastName_dep=$row['LastName_dep'];
+							$age = $row['dob'];
+							$year = explode('-', $age);
+							$dependantAge = date("Y") - $year[0];
+							$gender_dep=$row['gender_dep'];
+							?>
+				<tr><td>
+						<b>Name : </b><?php echo $row['FirstName_dep'];
+						echo " ";
+						echo $row['LastName_dep'];; ?> <br>
+						<b>Age : </b><?php echo $dependantAge ?><br>
+						<b>Gender : </b><?php echo $row['gender_dep'] ?><br><br>
+						
+				</td>
+				<?php } ?> 
+              </tr>
 			  
             </table>
 			

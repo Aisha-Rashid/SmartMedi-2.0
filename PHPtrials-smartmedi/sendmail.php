@@ -153,7 +153,7 @@ $message .="
 		</tbody>
 		
 		</table>
-		<p>The aforementioned can now log into the system using this <a href='$url'> link.</a><br> Instructions on how to do so has been mailed to the individuals. 
+		<p>The aforementioned can now log into the system using this <a href='$url'> link.</a><br> 
 		For any assistance, kindly get in touch via the contact details below.</p>
 		<footer>
 			<address>
