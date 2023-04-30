@@ -89,7 +89,7 @@ if(isset($_POST['submit'])!=""){
 	$query=$conn->query("INSERT INTO dependants (`IDNo`, `FirstName_dep`, `LastName_dep`, `dob`, `gender_dep`, `blood_group`, `allergies`, `medical_conditions`, `notes`) VALUES 
 	('$unique', '$FirstName', '$LastName', '$dob', '$gender', '$bloodgroup', '$allergies', '$medical_conditions', '$notes')");
 if($query){
-header("location:uploadProfile.php?type=dependent&name=$FirstName");
+header("location:uploadProfile.php?type=dependent&fname=$FirstName");
 }
 else{
 die(mysqli_error($conn));

@@ -80,24 +80,24 @@ if (isset($_POST['upload'])) {
 				echo "<h3> Failed to upload image!</h3>";
 			}
 		}
-if ($_GET['type'] == 'dependent'){ 
-$name = $_GET['name'];
-	// Get all the submitted data from the form
-	$sql = "update dependants set filename='$filename' where IDNo='$unique' and name = '$name'";
+		elseif ($_GET['type'] == 'dependent'){ 
+		$fname = $_GET['fname'];
+			// Get all the submitted data from the form
+			$query = "update dependants set filename='$filename' where IDNo='$unique' and FirstName_dep = '$fname'";
 
-	// Execute query
-	mysqli_query($db, $sql);
+			// Execute query
+			mysqli_query($db, $query);
 
-	// Now let's move the uploaded image into the folder: image
-	if (move_uploaded_file($tempname, $folder)) {
-		
-		echo"<script>alert('Image uploaded successfully!'); window.location.href ='/SmartMedi-2.0/PHPtrials-smartmedi/dependants.php'; </script>";
-		//echo "<h3> Image uploaded successfully!</h3>";
-	} else {
-		//echo "<h3> Failed to upload image!</h3>";
-		echo "<script>alert('Failed to upload image!'); window.location.href ='/SmartMedi-2.0/PHPtrials-smartmedi/dependants.php'; </script>";
-	}
-}
+			// Now let's move the uploaded image into the folder: image
+			if (move_uploaded_file($tempname, $folder)) {
+				
+				echo"<script>alert('Image uploaded successfully!'); window.location.href ='/SmartMedi-2.0/PHPtrials-smartmedi/dependants.php'; </script>";
+				//echo "<h3> Image uploaded successfully!</h3>";
+			} else {
+				//echo "<h3> Failed to upload image!</h3>";
+				echo "<script>alert('Failed to upload image!'); window.location.href ='/SmartMedi-2.0/PHPtrials-smartmedi/dependants.php'; </script>";
+			}
+		}
 }
 ?>
 
