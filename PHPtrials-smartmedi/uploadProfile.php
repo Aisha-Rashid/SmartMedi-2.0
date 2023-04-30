@@ -90,13 +90,12 @@ $name = $_GET['name'];
 
 	// Now let's move the uploaded image into the folder: image
 	if (move_uploaded_file($tempname, $folder)) {
-		echo "<h3> Image uploaded successfully!</h3>";
-		header('Location: dependants.php');
-		//echo"<script>alert('Image uploaded successfully!'); window.location.href ='/SmartMedi-2.0/PHPtrials-smartmedi/dependants.php'; </script>";
+		
+		echo"<script>alert('Image uploaded successfully!'); window.location.href ='/SmartMedi-2.0/PHPtrials-smartmedi/dependants.php'; </script>";
 		//echo "<h3> Image uploaded successfully!</h3>";
 	} else {
-		echo "<h3> Failed to upload image!</h3>";
-		//echo "<script>alert('Failed to upload image!'); window.location.href ='/SmartMedi-2.0/PHPtrials-smartmedi/dependants.php'; </script>";
+		//echo "<h3> Failed to upload image!</h3>";
+		echo "<script>alert('Failed to upload image!'); window.location.href ='/SmartMedi-2.0/PHPtrials-smartmedi/dependants.php'; </script>";
 	}
 }
 }
