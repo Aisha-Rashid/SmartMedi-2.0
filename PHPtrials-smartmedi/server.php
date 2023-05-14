@@ -60,7 +60,18 @@ if (isset($_POST['reg_user'])) {
 		
 		// Password encryption to increase data security
 		$password = md5($password1);
-		
+
+
+		$age = date_diff(date_create($DOB), date_create('today'))->y;
+
+// Check if the user is 18 years or older
+if ($age < 18) {
+  // Redirect the user to an error page or display an error message
+echo("You must be 18 years to Register");
+  exit;
+} else	 {
+  // Process the user's sign up
+  // ...		
 		// Inserting data into table
 		$query = "INSERT INTO patients (FirstName, LastName, username, TelNo, IDNo, DOB, gender, email, password)
 				VALUES('$FirstName' , '$LastName' , '$username', '$TelNo' , '$IDNo' , '$DOB' , '$gender', '$email', '$password')";
@@ -82,6 +93,7 @@ if (isset($_POST['reg_user'])) {
 		// Page on which the user will be
 		// redirected after logging in
 		header('location: dashboard.php');
+}
 	}
 }
 
