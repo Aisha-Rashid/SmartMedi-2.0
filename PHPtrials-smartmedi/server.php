@@ -49,6 +49,15 @@ if (isset($_POST['reg_user'])) {
 		array_push($errors, "The two passwords do not match");
 		// Checking if the passwords match
 	}
+	$age = date_diff(date_create($DOB), date_create('today'))->y;
+
+// Check if the user is 18 years or older
+if ($age < 18) {
+  // Redirect the user to an error page or display an error message
+echo("You must be 18 years to Register");
+  exit;
+} else	 {
+  // Process the user's sign up
 	// If the form is error free, then register the user
 	if (count($errors) == 0) {
 		// Password encryption to increase data security
@@ -64,7 +73,7 @@ if (isset($_POST['reg_user'])) {
 		// Page on which the user will be redirected after logging in
 		header('location: uploadProfile.php?type=register');
 	}
-}
+}}
 
 // Patient login
 if (isset($_POST['login_user'])) {

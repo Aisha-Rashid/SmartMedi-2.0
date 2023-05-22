@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2023 at 01:17 PM
+-- Generation Time: May 22, 2023 at 01:27 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -38,13 +38,6 @@ CREATE TABLE `admin` (
   `adminpass` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `admin`
---
-
-INSERT INTO `admin` (`id`, `adminFname`, `adminLname`, `workID`, `IDnumber`, `phone`, `email`, `adminpass`) VALUES
-(1, 'Aisha', 'Rashid', 5654, 34567765, 73456765, 'chuchuaisha@gmail.com', 'd983d1851e82044a25e554323a4e5f29');
-
 -- --------------------------------------------------------
 
 --
@@ -59,28 +52,6 @@ CREATE TABLE `billing` (
   `amountPaid` int(11) NOT NULL,
   `datePaid` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `billing`
---
-
-INSERT INTO `billing` (`ID`, `hospitalname`, `invoice`, `amountDue`, `amountPaid`, `datePaid`) VALUES
-(1, 'Final Hospital', 10004, 40156, 40156, '2023-05-01'),
-(2, 'Halisi Family Hospital', 10005, 8000, 8000, '2023-04-04'),
-(3, 'Final Hospital', 10006, 24156, 24156, '2023-04-04'),
-(4, 'Kitengela Medical', 10007, 16156, 16156, '2023-04-05'),
-(5, 'AAR Hospital', 10008, 176156, 176156, '2023-04-12'),
-(6, 'Aga Khan University Hospital', 10009, 160156, 160156, '2023-04-12'),
-(7, 'Avenue Hospital', 10010, 56156, 56156, '2023-04-12'),
-(8, 'Bristol Park Hospital', 10011, 40156, 40156, '2023-04-12'),
-(9, 'Brother André Medical Center', 10012, 8156, 8156, '2023-04-12'),
-(10, 'Coptic Hospital', 10013, 8156, 8156, '2023-04-12'),
-(11, 'Gertrude&#39;s Children&#39;s Hospital', 10014, 216156, 216156, '2023-04-12'),
-(12, 'Institution Trial', 10015, 160156, 160156, '2023-04-18'),
-(13, 'Institution Trial 2', 10016, 96156, 96156, '2023-04-18'),
-(14, 'Halisi Family Hospital nanyuki', 10017, 80156, 80156, '2023-04-18'),
-(15, 'Final Hospital email', 10018, 112156, 112156, '2023-04-18'),
-(16, 'Pona Hospital', 10019, 40156, 40156, '2023-04-20');
 
 -- --------------------------------------------------------
 
@@ -310,27 +281,6 @@ CREATE TABLE `doctors` (
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `doctors`
---
-
-INSERT INTO `doctors` (`id`, `nationalid`, `fname`, `lname`, `hospital`, `workid`, `specialty`, `password`) VALUES
-(1, 345678345, 'Doctor', 'Matibabu', 'Final Hospital', 6789, 'Critical Care and Emergency', '5139917406323aa33ff64a30b9be3cc9'),
-(15, 26738463, 'Sarah', 'Waithaka', 'Gertrude&#39;s Children&#39;s Hospital', 256543, 'Critical Care and Emergency', '9e9d7a08e048e9d604b79460b54969c3'),
-(8, 34567876, 'Patricia', 'Chemutai', 'Bristol Park Hospital', 309452, 'Medical Microbiology and Infectious Diseases', 'SMedi@123'),
-(9, 23456541, 'Julius', 'Chepkorir', 'Bristol Park Hospital', 309457, 'Public Health and Preventive Medicine (PhPm)', 'SMedi@123'),
-(10, 23565432, 'Brenda', 'Wangui', 'Bristol Park Hospital', 309464, 'Critical Care and Emergency', 'SMedi@123'),
-(3, 10364846, 'Racheal', 'Nzioka', 'Coptic Hospital', 653521, 'Critical Care and Emergency', 'SMedi@123'),
-(2, 30475486, 'Mitch', 'Odhiambo', 'Coptic Hospital', 653567, 'General Surgery', 'SMedi@123'),
-(4, 25467384, 'Abdul Aziz', 'Guyo', 'Coptic Hospital', 653577, 'Pediatrics', 'SMedi@123'),
-(7, 34565439, 'Pamela', 'Oteng', 'Brother André Medical Center', 4286935, 'Critical Care and Emergency', 'SMedi@123'),
-(5, 35435643, 'Vincent', 'Mwanza', 'Brother André Medical Center', 4286941, 'Pediatrics', 'SMedi@123'),
-(6, 23456549, 'Samuel', 'Ratemo', 'Brother André Medical Center', 4286947, 'General/Clinical Pathology', 'SMedi@123'),
-(11, 12345676, 'Kelvin', 'Nzomo', 'Avenue Hospital', 9875634, 'Critical Care and Emergency', 'SMedi@123'),
-(14, 29836547, 'Dexter', 'Mwilonza', 'AAR Hospital', 40570036, 'Critical Care and Emergency', 'SMedi@123'),
-(13, 12398765, 'Maimuna', 'Idris', 'Aga Khan University Hospital', 98700022, 'Pediatrics', 'SMedi@123'),
-(12, 12345439, 'Jack', 'Ochieng', 'Aga Khan University Hospital', 98700054, 'Critical Care and Emergency', 'SMedi@123');
-
 -- --------------------------------------------------------
 
 --
@@ -363,25 +313,6 @@ CREATE TABLE `hospitalreg` (
   `approvalDate` datetime NOT NULL,
   `mail` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `hospitalreg`
---
-
-INSERT INTO `hospitalreg` (`id`, `hospital`, `branch`, `email`, `tel`, `applied`, `file`, `status`, `approval`, `approvalDate`, `mail`) VALUES
-(1, 'Final Hospital', 5, 'chuchuaisha@gmail.com', 734567435, '2023-05-01', 'temp1.JPG', 1, 'approved', '2023-05-01 11:48:13', 1),
-(2, 'AAR Hospital', 22, 'chuchuaisha@gmail.com', 730605500, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-20 13:03:56', 1),
-(3, 'Aga Khan University Hospital', 20, 'akuh.nairobi@aku.edu', 111011888, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-20 09:29:57', 1),
-(4, 'Avenue Hospital', 7, 'admin@avenuehealthcare.com', 711060200, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-17 14:10:09', 0),
-(5, 'Bristol Park Hospital', 5, 'bpembasi@bristolpark.or.ke', 784178015, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-20 10:06:08', 1),
-(6, 'Brother André Medical Center', 1, 'fatumarashid4@gmail.com', 792591950, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-22 12:25:55', 1),
-(7, 'Coptic Hospital', 1, 'info@coptichospitals.org', 711043000, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-12 10:54:37', 0),
-(8, 'Gertrude&#39;s Children&#39;s Hospital', 27, 'info@gerties.org', 207206000, '2023-04-12', 'SmartMedi EEHR- Doctors.pdf', 1, 'approved', '2023-04-12 10:36:20', 0),
-(9, 'Institution Trial', 20, 'aisha.wrashid64@gmail.com', 764567744, '2023-04-18', 'README.md', 0, 'Not-Reveiwed', '0000-00-00 00:00:00', 0),
-(10, 'Institution Trial 2', 12, 'aisha.wrashid64@gmail.com', 76434567, '2023-04-18', 'README.md', 0, 'Not-Reveiwed', '0000-00-00 00:00:00', 0),
-(11, 'Halisi Family Hospital nanyuki', 10, 'aisha.wrashid64@gmail.com', 78654567, '2023-04-18', 'README.md', 0, 'Not-Reveiwed', '0000-00-00 00:00:00', 0),
-(12, 'Final Hospital email', 14, 'aisha.wrashid64@gmail.com', 756378463, '2023-04-18', 'README.md', 0, 'Not-Reveiwed', '0000-00-00 00:00:00', 0),
-(13, 'Pona Hospital', 5, 'ponamedicalfacility@gmail.com', 745676543, '2023-04-20', 'README.md', 0, 'Not-Reveiwed', '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -504,52 +435,6 @@ CREATE TABLE `patients` (
   `role` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `patients`
---
-
-INSERT INTO `patients` (`ID`, `FirstName`, `LastName`, `TelNo`, `IDNo`, `DOB`, `gender`, `bloodgroup`, `email`, `county`, `town`, `password`, `filename`, `role`) VALUES
-(6, 'Allan', 'Keverenge', '254795856', 2147485, '1988-03-15', 'Male', 'B-', 'allan@yahoo.com', 'Homa Bay', 'Homa Bay', 'b993e4526238d62f6b1b90e605532ff8', '', 'patient'),
-(21, 'Sophia', 'Mwenje', '+2547582544', 2559655, '1983-06-08', 'Female', 'AB-', 'sophia@gmail.com', 'Trans Nzoia', 'Trans Nzoia', '2ee0272b8e1a9705dc3ebe91c10b32f4', '', 'patient'),
-(13, 'Martin ', 'Sendeyo', '+254710252863', 4879885, '1983-02-17', 'Male', 'AB+', 'martin@gmail.com', 'Busia', 'Busia', '925d7518fc597af0e43f5606f9a51512', '', 'patient'),
-(20, 'Abdul', 'Imboha', '+2547856622', 6588689, '1988-12-23', 'Male', 'B+', 'abdul@gmail', 'Bungoma', 'Bungoma', '82027888c5bb8fc395411cb6804a066c', '', 'patient'),
-(14, 'Peter', 'Mburu', '+254716688262', 6598569, '1976-05-13', 'Male', 'O-', 'peter@yahoo.com', 'Kirinyaga', 'Kirinyaga', '51dc30ddc473d43a6011e9ebba6ca770', '', 'patient'),
-(12, 'Mary', 'Wambui', '+254725898989', 9873268, '1993-09-17', 'Female', 'O+', 'mary@gmail.com', 'Kiambu', 'Kiambu', 'b8e7be5dfa2ce0714d21dcfc7d72382c', '', 'patient'),
-(30, 'Ducky', 'Lucky', '0736452749', 24367838, '1990-03-17', 'Female', 'O-', 'duckylucky@yahoo.com', 'Kakamega', 'Isulu', '56975b83de847aa2ee9b2493b6c4bd8f', '', 'patient'),
-(45, 'Patient', 'One', '0744377736', 29735438, '1999-02-17', 'Male', 'O+', 'pt1one@gmail.com', 'Nairobi City', 'Nairobi', 'c7ec2916ae31da9734952741ed70d08d', 'userMale.JPG', 'patient'),
-(25, 'Fatuma', 'Rashid', '254719829526', 29816629, '1993-04-02', 'Female', 'O+', 'fatumarashid4@gmail.com', 'Kajiado', 'Kitengela', '407aa911747042d7f046b62feaf8b4c4', '', 'patient'),
-(18, 'Mark', 'Njoroge', '+2547285689', 30562389, '1999-03-18', 'Male', 'B-', 'mark@gmail.com', 'Kajiado', 'kajiado', 'ea82410c7a9991816b5eeeebe195e20a', '', 'patient'),
-(40, 'Aisha', 'Rashid', '0703277202', 33179878, '1996-06-25', 'Female', 'O+', 'chuchuaisha@gmail.com', 'Kajiado', 'Kitengela', 'aae82dfe8d1d25acb0947aad2a77d487', '20200604_120107.jpg', 'patient'),
-(33, 'Turkey', 'Lucky', '0745384637', 33432676, '1993-03-11', 'Male', 'AB-', 'tlucky@gmail.com', 'Kiambu', 'Ndumberi', 'db77174aa34ded1b6139455a58d0a38b', '', 'patient'),
-(41, 'Meshack', 'Milimo', '0703283923', 33535687, '1989-08-07', 'Male', 'B+', 'mmilimo@gmail.com', 'Machakos', 'Kangundo', '2269d672abe86cdd5867e78b65ddb940', 'courage-the-cowardly-dog-dog-animals-tv-wallpaper-preview.jpg', 'patient'),
-(35, 'Sheldon', 'Cooper', '0734973497', 33857490, '1991-06-18', 'Male', 'O+', 'scooper@gmail.com', 'Nairobi City', 'Pumwani', 'fcfff28fdbbbf75face3b3d97fdbfc15', 'pancakes.jpg', 'patient'),
-(42, 'Kelly', 'Kapoor', '0703277202', 35239857, '1992-11-06', '', '', 'kkapoor@gmail.com', '', 'Gede', 'ae074a5692dfb7c26aae5147e52ceb40', '', 'patient'),
-(26, 'Jeff', 'Githae', '254743567854', 43628735, '1996-07-05', 'Male', 'O+', 'jeffgithae@gmail.com', 'Kiambu', 'Kiambu', '166ee015c0e0934a8781e0c86a197c6e', '', 'patient'),
-(28, 'Chicken', 'Licken', '0737472368', 47388377, '1992-06-06', 'Male', 'A-', 'chickenlicken@gmail.com', 'Kilifi', 'Malindi', 'cdf3aead074cf574c5ce6c9ce76c2e41', '', 'patient'),
-(7, 'Monica', 'Ndunge', '+254788741200', 49798885, '1991-02-05', 'Female', 'O-', 'monica@gmail.com', 'Machakos', 'Machakos', 'ff0d813dd5d2f64dd372c6c4b6aed086', '', 'patient'),
-(29, 'Henny', 'Penny', '0764537584', 53648273, '1982-09-06', 'Female', 'AB+', 'hennypenny@gmail.com', 'Nairobi City', 'Ngara', 'penny', '', 'patient'),
-(1, 'Fatuma', 'Rashid', '273940287', 53664673, '1995-11-09', 'Female', 'O+', 'fatuma@yahoo.com', 'Kilifi', 'Malindi', 'fdc0978bc0cc4c37c3e3d44fc63ee487', '', 'patient'),
-(34, 'Lemony', 'Snicket', '0736254637', 53748393, '1990-10-10', 'Male', 'O+', 'lsnicket@gmail.com', 'Nairobi City', 'Nairobi', '5684f59763b080bb179fe408b64191bd', 'juice2.jpg', 'patient'),
-(44, 'trial', 'three', '36474836', 54737364, '1995-02-05', 'Male', 'B+', 'trial@gmail.com', 'Kericho', 'kitale', '8943be948c11e8ff266c8fc52b0a8826', 'img-3.jpg', 'patient'),
-(3, 'Patient', 'One', '073456745', 55678765, '1990-06-04', 'Male', 'A+', 'pt1one@gmail.com', 'Kajiado', 'Kitengela', 'c7ec2916ae31da9734952741ed70d08d', 'office.jpg', 'patient'),
-(10, 'Winfred', 'Kamunge', '+254752528962', 56552345, '1979-01-25', 'Female', 'A+', 'winfred@gmail.com', 'Kericho', 'Kericho', 'cfeee3fc113367fb6ea82084621e5c0d', '', 'patient'),
-(17, 'Faith', 'Katunge', '+25478595596', 56588966, '1995-11-20', 'Female', 'O+', 'faith@gmail.com', 'Elgeyo/Marakwet', 'Marakwet', 'ecee7df9bbac50b9b428483bfea1dd7c', '', 'patient'),
-(2, 'Ashraf', 'Mbulika', '63647828', 63748264, '2020-07-07', 'Male', 'AB+', 'ashraf@yahoo.com', 'Machakos', 'Athi River', '508924b0eac2ba101ada28841c931e44', '', 'patient'),
-(31, 'Goosey', 'Lucy', '0726836237', 66388463, '1990-12-09', 'Female', 'A-', 'glucy@gmail.com', 'Nairobi City', 'Umoja', 'aa7a60d9e3f05d9e068c4ba4d3608978', 'gooseyL (2).jfif', 'patient'),
-(11, 'Annastacia', 'Mbula', '+254718097856', 66989559, '1972-07-01', 'Female', 'A-', 'annastacia@gmail.com', 'Makueni', 'Wote', '2708535b89a179fe383b3b548048687f', '', 'patient'),
-(46, 'Rehema', 'Rashid', '637483625', 68493736, '1998-03-10', 'Female', 'O+', 'rehema@yahoo.com', 'Nairobi City', 'Nairobi', '5eaf0467a7fdc9fe2a16b9b8a8fd8b4a', '', 'patient'),
-(8, 'Cherlyne ', 'Obeyo', '+254719267540', 78978568, '1992-08-18', 'Female', 'AB+', 'cherlyneobeyo@gmail.com', 'Kakamega', 'Kakamega', 'b5e6859e6c6d07090ee1fc3bb85ec441', '', 'patient'),
-(9, 'Satish', 'Kumar', '+254752861926', 79858912, '1987-10-08', 'Male', 'B+', 'satish@yahoo.com', 'Kilifi', 'Kilifi', 'b8377b23bb86899405d2455cc6da3556', '', 'patient'),
-(4, 'Suhaila', 'Salim', '73849837', 82736745, '2017-07-21', 'Female', 'O+', 'suhaila@yahoo.com', 'Kajiado', 'Kitengela', 'e8b3ca806fd3c5e8e18368994a7ee305', '', 'patient'),
-(23, 'Samantha', 'Makori', '+254720586321', 96542356, '1967-04-10', 'Female', 'A+', 'samantha@gmail.com', 'Nairobi City', 'Nairobi', 'f01e0d7992a3b7748538d02291b0beae', '', 'patient'),
-(15, 'Timothy', 'Oketch', '+254720858623', 123456789, '1996-04-02', 'Male', 'AB-', 'timothy@gmail.com', 'Kisumu', 'Kisumu', 'ecb97d53d2d35b8ba98cf82a8d78cad9', '', 'patient'),
-(43, 'trial', 'two', '245463746', 253632536, '2019-02-05', 'Female', 'AB+', 'trial@gmail.com', 'Bungoma', 'Nairobi', '58723627fcebc230ab0d53ddf5f16e34', 'gallery-04.jpg', 'patient'),
-(5, 'Rashid', 'Thomas', '73883635', 367482725, '1988-10-13', 'Male', 'A+', 'rashid@yahoo.com', 'Nairobi City', 'Nairobi', '7d0ba610dea3dbcc848a97d8dfd767ae', '', 'patient'),
-(16, 'Erastus', 'Kinyua', '+254734528692', 544856500, '1977-10-09', 'Male', 'B-', 'erastus@yahoo.com', 'Embu', 'Embu', '029028fb57ad37f32281997724b97949', '', 'patient'),
-(24, 'Vitalis', 'Junior', '+254712358256', 545586598, '1994-07-07', 'Male', 'AB+', 'vitalis@gmail.com', 'Vihiga', 'Vihiga', '92b20c90c1bc317620c82dc41b4eb9fd', '', 'patient'),
-(19, 'Abdi', 'Osman', '+254720548562', 678456566, '2002-03-29', 'Male', 'AB-', 'abdi@gmail.com', 'Garissa', 'Garissa', '311eba6dada049960e16974e652ef134', '', 'patient'),
-(22, 'Biko', 'Biko', '+254710566555', 874797989, '1996-05-14', 'Male', 'O-', 'biko@gmail.com', 'Nairobi City', 'Nairobi', '3aeb4f9aab7e034b7722f070831bce41', '', 'patient');
-
 -- --------------------------------------------------------
 
 --
@@ -563,23 +448,6 @@ CREATE TABLE `response` (
   `allergies` text NOT NULL,
   `notes` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `response`
---
-
-INSERT INTO `response` (`id`, `IDNo`, `conditions`, `allergies`, `notes`) VALUES
-(5, 53664673, 'Respiratory and Ear Nose and Throat (ENT) disorders,Endocrine disorders,Gastro-intestinal disorders,Gynaecological and Obstetric disorders,Neurological and psychological disorders,Congenital/inherited/hereditary disorders,', 'peanuts, flowers', '5-year gastritis diagnosis, anxiety disorder,  stomach hernia, pelvic inflammation'),
-(6, 68493736, 'Respiratory and Ear Nose and Throat (ENT) disorders,', 'paracetamol, dust particles', 'rhinitis diagnosed in 2013'),
-(7, 63748264, 'Gastro-intestinal disorders,', 'nuts', 'gastritis detected'),
-(9, 29816629, 'Cardiovascular (heart and blood vessels) disorders, Respiratory and Ear Nose and Throat (ENT) disorders, Endocrine disorders, Gastro-intestinal disorders, Gynaecological and Obstetric disorders, Musculoskeletal disorders, Skin disorders, ', 'Dust, Kerosene, pollen ', 'Relatives suffering from - High blood pressure, Diabetes, peptic ulcers, arthritis, keloids\r\nPatient suffering from - asthma, ovarian cyst\r\n'),
-(10, 82736745, '', 'NIL', ''),
-(11, 367482725, 'Gastro-intestinal disorders, ', 'Sulphur', 'Diagnosed with Gastritis on January 2020'),
-(12, 2147485, 'Cardiovascular (heart and blood vessels) disorders, Respiratory and Ear Nose and Throat (ENT) disorders, ', 'Dust and smoke particles,\r\nAnimal Protein', 'Close relatives diagnosed with High blood pressure and asthma'),
-(13, 49798885, 'Eye related disorders, ', '', 'Glaucoma'),
-(14, 6598569, 'Cardiovascular (heart and blood vessels) disorders, Endocrine disorders, Musculoskeletal disorders, ', 'Dust and Pollen', 'Relatives with High Blood Pressure problems, \r\nSelf diagnosed with sporting pelvic injury and diabetes'),
-(15, 33179878, 'Cancer, growths or tumors, Cardiovascular (heart and blood vessels) disorders, Respiratory and Ear Nose and Throat (ENT) disorders, Endocrine disorders, Eye related disorders, Gastro-intestinal disorders, Musculoskeletal disorders, ', 'Nil', 'Self - diagnosed with Hiatus hernia type 3 (Endoscopy report of 2019) and GERD(Gastro-Intestinal Reflux Disease) \r\nFamily - immediate family diagnosed with several types of cancers (including pancreatic, colon and cervical), High blood pressure, diabetes, asthma, arthritis and glaucoma.'),
-(16, 35239857, '', '', '');
 
 --
 -- Indexes for dumped tables
@@ -713,7 +581,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `billing`
 --
 ALTER TABLE `billing`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `blood`
@@ -761,7 +629,7 @@ ALTER TABLE `docspecialty`
 -- AUTO_INCREMENT for table `doctors`
 --
 ALTER TABLE `doctors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `fileupload`
@@ -773,7 +641,7 @@ ALTER TABLE `fileupload`
 -- AUTO_INCREMENT for table `hospitalreg`
 --
 ALTER TABLE `hospitalreg`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `insurance`
@@ -791,67 +659,19 @@ ALTER TABLE `medicalcover`
 -- AUTO_INCREMENT for table `nextofkin`
 --
 ALTER TABLE `nextofkin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `patients`
 --
 ALTER TABLE `patients`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `response`
 --
 ALTER TABLE `response`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `dependants`
---
-ALTER TABLE `dependants`
-  ADD CONSTRAINT `dependants_ibfk_1` FOREIGN KEY (`IDNo`) REFERENCES `patients` (`IDNo`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `docnotes`
---
-ALTER TABLE `docnotes`
-  ADD CONSTRAINT `docnotes_ibfk_1` FOREIGN KEY (`IDNo`) REFERENCES `patients` (`IDNo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `docnotes_ibfk_2` FOREIGN KEY (`docid`) REFERENCES `doctors` (`workid`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `docnotesdependants`
---
-ALTER TABLE `docnotesdependants`
-  ADD CONSTRAINT `docnotesdependants_ibfk_1` FOREIGN KEY (`docid`) REFERENCES `doctors` (`workid`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `docnotesdependants_ibfk_2` FOREIGN KEY (`dependantID`) REFERENCES `dependants` (`ID_dep`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `fileupload`
---
-ALTER TABLE `fileupload`
-  ADD CONSTRAINT `fileupload_ibfk_1` FOREIGN KEY (`IDNo`) REFERENCES `patients` (`IDNo`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `medicalcover`
---
-ALTER TABLE `medicalcover`
-  ADD CONSTRAINT `medicalcover_ibfk_1` FOREIGN KEY (`IDNo`) REFERENCES `patients` (`IDNo`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `nextofkin`
---
-ALTER TABLE `nextofkin`
-  ADD CONSTRAINT `nextofkin_ibfk_1` FOREIGN KEY (`IDNo`) REFERENCES `patients` (`IDNo`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `response`
---
-ALTER TABLE `response`
-  ADD CONSTRAINT `response_ibfk_1` FOREIGN KEY (`IDNo`) REFERENCES `patients` (`IDNo`) ON DELETE CASCADE ON UPDATE CASCADE;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
