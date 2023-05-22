@@ -49,6 +49,19 @@ if (isset($_POST['reg_user'])) {
 		array_push($errors, "The two passwords do not match");
 		// Checking if the passwords match
 	}
+	// Define the allowed email services
+$allowedServices = ['gmail.com', 'outlook.com', 'yahoo.com'];
+
+// Extract the domain from the email address
+$emailParts = explode('@', $email);
+$domain = end($emailParts);
+
+// Check if the domain is in the allowed services
+if (!in_array($domain, $allowedServices)) {
+    // The email service is not allowed
+    // Handle the error or show an error message to the user
+    echo "Incorrect mail format";
+} else {
 	$age = date_diff(date_create($DOB), date_create('today'))->y;
 
 // Check if the user is 18 years or older
@@ -73,7 +86,7 @@ echo("You must be 18 years to Register");
 		// Page on which the user will be redirected after logging in
 		header('location: uploadProfile.php?type=register');
 	}
-}}
+}}}
 
 // Patient login
 if (isset($_POST['login_user'])) {
